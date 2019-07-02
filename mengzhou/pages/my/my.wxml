@@ -1,0 +1,52 @@
+<view class="page">
+  <view class="page_hd bg-f">
+      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+
+      <block wx:else>
+        <image bind:lintap="toAccountSet" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </block> 
+    <!-- </view> -->
+    <!--/ head -->
+  </view>
+
+  <view class="page_bd">
+
+    <!-- 我的数据 -->
+    <view class="section mt-10">
+
+      <navigator url="mydata/mydata" class="weui-cell weui-cell_access" row-num="4" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">我的数据</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+
+        <view class="weui-panel__bd">
+
+          <l-grid l-class="grid-item border-t ptb-10" row-num="5" show-col-border="{{true}}">
+            <l-grid-item bind:lintap="toMyData"
+              wx:for="{{myDataList}}" wx:key="{{index}}" key="{{index}}" slot="{{index}}">
+              <view class="num">{{item.num}}</view>
+              <view class="text">{{item.text}}</view>
+            </l-grid-item>
+          </l-grid>
+
+        </view>
+    </view>
+    <!--/ 我的数据 -->
+
+      <!-- 我的列表 -->
+      
+      <view class="section mt-10 plr-15">
+        <l-list  title="我的球队" bind:lintap="toMyTeam" icon="cart"/>
+        <l-list  title="我的赛事" bind:lintap="toMyGame" icon="cart"/>
+      </view>
+
+      <view class="section mt-10 plr-15">
+        <l-list title="我的订单" bind:lintap="toMyOrder" icon="cart"/>
+        <l-list title="我的客服" bind:lintap="toService" icon="cart"/>
+        <l-list title="授权页" bind:lintap="toAuth" icon="cart"/>
+      </view>
+      <!--/ 我的列表 -->
+
+  </view>
+</view>

@@ -1,0 +1,58 @@
+
+ <!-- 球队队员 -->
+  <view class="page_bd">
+    <view class="section">
+      <view class="weui-media-box weui-media-box_appmsg" >
+        <view class='mr-10'>
+          <span class="member-num"> 7 </span>
+        </view>
+        <view class="avatar-sz40">
+            <image class="thumb circle" src="../../../../img/img.jpg" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title">李岳阳</view>
+          <view class="weui-media-box__desc">前峰</view>
+        </view>
+        <view class='tags'>
+          <span class="tag primary circle">创建者</span>
+        </view>
+      </view>
+      <view class="weui-media-box weui-media-box_appmsg" >
+        <view class='mr-10'>
+          <span class="member-num"> 5 </span>
+        </view>
+        <view class="avatar-sz40">
+            <image class="circle thumb" src="../../../../img/img.jpg" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title">钟敏</view>
+          <view class="weui-media-box__desc">中场</view>
+        </view>
+      </view>
+      <view class="weui-media-box weui-media-box_appmsg" >
+        <view class='mr-10'>
+          <span class="member-num"> 9 </span>
+        </view>
+        <view class="avatar-sz40">
+            <image class="circle thumb" src="../../../../img/img.jpg" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title">王晨锋</view>
+          <view class="weui-media-box__desc">后卫</view>
+        </view>
+        <view class='list-tags'>
+          <span class="tag primary circle">队长</span>
+        </view>
+      </view>
+    </view>
+  </view>
+   <!-- / 球队队员 -->
+
+<!-- 申请加入球队-->
+<view class='p-20 pos-ab ab-b w-f'>
+  <button 
+    class='d-btn-primary' 
+    bindtap='openmodal'>
+      申请加入球队
+  </button>
+</view>

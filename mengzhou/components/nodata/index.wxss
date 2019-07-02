@@ -1,0 +1,4 @@
+/* components/nodata/index.wxss */
+.desc{
+  color:#999999;
+}

@@ -1,0 +1,32 @@
+<!-- components_feild -->
+
+<navigator url="home/home" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+  <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+      <image class="thumb" src="../../img/cd3.jpg" />
+  </view>
+  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+    <view class="weui-media-box__title">*足球场</view>
+    <view class="weui-media-box__desc">
+      高新区科太路333号
+    </view>
+    <view class='tags'>
+      <view class='tag gray'>5人制</view>
+    </view>
+  </view>
+</navigator>
+
+<navigator url="home/home" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="thumb square-cir" src="../../img/cd2.jpg" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title">云南红塔体育中心</view>
+          <view class="weui-media-box__desc">
+            昆明市西山区红塔西路15号
+          </view>
+          <view class='tags'>
+            <view class='tag gray'>5人制</view>
+            <view class='tag gray'>11人制</view>
+          </view>
+        </view>
+      </navigator>

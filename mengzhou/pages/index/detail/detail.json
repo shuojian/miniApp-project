@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "introduction":"introduction/introduction",
+    "integral": "integral/integral",
+    "result": "result/result",
+    "list": "list/list",
+    "tabView":"../../../common/component/navtab/navtab"
+  },
+  "navigationBarTitleText": "赛事详情"
+}

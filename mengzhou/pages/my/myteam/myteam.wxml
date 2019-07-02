@@ -1,0 +1,27 @@
+<view class="page">
+  <view class='page-bd'>
+
+    <view class="section mt-1">
+       <navigator 
+       url="../../team/detail/detail" 
+       class='weui-cell weui-cell_access' 
+       hover-class="weui-cell-active">
+        <view class="weui-cell__bd">滇峰时代</view> 
+        <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+      </navigator> 
+      <navigator 
+       url="../../team/detail/detail" 
+       class='weui-cell weui-cell_access' 
+       hover-class="weui-cell-active">
+        <view class="weui-cell__bd">滇峰时代</view> 
+        <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+      </navigator> 
+    </view>
+
+    <view class='p-20'>
+      <button bindtap='toCreatTeam' class='d-btn-primary'>创建球队</button>
+    </view>
+    
+  </view>
+</view>
+

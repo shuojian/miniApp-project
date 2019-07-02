@@ -1,0 +1,45 @@
+
+<view class="page">
+
+  <view class="page_bd">
+  
+    <view class='list adicon bg-f'>
+      <view class='item'>
+        <i class="iconfont icon-bisaiguanli"></i>
+        <view class="title">场地介绍</view>
+        <view class='desc'>标准11人天然草足球场：8块（含一块灯光球场），顶级人造草5人制足球场：2块</view>
+      </view>
+      <view class='item'>
+        <i class="iconfont icon-dizhi"></i>
+        <view class="title">云南省昆明市西山区红塔西路15号</view>
+        <view class='desc'>位于地图导航地图导航地图导航地图导航地图导航地图导航</view>
+      </view>
+      <view class='item'>
+        <i class="iconfont icon-lianxifangshi"></i>
+        <view class="title">联系方式</view>
+        <view class='desc'>
+        电话：<i bindtap="openActionsheetLX" class="color-primary" > 18675498547</i>
+        微信：<i class="color-primary"> 18675498547</i>
+        </view>
+      </view>
+      <view class='item'>
+        <i class="iconfont icon-shijian"></i>
+        <view class="title">营业时间</view>
+        <view class='desc'>周一至周日 9：00－－21：00</view>
+      </view>
+      <view class='item'>
+        <i class="iconfont icon-fuwu"></i>
+        <view class="title">场地服务</view>
+        <view class='desc'>停车场、住宿、装备店、冲淋、自助餐厅、游泳馆、足球战</view>
+      </view>
+      <view class='item'>
+        <i class="iconfont icon-xuzhi"></i>
+        <view class="title">约战订场须知</view>
+        <view class='desc'>位于地图导航地图导航地图导航地图导航地图导航地图导航</view>
+      </view>
+
+      
+      
+    </view>
+  </view>
+</view>

@@ -1,0 +1,23 @@
+
+<import src="../../../../common/template/viewList.wxml"/>
+
+<view>
+  <view class='section bg-gray' style="font-size:12px;">
+    <view class='item'>
+      <view class='team-name'>球队</view>
+      <view class="team-num">
+        <i>赛</i>
+        <i>胜/平/负</i>
+        <i>得/失</i>
+        <i>净胜</i>
+        <i>积分</i>
+      </view>
+    </view>
+  </view>
+  <view class='p-base'> A组积分 </view> 
+  <template is="integral"></template>
+  <view class='p-base'> B组积分 </view>
+  <template is="integral"></template>
+  <view class='p-base'> C组积分 </view>
+  <template is="integral"></template>
+</view>

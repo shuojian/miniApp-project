@@ -1,0 +1,78 @@
+<!--pages/me/myteam/newteam/newteam.wxml-->
+<form bindsubmit="formSubmit" bindreset="formReset">
+  <view class='weui-cells weui-cells_after-title'>
+
+    <view class='weui-cell'>
+      <view class='weui-cell__bd' bindtap="choseImg">球队队徽</view>
+      <view class='' style="width:35px; height:35px"><image class="wh-f" src='{{imgsrc}}'/></view>
+      <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+    </view>
+
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>球队名称</view>
+      <view class='formin'><input name="teamName" placeholder="输入名称"/></view>
+    </view>
+
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>所在地区</view>
+      
+      
+  <picker 
+    mode="region" 
+    bindchange="bindRegionChange" 
+    value="{{region}}" 
+    custom-item="{{customItem}}">
+      <view class="picker">
+        {{region[1]}}，{{region[2]}}
+      </view>
+  </picker>
+      <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+    </view>
+
+    <navigator class='weui-cell' url="intr/intr">
+      <view class='weui-cell__bd'>球队简介</view>
+      <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+    </navigator>
+
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>擅长赛制</view>
+        <picker name="teamType"
+         bindchange="bindPickerChange" 
+         value="{{index}}" 
+         range="{{array}}">
+          <view class="picker">
+            {{array[index]}}
+          </view>
+        </picker>
+      <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+    </view>
+
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>所属行业</view>
+        <picker name="belong"
+         bindchange="bindHyChange" 
+         value="{{hyIndex}}" 
+         range="{{hyArray}}">
+          <view class="picker">
+            {{hyArray[hyIndex]}}
+          </view>
+        </picker>
+      <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+    </view>
+
+  </view>
+
+<!--button-->
+  <view class='p-20'>
+    <button class='d-btn-primary' form-type='submit'>创建球队</button>
+  </view>
+<!--/ button-->
+
+<view>
+{{coinKen}}
+{{giftAmount}}
+{{rebateAmount}}
+{{points}}
+</view>
+
+</form>

@@ -1,0 +1,102 @@
+
+<view class='page'>
+  <view class='page-hd  section p20'>
+    <view class='d-grids none center ptb-20'>
+      <view class='grid'>
+        <i class="iconfont icon-bisai block fsz-3"></i>
+        昆明红云队
+      </view>
+      <view class='grid fsz-2 fw-5 color-reda'>
+        8：5
+      </view>
+      <view class='grid'>
+        <i class="iconfont icon-bisai block fsz-3"></i>
+        昆明太阳队
+      </view>
+    </view>
+  </view>
+  <!-- / 页头 -->
+  <view class='page-bd'>
+    <!-- 比赛事件 -->
+    <view class="cell-title mt-5"> 
+      <text class='text'>比赛事件</text> 
+    </view>
+    <view class='section'>
+      <view class='gamelines'>
+        <view class='gameline jia'> 
+          <view class="time"> 3 </view>
+          <view class='member'><i class="iconfont icon-bisaibiaoshi"></i> 黄峰</view>  
+          <view class="time"> </view>
+        </view>
+        <view class='gameline jia'> 
+          <view class="time"> 7 </view>
+          <view class='member'><i class="iconfont icon-bisaibiaoshi"></i> 黄峰</view>  
+          <view class="time"> </view>
+        </view>
+        <view class='gameline yi'> 
+          <view class="time">  </view>
+          <view class='member'><i class="iconfont icon-bisaibiaoshi"></i> 黄峰</view>  
+          <view class="time">16 </view>
+        </view>
+        <view class='gameline jia'> 
+          <view class="time"> 21 </view>
+          <view class='member'><i class="iconfont icon-bisaibiaoshi"></i> 黄峰</view>  
+          <view class="time"> </view>
+        </view>
+      </view>
+      <view class='gameline yi'> 
+          <view class="time">  </view>
+          <view class='member'><i class="iconfont icon-bisaibiaoshi"></i> 黄峰</view>  
+          <view class="time">33 </view>
+        </view>
+    </view>
+
+    <view class='d-grids center section mt-1 none' style="font-size:0.7rem">
+      <view class='grid'> <i class="iconfont icon-bisaibiaoshi"></i> 入球</view>
+      <view class='grid'><i class="iconfont icon-bisaibiaoshi color-primary"></i> 点球</view>
+      <view class='grid'><i class="iconfont icon-bisaibiaoshi color-sub"></i> 乌龙球</view>
+      <view class='grid'><i class="iconfont icon-hongpai color-y"></i> 黄牌</view>
+      <view class='grid'><i class="iconfont icon-hongpai color-red"></i> 红牌</view>
+      <view class='grid'><i class="iconfont icon-icon171"></i> 换人</view>
+    </view>
+    <!-- / 比赛事件 -->
+    <!-- 首发名单 -->
+    <view class="cell-title mt-5"> 
+      <text class='text'>首发名单</text> 
+    </view>
+    <view class='section'>
+      <view class='d-grids  center'>
+        <view class='grid'>
+          <view class='lis-item'>昆明红云队</view> 
+          <view class='lis-item'>昆明红云队</view> 
+          <view class='lis-item'>昆明红云队</view> 
+        </view>
+        <view class='grid'>
+          <view class='lis-item'>昆明红大</view> 
+          <view class='lis-item'>昆明太阳</view> 
+          <view class='lis-item'>红果果</view> 
+        </view>
+      </view>
+    </view>
+    <!-- / 首发名单 -->
+    <!-- 替补名单 -->
+    <view class="cell-title mt-5"> 
+      <text class='text'>替补名单</text> 
+    </view>
+    <view class='section'>
+      <view class='d-grids  center'>
+        <view class='grid'>
+          <view class='lis-item'>李非</view> 
+          <view class='lis-item'>张文</view> 
+          <view class='lis-item'>张红星</view> 
+        </view>
+        <view class='grid'>
+          <view class='lis-item'>李小</view> 
+          <view class='lis-item'>邓红</view> 
+          <view class='lis-item'>孙果果</view> 
+        </view>
+      </view>
+    </view>
+    <!-- / 替补名单 -->
+  </view>
+</view>

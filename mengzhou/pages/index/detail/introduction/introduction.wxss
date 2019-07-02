@@ -1,0 +1,17 @@
+@import"../../../../app.wxss";
+
+.kvpreview{
+  position:relative;background-color:#fff;
+}
+.kvpreview-item{
+ padding:8px 15px 7px 100px;
+ border-bottom:1rpx solid #d9d9d9;
+ overflow: hidden;
+ position: relative;
+}
+
+.kvpreview-item .key{
+  position: absolute;
+  margin-left:-85px;
+  color:#888;
+}

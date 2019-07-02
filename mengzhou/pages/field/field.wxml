@@ -1,0 +1,20 @@
+<view class="page">
+  <swiper 
+    class='swiper-box' 
+    indicator-dots="{{indicatorDots}}" 
+    autoplay="{{autoplay}}" 
+    interval="{{interval}}" 
+    duration="{{duration}}" 
+    circular="true">
+      <block wx:for="{{arr}}">
+          <swiper-item><image class="slide-image" src="{{item}}" style="width:100%"></image></swiper-item>
+      </block>
+  </swiper>
+
+  <view class="container">
+    <block wx:for="{{fieldList}}" wx:for-index="idx">
+      <d-field field="{{item}}"/>
+    </block>
+  </view>
+</view>
+

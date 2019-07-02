@@ -1,0 +1,6 @@
+<!--components/mydata/index.wxml-->
+
+<view bindtap='toMydata' class="container weui-cell weui-cell_access" row-num="4" hover-class="weui-cell_active">
+    <view class="weui-cell__bd">我的数据</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+</view>

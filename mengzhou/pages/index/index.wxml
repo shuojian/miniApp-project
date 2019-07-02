@@ -1,0 +1,56 @@
+
+
+<!--page:index.wxml-->
+<view class="container">
+  <view class='page'>
+
+    <view class='page-hd p20'>
+      <button class="d-btn-cc-pri pos-fix ab-r ab-b2" bindtap="openDg">创建赛事</button>
+    </view>
+
+    <button class="d-btn-cc-pri" bindtap="getEventList">获取列表</button>
+
+
+    <view class="page-bd">
+      <!-- <i class="tag complete circle pos-ab" style="right:10px;">已结束</i>
+      <i class="tag processing circle " style="right:10px;">进行中</i>
+      <i class="tag preparation circle ">筹备中</i> -->
+
+    <!-- gemes 列表 -->
+
+    <!-- <view bind:tap="onTap" class='container weui-media-box weui-media-box_appmsg'>
+  <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+    <image class="thumb square-cir" src="{{event.image}}" />
+  </view> -->
+
+  <!-- <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+    <view class="weui-media-box__title">{{event.eventName}}</view>
+    <view class="weui-media-box__desc">
+      <i class="mr-10">{{event.area}}</i>
+      <i>{{event.time}}</i>
+      <i class="tag processing circle pos-ab " style="right:10px;">{{status}}</i>
+    </view>
+    <view class='tags'>
+      <view class='tag gray square-cir2'>{{event.match}}</view>
+      <view class='tag gray square-cir2'>{{event.matchType}}</view>
+      <view class='tag gray square-cir2'>{{event.ParticipateTeam}}</view>
+    </view>
+  </view> -->
+
+</view>
+
+    <!-- <view class='games-container'>
+      <block wx:key="id" wx:for="{{gameList}}">
+        <d-event event="{{item}}"/>
+      </block>
+    </view> -->
+    
+ <!-- test      -->
+<!-- <block wx:key="id" wx:for="{{books}}">
+  <v-book book="{{item}}"/>
+</block> -->
+<!-- /test -->
+
+    </view>
+  <!-- </view> -->
+</view>

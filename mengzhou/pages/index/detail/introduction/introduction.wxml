@@ -1,0 +1,140 @@
+<!--pages/index/detail/introduction/introduction.wxml-->
+
+<view>
+  <view class='kvpreview'>
+    <view class='kvpreview-item'>
+      <view class='key'>
+        主办方
+      </view>
+      <view class='value'>
+        红象体育
+      </view>
+    </view>
+    <view class='kvpreview-item'>
+      <view class='key'>
+        合作伙伴
+      </view>
+      <view class='value'>
+        梦舟体育
+      </view>
+    </view>
+    <view class='kvpreview-item'>
+      <view class='key'>
+          起止日期
+      </view>
+      <view class='value'>
+        2019.4.1 - 2019.5.1
+      </view>
+    </view>
+    <view class='kvpreview-item'>
+      <view class='key'>
+         报名截止
+      </view>
+      <view class='value'>
+        已截止
+      </view>
+    </view>
+    <view class='kvpreview-item'>
+      <view class='key'>
+        赛事赛制
+      </view>
+      <view class='value'>
+        循环（11人制）
+      </view>
+    </view>
+    <view class='kvpreview-item'>
+      <view class='key'>
+        报名人数
+      </view>
+      <view class='value'>
+        10-22人
+      </view>
+    </view>
+    <view class='kvpreview-item'>
+      <view class='key'>
+        报名制度
+      </view>
+      <view class='value'>
+        非实名制
+      </view>
+    </view>
+    <view class='kvpreview-item'>
+      <view class='key'>
+        报名费用
+      </view>
+      <view class='value'>
+        免费
+      </view>
+    </view>
+    <view class='kvpreview-item'>
+      <view class='key'>
+        赛事奖励
+      </view>
+      <view class='value'>
+        第一名奖励3000元 及奖杯一座
+        第二名奖励3000元 及奖杯一座
+        第三名奖励3000元 及奖杯一座
+        第四名奖励3000元 及奖杯一座
+      </view>
+    </view>
+    <view class='kvpreview-item'>
+      <view class='key'>
+        联系方式
+      </view>
+      <view class='value'>
+        13888456987
+      </view>
+    </view>
+  </view>
+   
+
+<!-- 参赛球队列表 -->
+<view class='section mt-20'>
+  <view class='section-title' >共6支参赛球队</view> 
+  <view class='weui-cells weui-cells_after-title'>
+    <navigator class="weui-cell weui-cell_access" url="../../team/detail/detail">
+      <div class="weui-cell__hd"><image src="../../../../img/img.jpg" alt="" class="avatar-sz25 circle"/></div>
+      <div class="weui-cell__bd">
+        红云队
+      </div>
+      <view class="tip">报名成功</view> 
+    </navigator>
+
+    <navigator class="weui-cell weui-cell_access" url="../../team/detail/detail">
+      <div class="weui-cell__hd"><image src="../../../../img/header.png" alt="" class="avatar-sz25 circle"/></div>
+      <div class="weui-cell__bd weui-cell_primary">
+          <p>文字标题</p>
+      </div>
+      <i class="tip">报名成功</i> 
+    </navigator>
+
+    <navigator class="weui-cell weui-cell_access" url="../../team/detail/detail">
+      <div class="weui-cell__hd"><image src="../../../../img/header.png" alt="" class="avatar-sz25 circle"/></div>
+      <div class="weui-cell__bd weui-cell_primary">
+          <p>安宁太湖队</p>
+      </div>
+      <i class="tip">报名成功</i> 
+    </navigator>
+
+    <navigator class="weui-cell weui-cell_access" url="../../team/detail/detail">
+      <div class="weui-cell__hd"><image src="../../../../img/img.jpg" alt="" class="avatar-sz25 circle"/></div>
+      <div class="weui-cell__bd weui-cell_primary">
+          <p>滇池印象队</p>
+      </div>
+      <i class="tip">报名成功</i> 
+    </navigator>
+
+    <navigator class="weui-cell weui-cell_access" url="../../team/detail/detail">
+      <div class="weui-cell__hd"><image src="../../../../img/header.png" alt="" class="avatar-sz25 circle"/></div>
+      <div class="weui-cell__bd weui-cell_primary">
+          <p>安然队</p>
+      </div>
+      <i class="tip">报名成功</i> 
+    </navigator>
+
+  </view>
+</view>
+<!-- / 参赛球队列表 -->
+
+
+</view>

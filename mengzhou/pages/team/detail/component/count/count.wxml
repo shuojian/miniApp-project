@@ -1,0 +1,24 @@
+<import src="/common/template/viewList.wxml"/>
+
+<tabView tabTitle="{{tabTitle}}" positionTop="48px">
+
+  <view slot="0" >
+    <!--<sheshou></sheshou>-->
+    <template is="teamList-head"></template>
+    <template is="teamList"></template>
+  </view>
+
+  <view slot="1">
+    <!--<zhugong></zhugong>-->
+    <template is="teamList-head"></template>
+    <template is="teamList_zg"></template>
+  </view>
+  
+  <view slot="2">
+    <!--<huangpai></huangpai>-->
+    <template is="teamList-head"></template>
+    <template is="teamList_hp"></template>
+  </view>
+    
+</tabView>
+

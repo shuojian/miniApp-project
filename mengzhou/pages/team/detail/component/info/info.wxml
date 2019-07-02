@@ -1,0 +1,54 @@
+<!--pages/team/detail/info/info.wxml-->
+ <!-- 球队详情 -->  
+
+<view class='page-bd'>
+  <!-- 球队统计 -->
+  <view class="cell-title"> <text class='text'>球队统计</text> </view>
+  <view class='section'>
+    <view class="sction">
+      <view class="d-grids">
+        <view  class="grid" >
+          <view class="grid_label"><i class="num">0</i>场次</view>
+        </view>
+        <view  class="grid" >
+          <view class="grid_label"><i class="num">0</i>胜</view>
+        </view>
+        <view  class="grid" >
+          <view class="grid_label"><i class="num">0</i>平</view>
+        </view>
+        <view  class="grid" >
+          <view class="grid_label"><i class="num">0</i>负</view>
+        </view> 
+      </view> 
+      <!-- / d-grids -->
+      <view class="d-grids">
+        <view  class="grid" >
+          <view class="grid_label"><i class="num">0</i>未录入</view>
+        </view>
+        <view  class="grid" >
+          <view class="grid_label"><i class="num">0</i>选球</view>
+        </view>
+        <view  class="grid" >
+          <view class="grid_label"><i class="num">0</i>失球</view>
+        </view>
+        <view  class="grid" >
+          <view class="grid_label"><i class="num">0</i>净进球</view>
+        </view>          
+      </view>
+      <!-- / d-grids -->
+    </view>
+    <!-- 个人参数 -->
+  </view>
+  
+  <view class="cell-title"><text class='text'>近期比赛</text></view>
+  <view class="color-gray p-base bg-f">近期无赛事</view>
+      
+  <view class='p-20 pos-ab ab-b w-f'>
+    <button 
+      class='d-btn-primary'  
+      bindtap='openmodal'>
+        申请加入球队
+    </button>
+  </view>
+
+</view>

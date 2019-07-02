@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "d-button":"/components/image-button/index"
+  },
+  "navigationBarTitleText": "我的"
+
+}

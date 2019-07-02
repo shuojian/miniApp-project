@@ -1,0 +1,123 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/detail/detail",
+    "pages/index/detail/result/vsdetail/vsdetail",
+    "pages/index/detail/list/huangpai/huangpai",
+
+    "pages/team/team",
+    "pages/team/detail/detail",
+    "pages/team/personal/personal",
+
+    "pages/field/field",
+    "pages/field/detail/detail",
+    "pages/field/home/home",
+
+    "pages/my/my",
+    "pages/my/myorder/myorder",
+    "pages/my/myteam/myteam",
+    "pages/my/service/service",
+    "pages/my/mydata/mydata",
+    "pages/my/mygame/mygame",
+    "pages/my/myteam/newteam/newteam",
+    "pages/my/myteam/newteam/intr/intr",
+    "pages/my/style/style",
+
+    "pages/auth/index",
+
+    "pages/accountSet/index",
+    "pages/accountSet/realName/realName",
+
+    "components/navtab/navtab",
+    "template/viewList"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#3b5999",
+    "navigationBarTitleText": "赛事小程序",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#3b5999",
+    "borderStyle": "black",
+    "list": [
+      {
+        "selectedIconPath": "img/tab/index_tab.png",
+        "iconPath": "img/tab/index_tab1.png",
+        "pagePath": "pages/index/index",
+        "text": "赛事"
+      },
+      {
+        "selectedIconPath": "img/tab/team_tab.png",
+        "iconPath": "img/tab/team_tab1.png",
+        "pagePath": "pages/team/team",
+        "text": "附近球队"
+      },
+      {
+        "selectedIconPath": "img/tab/field_tab.png",
+        "iconPath": "img/tab/field_tab1.png",
+        "pagePath": "pages/field/field",
+        "text": "附近球场"
+      },
+      {
+        "selectedIconPath": "img/tab/me_tab.png",
+        "iconPath": "img/tab/me_tab1.png",
+        "pagePath": "pages/my/my",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "l-action-sheet": "/components/lin-ui/action-sheet/index",
+    "l-avatar": "/components/lin-ui/avatar/index",
+    "l-badge": "/components/lin-ui/badge/index",
+    "l-button": "/components/lin-ui/button/index",
+    "l-card": "/components/lin-ui/card/index",
+    "l-checkbox": "/components/lin-ui/checkbox/index",
+    "l-checkbox-group": "/components/lin-ui/checkbox-group/index",
+    "l-combined-tabs": "/components/lin-ui/combined-tabs/index",
+    "l-count-selector": "/components/lin-ui/count-selector/index",
+    "l-countdown": "/components/lin-ui/countdown/index",
+    "l-custom-tab-bar": "/components/lin-ui/custom-tab-bar/index",
+    "l-dialog": "/components/lin-ui/dialog/index",
+    "l-error-tip": "/components/lin-ui/error-tip/index",
+    "l-grid": "/components/lin-ui/grid/index",
+    "l-grid-item": "/components/lin-ui/grid-item/index",
+    "l-icon": "/components/lin-ui/icon/index",
+    "l-image-picker": "/components/lin-ui/image-picker/index",
+    "l-input": "/components/lin-ui/input/index",
+    "l-list": "/components/lin-ui/list/index",
+    "l-loading": "/components/lin-ui/loading/index",
+    "l-loadmore": "/components/lin-ui/loadmore/index",
+    "l-mask": "/components/lin-ui/mask/index",
+    "l-message": "/components/lin-ui/message/index",
+    "l-notice-bar": "/components/lin-ui/notice-bar/index",
+    "l-popup": "/components/lin-ui/popup/index",
+    "l-price": "/components/lin-ui/price/index",
+    "l-radio": "/components/lin-ui/radio/index",
+    "l-radio-group": "/components/lin-ui/radio-group/index",
+    "l-rate": "/components/lin-ui/rate/index",
+    "l-search-bar": "/components/lin-ui/search-bar/index",
+    "l-segment": "/components/lin-ui/segment/index",
+    "l-segment-item": "/components/lin-ui/segment-item/index",
+    "l-slide-view": "/components/lin-ui/slide-view/index",
+    "l-spin": "/components/lin-ui/spin/index",
+    "l-status-show": "/components/lin-ui/status-show/index",
+    "l-step": "/components/lin-ui/step/index",
+    "l-steps": "/components/lin-ui/steps/index",
+    "l-tabpanel": "/components/lin-ui/tabpanel/index",
+    "l-tabs": "/components/lin-ui/tabs/index",
+    "l-tag": "/components/lin-ui/tag/index",
+    "l-textarea": "/components/lin-ui/textarea/index",
+    "l-toast": "/components/lin-ui/toast/index"
+  },
+  "networkTimeout": {
+    "connectSocket": 10000,
+    "request": 15000,
+    "downloadFile": 30000,
+    "uploadFile": 1200000
+  },
+  "debug": true,
+  "sitemapLocation": "sitemap.json"
+}

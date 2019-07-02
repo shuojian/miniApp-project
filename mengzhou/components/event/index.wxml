@@ -1,0 +1,52 @@
+
+<!-- components_event 赛事 -->
+<view class='container'>
+  <view bind:tap="getEventList">获取列表</view>
+</view>
+
+
+
+
+<!-- <view bind:tap="onTap" class='container weui-media-box weui-media-box_appmsg'>
+  <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+    <image class="thumb square-cir" src="{{event.image}}" />
+  </view>
+
+  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+    <view class="weui-media-box__title">{{event.eventName}}</view>
+    <view class="weui-media-box__desc">
+      <i class="mr-10">{{event.area}}</i>
+      <i>{{event.time}}</i>
+      <i class="tag processing circle pos-ab " style="right:10px;">{{status}}</i>
+    </view>
+    <view class='tags'>
+      <view class='tag gray square-cir2'>{{event.match}}</view>
+      <view class='tag gray square-cir2'>{{event.matchType}}</view>
+      <view class='tag gray square-cir2'>{{event.ParticipateTeam}}</view>
+    </view>
+  </view>
+</view> -->
+
+
+
+
+ <!-- <view class="section">
+  <navigator url="detail/detail" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+      <image class="thumb square-cir" src="../../img/qs.png" />
+    </view>
+    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+      <view class="weui-media-box__title">2019赛事2</view>
+      <view class="weui-media-box__desc">
+        <i class="mr-10"> 昆明市五华区</i>
+        <i> 2019-4-15</i>
+        <i class="tag processing circle pos-ab " style="right:10px;">进行中</i>
+      </view>
+      <view class='tags'>
+        <view class='tag gray square-cir2'>7人制</view>
+        <view class='tag gray square-cir2'>分组赛+淘汰赛</view>
+        <view class='tag gray square-cir2'>参赛球队30支</view>
+      </view>
+    </view>
+  </navigator>
+</view> -->

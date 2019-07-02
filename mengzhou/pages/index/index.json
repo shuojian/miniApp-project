@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "v-book": "/components/event/index"
+  },
+  "navigationBarTitleText": "赛事"
+}

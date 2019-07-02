@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "tabView": "/common/component/navtabSub/navtabSub",
+    "sheshou": "sheshou/sheshou",
+    "zhugong": "zhugong/zhugong",
+    "huangpai": "huangpai/huangpai"
+  }
+}

@@ -1,0 +1,20 @@
+
+
+<view class="page">
+  <tabView 
+    tabTitle="{{tabTitle}}" 
+    positionTop="0" 
+    paddingTop="">
+      <view slot="0">
+        <info></info>
+      </view>
+      <view slot="1">
+        <member></member>
+      </view>
+      <view slot="2">
+        <count></count>
+      </view>
+    
+  </tabView>
+</view>
+

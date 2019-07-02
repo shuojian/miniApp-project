@@ -1,0 +1,5 @@
+<!--components/nodata/index.wxml-->
+<!--components/nodata/nodata.wxml-->
+<view class='container nodata'>
+  <text class='desc'>暂无数据</text>
+</view>

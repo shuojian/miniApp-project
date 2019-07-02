@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "d-nodata":"../../../../components/nodata/index"
+  },
+  "navigationBarTitleText": "我的订单"
+}

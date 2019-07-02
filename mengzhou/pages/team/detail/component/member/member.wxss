@@ -1,0 +1,15 @@
+@import"/app.wxss";
+
+.member-num{
+  display: inline-block; 
+  width:1rem; 
+  height:1rem; 
+  line-height: 1rem;
+  text-align: center;  
+  background: #B58900; 
+  color:#ffffff; 
+  border-radius:20px; 
+  padding:3px; 
+  margin-right:6px;
+  }
+

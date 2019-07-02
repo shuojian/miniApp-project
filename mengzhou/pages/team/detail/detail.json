@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "tabView": "/common/component/navtab/navtab",
+    "count":"component/count/count",
+    "info":"component/info/info",
+    "member":"component/fghfghsdfgmember/member"
+  },
+  "navigationBarTitleText": "球队详情"
+}

@@ -1,0 +1,27 @@
+<!-- components_team -->
+<view bindtap='onTab' class='container weui-media-box weui-media-box_appmsg' >
+  <view class="avatar-sz40">
+      <image class="thumb circle" src="../../img/img.jpg" />
+  </view>
+  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+    <view class="weui-media-box__title">{{team.title}}</view>
+    <view class="weui-media-box__desc">
+      <i class="mr-20"> {{team.aer}}</i>
+      <i> {{team.num}}</i>
+    </view>
+  </view>
+</view>
+
+<!-- <navigator url="detail/detail" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+  <view class="avatar-sz40">
+      <image class="thumb circle" src="../../img/img.jpg" />
+  </view>
+  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+    <view class="weui-media-box__title">队名有很多字的球队</view>
+    <view class="weui-media-box__desc">
+      <i class="mr-20"> 盘龙区</i>
+      <i> 7人 </i>
+    </view>
+  </view>
+</navigator> -->
+

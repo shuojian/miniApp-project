@@ -1,0 +1,21 @@
+
+
+
+
+
+<tabView tabTitle="{{tabTitle}}" positionTop="0" paddingTop="">
+    <view slot="0" >
+      <introduction></introduction>
+    </view>
+    <view slot="1" >
+      <integral></integral>
+    </view>
+    <view slot="2" >
+      <result></result>
+    </view>
+    <view slot="3" >
+      <list></list>
+    </view>
+</tabView>
+
+

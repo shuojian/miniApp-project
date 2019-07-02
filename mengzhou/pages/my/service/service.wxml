@@ -1,0 +1,16 @@
+<view class="page">
+  <view class='page-bd p-20'>  
+    <view>
+      <image src="{{image}}"></image>
+    </view>
+    <view>
+      {{title}}
+    </view>
+    <view>
+      更新日期：{{pubdate}} 点赞数：{{fav_nums}}
+    </view>
+    <view>
+      {{content}}
+    </view>
+  </view>
+</view>

@@ -1,0 +1,70 @@
+
+<view class='page'>
+  <!-- 过滤 -->
+  <view class='option'>
+    <view class='filter center'>
+      <picker 
+        bindchange="bindPickerChange" 
+        value="{{index}}" 
+        range="{{array}}">
+        <view class="picker">
+          {{array[index]}} <i class="iconfont icon-bottom color-gray fw5 fsz-1a2"></i>
+        </view>
+      </picker> 
+    </view>
+
+    <view class='next'>
+      下一轮<i class="iconfont icon-icon_right color-gray fw5 fsz-1a2"></i>
+    </view>
+  </view>
+  <!-- / 过滤 -->
+  
+  <!-- 对战列表 -->
+  <view class="list">
+    <navigator url="result/vsdetail/vsdetail" class='item'>
+      <view class='item-time'>2019-5-10</view>
+      <view class='item-v'>
+        <view class='item-team l '>昆明红云队 <i class="color-reda fw-6 fsz-1a2 mr--5"> 8 :</i></view>
+        <view class='item-team r'> <i class="color-reda fw-6 fsz-1a2"> 5 </i> 昆明太阳队  </view>
+      </view>
+    </navigator>
+    <navigator url="result/vsdetail/vsdetail" class='item'>
+      <view class='item-time'>2019-5-10</view>
+      <view class='item-v'>
+        <view class='item-team l '>ONE-U <i class="color-reda fw-6 fsz-1a2 mr--5"> 3 :</i></view>
+        <view class='item-team r'> <i class="color-reda fw-6a fsz-1a2"> 4 </i> 梅州胡足队  </view>
+      </view>
+    </navigator>
+    <navigator url="result/vsdetail/vsdetail" class='item'>
+      <view class='item-time'>2019-5-10</view>
+      <view class='item-v'>
+        <view class='item-team l '>ONE-U <i class="color-reda fw-6 fsz-1a2 mr--5"> 6 :</i></view>
+        <view class='item-team r'> <i class="color-reda fw-6 fsz-1a2"> 3 </i> 梅州胡足队  </view>
+      </view>
+    </navigator>
+    <navigator url="result/vsdetail/vsdetail" class='item'>
+      <view class='item-time'>2019-5-10</view>
+      <view class='item-v'>
+        <view class='item-team l '>ONE-U <i class="color-reda fw-6 fsz-1a2 mr--5"> 2 :</i></view>
+        <view class='item-team r'> <i class="color-reda fw-6 fsz-1a2"> 2 </i> 梅州胡足队  </view>
+      </view>
+    </navigator>
+    <navigator url="result/vsdetail/vsdetail" class='item'>
+      <view class='item-time'>2019-5-10</view>
+      <view class='item-v'>
+        <view class='item-team l '>ONE-U <i class="color-reda fw-6 fsz-1a2 mr--5"> 1 :</i></view>
+        <view class='item-team r'> <i class="color-reda fw-6 fsz-1a2"> 3 </i> 梅州胡足队  </view>
+      </view>
+    </navigator>
+    <navigator url="result/vsdetail/vsdetail" class='item'>
+      <view class='item-time'>2019-5-10</view>
+      <view class='item-v'>
+        <view class='item-team l '>ONE-U <i class="color-reda fw-6 fsz-1a2 mr--5"> 4 :</i></view>
+        <view class='item-team r'> <i class="color-reda fw-6 fsz-1a2"> 2 </i> 梅州胡足队  </view>
+      </view>
+    </navigator>
+
+  </view> 
+  <!-- / 分组赛列表 -->
+</view>
+

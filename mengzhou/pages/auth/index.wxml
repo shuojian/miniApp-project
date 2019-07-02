@@ -1,0 +1,20 @@
+
+<!--pages/login/auth/index.wxml 如果没有登录,直接跳转到该页面-->
+
+    <!-- <view class="userinfo ">
+      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+      <block wx:else>
+        <image bind:lintap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </block>
+    </view> -->
+
+ 
+<view wx:if="{{!canIUse}}">
+  <view class='zan-font-14 zan-c-gray-dark' style='text-align:center;margin-top:50rpx'>
+    允许微信授权后，可体验更多功能</view>
+  <view class="zan-btns">
+    <button open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo" class="zan-btn zan-btn--primary">授权登录</button>
+    <button bindtap='navigateBack' class="zan-btn">返回首页</button>
+  </view>
+</view>

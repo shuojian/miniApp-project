@@ -1,0 +1,20 @@
+<import src="../../../../common/template/viewList.wxml"/>
+
+<tabView tabTitle="{{tabTitle}}" positionTop="48px">
+  <view slot="0">
+    <template is="viewList-head"></template>
+    <template is="viewList"></template>
+  </view>
+  <view slot="1">
+    <view class='list section bg-gray'>
+      <template is="viewList-head"></template>
+    </view>
+    <template is="viewList_zg"></template>
+  </view>
+  <view slot="2">
+    <template is="viewList-head"></template>
+    <template is="viewList_hp"></template>
+  </view>
+</tabView>
+
+
