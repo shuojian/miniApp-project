@@ -1,62 +1,36 @@
 //app.js
 App({
   globalData: {
-    appId: ' wx5e388f9d4a1954c1',
+    appId: 'wx5e388f9d4a1954c1',
     loginInfo: null,
     userInfo: null,
     parentUserCode: null,
+
     // baseURL: 'https://www.mzsport.top/football/' // prd
     baseURL: 'http://47.107.33.58:8080/football/' // test
     // baseURL: 'http://127.0.0.1:8080/football/' // dev
   },
 
-  globalApi: {
-    checkUser: 'http://47.107.33.58:8080/football/acc/wxLogin'
-  },
-
-
   onLaunch: function () {
+    // 打开调试
+    // wx.setEnableDebug({
+    //   enableDebug: true
+    // })
+
     var that = this;
+    //获取分享数据--无效
+    //wx.getShareInfo()
+
     //调用API从本地缓存中获取数据
-    // var loginInfo = wx.getStorageSync('loginInfo')
-    // if (loginInfo) {
-    //   if (loginInfo.lastLoginDate &&
-    //     (Number(loginInfo.lastLoginDate) + 2 * 60 * 60 * 1000) > new Date().getTime()) {
-    //     that.globalData.loginInfo = loginInfo
-    //   } else {
-    //     wx.removeStorageSync('loginInfo')
-    //   }
-    // } else {
-    //   that.fxLogin((res) => {
-    //     console.log('页面加载loginfo:')
-    //     console.log(res)
-    //   })
-    // }
-
-    // 本地存储
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        }
+    var loginInfo = wx.getStorageSync('loginInfo')
+    if (loginInfo) {
+      if (loginInfo.lastLoginDate &&
+        (Number(loginInfo.lastLoginDate) + 2 * 60 * 60 * 1000) > new Date().getTime()) {
+        that.globalData.loginInfo = loginInfo
+      } else {
+        wx.removeStorageSync('loginInfo')
       }
-    })
+    }
   },
 
   onShow: function () {
@@ -81,9 +55,15 @@ App({
     // })
   },
 
-  /**
-   * 加载提示
-   */
+  onHide: function () {
+    //当小程序从前台进入后台，会触发 onHide
+
+  },
+  onError: function () {
+    //当小程序发生脚本错误，或者 api 调用失败时，会触发 onError 并带上错误信息
+
+  },
+
   showLoading: function () {
     wx.showToast({
       title: 'loading...',
@@ -98,75 +78,26 @@ App({
     wx.hideNavigationBarLoading()
   },
 
-
-  getToken() {
-    return new Promise((resolve, reject) => {
-      // 登录
-      wx.login({
-        success: res => {
-          // 发送 res.code 到后台换取 openId, sessionKey, unionId
-          if (res.code) {
-            //发送res.code 到后台
-            wx.request({
-              url: this.globalApi.checkUser,
-              method: 'POST',
-              data: {
-                code: res.code
-              },
-              success(res) {
-                //成功返回数据后，将token值存储到localStorage中
-                console.log('token返回：')
-                console.log(res)
-                wx.setStorage({
-                  key: 'yerlLocalToken',
-                  data: res.data.token
-                });
-                var resArg = res.data.token;
-                resolve()
-              },
-              fail() {
-                reject();
-              }
-            })
-          }
-        }
-      })
-    })
-  },
-
-  /**
-  * 清除缓存，重新登录
-  */
-  fxReLogin: function (cb) {
-    wx.removeStorageSync('loginInfo')
-    this.globalData.loginInfo = null
-    this.fxLogin(cb)
-  },
-
-  /**
-   * === 登录 ===
-   */
   fxLogin: function (cb) {
     var that = this
     if (that.globalData.loginInfo) {
       typeof cb == "function" && cb()
       return
     }
+
     //调用登录接口
     wx.login({
-      //登录成功
-      success: res => {
-        console.log('1.fxLogin登录成功wx')
+      success: function (res) {
+        console.log('wx.login:')
         console.log(res)
         if (that.globalData.userInfo && that.globalData.userInfo.rawData && that.globalData.userInfo.encryptedData && that.globalData.userInfo.iv && that.globalData.userInfo.signature) {
           that.fxWxLogin(res.code, cb)
         } else {
           that.showLoading()
-
           wx.getUserInfo({
             withCredentials: true,
             success: function (userInfo) {
-              console.log('2.wx.getUserInfo:')
+              console.log('wx.getUserInfo:')
               console.log(userInfo)
               that.globalData.userInfo = userInfo
               that.fxWxLogin(res.code, cb)
@@ -184,27 +115,28 @@ App({
               that.hideLoading()
             }
           })
-
         }
       },
-      //登录失败
-      fail: res => {
+      fail: function (res) {
         console.log('wx.login:失败')
         wx.showModal({
-          title: '登录失败，小程序授权才能有更好的体验',
-          content: 'wx.login:登录失败，小程序授权才能有更好的体验',
+          title: '出错啦',
+          content: 'wx.login:失败',
           showCancel: false
         })
       }
-
     })
   },
 
-  //向登录api接口发送code
+  fxReLogin: function (cb) {
+    wx.removeStorageSync('loginInfo')
+    this.globalData.loginInfo = null
+    this.fxLogin(cb)
+  },
+
   fxWxLogin: function (code, cb) {
     var that = this
     that.showLoading()
-
     wx.request({
       // url: that.globalData.baseURL + 'acc/wxLoginTest',
       url: that.globalData.baseURL + 'acc/wxLogin',
@@ -222,10 +154,8 @@ App({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        //换取openid和session_key
-        console.log('3. fxWxLogin:')
+        console.log('fxWxLogin:')
         console.log(res)
-
         if (res.data.code == 0 && res.data.data && res.data.data.token) {
           that.globalData.loginInfo = res.data.data
           that.globalData.loginInfo.lastLoginDate = new Date().getTime()
@@ -248,25 +178,16 @@ App({
     })
   },
 
-
-
-
-
-  //授权
   changeSetting: function (cb) {
     var that = this
     wx.showModal({
       title: '提示',
       content: '请您授权',
       showCancel: false,
-
       success: function (res) {
         console.log(res)
-
         wx.openSetting({
-
           success: function (res) {
-            console.log("wx.openSetting授权:")
             console.log(res)
             if (res.authSetting && res.authSetting["scope.userLocation"]) {
               //that.getLoginInfo(cb)
@@ -274,7 +195,6 @@ App({
               that.changeSetting(cb)
             }
           },
-
           fail: function (res) {
             that.changeSetting(cb)
           }
@@ -283,7 +203,6 @@ App({
     })
   },
 
-  //请求token
   getUserInfo: function (otherUserCode, cb) {
     var that = this
     that.showLoading()
@@ -296,45 +215,17 @@ App({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-
       success: function (res) {
-        console.log('getUserInfo,请求token:')
         console.log(res)
         if (res.data.code == 0 && res.data.data) {
           typeof cb == "function" && cb(res.data.data)
         }
       },
-
       complete: function (res) {
         that.hideLoading()
       }
     })
   },
-
-  //请求
-  saveUserTrail: function (longitude, latitude) {
-    var that = this
-    if (latitude && longitude && that.globalData.loginInfo && that.globalData.loginInfo.token) {
-      wx.request({
-        url: that.globalData.baseURL + 'u/saveUserTrail',
-        data: {
-          token: that.globalData.loginInfo.token,
-          longitude: longitude,
-          latitude: latitude
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        complete: function (res) {
-          console.log(res)
-        }
-      })
-    }
-  },
-
-  /**
-   * === - ===
-   */
 
   uploadFile: function (filePath, refType, refId, sort, cb) {
     var that = this
@@ -371,11 +262,31 @@ App({
     })
   },
 
+  saveUserTrail: function (longitude, latitude) {
+    var that = this
+    if (latitude && longitude && that.globalData.loginInfo && that.globalData.loginInfo.token) {
+      wx.request({
+        url: that.globalData.baseURL + 'u/saveUserTrail',
+        data: {
+          token: that.globalData.loginInfo.token,
+          longitude: longitude,
+          latitude: latitude
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        complete: function (res) {
+          console.log(res)
+        }
+      })
+    }
+  },
+
   shareAppMessage: function (res) {
     var that = this
     console.log(res)
     return {
-      title: '梦舟足球',
+      title: '梦舟体育',
       path: '/pages/index/index'
     }
   }

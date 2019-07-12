@@ -1,4 +1,8 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "l-grid": "/components/widget/grid/index",
+    "l-grid-item": "/components/widget/grid-item/index",
+    "l-dialog": "/components/widget/dialog/index"
+  }
 }

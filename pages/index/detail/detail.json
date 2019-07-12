@@ -1,10 +1,12 @@
 {
   "usingComponents": {
+    "l-tabpanel": "/components/widget/tabpanel/index",
+    "l-tabs": "/components/widget/tabs/index",
+
     "introduction":"introduction/introduction",
     "integral": "integral/integral",
     "result": "result/result",
-    "list": "list/list",
-    "tabView":"../../../common/component/navtab/navtab"
+    "list": "list/list"
   },
   "navigationBarTitleText": "赛事详情"
 }

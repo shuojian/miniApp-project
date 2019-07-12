@@ -1,0 +1,29 @@
+<!--pages/field/sportsorder/sportsorder.wxml-->
+<view class='container'>
+
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class='section'>
+      <l-input name="phone" label="收件人电话"  placeholder="收件人电话"  />
+      <l-input name="matchTimeStart" label="开始时间"  placeholder="开始时间"  /> 
+      <l-input name="matchTimeEnd" label="结束时间"  placeholder="结束时间"  />
+      <l-input name="realName" label="收件人姓名"  placeholder="姓名"  /> 
+      <view class='p-15'>
+        <view style="margin-bottom:10px">备注</view>
+        <l-textarea name="beizhu" indicator="{{true}}" maxlength="140" auto-height="{{true}}" placeholder=" 填写备注..."  />
+      </view>
+    </view>
+    <view class='mt-10 Bill p-15 section'>
+      <view class='section-title_left'>订单</view>
+      <view class='grid two'>
+        <view class='item'>单价</view>
+        <view class='item text-right'><l-price unit="￥" count="300" autofix reserve-digit="2" unit-size="20"></l-price></view>
+      </view>
+    </view>
+    
+  <view class='p-20 pos-ab ab-b w-f'>
+    <!-- <l-button type="default" size="large" form-type="submit" >提交订单</l-button> -->
+    <button class="d-btn-primary" formType="submit">提交订单</button>
+  </view>
+</form>
+
+</view>

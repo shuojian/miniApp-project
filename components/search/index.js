@@ -3,16 +3,16 @@ import {
   KeywordModel
 } from '../../models/keyword.js'
 
-import {
-  BookModel
-} from '../../models/book.js'
+// import {
+//   BookModel
+// } from '../../models/book.js'
 
 import {
   paginationBev
 } from '../behaviors/pagination.js'
 
 const keywordModel = new KeywordModel()
-const bookModel = new BookModel()
+// const bookModel = new BookModel()
 
 Component({
   /**

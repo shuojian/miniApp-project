@@ -1,9 +1,12 @@
 {
   "usingComponents": {
-    "tabView": "/common/component/navtab/navtab",
+    "l-tabpanel": "/components/widget/tabpanel/index",
+    "l-tabs": "/components/widget/tabs/index",
+    "l-dialog": "/components/widget/dialog/index",
+
     "count":"component/count/count",
     "info":"component/info/info",
-    "member":"component/fghfghsdfgmember/member"
+    "member":"component/member/member"
   },
   "navigationBarTitleText": "球队详情"
 }

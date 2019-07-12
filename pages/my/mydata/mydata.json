@@ -1,4 +1,8 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "d-button": "/components/image-button/index",
+    "l-grid": "/components/widget/grid/index",
+    "l-grid-item": "/components/widget/grid-item/index"
+  },
   "navigationBarTitleText": "个人主页"
 }

@@ -1,9 +1,24 @@
 
+ <l-tabs bind:linchange="changeTabs">
+  <l-tabpanel tab="赛事简介" key="one" slot="one">
+    <view class="tab-content"><introduction></introduction></view>
+  </l-tabpanel>
+  <l-tabpanel tab="赛事积分" key="two" slot="two">
+    <view class="tab-content"><integral></integral></view>
+  </l-tabpanel>
+  <l-tabpanel tab="赛程赛果" key="three" slot="three">
+    <view class="tab-content"><result></result></view>
+  </l-tabpanel>
+  <l-tabpanel tab="赛事榜单" key="four" slot="four">
+    <view class="tab-content"><list></list></view>
+  </l-tabpanel>
+</l-tabs>
 
 
 
 
-<tabView tabTitle="{{tabTitle}}" positionTop="0" paddingTop="">
+
+<!-- <tabView tabTitle="{{tabTitle}}" positionTop="0" paddingTop="">
     <view slot="0" >
       <introduction></introduction>
     </view>
@@ -16,6 +31,6 @@
     <view slot="3" >
       <list></list>
     </view>
-</tabView>
+</tabView> -->
 
 

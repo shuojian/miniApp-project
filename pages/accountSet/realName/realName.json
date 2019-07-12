@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "l-input": "/components/widget/input/index",
+    "l-list": "/components/widget/list/index",
+    "l-image-picker": "/components/widget/image-picker/index"
+  }
 }

@@ -1,8 +1,32 @@
 
 <!-- components_event 赛事 -->
-<view class='container'>
-  <view bind:tap="getEventList">获取列表</view>
-</view>
+<!-- <i class="tag complete circle pos-ab" style="right:10px;">已结束</i>
+  <i class="tag processing circle " style="right:10px;">进行中</i>
+  <i class="tag preparation circle ">筹备中</i> -->
+  
+<view bind:tap="onTap" class='container bg-f border-b weui-media-box weui-media-box_appmsg'>
+
+    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+      <image class="thumb square-cir" src="../../img/logo_v.jpg" />
+    </view>
+
+    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+      <view class="weui-media-box__title">{{event.eventName}}</view>
+
+      <view class="weui-media-box__desc">
+        <i class="mr-10">{{event.area}}</i>
+        <i>{{event.eventEndTime}}</i>
+        <i class="tag processing circle pos-ab " style="right:10px;">{{event.eventState}}</i>
+      </view>
+
+      <view class='tags'>
+        <view class='tag gray square-cir2'>{{event.eventDesc}}</view>
+        <view class='tag gray square-cir2'>{{event.eventType}}</view>
+        <view class='tag gray square-cir2'>{{event.eventPrice}}</view>
+      </view>
+    </view>
+
+</view> 
 
 
 

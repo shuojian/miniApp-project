@@ -1,6 +1,9 @@
 {
   "usingComponents": {
-    "d-button":"/components/image-button/index"
+    "d-button":"/components/image-button/index",
+    "l-list": "/components/widget/list/index",
+    "l-grid": "/components/widget/grid/index",
+    "l-grid-item": "/components/widget/grid-item/index"
   },
   "navigationBarTitleText": "我的"
 

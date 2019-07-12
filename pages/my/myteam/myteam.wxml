@@ -1,27 +1,20 @@
 <view class="page">
-  <view class='page-bd'>
+  <view wx:if="{{!nodata}}" class="section mt-1">
+    <block wx:key="id" wx:for="{{myteams}}">
+      <l-list title="{{item.myteam}}" bind:lintap="toMyTeam">
+      </l-list>
+    </block>
+  </view>
+  <view wx:else class='nodata'>
+        <image src="/img/logo_v.png"></image>
+        暂无相关数据
+  </view>
 
-    <view class="section mt-1">
-       <navigator 
-       url="../../team/detail/detail" 
-       class='weui-cell weui-cell_access' 
-       hover-class="weui-cell-active">
-        <view class="weui-cell__bd">滇峰时代</view> 
-        <view class='weui-cell__ft weui-cell__ft_in-access'></view>
-      </navigator> 
-      <navigator 
-       url="../../team/detail/detail" 
-       class='weui-cell weui-cell_access' 
-       hover-class="weui-cell-active">
-        <view class="weui-cell__bd">滇峰时代</view> 
-        <view class='weui-cell__ft weui-cell__ft_in-access'></view>
-      </navigator> 
-    </view>
+  
 
     <view class='p-20'>
       <button bindtap='toCreatTeam' class='d-btn-primary'>创建球队</button>
     </view>
-    
-  </view>
+
 </view>
 

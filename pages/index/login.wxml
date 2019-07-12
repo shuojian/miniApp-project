@@ -1,0 +1,21 @@
+<!--pages/index/login.wxml-->
+
+<view wx:if="{{inited}}" class="container p-20">
+  <swiper indicator-dots="true" autoplay="true" interval="5000" duration="1000">
+    <block wx:for="{{hotPrds}}" wx:key="*this">
+      <swiper-item catchtap="bindHotTap" data-prdid='{{item.prdId}}'>
+        <image src="{{item.imgUrl}}" mode="aspectFit" class="" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <text class="prd_title_txt">登录成功</text>
+</view>
+
+<view wx:if="{{authLogin}}" class="row_view auth p-20">
+  <l-avatar size="160" src="/img/logo.png" />
+  <view class="ms">
+    允许微信授权后，可体验梦舟全部功能</view>
+  <button class='mt-50 d-btn-primary' open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">请您授权登录</button>
+
+</view>

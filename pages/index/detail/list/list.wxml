@@ -1,6 +1,6 @@
-<import src="../../../../common/template/viewList.wxml"/>
+<import src="/template/viewList.wxml"/>
 
-<tabView tabTitle="{{tabTitle}}" positionTop="48px">
+<tabView tabTitle="{{tabTitle}}" positionTop="54px">
   <view slot="0">
     <template is="viewList-head"></template>
     <template is="viewList"></template>

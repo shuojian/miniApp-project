@@ -11,10 +11,8 @@
       </block>
   </swiper>
 
-  <view class="container">
-    <block wx:for="{{fieldList}}" wx:for-index="idx">
-      <d-field field="{{item}}"/>
-    </block>
-  </view>
+  <block wx:key="id" wx:for="{{gyms}}">
+    <d-gym gym="{{item}}"/>
+  </block>
 </view>
 

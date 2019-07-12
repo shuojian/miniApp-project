@@ -1,3 +1,16 @@
-<view class="page fx fx-ycenter">
-  <d-nodata wx:if="{{data.length < 1}}"/>
+<view class="page">
+  <view wx:if="{{!nodata}}"  class="section mt-1">
+    <block wx:key="id" wx:for="{{myorder}}">
+      <l-list title="{{item.myorder}}" bind:lintap="toOrderDetail">
+      </l-list>
+    </block>
+  </view>
+  <view wx:else class='nodata'>
+        <image src="/img/logo_v.png"></image>
+        暂无相关数据
+  </view>
+
+    
+
+    
 </view>

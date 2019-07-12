@@ -1,9 +1,13 @@
-// pages/field/field.js
-
 import {
   FieldModel
 } from '../../models/field.js'
+
+import {
+  WxCacheModel
+} from '../../models/wxcache.js'
+
 const fieldModel = new FieldModel()
+const wxCacheModel = new WxCacheModel()
 
 Page({
 
@@ -11,7 +15,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    geams: [],
+    gyms:{},
     more: '',
 
     mode: "scaleToFill",
@@ -32,58 +36,41 @@ Page({
     }
     this.setData({ arr: array })
 
-    const fields = fieldModel.getFieldList()
-    fields.then(
-      res => console.log(res)
-    )
+    wxCacheModel.get("gyms", fieldModel.getGymList())
+    this.getGyms()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
+   //下拉刷新
   onPullDownRefresh: function () {
-
+    this.clearCache()
+    this.getGyms()
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+  // 页面上拉触底事件的处理函数
   onReachBottom: function () {
-
+    if (!isLoading) {
+      if (this.data.prds && (this.data.prds.length % 6) == 0) {
+        this.init(this.data.prds[this.data.prds.length - 1].routeId)
+      }
+    }
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+  clearCache: function () {
+    this.setData({
+      gyms: {}
+    });
+  },
 
-  }
+
+  getGyms: function () {
+    const gyms = fieldModel.getGymList()
+    gyms.then(
+      res => {
+        this.setData({
+          gyms: res.data
+        })
+        wxCacheModel.put("gyms", res.data, 1)
+      })
+  },
+
 })

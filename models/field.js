@@ -1,24 +1,26 @@
+var app = getApp()
+
 import { HTTP } from '../utils/http.js'
 
 class FieldModel extends HTTP {
 
-  getFieldList() {
+  getGymList() {
     return this.request({
-      url: 'field/page',
+      url: 'gym/page',
       data: {
         token: app.globalData.loginInfo.token
       }
     })
   }
 
-  // getDetail(bid){
-  //   return this.request({
-  //     url:'field/${bid}/detauk',
-  //     data:{
-  //       token:app.globalData.loginInfo.token
-  //     }
-  //   })
-  // }
+  getDetail(bid){
+    return this.request({
+      url: `gym/getById?gymId=${bid}`,
+      data:{
+        token:app.globalData.loginInfo.token,
+      }
+    })
+  }
 
 }
 

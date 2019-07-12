@@ -1,0 +1,13 @@
+/* pages/index/login.wxss */
+
+.auth{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top:200rpx;
+  text-align:center;
+}
+
+.ms{
+  color: #777777
+}

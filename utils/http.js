@@ -18,16 +18,13 @@ class HTTP{
   //request
   _request(url, resolve, reject, data = {}, method = 'GET' ){
     //url, data, method
+    this._show_loading()
     wx.request({
       url:config.api_base_url + url,
       method:method,
       data:data,
       header: { 
         'content-type': 'application/x-www-form-urlencoded',
-        // 'token': 'app.globalData.loginInfo.token',
-        // 'Authorization': 'app.globalData.loginInfo.token'
-        // 'content-type': 'application/json',
-        // 'appkey': config.appkey
          },
       success: res=> {
         const code = res.statusCode.toString()
@@ -43,6 +40,9 @@ class HTTP{
       fail: err=> {
         reject()
         this._show_error(1)
+      },
+      complete: res=> {
+        this._hide_Loading()
       }
     })
   }
@@ -58,6 +58,20 @@ class HTTP{
       icon: "none",
       duration: 2000
     })
+  }
+
+  _show_loading(){
+    wx.showToast({
+      title: 'loading...',
+      icon: 'loading',
+      duration: 15000
+    })
+    wx.showNavigationBarLoading()
+  }
+
+  _hide_Loading(){
+    wx.hideToast()
+    wx.hideNavigationBarLoading()
   }
 
 }

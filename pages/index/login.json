@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "l-avatar": "/components/widget/avatar/index"
+  }
+}

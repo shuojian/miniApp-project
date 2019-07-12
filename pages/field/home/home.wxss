@@ -1,5 +1,0 @@
-
-
-.dfx{display: flex;}
-.dfx-item{flex:1 ; text-align: center; padding:10px; border-right:1px solid #dfdfdf;}
-.dfx-item:last-child{border-right:none;}

@@ -1,1 +1,25 @@
 /* pages/field/field.wxss */
+
+
+
+.list.adicon{
+  position: relative;
+  padding-left:15px;
+  border-top:1px solid #eeeeee;
+}
+.list.adicon .item{
+  padding:10px 15px 10px 25px;
+  border-bottom:1px solid #eeeeee;
+}
+.list.adicon .item .iconfont{
+  position: absolute;
+  margin-left:-30px;
+  color:#3b5999;
+  font-size: 20px;
+}
+.list.adicon .item .title{
+  
+}
+.list.adicon .item .desc{
+  font-size: 0.8em; color:#5c5c5c; margin-top:8px;
+}

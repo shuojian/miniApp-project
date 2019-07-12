@@ -1,5 +1,5 @@
 
-<import src="../../../../common/template/viewList.wxml"/>
+<import src="/template/viewList.wxml"/>
 
 <view>
   <view class='section bg-gray' style="font-size:12px;">

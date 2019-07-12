@@ -4,71 +4,49 @@
   <!-- header -->
   <view class='page-hd'>
     <view class="userinfo ptb-20">
-      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
+      <image  class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </view>
   </view>
   <!-- / header -->
 
   <view class='page-bd'>
-
     <!-- 所在球队 -->
     <view class="cell-title"> 
       <text class='text'>所在球队</text> 
     </view>
     <view class="section">
-      <navigator 
-        url="../../team/detail/detail" 
-        class='weui-cell weui-cell_access' 
-        hover-class="weui-cell-active">
-          <view class="weui-cell__bd">滇峰时代</view> 
-          <view class='weui-cell__ft weui-cell__ft_in-access'></view>
-      </navigator> 
+      <view wx:if="{{isTeam}}" class="color-gray p-base bg-f">
+        <navigator 
+          url="../../team/detail/detail" 
+          class='weui-cell weui-cell_access' 
+          hover-class="weui-cell-active">
+            <view class="weui-cell__bd">{{myteamname}}</view> 
+            <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+        </navigator>
+      </view>
+      <view wx:else class="color-gray p-base">还没有参加任何球队</view>
+       
     </view>
     <!-- / 所在球队 -->
 
-  <!-- 个人参数 -->
-  <view class="cell-title"> 
-    <text class='text'>个人参数数据统计</text> 
-  </view>
-  <view class="section">
-
-    <view class="d-grids">
-      <view  class="grid" >
-        <view class="grid_label"><i class="num">0</i>出勤率</view>
-      </view>
-      <view  class="grid" >
-        <view class="grid_label"><i class="num">0</i>胜</view>
-      </view>
-      <view  class="grid" >
-        <view class="grid_label"><i class="num">0</i>平</view>
-      </view>
-      <view  class="grid" >
-        <view class="grid_label"><i class="num">0</i>负</view>
-      </view> 
-    </view> 
-
-    <view class="d-grids mt--1">
-      <view  class="grid" >
-        <view class="grid_label"><i class="num">0</i>进球</view>
-      </view>
-      <view  class="grid" >
-        <view class="grid_label"><i class="num">0</i>助攻</view>
-      </view>
-      <view  class="grid" >
-        <view class="grid_label"><i class="num">0</i>黄牌</view>
-      </view>
-      <view  class="grid" >
-        <view class="grid_label"><i class="num">0</i>红牌</view>
-      </view>          
+    <!-- 个人参数 -->
+    <view class="cell-title"> 
+      <text class='text'>个人参数数据统计</text> 
     </view>
-
+    <view class="section">
+      <view class="weui-panel__bd">
+        <l-grid l-class="grid-item border-t ptb-10" row-num="4" show-border="{{true}}">
+          <l-grid-item 
+            wx:for="{{myDataCount}}" wx:key="{{index}}" key="{{index}}" slot="{{index}}">
+            <view class="num">{{item.num}}</view>
+            <view class="text">{{item.text}}</view>
+          </l-grid-item>
+        </l-grid>
+      </view>
+    </view>
+    <!-- 个人参数 -->
   </view>
-  <!-- 个人参数 -->
-
-  </view>
+  
 </view>
 

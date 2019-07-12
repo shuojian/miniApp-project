@@ -1,31 +1,85 @@
 // pages/logs/realName/realName.js
+const app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    realNameRules: [{
+      required: true
+    },
+    {
+      min: 2,
+      max: 5,
+      message: '长度需要在2-3个字符之间'
+    }
+    ],
+    idCardRules:[{
+      required: true
+    },
+      {
+        min: 14,
+        max: 18,
+        message: '长度需要在14-18位之间'
+      }
+    ]
+
+  },
+
+  onLoad: function (options) {
 
   },
 
 
-  choice: function () {
-    var that = this
-    wx.chooseImage({
-      count: 1, // 默认9  
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有  
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
-        var tempFilePaths = res.tempFilePaths
-        that.setData({
-          textHidden: true,
-          image_photo: tempFilePaths,
-          photoHidden: false
+  formSubmit: function (e) {
+    console.log('form提交：', e.detail.value)
+    app.showLoading()
+
+    wx.request({
+      url: app.globalData.baseURL + '/',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      data: {
+        token: app.globalData.loginInfo.token,
+        idCard: e.detail.value.idCard,
+        realName: e.detail.value.realName,
+        idImage: e.detail.value.idImage
+      },
+      success: res => {
+        if (res.data) {
+          wx.lin.showToast({
+            title: '成功提交,等待审核~',
+            icon: 'success',
+            iconStyle: 'color:#7ec699; size: 60',
+            success(){
+              setTimeout(function () {
+                wx.switchTab({
+                  url: '/pages/my/my',
+                }), 3000})
+            }
+          })
+        } 
+      },
+      fail: error => {
+        console.log(error);
+        wx.lin.showToast({
+          title: '提交出错，稍后重试~',
+          icon: 'error',
+          iconStyle: 'color:#7ec699; size: 60',
         })
+      },
+      complete: msg => {
+        app.hideLoading()
+        console.log('msg:')
+        console.log(msg)
       }
     })
   },
+
   uploadPhoto: function () {
     var that = this
     let param = util.json2Form({
@@ -34,7 +88,7 @@ Page({
       parkingPhoto: that.data.image_photo,
     });
     wx.uploadFile({
-      url: 'https://testapi.****.com/v4.0.0/uploadParkingPhoto', //仅为示例  
+      url: '1',
       filePath: that.data.image_photo[0],
       name: 'parkingPhoto',
       formData: {
@@ -68,139 +122,7 @@ Page({
         }
       }
     })
-
   },
 
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  pic: function (options) {
-    wx.chooseImage({ 
-      count: 1, // 默认9 
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有 
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有 
-      success: function (res) { 
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片 
-      var tempFilePaths = res.tempFilePaths 
-      } 
-      }) 
-      }, 
-      fail: function (res) { 
-        console.log(res.errMsg) 
-      },
-
-  choseImgMethod() {
-    var that = this; 
-    wx.showActionSheet({ 
-      itemList: ['从相册中选择', '拍照'], 
-      itemColor: "#3b5999", 
-      success: function (res) { 
-        if (!res.cancel) { 
-          if (res.tapIndex == 0) { 
-            that.chooseWxImage('album') 
-          } else if (res.tapIndex == 1) { 
-            that.chooseWxImage('camera') 
-            } 
-          } 
-        } 
-      })
-  },
-  chooseWxImage: function (type) { 
-    var that = this; 
-    wx.chooseImage({ 
-      sizeType: ['original', 'compressed'], 
-      sourceType: [type], 
-      success: function (res) { 
-        console.log(res); 
-        that.setData({ 
-          tempFilePaths: res.tempFilePaths[0],
-        }) 
-      } 
-    }) 
-  },
-  chooseWxPhoto: function (type) {
-    var that = this;
-    const ctx = wx.createCameraContext()
-    ctx.takePhoto({
-      quality: 'high',
-      success: (res) => {
-        this.setData({
-          src: res.tempImagePath
-        })
-      }
-    })
-  },
-
-
-
-
-  choseImg() {
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths
-      }
-    })
-  },
-  takePhoto() {
-    const ctx = wx.createCameraContext()
-    ctx.takePhoto({
-      quality: 'high',
-      success: (res) => {
-        this.setData({
-          src: res.tempImagePath
-        })
-      }
-    })
-  }
+  
 })

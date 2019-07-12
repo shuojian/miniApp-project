@@ -1,45 +1,66 @@
+<!--<text>pages/field/home/home.wxml</text>-->
 
-<view class="page">
+<view class='container'>
+
+  <view class='page-hd'>
+    <view class="xsimg">
+        <image class='thumb' src="../../../img/cd2.jpg"/>
+    </view>
+    <view  class='section mt-1 border'>
+      <div class="dfx">
+        <view  bindtap="booking" class="dfx-item">
+          <i class="iconfont icon-yaoqing"></i> 订场
+        </view>
+        <view bindtap="callFootball" class="dfx-item">
+          <i class="iconfont icon-lianxifangshi"></i> 联系球场
+        </view>
+      </div>
+    </view>
+  </view>
 
   <view class="page_bd">
-  
+    <!-- 球场简介 -->
+    <view class="weui-cell section ">
+      <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+        <view class="weui-media-box__title">{{gym.gymName}}</view>
+        <view class="title"><i class="iconfont icon-dizhi"></i> {{gym.gymAddr}}</view>
+        <view class='tags'>
+          <view class='tag gray'>5人制</view>
+          <view class='tag gray'>11人制</view>
+        </view>
+      </view>
+    </view>
     <view class='list adicon bg-f'>
       <view class='item'>
         <i class="iconfont icon-bisaiguanli"></i>
         <view class="title">场地介绍</view>
-        <view class='desc'>标准11人天然草足球场：8块（含一块灯光球场），顶级人造草5人制足球场：2块</view>
-      </view>
-      <view class='item'>
-        <i class="iconfont icon-dizhi"></i>
-        <view class="title">云南省昆明市西山区红塔西路15号</view>
-        <view class='desc'>位于地图导航地图导航地图导航地图导航地图导航地图导航</view>
+        <view class='desc'>{{gym.gymDesc}}</view>
       </view>
       <view class='item'>
         <i class="iconfont icon-lianxifangshi"></i>
         <view class="title">联系方式</view>
         <view class='desc'>
-        电话：<i bindtap="openActionsheetLX" class="color-primary" > 18675498547</i>
-        微信：<i class="color-primary"> 18675498547</i>
+        电话：<i bindtap="tel" class="color-primary" >{{gym.gymContactPhone}}</i>
+        微信：<i class="color-primary">{{gym.gymContactWechat}}</i>
         </view>
       </view>
       <view class='item'>
         <i class="iconfont icon-shijian"></i>
         <view class="title">营业时间</view>
-        <view class='desc'>周一至周日 9：00－－21：00</view>
+        <view class='desc'>{{gym.gymBusinessHours}}</view>
       </view>
       <view class='item'>
         <i class="iconfont icon-fuwu"></i>
         <view class="title">场地服务</view>
-        <view class='desc'>停车场、住宿、装备店、冲淋、自助餐厅、游泳馆、足球战</view>
+        <view class='desc'>{{gym.gymService}}</view>
       </view>
       <view class='item'>
         <i class="iconfont icon-xuzhi"></i>
         <view class="title">约战订场须知</view>
-        <view class='desc'>位于地图导航地图导航地图导航地图导航地图导航地图导航</view>
+        <view class='desc'>{{gym.gymOrderNotice}}</view>
       </view>
-
-      
-      
     </view>
+    <!-- / 球场简介 -->
   </view>
 </view>
+

@@ -1,39 +1,32 @@
-
 <!-- page:Teams -->
 <view class='container'>
   <!-- 搜索 -->
-  <v-search more="{{more}}" bind:cancel="onCancel" wx:if="{{searching}}" /> 
-  <view class='teams-container'>
-    <block wx:key="id" xw:for="{{teamList}}">
-      <d-team team="{{item}}"/>
-    </block>
-  </view>
+  <!-- <v-search more="{{more}}" bind:cancel="onCancel" wx:if="{{searching}}" />  -->
+  <block wx:key="id" wx:for="{{teams}}">
+    <d-team team="{{item}}"/>
+  </block>
+
 </view>
 
-  
 
 
 
-  <!-- 列表 -->
-  <!-- <view class="page_bd">
-    <view class="section">
-      
-      <navigator url="detail/detail" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-        <view class="avatar-sz40">
-            <image class="thumb circle" src="../../img/img.jpg" />
-        </view>
-        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-          <view class="weui-media-box__title">滇梦之队</view>
-          <view class="weui-media-box__desc">
-            <i class="mr-20"> 盘龙区</i>
-            <i> 7人 </i>
-          </view>
-        </view>
-      </navigator>
-      
-    </view>
-  </view> -->
- <!-- / 列表 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -57,16 +50,6 @@
       <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
     </view>
     <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
-      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-          <view>实时搜索文本</view>
-        </view>
-      </navigator>
-      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-          <view>实时搜索文本</view>
-        </view>
-      </navigator>
       <navigator url="" class="weui-cell" hover-class="weui-cell_active">
         <view class="weui-cell__bd">
           <view>实时搜索文本</view>

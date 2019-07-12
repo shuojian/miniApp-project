@@ -1,6 +1,6 @@
 
 // var util = require('../../utils/util.js')
-var myData = require('../../utils/data.js')
+var myData = require('../../utils/data.js').myData
 import { promisic } from '../../utils/common.js'
 
 const app = getApp()
@@ -8,33 +8,30 @@ const app = getApp()
 
 Page({
   data: {
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+
     authorized: false,
-    userInfo: null,
-    // hasUserInfo: false,
-    // canIUse: wx.canIUse('button.open-type.getUserInfo'),
     loginInfo: null,
     coinKen: 0,
     signed: false,
     inited: false,
 
-    myDataList: myData.myData,
+    myDataList: myData,
   },
-
-  onShow(options) {
-    // this.userAuthorized()
-  },
-
 
   /**
    * 生命周期函数--监听页面加载
    */
+
   onLoad(options) {
     if (app.globalData.loginInfo && app.globalData.loginInfo.token) {
       console.log('页面有1 loginInfo.token:')
       console.log(app.globalData.userInfo)
 
       this.setData({
-        loginInfo: app.globalData.loginInfo
+        loginInfo: app.globalData.loginInfo,
       })
 
       wx.request({
@@ -45,11 +42,11 @@ Page({
         header: {
           'content-type': 'application/x-www-form-urlencoded'
         },
-        success: function (res) {
+        success: res=>{
           console.log('页面请求成功')
           console.log(res)
           if (res.data.code == 0 && res.data.data) {
-            that.setData({
+            this.setData({
               coinKen: res.data.data.user.coinKen || 0
             })
           }
@@ -132,7 +129,6 @@ Page({
   },
 
   getUserInfo(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -140,7 +136,7 @@ Page({
     })
   },
 
-  toAccountSet() {
+  accountSet() {
     wx.navigateTo({
       url: '../accountSet/index'
     })

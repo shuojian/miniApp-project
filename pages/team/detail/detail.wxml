@@ -1,20 +1,38 @@
+ <l-tabs bind:linchange="changeTabs">
+  <l-tabpanel tab="球队详情" key="one" slot="one">
+    <view class="tab-content">
+      <info/>
+    </view>
+  </l-tabpanel>
 
+  <l-tabpanel tab="球队队员" key="two" slot="two">
+    <view class="tab-content">
+      <block wx:key="id" wx:for="{{members}}">
+        <member member="{{item}}"/>
+      </block>
+    </view>
+  </l-tabpanel>
 
-<view class="page">
-  <tabView 
-    tabTitle="{{tabTitle}}" 
-    positionTop="0" 
-    paddingTop="">
-      <view slot="0">
-        <info></info>
-      </view>
-      <view slot="1">
-        <member></member>
-      </view>
-      <view slot="2">
-        <count></count>
-      </view>
-    
-  </tabView>
+  <l-tabpanel tab="球队统计" key="three" slot="three">
+    <view class="tab-content">
+      <count/>
+    </view>
+  </l-tabpanel>
+</l-tabs>
+
+<l-dialog 
+        show="{{false}}"
+        type="confirm"  
+        title="输入4位邀请码">
+        <input  maxlength="10" placeholder="请输入4位邀请码" />
+</l-dialog>
+<l-toast />
+<view class='p-20 pos-ab ab-b w-f'>
+  <button 
+    class='d-btn-primary'  
+    bindtap='onTap'>
+      申请加入球队
+  </button>
 </view>
+
 

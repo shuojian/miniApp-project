@@ -1,6 +1,7 @@
 /* common/component/pagecomponent/games/index.wxss */
-
 /* 组件 custom-component.wxss */
-:host {
+@import "../../app.wxss";
+/* :host {
   color: #3c3c3c;
-}
+} */
+

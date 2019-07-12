@@ -1,76 +1,75 @@
-// pages/team/detail/detail.js
+import { 
+  TeamModel 
+} from '../../../models/team.js'
+
+import {
+  WxCacheModel
+} from '../../../models/wxcache.js'
+
+const teamModel = new TeamModel()
+const wxCacheModel = new WxCacheModel()
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    currentTab: 0,
-    currentTabSub: 5,
-
-    tabTitle: ['球队详情', '球队队员', '球队统计']
+    team:null,
+    members:null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading()
+    const bid = options.bid
 
+    console.log('team详情bid：')
+    console.log(bid)
+
+    wxCacheModel.get("team", teamModel.getDetail())
+    wxCacheModel.get("members", teamModel.getListMember())
+
+    const detail = teamModel.getDetail(bid)
+    const members = teamModel.getListMember(bid)
+
+    detail.then(res =>{
+
+      console.log('team详情：')
+      console.log(res.data)
+
+      this.setData({
+        team:res.data
+      })
+      wx.hideLoading()
+      wxCacheModel.put("team", res.data, 0.2)
+    })
+
+    members.then(res =>{
+      console.log('members详情：')
+      console.log(res.data)
+      this.setData({
+        members: res.data
+      })
+      wx.hideLoading()
+      wxCacheModel.put("members", res.data, 0.2)
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onTap() {
+    wx.lin.showDialog({
+      type: "confirm",
+      title: "请输入4位邀请码",
+      success: (res) => {
+        if (res.confirm) {
+          wx.lin.showToast({
+            title: '申请已发送,等待确认~',
+            icon: 'success',
+            iconStyle: 'color:#7ec699; size: 60',
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  currentTab(e) {
-    this.setData({ currentTab: e.currentTarget.dataset.current });
-  },
-  switchTab(e) {
-    this.setData({ currentTabSub: e.currentTarget.dataset.idx });
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

@@ -15,24 +15,18 @@
 
     <view class='weui-cell'>
       <view class='weui-cell__bd'>所在地区</view>
-      
-      
-  <picker 
-    mode="region" 
-    bindchange="bindRegionChange" 
-    value="{{region}}" 
-    custom-item="{{customItem}}">
-      <view class="picker">
-        {{region[1]}}，{{region[2]}}
-      </view>
-  </picker>
+      <picker 
+        name="teamArea"
+        mode="region" 
+        bindchange="bindRegionChange" 
+        value="{{region}}" 
+        custom-item="{{customItem}}">
+          <view class="picker">
+            {{region[1]}}，{{region[2]}}
+          </view>
+      </picker>
       <view class='weui-cell__ft weui-cell__ft_in-access'></view>
     </view>
-
-    <navigator class='weui-cell' url="intr/intr">
-      <view class='weui-cell__bd'>球队简介</view>
-      <view class='weui-cell__ft weui-cell__ft_in-access'></view>
-    </navigator>
 
     <view class='weui-cell'>
       <view class='weui-cell__bd'>擅长赛制</view>
@@ -49,7 +43,7 @@
 
     <view class='weui-cell'>
       <view class='weui-cell__bd'>所属行业</view>
-        <picker name="belong"
+        <picker name="nameBelong"
          bindchange="bindHyChange" 
          value="{{hyIndex}}" 
          range="{{hyArray}}">
@@ -58,6 +52,11 @@
           </view>
         </picker>
       <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+    </view>
+
+    <view class='p-15'>
+      <view style="margin-bottom:10px">球队简介</view>
+      <l-textarea name="teamIntr" indicator="{{true}}" maxlength="140" auto-height="{{true}}" placeholder=" 填写球队简介..."  />
     </view>
 
   </view>
@@ -69,10 +68,5 @@
 <!--/ button-->
 
 <view>
-{{coinKen}}
-{{giftAmount}}
-{{rebateAmount}}
-{{points}}
 </view>
-
 </form>

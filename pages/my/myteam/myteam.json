@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "l-list": "/components/widget/list/index"
+  },
   "navigationBarTitleText": "我的球队"
 }
