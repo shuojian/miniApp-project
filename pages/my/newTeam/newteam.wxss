@@ -1,0 +1,2 @@
+@import "/components/common/list.wxss";
+@import '/common/iconfont/iconfont.wxss';

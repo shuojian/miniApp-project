@@ -1,20 +1,25 @@
 <view class="page">
+
   <view wx:if="{{!nodata}}" class="section mt-1">
-    <block wx:key="id" wx:for="{{myteams}}">
-      <l-list title="{{item.myteam}}" bind:lintap="toMyTeam">
-      </l-list>
+    <block wx:key="id" wx:for="{{myTeams}}">
+      <team-cs team="{{item}}" 
+              hasNewMembe="{{hasNewMember}}"  
+              bind:disableTap="{{disableTeam}}"/>
     </block>
   </view>
+  
   <view wx:else class='nodata'>
-        <image src="/img/logo_v.png"></image>
-        暂无相关数据
+      <image src="/img/logo_v.png"></image>
+      暂无相关数据
   </view>
 
-  
-
-    <view class='p-20'>
-      <button bindtap='toCreatTeam' class='d-btn-primary'>创建球队</button>
-    </view>
+  <view class='p-20' wx:if="{{isCreat}}">
+    <button bindtap='creatTeam' class='d-btn-primary'>创建球队</button>
+  </view>
 
 </view>
 
+
+<!-- components
+  team-cs: ../../widget/list/teamList/index
+-->

@@ -1,0 +1,44 @@
+
+<view class=' container'>
+
+  <view class='option'>
+    <view class='filter center'>
+      <picker 
+        bindchange="pickerChange" 
+        value="{{index}}" 
+        range="{{array}}">
+        <view class="picker">
+          {{array[index]}} 
+          <i class="iconfont icon-iconset0494 color-gray fw5 fsz-1a2"></i>
+        </view>
+      </picker> 
+    </view>
+
+    <!-- <view class='next'>
+      下一轮
+      <i class="iconfont icon-icon_right color-gray fw5 fsz-1a2"></i>
+    </view> -->
+  </view>
+
+  <block wx:key="id" wx:for="{{match}}">
+      <view class='item' bindtap='detail'>
+        <view class='item-time'>{{item.time}}</view>
+        <view class='item-v'>
+          <view class='item-team l'>
+            {{item.hostTeamId}} 
+            <i class="color-reda fw-6 fsz-1a2 mr--5"> {{item.hostTeamShoot}}:</i>
+          </view>
+          <view class='item-team r'> 
+            <i class="color-reda fw-6 fsz-1a2"> {{item.guestTeamShoot}} </i> 
+            {{item.guestTeamId}} 
+          </view>
+        </view>
+      </view>
+  </block>
+
+</view>  
+  
+  
+   
+
+

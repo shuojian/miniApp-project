@@ -1,0 +1,79 @@
+<!--pages/me/myteam/newteam/newteam.wxml-->
+<form bindsubmit="formSubmit" bindreset="formReset">
+  <view class='section p-15'>
+
+    <view class='item' >
+      <view class='item-left' >球队队徽</view>
+      <view class='item-right'>
+        <view wx:if="{{!attachs}}" style="width:35px; height:35px">
+          <image class='wh-f'  bindtap='choseImg' id='1' name='attachs' src='/img/logo.png'></image>
+        </view>
+        <view wx:else style="width:35px; height:35px">
+          <image class='wh-f'  bindtap='choseImg' id='1' name='attachs' src='{{attachs}}'></image>
+        </view>
+        <!-- <image class="wh-f" src='{{imgsrc}}'/> -->
+        <view class='iconfont icon-icon_right'></view>
+      </view>
+    </view>
+    <l-input l-class="mrl--15" label="球队名称" name="teamName" value="{{teamName}}"/>
+
+    <view class='item'>
+      <view class='item-left'>所在地区</view>
+      <view class='item-right'>
+        <picker name="teamArea"
+              mode="region" 
+              bindchange="regionChange" 
+              value="{{region}}" 
+              custom-item="{{customItem}}">
+            <view class="picker">
+              {{region[1]}}，{{region[2]}}
+            </view>
+        </picker>
+        <view class='iconfont icon-icon_right'></view>
+      </view>
+    </view>
+
+    <view class='item'>
+      <view class='item-left'>擅长赛制</view>
+      <view class='item-right'>
+        <picker name="teamType"
+                bindchange="pickerChange" 
+                value="{{array[index]}}" 
+                range="{{array}}">
+          <view class="picker">{{array[index]}}</view>
+        </picker>
+        <view class='iconfont icon-icon_right'></view>
+      </view>
+    </view>
+
+    <view class='item'>
+      <view class='item-left'>所属行业</view>
+      <view class='item-right'>
+        <picker name="teamBelong"
+                bindchange="hyChange" 
+                value="{{hyArray[hyIndex]}}" 
+                range="{{hyArray}}">
+          <view class="picker">{{hyArray[hyIndex]}}</view>
+        </picker>
+        <view class='iconfont icon-icon_right'></view>
+      </view>
+    </view>
+    <!-- <view class='item'>
+      <view class='item-left'>入队验证码</view>
+      <view class='item-right'>3359</view>
+    </view> -->
+    <view class='mtb-10'>球队简介</view>
+    <l-textarea 
+        name="teamDesc" 
+        indicator="{{true}}" 
+        maxlength="60" 
+        auto-height="{{true}}" 
+        value="{{teamDesc}}"/>
+  </view>
+  <view class='p-20'><button class='d-btn-primary' form-type='submit'>确定修改</button></view>
+</form>
+
+<view bindtap='disableTeam' class="btn-delete" >  册除球队 </view>
+
+<l-toast />
+

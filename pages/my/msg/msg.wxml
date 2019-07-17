@@ -1,0 +1,18 @@
+<block wx:for="{{myTeamMsgs}}" wx:key="key">
+  <view class="container">
+    <view class="msg-hd">
+      申请加入球队
+    </view>
+    <view class="msg-bd">
+      {{item.applyDesc}}
+      <view class="time">{{item.insertTime}}</view>
+    </view>
+    <view class="msg-ft">
+      <view class="btn-rj" bindtap="reject">拒绝</view>
+      <view class="btn-ac" bindtap="accept">接受</view>
+    </view>
+  </view>
+</block>
+<l-toast/>
+
+

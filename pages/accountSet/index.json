@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "l-dialog": "/components/widget/dialog/index"
+  }
 }

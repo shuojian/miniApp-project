@@ -1,38 +1,83 @@
- <l-tabs bind:linchange="changeTabs">
+
+<view class='container'>
+    <view class='item-hd smx'>
+      <image wx:if="{{team.logoUrl}}" class="circle" src="{{team.logoUrl}}" />
+      <image wx:else class='circle' src="/img/logo.png"></image>
+    </view>
+    <view class='item-bd'>
+      <view class='title'>{{team.teamName}}</view>
+      <view class='tags'><i>{{team.teamType}}</i></view>
+      <view class='desc'> {{team.teamDesc}}</view> 
+    </view>
+    <view class="item-ft">
+      <d-edit linkText="编辑"
+              isCreator="{{isCreator}}"
+              isTeam="{{isTeam}}"
+              isMember="{{isMember}}"
+              team="{{team}}"/>
+    </view>
+</view>
+
+
+ <l-tabs>
   <l-tabpanel tab="球队详情" key="one" slot="one">
     <view class="tab-content">
-      <info/>
+      <info team="{{team}}"/>
     </view>
   </l-tabpanel>
 
   <l-tabpanel tab="球队队员" key="two" slot="two">
     <view class="tab-content">
       <block wx:key="id" wx:for="{{members}}">
-        <member member="{{item}}"/>
+        <member bind:dtap = "kickoutTeam"
+                member="{{item}}" 
+                isCreator="{{isCreator}}" 
+                isMember="{{isMember}}" 
+                creatorUserCode="{{creatorUserCode}}" 
+                isLink="{{isLink}}"/>
       </block>
     </view>
   </l-tabpanel>
 
   <l-tabpanel tab="球队统计" key="three" slot="three">
     <view class="tab-content">
-      <count/>
+      <tabView tabTitle="{{tabTitle}}" positionTop="20rpx" cata="{{true}}">
+        <view slot="0" >
+            <block wx:key="id" wx:for="{{members}}">
+              <count member="{{item}}" smmShoot="{{true}}"/>
+            </block>
+        </view>
+
+        <view slot="1">
+          <block wx:key="id" wx:for="{{members}}">
+            <count member="{{item}}" smmAssistsGoal="{{true}}"/>
+          </block>
+        </view>
+        
+        <view slot="2">
+          <block wx:key="id" wx:for="{{members}}">
+              <count member="{{item}}"smmFoul="{{true}}"/>
+          </block>
+        </view>
+      </tabView>
     </view>
   </l-tabpanel>
 </l-tabs>
+<button wx:if="{{!isCreator && !isTeam && !isMember}}" class="btn-bottom" bindtap='applyForJoin'>  申请加入球队 </button>
+<!-- <button wx:if="{{}}" class="btn-bottom" bindtap='onTap'>  微信邀请好友 </button> -->
 
-<l-dialog 
-        show="{{false}}"
-        type="confirm"  
-        title="输入4位邀请码">
-        <input  maxlength="10" placeholder="请输入4位邀请码" />
-</l-dialog>
+<!-- <l-dialog type="confirm"  >
+  <form bindsubmit="formSubmit">
+    <l-textarea 
+        l-class="applyDesc"
+        name="applyDesc" 
+        indicator="{{true}}" 
+        maxlength="40"
+        placeholder="请输入申请说明"
+        auto-height="{{true}}" 
+        value="{{teamDesc}}"/>
+  </form>
+</l-dialog> -->
 <l-toast />
-<view class='p-20 pos-ab ab-b w-f'>
-  <button 
-    class='d-btn-primary'  
-    bindtap='onTap'>
-      申请加入球队
-  </button>
-</view>
 
 

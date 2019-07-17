@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "d-gym":"/components/gym/index"
-  },
-  "navigationBarTitleText": "附近球场",
-  "enablePullDownRefresh": true
-}

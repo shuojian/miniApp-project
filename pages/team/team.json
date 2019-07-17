@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "d-team":"/components/team/index"
+    "d-team":"../widget/list/team/index"
   },
   "navigationBarTitleText": "附近球队",
   "enablePullDownRefresh": true

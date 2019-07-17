@@ -1,49 +1,50 @@
-<view class="page">
-  <view class="page_bd">
+<form bindsubmit="formSubmit" bindreset="formReset">
 
-      <view class="section mt-10">
-        <view class='weui-cell weui-cell_access'>
-          <view class="weui-cell__bd">头像</view>
-          <image bindtap="choseImgMethod" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </view>   
-        
-        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <view class="weui-cell__bd">昵称</view>
-          <view bindtap='openAlter'>{{userInfo.nickName}}</view> 
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </view>
+  <view class='item' bindtap="changeImg">
+    <view class='item-left' >头像</view>
+    <view class='item-right'>
+      <view class='' style="width:35px; height:35px">
+      <image bindtap="choseImgMethod" 
+            class="userinfo-avatar" 
+            src="{{userInfo.avatarUrl}}" 
+            mode="cover"></image>
       </view>
+      <view class='iconfont icon-icon_right'></view>
+    </view>
+  </view>
 
-      <view class="section mt-10">
-        <navigator url="realName/realName" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-            <view class="weui-cell__bd">实名认证</view>
-            未认证
-            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </navigator>
+  <view class='item'>
+    <view class='item-left' >昵称</view>
+    <view class='item-right'>
+    <!-- bindtap='changeNickName' -->
+      {{userInfo.nickName}}
+      <view class='iconfont icon-icon_right'></view>
+    </view>
+  </view>
 
-        <view class='weui-cell'>
-          <view class='weui-cell__bd'>球衣尺寸</view>
-          请选择尺码:
-          <picker 
-            bindchange="bindPickerChange" 
+  <view class="item" bindtap='toRealName'>
+    <view class='item-left' >实名认证</view>
+    <view class='item-right'>
+      未认证
+      <view class='iconfont icon-icon_right'></view>
+    </view>
+  </view>
+
+  <view class='item'>
+    <view class='item-left'>球衣尺寸</view>
+    <view class='item-right'>
+      <picker bindchange="pickerChange" 
             value="{{index}}" 
             range="{{array}}">
-              <view class="picker">
-                {{array[index]}}
-              </view>
-          </picker>
-          <view class='weui-cell__ft weui-cell__ft_in-access'></view>
-        </view>
+        <view class="picker">{{array[index]}} </view>
+      </picker>
+      <view class='iconfont icon-icon_right'></view>
+    </view>
+  </view>  
+<view class='p-20'><button class='d-btn-primary' form-type='submit'>提交</button></view>
+</form>
 
-      </view>
-       <!--camera
-          device-position='back'
-          flash="off"
-          binderror="error"
-          style="width:100%; height:300px;"
-        >
-        </camera>
-        <image mode="widthFix" src="{{src}}"></image>-->
-  </view> 
-</view>
+<l-dialog show="{{false}}" title="输入昵称">
+  <input  maxlength="10" placeholder="请输入昵称" />
+</l-dialog>
+<l-toast />

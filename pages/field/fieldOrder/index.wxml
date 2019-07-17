@@ -1,0 +1,142 @@
+<view class='container'>
+  <l-tabs bind:linchange="sDate" 
+          equal-width="true" 
+          scrollable="true" 
+          l-class-header="tabs" 
+          l-class-active="tab" 
+          l-class-inactive="tab">
+    <block wx:key="key" wx:for="{{aWeek}}">
+      <l-tabpanel tab="{{item.date}}{{item.day}}" 
+                  key="{{item.eDate}}" 
+                  slot="{{item.eDate}}">
+        <view class="tab-content section p-15" style="margin-bottom:140rpx">
+          <!-- 5人场 -->
+            <view wx:if='{{fieldSize == "5人制"}}'>
+              <view style="font-size:0.8rem;color:#777777;margin-bottom:10rpx;"> 
+                "5人制"球场暂时只提供连续的时间段选择，若有不连续时间段的订购需求，请分次选购。
+              </view>
+              <view class='section p-15 orders'>
+                <block wx:for="{{orders}}" 
+                      wx:key="this">
+                  <view  class="order-item {{item.selected?'checked':''}} {{item.booked == 'Y'? 'disable':''}}"
+                        bindtap='orderChange' 
+                        data-index='{{index}}' 
+                        data-booked='{{item.booked}}'
+                        data-id='{{item.id}}'
+                        data-time='{{item.hour}}'> 
+                    <view class="money">￥{{price}}</view>
+                    <view>{{item.hour}}</view>
+                  </view>
+                </block>
+              </view>
+            </view>
+          <!-- / 5人场 -->  
+          <!-- 11人场 -->  
+            <view wx:if='{{fieldSize == "11人制"}}'>
+              <block wx:for="{{orders}}" wx:key="this">
+                <view class="orders_11">
+                  <view class="order-label">{{item.hour}}</view>
+                  <!--=== 全场 ===-->
+                    <block wx:if="{{item.type == 'full'}}">
+                      <view class="order-item-full"> {{item.hostTeamName}}</view>
+                    </block>
+                  <!--===/ 全场 ===-->
+
+                  <!--=== 半场 ===-->
+                    <block wx:else>
+                      <!--= 左半场 =--> 
+                        <view wx:if="{{item.booked == 'M'}}" class="order-item disable">维护中</view>
+                        <view wx:if="{{item.booked == 'N'}}" 
+                              class="order-item {{item.selectedA?'checked':''}}"
+                              bindtap='orderSelect' 
+                              data-index='{{index}}' 
+                              data-booked='{{item.booked}}'
+                              data-id='{{item.id}}'
+                              data-time='{{item.hour}}'>
+                            <view class="money">半场 ￥{{item.price}}</view>
+                            <view class="bookTip">可订半场</view>
+                        </view>
+                        <view wx:elif="{{item.booked == 'Y' && item.hostOrderId !== 0}}" class="order-item booked">
+                          <view >{{item.hostTeamName}}</view>
+                          <view class="small" >{{item.hostTeamColor}}</view>
+                        </view>
+                      <!-- / 左半场 --> 
+
+                      <view class="vs"> <view wx:if="{{item.booked == 'Y'}}">vs</view> </view>
+
+                      <!-- 右半场 --> 
+                        <!-- <view class="order-half"> -->
+                          <view class="order-item disable" wx:if="{{item.booked == 'M'}}">维护中</view>
+                          <view wx:if="{{item.booked == 'N'}}" 
+                                class="order-item {{item.selectedB?'checked':''}}"
+                                bindtap='orderAccept' 
+                                data-index='{{index}}' 
+                                data-booked='{{item.booked}}'
+                                data-id='{{item.id}}'
+                                data-time='{{item.hour}}'>
+                              <view class="money">半场 ￥{{item.price}}</view>
+                              <view class="bookTip">可订半场</view>
+                          </view>
+                          <view wx:elif="{{item.booked == 'Y'}}" class="order-item booked">
+                            <block wx:if="{{item.gusetOrderId !==''}}">
+                              <view class="fz-normal">{{item.guestTeamName}}aaa</view>
+                              <view class="small">{{item.guestTeamColor}}bbb</view>
+                            </block>
+                            <view wx:else
+                                class="order-item {{item.selectedB?'checked':''}}"
+                                bindtap='orderAccept' 
+                                data-index='{{index}}' 
+                                data-booked='{{item.booked}}'
+                                data-id='{{item.id}}'
+                                data-time='{{item.hour}}'>
+                                <view class="money">半场 ￥{{item.price}}</view>
+                                <view class="bookTip">可订半场</view>
+                            </view>
+                          </view>
+                        <!-- </view> -->
+                      <!-- / 右半场 --> 
+                    </block>
+                  <!--=== / 半场 ===-->
+                </view>
+              </block>
+            </view>
+          <!-- / 11人场 -->
+        </view>
+      </l-tabpanel>
+    </block>
+  </l-tabs>
+  
+  <!-- 选择信息 -->
+    <view class="carts" wx:if="{{carts.length > 0}}">
+      已选:
+      <block wx:for='{{carts}}' wx:key="key">
+        <view class="carts-item">{{item.time}}</view>
+      </block>
+    </view>
+  <!-- / 选择信息 -->
+
+  <!-- 提交按钮 -->
+    <button class="btn-bottom {{isNext == false ? 'btn-disable':''}}" bindtap="orderConfirm" style='opacity: {{opacity}}'>
+      <view class='btn-total'>
+        <i class="mark">￥</i> {{num*price}} </view>
+      <view class='btn-text'>{{buy}}</view>
+    </button>
+  <!-- / 提交按钮 -->
+</view>
+
+<l-message/>
+<l-toast />
+
+<!-- <view class="section p-15 orderInfo">
+    <view>{{field.fieldType}}：{{gymName}} · {{field.name}} · ￥{{field.amount}}/小时</view>
+    <view>{{field.contact}}</view>
+  </view> -->
+   <!-- 选择日期 -->  
+  <!-- <view class="picker_group"> 
+    选择日期： 
+    <picker mode="date" value="{{date}}" bindchange="bindDateChange">  
+      <view class="picker">{{date}}</view>  
+    </picker>      
+  </view> -->
+  <!-- / 选择日期 --> 
+

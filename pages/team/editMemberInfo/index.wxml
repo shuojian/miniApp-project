@@ -1,0 +1,29 @@
+<!--pages/me/myteam/newteam/newteam.wxml-->
+<form bindsubmit="formSubmit">
+  <view class='section p-15'>
+    <l-input l-class="mrl--15" label="真实姓名" value="{{realName}}" name="realName"  />
+    <l-input l-class="mrl--15" label="球衣号码" value="{{stmShirtNum}}" name="stmShirtNum"   />
+    <!-- <d-radio label="场上位置"/>
+    <d-radio label="设置身份"/> -->
+    <l-radio-group l-class="check-list" current="{{stmPosition}}"  bind:linchange="onChangeTapWZ" placement="row" >
+      <view class="radio-lebel">场上位置</view> 
+      <l-radio l-class="mr"  value="门将" />
+      <l-radio l-class="mr" value="后卫" />
+      <l-radio l-class="mr" value="中场" />
+      <l-radio l-class="mr" value="前峰" />
+    </l-radio-group>
+
+    <l-radio-group l-class="check-list" current="{{stmType}}" bind:linchange="onChangeTapSF" placement="row">
+      <view class="radio-lebel">设置身份</view>
+      <l-radio l-class="mr" value="队长" />
+      <l-radio l-class="mr" value="副队长" />
+      <l-radio l-class="mr" value="教练" />
+      <l-radio l-class="mr" value="队员" />
+    </l-radio-group>
+
+  </view>
+  <view class='p-20'><button class='d-btn-primary' form-type='submit'>确定修改</button></view>
+</form>
+
+  <view bindtap='leaveTeam' class="btn-delete" > 退出球队 </view>
+<l-toast />

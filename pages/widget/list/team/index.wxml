@@ -1,0 +1,16 @@
+<!-- components_team -->
+<view bindtap='onTap' class='container' >
+  <view class="item-hd sm">
+      <image wx:if="{{team.logoUrl}}" class='circle' src="{{team.logoUrl}}" />
+      <image wx:else class='circle' src="../../../../img/logo_v.jpg" />
+  </view>
+
+  <view class="item-bd">
+    <view class="title">{{team.teamName}}</view>
+    <view class="desc">
+      <view class="it first"><i class="d-tag">{{team.teamType}}</i></view>
+      <view class="it"> 共{{team.memberCount}}人</view>
+      <view class="desci"> {{team.teamDesc}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,18 @@
+<view class='container'>
+  <view class='item fx'>
+    <view class='team-pm'><i class="xh">{{ranking}}</i></view>
+    <view class='team-member'>{{match.realName}}</view>
+    <view class='team-member'>{{match.teamId}}</view>
+    <view class="team-num"><i>{{match.matchCount}}</i></view>
+    <view wx:if="{{shoot}}" class="team-num">
+      <i>{{match.smmShoot}}</i>
+    </view>
+    <view  wx:if="{{goal}}" class="team-num">
+      <i>{{match.smmGoal}}</i>
+    </view>
+    <view  wx:if="{{foul}}" class="team-num">
+      <i>{{match.smmFoul}}</i>
+    </view>
+  </view>
+</view>
+

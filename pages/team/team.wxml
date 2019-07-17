@@ -1,14 +1,27 @@
-<!-- page:Teams -->
+
 <view class='container'>
-  <!-- 搜索 -->
-  <!-- <v-search more="{{more}}" bind:cancel="onCancel" wx:if="{{searching}}" />  -->
   <block wx:key="id" wx:for="{{teams}}">
     <d-team team="{{item}}"/>
   </block>
-
 </view>
+<l-message type="{{success}}" content="{{content}}"/>
 
 
+
+<!-- <loadmore show="{{true}}" type="loading" line="true" show="true">
+  <view slot="content">
+     <view class='container'>
+        <block wx:key="id" wx:for="{{teams}}">
+          <d-team team="{{item}}"/>
+        </block>
+      </view>
+  </view>
+</loadmore> -->
+
+<!-- ../widget/list/team/index -->
+
+<!-- 搜索 -->
+  <!-- <v-search more="{{more}}" bind:cancel="onCancel" wx:if="{{searching}}" />  -->
 
 
 

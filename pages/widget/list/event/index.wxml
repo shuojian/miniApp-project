@@ -1,0 +1,56 @@
+
+<!-- components_event 赛事 -->
+<!-- <i class="tag complete circle pos-ab" style="right:10px;">已结束</i>
+  <i class="tag processing circle " style="right:10px;">进行中</i>
+  <i class="tag preparation circle ">筹备中</i> -->
+  
+<view bind:tap="onTap" class='container'>
+    <view class="item-hd">
+      <image wx:if="{{event.logoUrl}}" class='square' src="{{event.logoUrl}}" />
+      <image wx:else class='square' src="../../../../img/logo_v.jpg" />
+    </view>
+
+    <view class="item-bd">
+      <view class="title">{{event.eventName}}</view>
+
+      <view class="desc">
+        <i class="mr-10">{{event.eventArea}}</i>
+        <i>{{event.eventStartTimea}}</i> - <i>{{event.eventEndTimea}}</i>
+      </view>
+
+      <view class='tags'>
+        <view class='tag gray square-h'>{{event.eventDesc}}</view>
+        <view class='tag gray square-h'>{{event.eventType}}</view>
+        <view class='tag gray square-h'>{{event.eventPrice}}</view>
+      </view>
+    </view>
+
+    <view class='item-ft'>
+      <i wx:if="{{now < event.eventStartTime}}" class="tag fill circle primary" style="right:10px;">未开始</i>
+      <i wx:elif="{{now > event.eventEndTime}}" class="tag fill circle gray" style="right:10px;">已结束</i>
+      <i wx:else class="tag fill circle red" style="right:10px;">进行中</i>
+      <!-- <i class="tag processing circle pos-ab " style="right:10px;">进行中</i> -->
+    </view>
+</view> 
+
+
+ <!-- <view class="section">
+  <navigator url="detail/detail" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+      <image class="thumb square-cir" src="../../img/qs.png" />
+    </view>
+    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+      <view class="weui-media-box__title">2019赛事2</view>
+      <view class="weui-media-box__desc">
+        <i class="mr-10"> 昆明市五华区</i>
+        <i> 2019-4-15</i>
+        <i class="tag processing circle pos-ab " style="right:10px;">进行中</i>
+      </view>
+      <view class='tags'>
+        <view class='tag gray square-cir2'>7人制</view>
+        <view class='tag gray square-cir2'>分组赛+淘汰赛</view>
+        <view class='tag gray square-cir2'>参赛球队30支</view>
+      </view>
+    </view>
+  </navigator>
+</view> -->

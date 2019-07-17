@@ -1,0 +1,12 @@
+<view class='container'>
+    <view class="item-avatar">
+      <image src="/img/logo_v.jpg" alt="" class="avatar-img"/>
+    </view>
+    <view class="item-main" catchtap='toTeam'>
+      {{team.teamName}}
+    </view>
+    <view class="item-footer apply" wx:if="{{team.hasNewMember == 'Y'}}" catchtap='toMsg'>
+        有新消息
+        <view class="newMsg"></view>
+    </view>
+</view>

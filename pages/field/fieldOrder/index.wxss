@@ -1,0 +1,118 @@
+
+.tabs,.tab{
+  padding:0 20rpx;
+  background: #fff;
+}
+
+/* order-item */
+  .orders{
+    display: flex;
+    align-items: center;
+    flex-wrap:wrap;
+  }
+  .order-item,.order-item-full{
+    padding:20rpx 10rpx;
+    margin:0 15rpx 15rpx 0;
+    border:2rpx solid #ccc;
+    color:#555;
+    width:27%;
+    height:2.2rem; 
+    text-align: center;
+    font-size: 0.8rem
+  }
+  .order-item-full{
+    width:65%;
+    background: #f34573;
+    color:#fff !important;
+    border:none;
+    font-size: 1rem;
+    line-height: 2.2rem;
+  }
+  .order-item.booked{
+    background: #f34573;
+    color:#fff !important;
+    border:3rpx solid #f34573;
+  }
+  .orders_11{display: flex;align-items:center;}
+  .orders_11 .order-label{width:6rem;}
+  .orders_11 .order-half{width:27%;}
+  .order-item.booked .small{
+    font-size: 0.7rem;
+    color:#fff;
+  }
+  .orderInfo{color:#777;}
+  .accept{width:27%;}
+  .disable{
+    pointer-events:none;
+    background: #eeeeee;
+    color:#ffffff;
+    border:none;
+    height:2rem;
+  }
+  .checked .money{color:#ffff00;}
+  .checked .bookTip{color:#fff;}
+  .checked{
+    background: rgb(59, 89, 153);
+    color:#fff !important;
+    border:1px solid rgb(59, 89, 153);
+    }
+  .money{color:#3b5999;}
+  .vs{padding:0 20rpx;}
+  .bookTip{
+    font-size: 0.7rem;
+    color:#3b5999;
+  }
+
+/* carts */
+  .carts{
+    padding:10rpx 0 0 30rpx;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    position: fixed;
+    bottom: 140rpx;
+    left:0;
+    background: #fff;
+    z-index: 100;
+    font-size: 0.8rem;
+  }
+  .carts-item{
+    padding:6rpx;
+    margin:0 6rpx 6rpx 0;
+    background:rgba(59, 89, 153,0.8);
+    color:#fff;
+    border:1rpx solid #eeeeee;
+  }
+
+/* btn */
+  .btn-bottom{
+    position: fixed ; 
+    bottom:30rpx; 
+    left:30rpx; 
+    right:30rpx; 
+    background:#3b5999;
+    color:#ffffff;
+    display: flex;
+    }
+
+  .btn-total{
+    text-align: center;
+    width:40%;
+    color:#ffff00;
+    font-size: 1.5rem;
+    line-height: 3rem;
+  }
+
+  .btn-disable{
+    pointer-events:none;
+  }
+
+/* 日期选择 */
+.tips{padding:0 30rpx 10rpx}
+.numb{color:#e83e8c;font-weight: 500; }
+
+.fz-normal{font-size: 1rem;}
+.mark{
+  font-size: 20rpx;
+  color:rgb(200,200,200)
+}

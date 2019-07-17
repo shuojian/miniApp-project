@@ -1,0 +1,47 @@
+.container{
+  background: #fff;
+  font-size: 0.8rem;
+  line-height: 1.8rem;
+  color:#999999;
+}
+.header{
+  border-bottom:1rpx solid #efefef;
+  line-height: 2.4rem;
+  padding:0 30rpx;
+}
+.body{
+  padding:30rpx;
+  display: flex;
+  align-items: center;
+}
+.footer{
+  border-top:1rpx solid #efefef;
+  line-height: 2.4rem;
+  padding:0 30rpx;
+}
+
+.title{
+  font-size: 1.6rem;
+  font-weight: 600;
+  color:rgb(59, 89, 153);
+}
+.label{
+  font-size: 0.8rem;
+  color:#999;
+}
+.addr{
+  height:1.3rem;
+}
+.time{
+  color:#3c3c3c;
+  height:1.1rem;
+}
+.body .main{width:80%}
+.body .right{
+  font-size: 1.4rem;
+  text-align: center;
+}
+.body .right i{
+  font-size: 0.8rem;
+  color:#999
+}

@@ -1,0 +1,47 @@
+
+  <view class='container'>
+    <view class='item'>
+      <view class='key'>主办方</view>
+      <view class='value'>{{event.sponsorName}}</view>
+    </view>
+    <view class='item'>
+      <view class='key'>合作伙伴</view>
+      <view class='value'>{{event.zbf}}</view>
+    </view>
+    <view class='item'>
+      <view class='key'>起止日期</view>
+      <view class='value'>{{stTime}} - {{edTime}}</view>
+    </view>
+    <view class='item'>
+      <view class='key'> 报名截止</view>
+      <view class='value'>{{sstTime}}{{sedTime}} </view>
+    </view>
+    <view class='item'>
+      <view class='key'>赛事赛制</view>
+      <view class='value'>{{event.signupMemberLimi}}</view>
+    </view>
+    <view class='item'>
+      <view class='key'>报名人数 </view>
+      <view class='value'>{{event.signupMemberLimit}}</view>
+    </view>
+    <view class='item'>
+      <view class='key'>报名制度</view>
+      <view class='value'>{{event.signupType}}</view>
+    </view>
+    <view class='item'>
+      <view class='key'> 报名费用</view>
+      <view class='value'>{{event.eventPrice}}</view>
+    </view>
+    <view class='item'>
+      <view class='key'>赛事奖励</view>
+      <view class='value'>{{event.zbf}}</view>
+    </view>
+    <view class='item'>
+      <view class='key'>联系方式</view>
+      <view class='value'>{{event.eventContactPhone}}</view>
+    </view>
+  </view>
+   
+
+
+

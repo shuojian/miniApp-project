@@ -1,6 +1,8 @@
 // pages/my/my.js
+// import { promisic } from '../../../utils/common.js'
+import { ReqModel } from '../../../models/request.js'
 const app = getApp()
-
+const reqModel = new ReqModel()
 Page({
 
   /**
@@ -8,10 +10,9 @@ Page({
    */
   data: {
     userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    isTeam: false,
-
+    authorized: false,
+    myTeams: null,
+    noData: true,
     myDataCount: [
       {
         id: 0,
@@ -59,41 +60,58 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
+    wx.showLoading()
+    const myTeam = reqModel.getMyTeam()
+    myTeam.then(
+      res => {
+        this.setData({
+          nodata: false,
+          myTeams: res.data,
+        })
+        console.log('我的球队:', res.data)
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        authorized: true,
       })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
+      wx.hideLoading()
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
-            hasUserInfo: true
+            authorized: true,
           })
         }
       })
+      wx.hideLoading()
     }
   },
 
-  
+  toDetail(){
+    wx.navigateTo({
+      url: '',
+    })
+  },
+
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
 
   },
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '梦舟体育',
+      path: '/pages/index/index'
+    }
+  }
 
 
 })

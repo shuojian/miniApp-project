@@ -1,28 +1,27 @@
 {
   "pages": [
-    "pages/index/login",
+    "pages/index/login/login",
+    "pages/field/index",
+    "pages/field/fields/index",
+    "pages/field/detail/detail",
+    "pages/field/fieldOrder/index",
+    "pages/field/orderConfirm/index",
     "pages/index/index",
     "pages/index/detail/detail",
-    "pages/index/detail/result/vsdetail/vsdetail",
     "pages/team/team",
     "pages/team/detail/detail",
-    "pages/team/personal/personal",
-    "pages/field/field",
-    "pages/field/detail/detail",
+    "pages/team/applyDesc/index",
+    "pages/team/editMemberInfo/index",
+    "pages/team/editteam/index",
     "pages/my/my",
-    "pages/my/myorder/myorder",
-    "pages/my/myteam/myteam",
-    "pages/my/service/service",
-    "pages/my/mydata/mydata",
-    "pages/my/mygame/mygame",
-    "pages/my/myteam/newteam/newteam",
-    "pages/my/myteam/newteam/intr/intr",
-    "pages/auth/index",
-    "pages/accountSet/index",
-    "pages/accountSet/realName/realName",
-    "template/viewList",
-    "pages/field/sportsorder/sportsorder",
-    "pages/my/myorder/detail/detail"
+    "pages/my/myData/mydata",
+    "pages/my/myTeam/myteam",
+    "pages/my/newTeam/newteam",
+    "pages/my/myEvent/myevent",
+    "pages/my/myOrder/myorder",
+    "pages/my/myOrderDetail/index",
+    "pages/my/msg/msg",
+    "pages/my/service/service" 
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -36,22 +35,16 @@
     "borderStyle": "black",
     "list": [
       {
-        "selectedIconPath": "img/tab/index_tab.png",
-        "iconPath": "img/tab/index_tab1.png",
-        "pagePath": "pages/index/index",
-        "text": "赛事"
+        "selectedIconPath": "img/tab/field_tab.png",
+        "iconPath": "img/tab/field_tab1.png",
+        "pagePath": "pages/field/index",
+        "text": "订球场"
       },
       {
         "selectedIconPath": "img/tab/team_tab.png",
         "iconPath": "img/tab/team_tab1.png",
         "pagePath": "pages/team/team",
         "text": "附近球队"
-      },
-      {
-        "selectedIconPath": "img/tab/field_tab.png",
-        "iconPath": "img/tab/field_tab1.png",
-        "pagePath": "pages/field/field",
-        "text": "附近球场"
       },
       {
         "selectedIconPath": "img/tab/me_tab.png",
@@ -67,11 +60,12 @@
     "l-dialog": "/components/widget/dialog/index",
     "l-icon": "/components/widget/icon/index",
     "l-loading": "/components/widget/loading/index",
-    "l-loadmore": "/components/widget/loadmore/index",
+    "loadmore": "/components/widget/loadmore/index",
     "l-mask": "/components/widget/mask/index",
     "l-status-show": "/components/widget/status-show/index",
+    "l-toast": "/components/widget/toast/index",
     "l-tag": "/components/widget/tag/index",
-    "l-toast": "/components/widget/toast/index"
+    "l-message": "/components/widget/message/index"
   },
   "networkTimeout": {
     "connectSocket": 10000,

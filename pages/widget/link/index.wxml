@@ -1,0 +1,13 @@
+<view wx:if="{{isCreator && isTeam && isMember}}" class="container team" bindtap="teamInfo">
+  {{linkText}}
+</view>
+<view wx:if="{{isMember && !isTeam && !isLink}}" class="container member">
+  {{linkText}}
+</view>
+<view wx:if="{{isMember && !isTeam && isLink}}" >
+  <l-icon l-class-self="l-arrow" name="right" l-class="linkArrow" bindtap="memberInfo"/> 
+</view>
+
+
+
+

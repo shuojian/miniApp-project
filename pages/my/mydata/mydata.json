@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "d-button": "/components/image-button/index",
+    "team-cs": "../../widget/list/teamList/index",
+    
     "l-grid": "/components/widget/grid/index",
     "l-grid-item": "/components/widget/grid-item/index"
   },

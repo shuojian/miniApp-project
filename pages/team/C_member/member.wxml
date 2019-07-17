@@ -1,0 +1,32 @@
+
+ <!-- 球队队员 -->
+  <view class="container" >
+      <view class='mr-10'><span class="member-num" wx:if="{{member.stmShirtNum !== 0}}"> {{member.stmShirtNum}} </span></view>
+      <view class="item-hd smx">
+          <image class="circle" src="/img/logo_v.jpg" />
+      </view>
+      <view class="item-bd">
+        <view class="title">{{member.realName}}</view>
+        <view class="desc">{{member.stmPosition}}</view>
+      </view>
+      <view wx:if="{{member.userCode == creatorUserCode}}" class="item-bd_sb" >
+        <d-edit linkText="创建者"
+                isMember ="{{member}}"
+                member="{{member}}"/>
+      </view>
+
+      <view wx:if="{{member.userCode !== creatorUserCode}}" class="item-bd_sb" >
+        <view class="kickoutTeam" bindtap="kickoutTeam">踢出球队</view>
+      </view>
+
+      <view class='item-ft'>
+        <view class='tags' wx:if="{{notag}}">
+          <span class="tag primary circle">{{member.stmState}}</span>
+        </view>
+        <d-edit wx:if="{{member.userCode == creatorUserCode && isLink}}"
+                isMember ="{{member}}"
+                member="{{member}}"
+                isLink="{{isLink}}"/>
+      </view>
+  </view>
+   <!-- / 球队队员 -->

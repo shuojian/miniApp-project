@@ -3,7 +3,7 @@
     <view wx:if="{{checked}}" class='checkbox' style="background:{{ checked?color:''}}; height:{{size}}rpx; width:{{size}}rpx">
       <image class='checkbox-{{shape==="right"? "right": "circle"}}' src='{{shape==="right"? right: circle}}'></image>
     </view>
-    <view wx:else style='background:{{  disabled? "#ccc":""}};  :;height:{{size}}rpx; width:{{size}}rpx' class='checkbox-unselected  checkbox'>
+    <view wx:else style='background:{{  disabled? "#ccc":""}};  :;height:{{sizeH}}rpx; width:{{sizeW}}rpx' class='checkbox-unselected  checkbox'>
         <image class='checkbox-{{shape==="right"? "right": "circle"}}' src='{{shape==="right"? right: circle}}'></image>
     </view>
     <view wx:if="{{ !custom }}" class="checkbox-title{{disabled? '-disabled': ''}} l-title-class">{{value}}</view>

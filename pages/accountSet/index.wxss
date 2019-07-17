@@ -1,16 +1,11 @@
 /* pages/logs/logs.wxss */
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+@import "/components/common/list.wxss";
+@import '/common/iconfont/iconfont.wxss';
 
 .userinfo-avatar {
-  width: 100rpx;
-  height: 100rpx;
+  width: 70rpx;
+  height: 70rpx;
   border-radius: 50%;
 }
 
-.userinfo-nickname {
-  color: #aaa;
-}
+.item{padding-left:30rpx; padding-right:20rpx;}

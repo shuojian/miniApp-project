@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "listHeader": "../../widget/list/header/index",
+    "listHeaderA": "../../widget/list/header/a"
+  }
+}

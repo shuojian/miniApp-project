@@ -1,9 +1,0 @@
-<!--pages/me/myteam/newteam/intr/intr.wxml-->
-<view>
-  <view class='section p-20 mt-1'>
-     <textarea name="textarea" placeholder="输入球队介绍"></textarea> 
-  </view>
-  <view class='p-20'>
-    <button class='d-btn-primary'>保存</button>
-  </view>
-</view>

@@ -7,77 +7,102 @@ Page({
    * 页面的初始数据
    */
   data: {
-    realNameRules: [{
-      required: true
-    },
-    {
-      min: 2,
-      max: 5,
-      message: '长度需要在2-3个字符之间'
-    }
-    ],
+    tip: '',
+    realName: '',
+    idCard: '',
+    // canSubmit:true,
+
     idCardRules:[{
       required: true
     },
       {
-        min: 14,
-        max: 18,
-        message: '长度需要在14-18位之间'
+        pattern: /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}$)/,
+        message: '身份证号码有误'
       }
-    ]
-
+    ] 
   },
 
   onLoad: function (options) {
-
+    // if (this.data.realName.length > 1 && this.data.idCard.length > 14 ){
+    //   this.setData({
+    //     canSubmit:false
+    //   })
+    // }
   },
 
+  onChangeRealName(event) {
+    var realName = event.detail.detail.value
+    this.setData({
+      realName: realName
+    })
+    // this.data.realName = realName
+  },
+  onChangeIdcard(event) {
+    var idCardNum = event.detail.detail.value
+    this.setData({
+      idCard: idCardNum
+    })
+    // this.data.idCard = idCardNum
+  },
 
   formSubmit: function (e) {
+    var realName = e.detail.value.realName
+    var idCard = e.detail.value.idCard
     console.log('form提交：', e.detail.value)
-    app.showLoading()
-
-    wx.request({
-      url: app.globalData.baseURL + '/',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      data: {
-        token: app.globalData.loginInfo.token,
-        idCard: e.detail.value.idCard,
-        realName: e.detail.value.realName,
-        idImage: e.detail.value.idImage
-      },
-      success: res => {
-        if (res.data) {
+    if (realName == "" || idCard==""){
+      wx.lin.showToast({
+        title: '姓名和身份证号不能为空',
+        icon:'error',
+        iconStyle: 'color:#7ec699; size: 60',
+      })
+    }else(
+      // this.setData({
+      //   canSubmit: false
+      // }),
+      app.showLoading(),
+      wx.request({
+        url: app.globalData.baseURL + '/',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST',
+        data: {
+          token: app.globalData.loginInfo.token,
+          idCard: e.detail.value.idCard,
+          realName: e.detail.value.realName,
+          idImage: e.detail.value.idImage
+        },
+        success: res => {
+          if (res.data) {
+            wx.lin.showToast({
+              title: '成功提交,等待审核~',
+              icon: 'success',
+              iconStyle: 'color:#7ec699; size: 60',
+              success() {
+                setTimeout(function () {
+                  wx.switchTab({
+                    url: '/pages/my/my',
+                  }), 5000
+                })
+              }
+            })
+          }
+        },
+        fail: error => {
+          console.log(error);
           wx.lin.showToast({
-            title: '成功提交,等待审核~',
-            icon: 'success',
+            title: '网络出问题，稍后重试~',
+            icon: 'error',
             iconStyle: 'color:#7ec699; size: 60',
-            success(){
-              setTimeout(function () {
-                wx.switchTab({
-                  url: '/pages/my/my',
-                }), 3000})
-            }
           })
-        } 
-      },
-      fail: error => {
-        console.log(error);
-        wx.lin.showToast({
-          title: '提交出错，稍后重试~',
-          icon: 'error',
-          iconStyle: 'color:#7ec699; size: 60',
-        })
-      },
-      complete: msg => {
-        app.hideLoading()
-        console.log('msg:')
-        console.log(msg)
-      }
-    })
+        },
+        complete: msg => {
+          app.hideLoading()
+          console.log('msg:')
+          console.log(msg)
+        }
+      })
+    ) 
   },
 
   uploadPhoto: function () {

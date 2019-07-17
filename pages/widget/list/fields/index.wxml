@@ -1,0 +1,17 @@
+<view class='container' >
+  <view class="item-hd" catchtap='toInfo'>
+    <image wx:if="{{field.logoUrl}}" class="avatar" src="{{field.logoUrl}}" />
+    <image wx:else class='avatar' src="../../../../img/logo_v.jpg" />
+  </view>
+  <view class="item-bd" catchtap='toInfo'>
+    <view class="title">{{field.fieldName}} <view class="price"><i>￥</i>{{field.amount}}<i>/h</i></view></view>
+    <view class="content">
+      <view class="tag gray square-h">{{field.fieldType}}</view>
+      <view class="tag gray square-h">{{field.fieldSize}}</view>
+      <view class="Phone">{{field.fieldContactPhone}}</view>
+    </view>
+  </view>
+  <view class="item-ft" catchtap='toBook'>
+    <view class="btn-book">马上订</view>
+  </view>
+</view>

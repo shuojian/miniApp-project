@@ -1,0 +1,4 @@
+@import "../../widget/list/header/index.wxss";
+
+.container{background: #fff;}
+.item{padding:10px 0 10px 10px; border-top:1px solid #dfdfdf;overflow: hidden}

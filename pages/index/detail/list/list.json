@@ -1,6 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "tabView": "../../../../components/navtabSub/navtabSub"
-  }
-}

@@ -1,0 +1,95 @@
+<!-- <view class="img">
+  <image src="{{field.logoUrl}}"></image>
+</view> -->
+<view wx:if="{{isGym == true}}">
+  <view class="title-block">{{gym.gymName}}简介</view>
+  <view class="container">
+    <view class="fieldInfo">
+      <view class="addr"><i class="iconfont icon-dizhi"></i> {{gym.gymAddr}}</view>
+    </view>
+    <view class='list adicon bg-f'>
+      <view class='item'>
+        <i class="iconfont icon-bisaiguanli"></i>
+        <view class="title">场地介绍</view>
+        <view class='desc'>{{gym.gymDesc}}</view>
+      </view>
+      <view class='item'>
+        <i class="iconfont icon-lianxifangshi"></i>
+        <view class="title">联系方式</view>
+        <view class='desc'>
+        电话：<i bindtap="tel" class="color-primary" >{{gym.gymContactPhone}}</i>
+        微信：<i class="color-primary">{{gym.gymContactWechat}}</i>
+        </view>
+      </view>
+      <view class='item'>
+        <view class="title">营业时间</view>
+        <view class='desc'>{{gym.gymBusinessHours}}</view>
+      </view>
+      <view class='item'>
+        <i class="iconfont icon-fuwu"></i>
+        <view class="title">场地服务</view>
+        <view class='desc'>{{gym.gymService}}</view>
+      </view>
+      <view class='item'>
+        <i class="iconfont icon-xuzhi"></i>
+        <view class="title">约战订场须知</view>
+        <view class='desc'>{{gym.gymOrderNotice}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:else>
+    <view class="title-block">{{field.fieldName}}简介</view>
+    <view class="container">
+      <view class="fieldInfo">
+        <!-- <view class="addr"><i class="iconfont icon-dizhi"></i> {{field.addr}}</view> -->
+        <view class='tags'>
+          <view class='tag gray square'>{{field.fieldType}}</view>
+          <view class='tag gray square'>{{field.fieldSize}}</view>
+        </view>
+      </view>
+    </view>
+      
+    <view class='list adicon bg-f'>
+      <view class='item'>
+        <i class="iconfont icon-bisaiguanli"></i>
+        <view class="title">场地费用</view>
+        <view class='desc'>￥<i>{{field.amount}}</i>/小时</view>
+      </view>
+      <view class='item'>
+        <i class="iconfont icon-bisaiguanli"></i>
+        <view class="title">场地介绍</view>
+        <view class='desc'>{{field.fieldDesc}}</view>
+      </view>
+      <view class='item'>
+        <i class="iconfont icon-lianxifangshi"></i>
+        <view class="title">联系方式</view>
+        <view class='desc'>
+        电话：<i bindtap="tel" class="color-primary" >{{field.phone}}</i>
+        微信：<i class="color-primary">{{field.wechat}}</i>
+        </view>
+      </view>
+      <view class='item'>
+        <i class="iconfont icon-shijian"></i>
+        <view class="title">营业时间</view>
+        <view class='desc'>{{field.businessHours}}</view>
+      </view>
+      <view class='item'>
+        <i class="iconfont icon-fuwu"></i>
+        <view class="title">场地服务</view>
+        <view class='desc'>{{field.service}}</view>
+      </view>
+      <view class='item'>
+        <i class="iconfont icon-xuzhi"></i>
+        <view class="title">约战订场须知</view>
+        <view class='desc'>{{field.notice}}</view>
+      </view>
+    </view>
+
+    <!-- button  -->
+    <view class='page-hd p20'>
+      <button class="d-btn-cc-pri pos-fix ab-r ab-b2" bindtap='toBook'>去订场</button>
+    </view>
+</view>
+
+

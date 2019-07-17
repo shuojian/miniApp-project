@@ -1,0 +1,35 @@
+
+.container{
+  margin:30rpx;
+  background: #ffffff;
+  border-radius: 30rpx;
+}
+.msg-hd{
+  padding:20rpx 30rpx;
+  font-weight: 500;
+}
+.msg-bd{
+  padding:30rpx;
+  border-top:1px solid #efefef;
+  border-bottom:1px solid #efefef;
+  color:#777777;
+}
+.time{
+  text-align: right;
+  padding:26rpx 0 0 0;
+  font-size: 0.8rem;
+  color:#999999;
+}
+.msg-ft{
+  display: flex;
+  align-items: center;
+}
+.btn-rj,.btn-ac{
+  padding:30rpx;
+  text-align: center;
+  flex: 1;
+  font-size: 1.2rem
+}
+.btn-rj{
+  border-right:1px solid #efefef;
+}

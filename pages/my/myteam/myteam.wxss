@@ -1,1 +1,4 @@
-/* pages/my/myteam/myteam.wxss */
+.prl-15{
+  padding-right:30rpx;
+  padding-left:30rpx;
+}

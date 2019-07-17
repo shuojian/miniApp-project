@@ -1,0 +1,56 @@
+.bookInfo{
+  background: #fff;
+  padding:30rpx;
+  text-align: center
+}
+.title{
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.info{
+  display: flex;
+  align-items: center;
+  padding:30rpx 0;
+}
+/* .info > view {
+  flex:1;
+} */
+.time{
+  font-size: 1.2rem;
+  width:20%;
+}
+.feild-name{
+  color:rgb(59, 89, 153);
+  border-top:4rpx solid #efefef;
+}
+.book-detail{
+  font-size: 0.9rem;
+  line-height: 1.5rem;
+  width:50%;
+  margin:0 5%;
+}
+.footer{
+  color:#888888;
+}
+.bill{
+  padding:30rpx;
+  text-align: right;
+}
+.num-money{
+  color:#ff0000;
+  font-size:1.2rem;
+  font-weight:500;
+  margin-bottom:160rpx;
+}
+.field-info{
+  display: inline-block;
+  margin-left:4rpx;
+  color:#888888;
+  font-weight: 400;
+}
+/* .field-info i{
+  display: inline-block;
+  margin-left:4rpx;
+  color:rgb(59, 89, 153);
+  font-weight: 400;
+} */

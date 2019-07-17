@@ -1,0 +1,19 @@
+@import"../../../app.wxss";
+
+.container{
+    background-color:#fff;
+}
+.container .item{
+    border-bottom:1rpx solid #efefef;
+    min-height:1.3rem;
+    line-height: 1.3rem;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items:center;
+}
+
+.container .item .key{
+    width:20%;
+    padding:14rpx 30rpx;
+    color:#777;
+}

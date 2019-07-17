@@ -2,11 +2,20 @@
 <!-- header -->
   <view class='page-hd bg-f'>
     <view class="userinfo ptb-20">
-      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <block wx:else>
-        <image bindtap="accountSet" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <button wx:if="{{!authorized}}" 
+              open-type="getUserInfo" 
+              bind:getuserinfo="onGetUserInfo"> 
+        获取头像昵称 
+      </button>
+      <view wx:if="{{authorized}}">
+        <!-- bindtap="accountSet"  -->
+        <image 
+              class="userinfo-avatar" 
+              src="{{userInfo.avatarUrl}}" 
+              mode="cover">
+        </image>
         <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
+      </view>
     </view>
   </view>
 <!-- / header -->
@@ -15,22 +24,17 @@
 
     <!-- 我的数据 -->
     <view class="section mt-10">
-      <navigator url="mydata/mydata" class="weui-cell weui-cell_access" row-num="4" hover-class="weui-cell_active">
-          <view class="weui-cell__bd">我的数据</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-      </navigator>
-
-        <view class="weui-panel__bd">
-
-          <l-grid l-class="grid-item border-t ptb-10" row-num="5" show-col-border="{{true}}">
-            <l-grid-item bind:lintap="toMyData"
-              wx:for="{{myDataList}}" wx:key="{{index}}" key="{{index}}" slot="{{index}}">
-              <view class="num">{{item.num}}</view>
-              <view class="text">{{item.text}}</view>
-            </l-grid-item>
-          </l-grid>
-
-        </view>
+      <l-list l-class="plr-15"  title="我的数据" bind:lintap="toMyData"/>
+      <l-grid l-class="ptb-15" row-num="5" show-col-border="{{true}}">
+        <l-grid-item bind:lintap="toMyData"
+                    wx:for="{{myDataList}}" 
+                    wx:key="{{index}}" 
+                    key="{{index}}" 
+                    slot="{{index}}">
+          <view class="num">{{item.num}}</view>
+          <view class="text">{{item.text}}</view>
+        </l-grid-item>
+      </l-grid>
     </view>
     <!--/ 我的数据 -->
 
@@ -38,14 +42,26 @@
       
       <view class="section mt-10 plr-15">
         <l-list  title="我的球队" bind:lintap="toMyTeam" image="/img/tab/me_tab.png"/>
-        <l-list  title="我的赛事" bind:lintap="toMyGame" image="/img/tab/index_tab.png"/>
-      </view>
-
-      <view class="section mt-10 plr-15">
+        <l-list  title="我的赛事" bind:lintap="toMyEvent" image="/img/tab/index_tab.png"/>
         <l-list title="我的订单" bind:lintap="toMyOrder" icon="order"/>
-        <l-list title="我的客服" bind:lintap="toService" image="/img/tab/s.png"/>
       </view>
-      <!--/ 我的列表 -->
 
+      <!-- <view class="section mt-10 plr-15">
+        <l-list title="我的客服" image="/img/tab/s.png">
+        <view slot="right-section"><contact-button type="default-light" size="30" session-from="weapp" class="guest-button">
+    </contact-button></view>
+    </l-list>
+      </view> -->
+      
+      <!--/ 我的列表 -->
+        <view class="section mt-10 p-15 fz-14">
+          <l-button special="{{true}}" open-type="share">
+            <l-icon name="share" /> <i class="ml-10">分享梦舟</i> 
+          </l-button>
+          <view class="list-divide"></view>
+          <l-button special="{{true}}" open-type="contact">
+            <l-icon name="customer-service" color="#3683d6" /><i class="ml-10">客服</i>
+          </l-button>
+        </view>
   </view>
 </view>

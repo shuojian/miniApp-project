@@ -3,10 +3,14 @@
     "l-tabpanel": "/components/widget/tabpanel/index",
     "l-tabs": "/components/widget/tabs/index",
     "l-dialog": "/components/widget/dialog/index",
+    "l-textarea": "/components/widget/textarea/index",
+    "l-input": "/components/widget/input/index",
+    "tabView": "../../widget/navtabSub/navtabSub",
+    "d-edit": "../../widget/link/index",
 
-    "count":"component/count/count",
-    "info":"component/info/info",
-    "member":"component/member/member"
+    "info":"../C_info/info",
+    "member":"../C_member/member",
+    "count": "../C_count/index"
   },
   "navigationBarTitleText": "球队详情"
 }

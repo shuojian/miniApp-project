@@ -1,29 +1,38 @@
 
-
-.dfx{display: flex;}
-.dfx-item{flex:1 ; text-align: center; padding:10px; border-right:1px solid #dfdfdf;}
+/* @import"/components/common/tag.wxss"; */
+.container{
+  background: #fff;
+}
+.padding{
+  padding:20rpx 30rpx;
+}
+/* .title{
+  font-weight: 500; 
+  color:#3b5999; 
+  margin-bottom:16rpx; 
+  line-height: 1.2rem;
+  } */
+  .title-block{
+  font-weight: 600; 
+  color:#3b5999; 
+  margin:20rpx; 
+  padding-left:20rpx; 
+  border-left:6rpx solid;
+  line-height: 1rem;
+  }
+.addr{
+font-size: 0.8rem;
+color:#777;
+}
+.tips{color:#999999;}
+.dfx{display: flex; border:1px solid #efefef}
+.dfx-item{ 
+  flex: 1;
+  text-align: center; 
+  padding:10px; 
+  border-right:1px solid #efefef;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  }
 .dfx-item:last-child{border-right:none;}
-
-
-
-.list.adicon{
-  position: relative;
-  padding-left:15px;
-  border-top:1px solid #eeeeee;
-}
-.list.adicon .item{
-  padding:10px 15px 10px 25px;
-  border-bottom:1px solid #eeeeee;
-}
-.list.adicon .item .iconfont{
-  position: absolute;
-  margin-left:-30px;
-  color:#3b5999;
-  font-size: 20px;
-}
-.list.adicon .item .title{
-  
-}
-.list.adicon .item .desc{
-  font-size: 0.8em; color:#5c5c5c; margin-top:8px;
-}

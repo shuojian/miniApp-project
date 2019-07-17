@@ -1,7 +1,8 @@
 var phonePatten = /^\d{3}-\d{8}$/;
 var mobilePatten = /^1\d{10}$/;
 
-const formatTime = date => {
+const formatTime = (date) => {//坑爹的，报错
+  // var date = new Date()//一定要记得写这个，不然会报date.getFullYear is not a function
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -11,6 +12,16 @@ const formatTime = date => {
 
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
+
+const toTime = (time = +new Date()) =>{
+  var date = new Date(time + 8 * 3600 * 1000); // 增加8小时
+  return date.toJSON().substr(0, 19).replace('T', ' ');
+}//1与2 格式区别 "2018-08-09 18:25:54"
+
+const toTime2 = (time = +new Date()) => {
+  var date = new Date(time + 8 * 3600 * 1000);
+  return date.toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '.');
+}// "2018.08.09 18:25:54"
 
 const formatTimeStamp = timestamp => {
   if (!timestamp) {
@@ -92,4 +103,6 @@ module.exports = {
   getNowPickerDate: getNowPickerDate,
   getNowPickerTime: getNowPickerTime,
   formatPhone: formatPhone,
+  toTime:toTime,
+  toTime2: toTime2,
 }

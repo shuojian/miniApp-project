@@ -1,20 +1,40 @@
 <form bindsubmit="formSubmit" bindreset="formReset" class='section'>
     <view class='section section_gap'>
-      <l-input label="真实姓名" rules="{{realNameRules}}" name="realName"  placeholder="真实姓名" required="{{ture}}" whitespace="{{ture}}" clear="{{true}}" />
-      <l-input label="身份证号" rules="{{idCardRules}}" name="idCard"  placeholder="输入身份证号" required="{{ture}}" whitespace="{{ture}}"  clear="{{true}}"/>
-    </view>
+      <l-input 
+          name="realName"   
+          label="真实姓名" 
+          tipType="message" 
+          placeholder="真实姓名" 
+          required="{{ture}}" 
+          whitespace="{{ture}}"
+          bind:linchange="onChangeRealName"
+          clear="{{true}}" />
+      <l-input 
+          name="idCard"  
+          type="idcard" 
+          label="身份证号" 
+          rules="{{idCardRules}}" 
+          tipType="message" 
+          placeholder="输入身份证号" 
+          required="{{ture}}" 
+          whitespace="{{ture}}" 
+          bind:linchange="onChangeIdcard"
+          clear="{{true}}"/>
+        </view>
+
     <view class='section section_gap'>
       <view class='p-15'>证件照片 <i class="f-desc">上传身份证正反面照</i></view>
       <view class='p-15'>
-        <l-image-picker count="2" size="4" bind:linchange="onChangeTap" />
+        <l-image-picker name="idcard" count="2" size="4" bind:linchange="onChangeTap" />
       </view> 
     </view>
 
     <view class="p-20">
-      <button class='d-btn-primary' formType="submit">提交实名</button>
+      <button class='d-btn-primary' formType="submit" disabled="{{canSubmit}}">提交实名</button>
     </view>
 </form>
 
+<l-message/>
 <l-toast />
 
 

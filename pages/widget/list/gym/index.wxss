@@ -1,0 +1,10 @@
+@import "/components/common/list.wxss";
+@import "/components/common/tag.wxss";
+
+.ell{
+  word-break:keep-all;
+  white-space:nowrap;
+}
+.desc{
+  width:100%;
+}

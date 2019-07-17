@@ -1,0 +1,19 @@
+<view class='container' bindtap='onTap'>
+  <view class="header">订单金额：<i>￥</i>{{myOrder.amount}}</view>
+  <view class="main">
+    <view class='time'>{{myOrder.matchHourStart}}</view>
+    <view class="main-info">
+      <view class='title'>
+        {{myOrder.fieldName}} 
+        <view wx:if="{{myOrder.type == 'full'}}">全场</view>
+        <view wx:if="{{myOrder.type == 'half'}}">半场</view>
+      </view>
+      <view>{{myOrder.matchDay}}</view>
+    </view>
+     <view class='time'>{{myOrder.matchHourEnd}}</view>
+  </view>
+  <view class="footer">
+    <view class='item'>队名：{{myOrder.teamName}}</view>
+    <view class='item'>队服颜色：{{myOrder.teamColor}}</view>
+  </view>
+</view>

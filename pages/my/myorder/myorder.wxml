@@ -1,16 +1,22 @@
-<view class="page">
-  <view wx:if="{{!nodata}}"  class="section mt-1">
-    <block wx:key="id" wx:for="{{myorder}}">
-      <l-list title="{{item.myorder}}" bind:lintap="toOrderDetail">
-      </l-list>
-    </block>
-  </view>
-  <view wx:else class='nodata'>
-        <image src="/img/logo_v.png"></image>
-        暂无相关数据
-  </view>
 
-    
-
-    
+<view wx:if="{{!nodata}}">
+  <block wx:key="id" wx:for="{{myOrders}}">
+    <orderList myOrder="{{item}}" bind:lintap="toDetail"/>
+  </block>
 </view>
+<view wx:else class='nodata'>
+  <image src="/img/logo_v.png"></image>
+  暂无相关数据
+</view>
+
+
+<!-- <loadmore show="{{true}}" type="loading" line="{{true}}">
+  <view slot="content">
+  </view>
+</loadmore> -->
+
+
+<!-- component 
+  d-nodata:widget/nodata/index
+  orderList:widget/list/myorder/index
+-->

@@ -1,36 +1,52 @@
 
- <l-tabs bind:linchange="changeTabs">
+ <l-tabs bind:linchange="">
   <l-tabpanel tab="赛事简介" key="one" slot="one">
-    <view class="tab-content"><introduction></introduction></view>
+    <view class="tab-content">
+      <introduction event="{{event}}" 
+                  stTime="{{stTime}}" 
+                  edTime="{{edTime}}" 
+                  sstTime="{{ssTime}}" 
+                  sedTime="{{sedTime}}"/>
+      <listTeam listTeam="{{listTeam}}" />
+    </view>
   </l-tabpanel>
+
   <l-tabpanel tab="赛事积分" key="two" slot="two">
-    <view class="tab-content"><integral></integral></view>
+    <view class="tab-content">
+      <integral integral="{{listTeamGroup}}"/>
+    </view>
   </l-tabpanel>
+
   <l-tabpanel tab="赛程赛果" key="three" slot="three">
-    <view class="tab-content"><result></result></view>
+    <view class="tab-content">
+      <result match="{{matchs}}"/> 
+    </view>
   </l-tabpanel>
+
   <l-tabpanel tab="赛事榜单" key="four" slot="four">
-    <view class="tab-content"><list></list></view>
+    <view class="tab-content">
+      <tabView tabTitle="{{tabTitle}}" positionTop="20rpx">
+        <view slot="0" >
+            <block wx:key="id" wx:for="{{listMember}}">
+                <count match="{{item}}" shoot="{{true}}"/>
+            </block>
+        </view>
+
+        <view slot="1">
+            <block wx:key="id" wx:for="{{listMember}}">
+                <count match="{{item}}" goal="{{true}}"/>
+            </block>
+        </view>
+        
+        <view slot="2">
+            <block wx:key="id" wx:for="{{listMember}}">
+                <count match="{{item}}" foul="{{true}}"/>
+            </block>
+        </view>
+      </tabView>
+    </view>
   </l-tabpanel>
 </l-tabs>
 
-
-
-
-
-<!-- <tabView tabTitle="{{tabTitle}}" positionTop="0" paddingTop="">
-    <view slot="0" >
-      <introduction></introduction>
-    </view>
-    <view slot="1" >
-      <integral></integral>
-    </view>
-    <view slot="2" >
-      <result></result>
-    </view>
-    <view slot="3" >
-      <list></list>
-    </view>
-</tabView> -->
 
 

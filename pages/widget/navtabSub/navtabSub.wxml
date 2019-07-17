@@ -1,0 +1,23 @@
+<!--common/component/navtab.wxml-->
+<view class="contain">
+    <!-- <view class="tab" style="position:fixed;left:0;top:{{positionTop}}">  -->
+    <view class="tab" style="margin-top:{{positionTop}}"> 
+      <view wx:for="{{tabTitle}}" 
+            wx:key="{{index}}" 
+            class="tab-son {{num==index?'active':''}}" 
+            bindtap='toggle' 
+            data-index="{{index}}">
+            {{item}}
+      </view>
+    </view> 
+    <view class="tab-content" >
+      <view wx:for="{{tabTitle}}" 
+            wx:key="{{index}}" 
+            class="tab-contents {{num==index?'on':''}}">
+          <listHeaderA wx:if="{{cata}}"/>
+          <listHeader wx:if="{{!cata}}"/>
+          <slot name="{{index}}"></slot>
+      </view>
+
+    </view>
+</view>

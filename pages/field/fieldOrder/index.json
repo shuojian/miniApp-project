@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "l-tabpanel": "/components/widget/tabpanel/index",
+    "l-tabs": "/components/widget/tabs/index"
+  },
+  "navigationBarTitleText": "选择球场"
+}

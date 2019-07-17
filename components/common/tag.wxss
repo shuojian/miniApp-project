@@ -1,0 +1,35 @@
+
+/*tags*/
+.tags{
+  margin-top:5px; 
+  overflow: hidden;
+  }
+.tag{
+  display: inline-block; 
+  border:1rpx solid; 
+  padding:1px 3px 0;  
+  margin-right:3px; 
+  font-size: 12px; 
+  }
+.tag.circle{ 
+  border-radius:50rpx; 
+  padding:5rpx 10rpx 8rpx;
+  }
+
+.tag.red{ color:#e83e8c}
+.tag.primary{color:#3b5999}
+.tag.gray{
+  color:#999999; 
+  border-color:#dfdfdf;
+  }
+.tag.fill.red{background:#e83e8c;color:#ffffff; border:none;}
+.tag.fill.primary{background:#3b5999;color:#ffffff;border:none;}
+.tag.fill.gray{
+  background:#999999; 
+  color:#ffffff;
+  border:none;
+  }
+
+.circle{border-radius: 50%;}
+.square-h{border-radius: 4rpx;}
+.square{border-radius: 8rpx;}

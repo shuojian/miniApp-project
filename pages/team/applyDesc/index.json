@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "l-textarea": "/components/widget/textarea/index"
+  }
+}

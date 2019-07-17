@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "d-field":"../../widget/list/fields/index",
+    "d-info": "../C_fieldInfo/index"
+  },
   "navigationBarTitleText": "球场主页"
 }

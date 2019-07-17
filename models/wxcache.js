@@ -1,7 +1,3 @@
-/**
- * name: wx-class-cache.js
- *
- */
 
  class WxCacheModel {
 

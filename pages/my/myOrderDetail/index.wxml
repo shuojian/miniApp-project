@@ -1,0 +1,14 @@
+<view class='container card'>
+  <view class="header">订单号：{{orderDetail.dailyOrderId}} </view>
+
+  <view class="body">
+    <view class="main">
+      <view class="title">{{orderDetail.fieldName}}</view>
+      <view class='addr'>{{orderDetail.gymAddr}}</view>
+      <!-- <view class='time'>{{orderDetail.day}}</view> -->
+    </view>
+    <view class="right"><i>￥</i>{{orderDetail.amount}}</view>
+  </view>
+
+  <view class="footer">预订时间：{{orderDetail.day}} {{orderDetail.start}} - {{orderDetail.end}}</view>
+</view>

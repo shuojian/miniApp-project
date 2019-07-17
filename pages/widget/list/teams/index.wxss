@@ -1,0 +1,30 @@
+
+.container{
+  display: flex;
+  align-items: center;
+  border-top:1px solid #efefef;
+  padding:20rpx 30rpx;
+  line-height: 0.8rem;
+}
+.item-avatar{
+  flex:1
+}
+.avatar-img{
+  width:50rpx;
+  height:50rpx;
+  border-radius: 50%;
+}
+.item-main{
+  flex:7 ;
+  display: flex;
+  align-items: center;
+  height: 1.45rem
+}
+.item-footer{
+  flex:2;
+  color:#999999;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  height: 1.45rem
+}

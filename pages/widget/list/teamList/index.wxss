@@ -1,0 +1,17 @@
+@import '../teams/index.wxss';
+.newMsg{
+  width:20rpx;
+  height:20rpx;
+  background: #ff0000;
+  border-radius: 20rpx;
+  margin:0 auto;
+}
+.item-main{
+  flex:6 !important;
+}
+.item-footer{
+  flex:3 !important;
+}
+.apply{
+  color:#999999;
+}

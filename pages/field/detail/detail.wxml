@@ -1,66 +1,46 @@
-<!--<text>pages/field/home/home.wxml</text>-->
-
-<view class='container'>
-
-  <view class='page-hd'>
+<view class='page-hd'>
     <view class="xsimg">
-        <image class='thumb' src="../../../img/cd2.jpg"/>
+      <image wx:if="{{gym.logoUrl}}" class='thumb' src="{{gym.logoUrl}}"/>
+      <image wx:else class='thumb' src="../../../img/cd2.jpg"/>
     </view>
-    <view  class='section mt-1 border'>
-      <div class="dfx">
-        <view  bindtap="booking" class="dfx-item">
-          <i class="iconfont icon-yaoqing"></i> 订场
-        </view>
-        <view bindtap="callFootball" class="dfx-item">
-          <i class="iconfont icon-lianxifangshi"></i> 联系球场
-        </view>
-      </div>
-    </view>
-  </view>
-
-  <view class="page_bd">
-    <!-- 球场简介 -->
-    <view class="weui-cell section ">
-      <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-        <view class="weui-media-box__title">{{gym.gymName}}</view>
-        <view class="title"><i class="iconfont icon-dizhi"></i> {{gym.gymAddr}}</view>
-        <view class='tags'>
-          <view class='tag gray'>5人制</view>
-          <view class='tag gray'>11人制</view>
-        </view>
-      </view>
-    </view>
-    <view class='list adicon bg-f'>
-      <view class='item'>
-        <i class="iconfont icon-bisaiguanli"></i>
-        <view class="title">场地介绍</view>
-        <view class='desc'>{{gym.gymDesc}}</view>
-      </view>
-      <view class='item'>
-        <i class="iconfont icon-lianxifangshi"></i>
-        <view class="title">联系方式</view>
-        <view class='desc'>
-        电话：<i bindtap="tel" class="color-primary" >{{gym.gymContactPhone}}</i>
-        微信：<i class="color-primary">{{gym.gymContactWechat}}</i>
-        </view>
-      </view>
-      <view class='item'>
-        <i class="iconfont icon-shijian"></i>
-        <view class="title">营业时间</view>
-        <view class='desc'>{{gym.gymBusinessHours}}</view>
-      </view>
-      <view class='item'>
-        <i class="iconfont icon-fuwu"></i>
-        <view class="title">场地服务</view>
-        <view class='desc'>{{gym.gymService}}</view>
-      </view>
-      <view class='item'>
-        <i class="iconfont icon-xuzhi"></i>
-        <view class="title">约战订场须知</view>
-        <view class='desc'>{{gym.gymOrderNotice}}</view>
-      </view>
-    </view>
-    <!-- / 球场简介 -->
-  </view>
 </view>
+
+<view class="page_bd">
+  <!-- 场地列表 -->
+  <view class="title-block">{{gym.gymName}} 场地列表</view> 
+  <view class="container">
+    <view wx:if="{{fields.length == 0}}" class='padding'>今日暂无场地</view>
+    <view wx:else>
+      <block wx:key="id" wx:for="{{fields}}">
+        <d-field field="{{item}}" gymName="{{gym.gymName}}"/>
+      </block>
+    </view>
+  </view>
+  <!-- / 场地列表 -->
+  <!-- 简介 -->
+  <d-info isGym="{{true}}" gym="{{gym}}"/>
+</view>
+
+<!-- components -->
+<!-- d-field:widget/list/fields -->
+<!-- d-info:../C_fieldInfo -->
+
+
+
+
+
+
+<!-- <view  class='section mt-1'>
+  <div class="dfx">
+    <view  bindtap="booking" data-orderid="{{orderid}}" class="dfx-item">
+      <i class="iconfont icon-yaoqing"></i> 订场
+    </view>
+    <view bindtap="callFootball" class="dfx-item">
+      <i class="mr-4 tips">联系</i> {{gym.gymContactPhone}}
+    </view>
+    <view bindtap="toGymInfo" class="dfx-item">
+      {{gym.gymName}}<i class="ml-4 tips">简介</i> 
+  </view>
+  </div>
+</view> -->
 

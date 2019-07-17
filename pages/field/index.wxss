@@ -1,0 +1,41 @@
+.gym-opt{
+  display: flex;
+  align-items: center;
+  padding:20rpx 30rpx;
+  background:#fff;
+  margin-bottom: 10rpx;
+}
+.gym-opt div{
+  text-align: center;
+  border-right:1rpx solid #efefef;
+  flex:1;
+}
+.gym-opt div:last-child{
+  border-right:none;
+}
+.fz{
+  font-size: 40rpx;
+  color:#3b5999;
+}
+.opt-text{
+  font-size: 0.7rem;
+  margin-top:6rpx;
+}
+.list.adicon{
+  position: relative;
+  padding-left:15px;
+  border-top:1px solid #eeeeee;
+}
+.list.adicon .item{
+  padding:10px 15px 10px 25px;
+  border-bottom:1px solid #eeeeee;
+}
+.list.adicon .item .iconfont{
+  position: absolute;
+  margin-left:-30px;
+  color:#3b5999;
+  font-size: 20px;
+}
+.list.adicon .item .desc{
+  font-size: 0.8em; color:#5c5c5c; margin-top:8px;
+}

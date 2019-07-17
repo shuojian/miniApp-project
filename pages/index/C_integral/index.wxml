@@ -1,0 +1,17 @@
+
+<listHeader/>
+<view class='p-base'> {{integral.teamGroup}}A组积分 </view> 
+<block wx:key="id" wx:for="{{integral}}">
+  <view bindtap='' class=' container'>
+    <view class='team-name'><i class="xh">{{paiMing}}</i> {{item.teamName}}</view>
+    <view class="team-num">
+      <i>{{item.matchCount}}</i>
+      <i>{{item.win}}/{{item.draw}}/{{item.smtGoalDifference}}</i>
+      <i>{{item.smtGoal}}/{{item.lose}}</i>
+      <i>{{item.smtGoalAgainst}}</i>
+      <i>{{item.smtScore}}</i>
+    </view>
+  </view>
+</block>
+
+

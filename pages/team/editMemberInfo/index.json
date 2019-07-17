@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "l-input": "/components/widget/input/index",
+    "l-radio-group": "/components/widget/radio-group/index",
+    "l-radio": "/components/widget/radio/index",
+    "l-list": "/components/widget/list/index"
+  }
+}

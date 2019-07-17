@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "d-event": "/components/event/index"
+    "d-event": "../widget/list/event/index",
+    "l-dialog": "/components/widget/dialog/index"
   },
   "navigationBarTitleText": "赛事",
   "enablePullDownRefresh": true

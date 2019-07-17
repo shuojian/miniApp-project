@@ -1,4 +1,0 @@
-
-@import"/template/viewList.wxss";
-
-.bg-gray{background: #aaaaaa; color:#fff}

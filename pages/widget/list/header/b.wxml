@@ -1,0 +1,10 @@
+<view class='container'>
+  <view class='team-name'>球队</view>
+  <view class="team-num">
+    <i>赛</i>
+    <i>胜/平/负</i>
+    <i>得/失</i>
+    <i>净胜</i>
+    <i>积分</i>
+  </view>
+</view>

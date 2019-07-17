@@ -1,2 +1,2 @@
 /* pages/index/detail/detail.wxss */
-
+@import"/app.wxss"

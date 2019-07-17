@@ -1,0 +1,58 @@
+@import "/components/common/tag.wxss";
+.container{
+  display: flex;
+  padding:20rpx 30rpx;
+  border-bottom: 1rpx solid #efefef;
+  align-items:center;
+  background: #fff;
+}
+.item-hd{
+  width:18%;
+  padding-right:20rpx;
+}
+.item-hd .avatar{
+  width:120rpx;
+  height:120rpx;
+  border-radius: 10rpx;
+}
+.item-bd{
+  /* width:40%; */
+  width:60%;
+  padding-right:20rpx;
+}
+.item-ft{
+  /* width:42%; */
+  width:22%;
+  display: flex;
+  align-items: center;
+  justify-content:flex-end;
+}
+.title{
+  font-size: 1.1rem;
+  display: flex;
+}
+.content{
+  color:#777777;
+  font-size: 0.8rem;
+  line-height: 1.2rem
+}
+
+.price{
+ color:#B58900;
+ font-size: 1.1rem;
+ margin-left:6rpx;
+}
+.price i{
+  font-size: 0.6rem;
+  color:#aaaaaa;
+}
+.btn-book{
+  padding:18rpx 14rpx;
+  border-radius: 60rpx;
+  color:#ffffff;
+  background: #3b5999;
+  /* background: #B58900 #3b5999; */
+  display: inline-block;
+  margin-left: 16rpx;
+  font-weight: 500;
+}

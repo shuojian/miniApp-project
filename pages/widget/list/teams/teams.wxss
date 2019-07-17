@@ -1,0 +1,12 @@
+
+.container{
+  margin-top:10rpx;
+  background: #fff;
+}
+.title{
+  font-size: 32rpx;
+  line-height: 2rem;
+  font-weight: 500;
+  color: rgb(59, 89, 153);
+  text-align: center;
+}

@@ -1,66 +1,99 @@
-import {
-  EventModel
-} from '../../models/event.js'
+import {ReqModel} from '../../models/request.js'
+import {WxCacheModel} from '../../models/wxcache.js'
 
-import {
-  WxCacheModel
-} from '../../models/wxcache.js'
-
-const eventModel = new EventModel()
+const reqModel = new ReqModel()
 const wxCacheModel = new WxCacheModel()
-
+const time = require('../../utils/util.js')
 Page({
   data: {
     events:{},
     more: '',
+    pagenumL:1
   },
 
   /**
   * 生命周期函数--监听页面加载
   */
-  onLoad(optins) {
-    wxCacheModel.get("events", eventModel.getEventList())
-    this.getEvents()
-  },
-
-  // 创建赛事弹框
-  openDg() {
-    wx.showModal({
-      content: '进驻赛事，请联系QQ123456789',
-    })
+  onLoad(options) {
+    wxCacheModel.get("events", reqModel.getEventList())
+    this._getEvents()
   },
 
   //下拉刷新
   onPullDownRefresh: function () {
-    this.clearCache();
-    this.getEvents()
+    this._clearCache();
+    this._getEvents()
+    wx.stopPullDownRefresh()
   },
 
   // 页面上拉触底事件的处理函数
   onReachBottom: function () {
-    if (!isLoading) {
-      if (this.data.prds && (this.data.prds.length % 6) == 0) {
-        this.init(this.data.prds[this.data.prds.length - 1].routeId)
-      }
+    let pagenum = this.data.pagenum + 1; //获取当前页数并+1
+    this.setData({
+      pagenum: pagenum, //更新当前页数
+    })
+    this._getEvents();//重新调用请求获取下一页数据
+  },
+
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '梦舟体育',
+      path: '/pages/index/index'
+      // path: '/page/user?id=123'
     }
   },
 
-  clearCache: function () {
+  // 创建赛事弹框
+  onclick() {
+    // wx.lin.showDialog({
+    //   type: "alert",
+    //   title: "进驻赛事",
+    //   content: "请联系QQ123456789",
+    //   success: (res) => {
+    //     if (res.confirm) {
+    //       console.log('用户点击确定')
+    //     } else if (res.cancel) {
+    //       console.log('用户点击取消')
+    //     }
+    //   }
+    // })
+
+    wx.showModal({
+      title: '进驻赛事',
+      content: '请联系QQ123456789',
+    })
+  },
+
+  _clearCache: function () {
     this.setData({
       events: {}
     });
   },
 
-  getEvents: function () {
-    const events = eventModel.getEventList()
+  _getEvents: function () {
+    const events = reqModel.getEventList()
     events.then(
       res => {
+        const arr= res.data
+        const events = arr.map((obj) => {
+          let rObj = obj;
+          rObj.insertTimea = time.toTime2(obj.insertTime);
+          rObj.eventStartTimea = time.toTime2(obj.eventStartTime).slice(0, 10);
+          rObj.eventEndTimea = time.toTime2(obj.stTimes).slice(0, 10);
+          rObj.signupStartTimea = time.toTime2(obj.stTimes).slice(0, 13);
+          rObj.signupEndTimea = time.toTime2(obj.stTimes).slice(0, 13);
+          return rObj
+        })
         this.setData({
-          events: res.data
+          events: events,
         })
         wxCacheModel.put("events", res.data, 1)
-      }
+        console.log('赛事列表:', events)
+      },
     )
-  },
-
+  }
 })

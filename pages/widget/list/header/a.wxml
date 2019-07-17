@@ -1,0 +1,9 @@
+<!--components/listheader/index.wxml-->
+<view class='container'>
+  <view class='item-header item fx'>
+    <view class='team-pm'>排名</view>
+    <view class='team-member'>球员</view>
+    <view class="team-num">参赛</view>
+    <view class="team-num">入球</view>
+  </view>
+</view>

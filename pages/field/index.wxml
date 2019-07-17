@@ -1,0 +1,30 @@
+<view class="page">
+  <swiper 
+    class='swiper-box' 
+    indicator-dots="{{indicatorDots}}" 
+    autoplay="{{autoplay}}" 
+    interval="{{interval}}" 
+    duration="{{duration}}" 
+    circular="true">
+      <block wx:key="id" wx:for="{{swipers}}">
+          <swiper-item><image class="slide-image" src="{{item}}" style="width:100%"></image></swiper-item>
+      </block>
+  </swiper>
+
+  <view class="gym-opt">
+    <div bindtap="toFields">
+      <i class="iconfont icon-bisai1 fz"></i>  
+      <view class="opt-text">5人制足球</view> 
+    </div>
+    <div bindtap="toFields11">
+      <i class="iconfont icon-bisai1 fz"></i> 
+      <view class="opt-text"> 11人制足球</view>
+    </div>
+  </view>
+
+  <block wx:key="id" wx:for="{{gyms}}">
+    <d-gym gym="{{item}}"/>
+  </block>
+</view>
+
+<l-loading type="flash"full-screen="{{true}}"></l-loading>

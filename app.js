@@ -1,70 +1,28 @@
 //app.js
+import { api } from 'utils/config.js'
 App({
   globalData: {
     appId: 'wx5e388f9d4a1954c1',
     loginInfo: null,
     userInfo: null,
+    code: null,
     parentUserCode: null,
-
-    // baseURL: 'https://www.mzsport.top/football/' // prd
-    baseURL: 'http://47.107.33.58:8080/football/' // test
-    // baseURL: 'http://127.0.0.1:8080/football/' // dev
+    baseURL: api.base_url
   },
 
-  onLaunch: function () {
-    // 打开调试
-    // wx.setEnableDebug({
-    //   enableDebug: true
-    // })
-
-    var that = this;
-    //获取分享数据--无效
-    //wx.getShareInfo()
-
-    //调用API从本地缓存中获取数据
+  onLaunch() {
     var loginInfo = wx.getStorageSync('loginInfo')
     if (loginInfo) {
       if (loginInfo.lastLoginDate &&
         (Number(loginInfo.lastLoginDate) + 2 * 60 * 60 * 1000) > new Date().getTime()) {
-        that.globalData.loginInfo = loginInfo
+        this.globalData.loginInfo = loginInfo
       } else {
         wx.removeStorageSync('loginInfo')
       }
     }
   },
 
-  onShow: function () {
-    var that = this
-    //    wx.getLocation({
-    //      success: function(res) {
-    //        console.log(res)
-    //        if (res.latitude && res.longitude) {
-    //          that.saveUserTrail(Number(res.longitude), Number(res.latitude))
-    //        }
-    //      }
-    //    })
-
-    //当小程序启动，或从后台进入前台显示，会触发 onShow
-    // wx.checkSession({
-    //   success: function() {
-    //     //session_key 未过期，并且在本生命周期一直有效
-    //   },
-    //   fail: function() {
-    //     // session_key 已经失效，需要重新执行登录流程
-    //   }
-    // })
-  },
-
-  onHide: function () {
-    //当小程序从前台进入后台，会触发 onHide
-
-  },
-  onError: function () {
-    //当小程序发生脚本错误，或者 api 调用失败时，会触发 onError 并带上错误信息
-
-  },
-
-  showLoading: function () {
+  showLoading() {
     wx.showToast({
       title: 'loading...',
       icon: 'loading',
@@ -73,52 +31,48 @@ App({
     wx.showNavigationBarLoading()
   },
 
-  hideLoading: function () {
+  hideLoading() {
     wx.hideToast()
     wx.hideNavigationBarLoading()
   },
 
-  fxLogin: function (cb) {
-    var that = this
-    if (that.globalData.loginInfo) {
+  fxLogin(cb) {
+    if (this.globalData.loginInfo) {
       typeof cb == "function" && cb()
       return
     }
 
     //调用登录接口
     wx.login({
-      success: function (res) {
-        console.log('wx.login:')
-        console.log(res)
-        if (that.globalData.userInfo && that.globalData.userInfo.rawData && that.globalData.userInfo.encryptedData && that.globalData.userInfo.iv && that.globalData.userInfo.signature) {
-          that.fxWxLogin(res.code, cb)
+      success: (res) => {
+        console.log('调用登录接口获得:', res)
+        if (this.globalData.userInfo && this.globalData.userInfo.rawData && this.globalData.userInfo.encryptedData && this.globalData.userInfo.iv && this.globalData.userInfo.signature) {
+          this.fxWxLogin(res.code, cb)
+          this.globalData.code = res.code
         } else {
-          that.showLoading()
+          wx.showLoading()
           wx.getUserInfo({
             withCredentials: true,
-            success: function (userInfo) {
-              console.log('wx.getUserInfo:')
-              console.log(userInfo)
-              that.globalData.userInfo = userInfo
-              that.fxWxLogin(res.code, cb)
+            success: (userInfo) => {
+              this.globalData.userInfo = userInfo
+              this.fxWxLogin(res.code, cb)
+              console.log('调用getUserInfo:', userInfo)
             },
-            fail: function (res) {
-              console.log('wx.getUserInfo:失败')
+            fail: (res) => {
               wx.showModal({
                 title: '出错啦',
-                content: 'wx.getUserInfo:失败',
+                content: '获取用户信息失败',
                 showCancel: false
               })
               // typeof cb == "function" && cb()
             },
-            complete: function (res) {
-              that.hideLoading()
+            complete: (res) => {
+              wx.hideLoading()
             }
           })
         }
       },
-      fail: function (res) {
-        console.log('wx.login:失败')
+      fail: (res) => {
         wx.showModal({
           title: '出错啦',
           content: 'wx.login:失败',
@@ -135,68 +89,65 @@ App({
   },
 
   fxWxLogin: function (code, cb) {
-    var that = this
-    that.showLoading()
+    this.showLoading()
     wx.request({
-      // url: that.globalData.baseURL + 'acc/wxLoginTest',
-      url: that.globalData.baseURL + 'acc/wxLogin',
+      // url: this.globalData.baseURL + 'acc/wxLoginTest',
+      url: this.globalData.baseURL + 'acc/wxLogin',
       method: 'POST',
       data: {
-        appId: that.globalData.appId,
+        appId: this.globalData.appId,
         code: code,
-        userInfo: that.globalData.userInfo.rawData,
-        encryptedData: that.globalData.userInfo.encryptedData,
-        iv: that.globalData.userInfo.iv,
-        signature: that.globalData.userInfo.signature,
-        parentUserCode: that.globalData.parentUserCode
+        userInfo: this.globalData.userInfo.rawData,
+        encryptedData: this.globalData.userInfo.encryptedData,
+        iv: this.globalData.userInfo.iv,
+        signature: this.globalData.userInfo.signature,
+        parentUserCode: this.globalData.parentUserCode
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      success: function (res) {
-        console.log('fxWxLogin:')
-        console.log(res)
+      success: (res) => {
+        console.log('code换取token res:', res)
         if (res.data.code == 0 && res.data.data && res.data.data.token) {
-          that.globalData.loginInfo = res.data.data
-          that.globalData.loginInfo.lastLoginDate = new Date().getTime()
-          wx.setStorageSync('loginInfo', that.globalData.loginInfo)
+          this.globalData.loginInfo = res.data.data
+          this.globalData.loginInfo.lastLoginDate = new Date().getTime()
+          wx.setStorageSync('loginInfo', this.globalData.loginInfo)
           typeof cb == "function" && cb()
         }
+
       },
-      fail: function (res) {
-        // that.changeSetting(cb)
-        console.log('fxWxLogin:失败')
+      fail: (res) => {
+        // this.changeSetting(cb)
+        console.log('code换取token失败')
         wx.showModal({
           title: '出错啦',
           content: '登录失败',
           showCancel: false
         })
       },
-      complete: function (res) {
-        that.hideLoading()
+      complete: (res) => {
+        this.hideLoading()
       }
     })
   },
 
-  changeSetting: function (cb) {
-    var that = this
+  changeSetting(cb) {
     wx.showModal({
       title: '提示',
       content: '请您授权',
       showCancel: false,
-      success: function (res) {
-        console.log(res)
+      success: (res) => {
         wx.openSetting({
-          success: function (res) {
-            console.log(res)
+          success: (res) => {
+            console.log("授权成功：", res)
             if (res.authSetting && res.authSetting["scope.userLocation"]) {
-              //that.getLoginInfo(cb)
+              //this.getLoginInfo(cb)
             } else {
-              that.changeSetting(cb)
+              this.changeSetting(cb)
             }
           },
-          fail: function (res) {
-            that.changeSetting(cb)
+          fail: (res) => {
+            this.changeSetting(cb)
           }
         })
       }
@@ -204,71 +155,94 @@ App({
   },
 
   getUserInfo: function (otherUserCode, cb) {
-    var that = this
-    that.showLoading()
+    this.showLoading()
     wx.request({
-      url: that.globalData.baseURL + 'u/view',
+      url: this.globalData.baseURL + 'u/view',
       data: {
-        token: that.globalData.loginInfo.token,
+        token: this.globalData.loginInfo.token,
         otherUserCode: otherUserCode
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      success: function (res) {
-        console.log(res)
+      success: (res) => {
+        console.log("getUserInfo:", res)
         if (res.data.code == 0 && res.data.data) {
           typeof cb == "function" && cb(res.data.data)
         }
       },
-      complete: function (res) {
-        that.hideLoading()
+      complete: (res) => {
+        this.hideLoading()
       }
     })
   },
 
-  uploadFile: function (filePath, refType, refId, sort, cb) {
-    var that = this
-    if (!filePath) {
-      typeof cb == "function" && cb()
-      return
-    }
+  uploadFile: function (filePath, file, refId, refType) {
+    wx.showLoading()
     wx.uploadFile({
-      url: that.globalData.baseURL + 'file/upload',
+      url: this.globalData.baseURL + 'file/uploadToWxCos',
       filePath: filePath,
       name: 'file',
+      method: "POST",
       formData: {
-        token: that.globalData.loginInfo.token,
-        'refType': refType || '',
-        'refId': refId || '',
-        'sort': sort || 0
+        token: this.globalData.loginInfo.token,
+        appId: this.globalData.appId,
+        // duration:
+        file: file,
+        // fileType:,
+        refId: refId || '',
+        refType: refType || '',
       },
-      success: function (res) {
-        if (res.data) {
-          var retData = JSON.parse(res.data)
-          if (retData.code != 0) {
-            typeof cb == "function" && cb()
-            return
-          }
-          typeof cb == "function" && cb(retData.data.url)
-        }
+      success: (res) => {
+        console.log('文件上传信息：', res, res.data)
       },
-      fail: function (res) {
-        typeof cb == "function" && cb()
-      },
-      complete: function (res) {
-        console.log(res)
+      complete: (res) => {
+        wx.hideLoading()
       }
     })
   },
+  // uploadFile: function (filePath, file, refId, refType,  cb) {
+  //   if (!filePath) {
+  //     typeof cb == "function" && cb()
+  //     return
+  //   }
+  //   wx.uploadFile({
+  //     url: this.globalData.baseURL + 'file/uploadToWxCos',
+  //     filePath: filePath,
+  //     name: 'file',
+  //     method:"POST",
+  //     formData: {
+  //       token: this.globalData.loginInfo.token,
+  //       appId: this.globalData.appId,
+  //       // duration:
+  //       file:file,
+  //       // fileType:,
+  //       refId: refId || '',
+  //       refType: refType || '',
+  //       // sort: sort || 0
+  //     },
+  //     success: (res) =>{
+  //       if (res.data) {
+  //         var retData = JSON.parse(res.data)
+  //         if (retData.code != 0) {
+  //           typeof cb == "function" && cb()
+  //           return
+  //         }
+  //         typeof cb == "function" && cb(retData.data.url)
+  //       }
+  //     },
+  //     fail: (res)=> {
+  //       typeof cb == "function" && cb()
+  //     }
+  //   })
+  // },
 
   saveUserTrail: function (longitude, latitude) {
-    var that = this
-    if (latitude && longitude && that.globalData.loginInfo && that.globalData.loginInfo.token) {
+    if (latitude && longitude && this.globalData.loginInfo && this.globalData.loginInfo.token) {
       wx.request({
-        url: that.globalData.baseURL + 'u/saveUserTrail',
+        url: this.globalData.baseURL + 'u/saveUserTrail',
         data: {
-          token: that.globalData.loginInfo.token,
+          token: this.globalData.loginInfo.token,
           longitude: longitude,
           latitude: latitude
         },
@@ -282,12 +256,11 @@ App({
     }
   },
 
-  shareAppMessage: function (res) {
-    var that = this
-    console.log(res)
+
+  shareAppMessage(res) {
     return {
       title: '梦舟体育',
       path: '/pages/index/index'
     }
-  }
+  },
 })
