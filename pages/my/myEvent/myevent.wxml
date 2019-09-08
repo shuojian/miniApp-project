@@ -6,13 +6,13 @@
         </l-list>
       </block>
     </view>
-    <view wx:else class='nodata'>
-        <image src="/img/logo_v.png"></image>
-        暂无相关数据
-    </view>
-
+    <noData wx:else/>
     <button class='d-btn-primary'  bindtap="onTap">创建赛事</button>
   </view>
 </view>
-
 <l-dialog/>
+
+
+<!-- components 
+  "noData":"../../widget/nodata/index"
+-->

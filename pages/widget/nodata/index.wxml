@@ -1,5 +1,8 @@
 <!--components/nodata/index.wxml-->
-<!--components/nodata/nodata.wxml-->
-<view class='container nodata'>
-  <text class='desc'>暂无数据</text>
+<view wx:if="{{noType == 'list'}}" class='container'>
+  <text class='desc'>{{text}}</text>
+</view>
+<view wx:elif="{{noType == 'page'}}" class='nodata-page'>
+  <image src="/img/logo_v.png"></image>
+  {{text}}
 </view>

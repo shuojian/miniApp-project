@@ -66,25 +66,24 @@ Page({
   },
 
   //分享
-  onShareAppMessage: function (res) {
+  onShareAppMessage(res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
     }
     return {
       title: '梦舟体育',
-      path: '/pages/index/index'
-      // path: '/page/user?id=123'
+      path: app.globalData.startUrl
     }
   },
   //下拉刷新
-  onPullDownRefresh: function () {
+  onPullDownRefresh () {
     this._clearCache()
     this._getGyms()
     wx.stopPullDownRefresh()
   },
-  // 页面上拉触底事件的处理函数
-  onReachBottom: function () {
+  // 上拉触底
+  onReachBottom() {
     let pagenum = this.data.pagenum + 1; //获取当前页数并+1
     this.setData({
       pagenum: pagenum, //更新当前页数

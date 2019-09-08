@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "d-nodata":"../../widget/nodata/index",
+    "nodata":"../../widget/nodata/index",
     "orderList":"../../widget/list/myorder/index"
   },
   "navigationBarTitleText": "我的订单",

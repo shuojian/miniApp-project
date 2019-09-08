@@ -7,7 +7,8 @@ App({
     userInfo: null,
     code: null,
     parentUserCode: null,
-    baseURL: api.base_url
+    baseURL: api.base_url,
+    startUrl:api.start_url
   },
 
   onLaunch() {

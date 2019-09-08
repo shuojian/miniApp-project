@@ -4,10 +4,7 @@
     <orderList myOrder="{{item}}" bind:lintap="toDetail"/>
   </block>
 </view>
-<view wx:else class='nodata'>
-  <image src="/img/logo_v.png"></image>
-  暂无相关数据
-</view>
+<nodata wx:else></nodata>
 
 
 <!-- <loadmore show="{{true}}" type="loading" line="{{true}}">
@@ -17,6 +14,6 @@
 
 
 <!-- component 
-  d-nodata:widget/nodata/index
+  nodata:widget/nodata/index
   orderList:widget/list/myorder/index
 -->

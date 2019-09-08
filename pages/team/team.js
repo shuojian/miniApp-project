@@ -3,7 +3,7 @@ import { WxCacheModel } from '../../models/wxcache.js'
 
 const reqModel = new ReqModel()
 const wxCacheModel = new WxCacheModel()
-var isLoading = false;
+const app = getApp()
 
 Page({
   data: {
@@ -19,12 +19,12 @@ Page({
     hasMoreData: false,
   },
 
-  onLoad(options) {
+  onLoad(o) {
     wxCacheModel.get("teams", reqModel.getTameList())
-    this.getTeams()
+    this._getTeams()
   },
 
-  getTeams(message) {
+  _getTeams() {
     let page = this.data.page
     let pageLimit = this.data.pageLimit
     const teams = reqModel.getTameList(page, pageLimit)
@@ -53,34 +53,33 @@ Page({
     )
   },
 
-  clearCache: function () {
+  _clearCache() {
     this.setData({
       teams: []
     });
   },
 
-  onShareAppMessage: function (res) {
+  onShareAppMessage(res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
     }
     return {
       title: '梦舟体育',
-      path: '/pages/index/index'
-      // path: '/page/user?id=123'
+      path: app.globalData.startUrl
     }
   },
 
   //下拉刷新
-  onPullDownRefresh: function () {
+  onPullDownRefresh() {
     this.data.page = 1
-    this.clearCache();
-    this.getTeams()
+    this._clearCache();
+    this._getTeams()
     wx.stopPullDownRefresh()
   },
 
-  // 页面上拉触底事件的处理函数
-  onReachBottom: function () {
+  // 上拉触底
+  onReachBottom() {
     let page = this.data.page + 1; //获取当前页数并+1
     if(this.data.hasMoreData) {
       this.getTeams(page)

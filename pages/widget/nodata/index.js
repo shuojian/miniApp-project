@@ -4,7 +4,14 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    noType: {
+      type: String,
+      value: 'page'
+    },
+    text:{
+      type:String,
+      value:'暂无相关数据'
+    }
   },
 
   /**

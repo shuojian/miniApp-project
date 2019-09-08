@@ -4,6 +4,7 @@ import {WxCacheModel} from '../../models/wxcache.js'
 const reqModel = new ReqModel()
 const wxCacheModel = new WxCacheModel()
 const time = require('../../utils/util.js')
+const app = getApp()
 Page({
   data: {
     events:{},
@@ -42,8 +43,7 @@ Page({
     }
     return {
       title: '梦舟体育',
-      path: '/pages/index/index'
-      // path: '/page/user?id=123'
+      path: app.globalData.startUrl
     }
   },
 

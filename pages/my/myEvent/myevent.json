@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "noData":"../../widget/nodata/index"
+  },
   "navigationBarTitleText": "我的赛事"
 }

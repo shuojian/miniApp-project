@@ -1,4 +1,16 @@
-/* components/nodata/index.wxss */
+
+.nodata-page{
+  min-height:450rpx; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top:100rpx;
+  text-align:center; 
+}
+.nodata-page image{
+  width:  200rpx;
+  height: 200rpx;
+}
 .desc{
   color:#999999;
 }
