@@ -44,8 +44,9 @@ Page({
     const fieldSize = query.fieldSize
     const carts = JSON.parse(query.carts)
     console.log('页面接收:', query)
-    if (carts[0].booked == "Y" && carts[0].hostOrderId !== 0){
-      const orderId = carts[0].hostOrderId
+    console.log('carts:', carts)
+    if (carts[0].booked == "Y" && typeof carts[0].hostorderid != 'undefined'){
+      const orderId = carts[0].hostorderid
       this.setData({
         isGuest:true,
         orderId
@@ -125,8 +126,8 @@ Page({
         matchTimeEnd: this.data.matchTimeEnd,
         phone: e.detail.value.phone,
         realName: this.data.userInfo.nickName,
-        teamName: e.detail.value.teamColor,
-        teamColor: e.detail.value.teamName,
+        teamName: e.detail.value.teamName,
+        teamColor: e.detail.value.teamColor,
         note: e.detail.value.note,
         type: this.data.type
         // teamId:teamId,
@@ -262,8 +263,8 @@ Page({
               content: '场地预订成功',
               showCancel: false,
               success: (res) => {
-                wx.reLaunch({
-                  url: '/pages/my/my'
+                wx.navigateBack({
+                  delta:1
                 })
               }
             })

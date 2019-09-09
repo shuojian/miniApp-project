@@ -2,13 +2,20 @@
 .container{
   padding:20rpx 30rpx;
   background: #fff;
-  margin-bottom: 10rpx;
+  margin: 20rpx;
   color:#777777;
   font-size: 0.8rem;
+  border-radius: 20rpx;
 }
 .header{
   border-bottom:2rpx solid #efefef;
   padding:0 0 16rpx 0;
+  display: flex;
+}
+.header view{
+  flex: 1
+}
+.header .right{
   text-align: right;
 }
 .main{

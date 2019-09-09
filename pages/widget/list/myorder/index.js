@@ -4,7 +4,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    myOrder:Object
+    order:Object
   },
 
   /**
@@ -19,7 +19,7 @@ Component({
    */
   methods: {
     onTap(event) {
-      const bid = this.properties.myOrder.orderId
+      const bid = this.properties.order.orderId
       wx.navigateTo({
         url: `/pages/my/myOrderDetail/index?bid=${bid}`
       })

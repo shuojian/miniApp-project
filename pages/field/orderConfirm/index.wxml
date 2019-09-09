@@ -65,7 +65,8 @@
               type="string" 
               label="球队名" 
               placeholder="球队名" />
-      <l-input wx:if="{{fieldSize == '11人制'}}" name="teamColor" 
+      <l-input wx:if="{{fieldSize == '11人制'}}" 
+              name="teamColor" 
               required="{{true}}"
               type="string" 
               label="队服颜色" 

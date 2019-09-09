@@ -1,14 +1,32 @@
 <view class='container card'>
-  <view class="header">订单号：{{orderDetail.dailyOrderId}} </view>
+  <view class="header">
+    <view>订单号：{{orderDetail.orderId}} </view>
+    <view class="right" wx:if="{{orderDetail.state == 'closed'}}">已结束</view> 
+  </view>
 
   <view class="body">
     <view class="main">
-      <view class="title">{{orderDetail.fieldName}}</view>
-      <view class='addr'>{{orderDetail.gymAddr}}</view>
-      <!-- <view class='time'>{{orderDetail.day}}</view> -->
+      <view class='time'>{{orderDetail.start}}</view>
+      <view class="main-info">
+        <view class='title'>
+          <view wx:if="{{orderDetail.type == 'full'}}">全场</view>
+          <view wx:if="{{orderDetail.type == 'half'}}">半场</view>
+        </view>
+        <view>{{orderDetail.day}}</view>
+      </view>
+      <view class='time'>{{orderDetail.end}}</view>
     </view>
-    <view class="right"><i>￥</i>{{orderDetail.amount}}</view>
+
+    <view class="order-info">
+      <view class="field-name">{{orderDetail.fieldName}} </view>
+      <view ><i class="label">地址：</i>{{orderDetail.gymAddr}}</view>
+      <view ><i class="label">球队：</i>{{orderDetail.teamColor}}</view>
+      <view ><i class="label">队服颜色：</i>{{orderDetail.teamName}}</view>
+      <view ><i class="label">预定电话：</i>{{orderDetail.phone}}</view>
+    </view>
   </view>
 
-  <view class="footer">预订时间：{{orderDetail.day}} {{orderDetail.start}} - {{orderDetail.end}}</view>
+  <view class="footer">
+    <view class="right"><i>￥</i>{{orderDetail.amount/2}}</view>
+  </view>
 </view>

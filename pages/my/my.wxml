@@ -1,7 +1,7 @@
 <view class="page">
 <!-- header -->
   <view class='page-hd bg-f'>
-    <view class="userinfo ptb-20">
+    <view class="userinfo py-20">
       <button wx:if="{{!authorized}}" 
               open-type="getUserInfo" 
               bind:getuserinfo="onGetUserInfo"> 
@@ -24,8 +24,8 @@
 
     <!-- 我的数据 -->
     <view class="section mt-10">
-      <l-list l-class="plr-15"  title="我的数据" bind:lintap="toMyData"/>
-      <l-grid l-class="ptb-15" row-num="5" show-col-border="{{true}}">
+      <l-list l-class="px-15"  title="我的数据" bind:lintap="toMyData"/>
+      <l-grid l-class="py-15" row-num="5" show-col-border="{{true}}">
         <l-grid-item bind:lintap="toMyData"
                     wx:for="{{myDataList}}" 
                     wx:key="{{index}}" 
@@ -40,13 +40,13 @@
 
       <!-- 我的列表 -->
       
-      <view class="section mt-10 plr-15">
+      <view class="section mt-10 px-15">
         <l-list  title="我的球队" bind:lintap="toMyTeam" image="/img/tab/me_tab.png"/>
         <l-list  title="我的赛事" bind:lintap="toMyEvent" image="/img/tab/index_tab.png"/>
         <l-list title="我的订单" bind:lintap="toMyOrder" icon="order"/>
       </view>
 
-      <!-- <view class="section mt-10 plr-15">
+      <!-- <view class="section mt-10 px-15">
         <l-list title="我的客服" image="/img/tab/s.png">
         <view slot="right-section"><contact-button type="default-light" size="30" session-from="weapp" class="guest-button">
     </contact-button></view>

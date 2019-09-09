@@ -22,7 +22,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.8.0",
+	"libVersion": "2.8.2",
 	"appid": "wx5e388f9d4a1954c1",
 	"projectname": "miniApp-project",
 	"debugOptions": {

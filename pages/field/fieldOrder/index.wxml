@@ -77,21 +77,20 @@
                               <view class="money">半场 ￥{{item.price}}</view>
                               <view class="bookTip">可订半场</view>
                           </view>
-                          <view wx:elif="{{item.booked == 'Y'}}" class="order-item booked">
-                            <block wx:if="{{item.gusetOrderId !==''}}">
-                              <view class="fz-normal">{{item.guestTeamName}}aaa</view>
-                              <view class="small">{{item.guestTeamColor}}bbb</view>
-                            </block>
-                            <view wx:else
+                          <view wx:elif="{{item.booked == 'Y' && item.bookedB}}" class="order-item {{item.bookedB?'booked':''}}">
+                              <view class="fz-normal">{{item.guestTeamName}}</view>
+                              <view class="small">{{item.guestTeamColor}}</view>
+                          </view>  
+                          <view wx:elif="{{item.booked == 'Y' && !item.bookedB}}"
                                 class="order-item {{item.selectedB?'checked':''}}"
                                 bindtap='orderAccept' 
                                 data-index='{{index}}' 
                                 data-booked='{{item.booked}}'
                                 data-id='{{item.id}}'
+                                data-hostOrderId='{{item.hostOrderId}}'
                                 data-time='{{item.hour}}'>
                                 <view class="money">半场 ￥{{item.price}}</view>
                                 <view class="bookTip">可订半场</view>
-                            </view>
                           </view>
                         <!-- </view> -->
                       <!-- / 右半场 --> 

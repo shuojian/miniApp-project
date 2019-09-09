@@ -1,7 +1,7 @@
 
 <view wx:if="{{!nodata}}">
   <block wx:key="id" wx:for="{{myOrders}}">
-    <orderList myOrder="{{item}}" bind:lintap="toDetail"/>
+    <orderList order="{{item}}" bind:lintap="toDetail"/>
   </block>
 </view>
 <nodata wx:else></nodata>

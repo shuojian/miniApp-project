@@ -7,35 +7,35 @@
   <view class='section'>
       <l-grid row-num="4" show-border="{{true}}">
         <l-grid-item key="one" slot="one">
-          <view class="ptb-10"><i class="num">{{team.matchCount}}</i>场次</view>
+          <view class="py-10"><i class="num">{{team.matchCount}}</i>场次</view>
         </l-grid-item>
         <l-grid-item key="two" slot="two">
-          <view class="ptb-10"><i class="num">{{team.win}}</i>胜</view>
+          <view class="py-10"><i class="num">{{team.win}}</i>胜</view>
         </l-grid-item>
         <l-grid-item key="3" slot="3">
-          <view class="ptb-10"><i class="num">{{team.draw}}</i>平</view>
+          <view class="py-10"><i class="num">{{team.draw}}</i>平</view>
         </l-grid-item>
         <l-grid-item key="4" slot="4">
-          <view class="ptb-10"><i class="num">{{team.lose}}</i>负</view>
+          <view class="py-10"><i class="num">{{team.lose}}</i>负</view>
         </l-grid-item> 
         <l-grid-item key="5" slot="5">
-          <view class="ptb-10"><i class="num">{{team.matchCount}}</i>未录入</view>
+          <view class="py-10"><i class="num">{{team.matchCount}}</i>未录入</view>
         </l-grid-item>
         <l-grid-item key="6" slot="6">
-          <view class="ptb-10"><i class="num">{{team.smtGoal}}</i>选球</view>
+          <view class="py-10"><i class="num">{{team.smtGoal}}</i>选球</view>
         </l-grid-item>
         <l-grid-item key="7" slot="7">
-          <view class="ptb-10"><i class="num">{{team.smtGoalAgainst}}</i>失球</view>
+          <view class="py-10"><i class="num">{{team.smtGoalAgainst}}</i>失球</view>
         </l-grid-item>
         <l-grid-item key="8" slot="8">
-          <view class="ptb-10"><i class="num">{{team.smtGoalDifference}}</i>净进球</view>
+          <view class="py-10"><i class="num">{{team.smtGoalDifference}}</i>净进球</view>
         </l-grid-item> 
       </l-grid> 
     <!-- 个人参数 -->
   </view>
   
   <view class="cell-title"><text class='text'>近期比赛</text></view>
-  <view wx:if="{{isEnvent}}" class="color-gray p-base bg-f">{{team.teamName}}</view>
-  <view wx:else class="color-gray p-base bg-f">近期无赛事</view>
+  <view wx:if="{{isEnvent}}" class="text-gray p-base bg-f">{{team.teamName}}</view>
+  <view wx:else class="text-gray p-base bg-f">近期无赛事</view>
     
 </view>

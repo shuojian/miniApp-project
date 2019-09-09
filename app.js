@@ -256,12 +256,10 @@ App({
       })
     }
   },
-
-
   shareAppMessage(res) {
     return {
       title: '梦舟体育',
-      path: '/pages/index/index'
+      path: this.globalData.startUrl
     }
   },
 })

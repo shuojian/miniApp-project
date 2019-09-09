@@ -135,8 +135,7 @@ Page({
               matchTimeStart,
               matchTimeEnd
             })
-            // console.log("-订单：", carts)
-            // console.log("-timeStart：", timeStart, matchTimeStart,"timeEnd：", timeEnd, matchTimeEnd)
+            console.log("-订单orderChange：", carts)
           }
           else {
             this.setData({
@@ -201,8 +200,8 @@ Page({
               matchTimeStart: matchTimeStart,
               matchTimeEnd: matchTimeEnd,
             })
-        console.log("+列表：", arr)
-        console.log("+订单：", carts)
+        console.log("+列表orderChange：", arr)
+        console.log("+订单orderChange：", carts)
         // console.log("+timeStart：", timeStarta, matchTimeStart, "timeEnd：", timeEnda, matchTimeEnd)
       }
 
@@ -217,118 +216,114 @@ Page({
       let num = this.data.num;
       let carts = this.data.carts;
       if (arr[index].selectedB == true) {
-        // let num = this.data.num;
-        // let carts = this.data.carts;
         //carts--
-        --num;
-        if (num <= 0) {
-          this.setData({
-            opacity: 0.2,
-            buy: "请选择订场时间",
-            isNext: false,
-          })
-        }
-        arr[index].selectedB = false
-        const selectEl = carts.find(
-          (x) => {
-            return x.id == e.currentTarget.dataset.id
-          })
-        var inx = carts.findIndex((fruit) => fruit.id == selectEl.id)
-        carts.splice(inx, 1);
+          --num;
+          if (num <= 0) {
+            this.setData({
+              opacity: 0.2,
+              buy: "请选择订场时间",
+              isNext: false,
+            })
+          }
+          arr[index].selectedB = false
+          const selectEl = carts.find(
+            (x) => {
+              return x.id == e.currentTarget.dataset.id
+            })
+          var inx = carts.findIndex((fruit) => fruit.id == selectEl.id)
+          carts.splice(inx, 1);
 
-        if (carts.length > 0) {
-          carts.sort(this._compare("id"));//排序
+          if (carts.length > 0) {
+            carts.sort(this._compare("id"));//排序
 
-          //获取时间
-          const str = carts[0].time.indexOf('-')
-          const timeStart = carts[0].time.slice(0, str)//截取时间
-          const timeEnd = carts[carts.length - 1].time.slice(str + 1)
-          let timeStarta = `${this.data.date} ${timeStart}`
-          let timeEnda = `${this.data.date} ${timeEnd}`
-          let matchTimeStart = (new Date(timeStarta)).getTime()
-          let matchTimeEnd = (new Date(timeEnda)).getTime()
+            //获取时间
+            const str = carts[0].time.indexOf('-')
+            const timeStart = carts[0].time.slice(0, str)//截取时间
+            const timeEnd = carts[carts.length - 1].time.slice(str + 1)
+            let timeStarta = `${this.data.date} ${timeStart}`
+            let timeEnda = `${this.data.date} ${timeEnd}`
+            let matchTimeStart = (new Date(timeStarta)).getTime()
+            let matchTimeEnd = (new Date(timeEnda)).getTime()
 
-          //更新订单
-          this.setData({
-            orders: arr,
-            carts,
-            num: carts.length,
-            timeStart,
-            timeEnd,
-            matchTimeStart,
-            matchTimeEnd
-          })
-          console.log("-订单：", carts)
-          console.log("+列表：", arr)
-          // console.log("-timeStart：", timeStart, matchTimeStart,"timeEnd：", timeEnd, matchTimeEnd)
-        }
-        else {
-          //更新订单
-          this.setData({
-            orders: arr,
-            carts,
-            num: carts.length,
-          })
-        }
+            //更新订单
+            this.setData({
+              orders: arr,
+              carts,
+              num: carts.length,
+              timeStart,
+              timeEnd,
+              matchTimeStart,
+              matchTimeEnd
+            })
+            console.log("-订单orderAccept：", carts)
+            console.log("-列表orderAccept：", arr)
+            // console.log("-timeStart：", timeStart, matchTimeStart,"timeEnd：", timeEnd, matchTimeEnd)
+          }
+          else {
+            //更新订单
+            this.setData({
+              orders: arr,
+              carts,
+              num: carts.length,
+            })
+          }
       } else {
-        // let num = this.data.num;
-        // let carts = this.data.carts;
         //carts++
-        ++num;
-        if (carts.length >= 1) {
-          if (cartId - carts[carts.length - 1].id > 1 || cartId - carts[0].id < -1) {
-            this.showToast()
+          ++num;
+          if (carts.length >= 1) {
+            if (cartId - carts[carts.length - 1].id > 1 || cartId - carts[0].id < -1) {
+              this.showToast()
+            } else {
+              arr[index].selectedB = true
+              var order = {
+                time: e.currentTarget.dataset.time,
+                id: e.currentTarget.dataset.id,
+                booked: "Y",
+                hostorderid: e.currentTarget.dataset.hostorderid
+              }
+              carts.push(order)
+            }
           } else {
             arr[index].selectedB = true
             var order = {
               time: e.currentTarget.dataset.time,
               id: e.currentTarget.dataset.id,
-              booked: "N",
-              selectedB: true
+              booked: "Y",
+              hostorderid: e.currentTarget.dataset.hostorderid
             }
             carts.push(order)
           }
-        } else {
-          arr[index].selectedB = true
-          var order = {
-            time: e.currentTarget.dataset.time,
-            id: e.currentTarget.dataset.id,
-            booked: "N",
-            selectedB: true
-          }
-          carts.push(order)
-        }
-        carts.sort(this._compare("id"));//排序
-        //获取时间
-        const seperator = "-";
-        const str = carts[0].time.indexOf('-')
-        const timeStart = carts[0].time.slice(0, str)//截取开始时间
-        const timeEnd = carts[carts.length - 1].time.slice(str + 1)//截取结束时间
-        const Y = `${this.data.date}`.slice(0, 4)//截取年
-        const M = `${this.data.date}`.slice(4, 6)//截取月
-        const D = `${this.data.date}`.slice(6)//截取日
-        let date = `${Y}${seperator}${M}${seperator}${D}`
-        let timeStarta = `${date} ${timeStart}`
-        let timeEnda = `${date} ${timeEnd}`
-        let matchTimeStart = (new Date(timeStarta)).getTime()
-        let matchTimeEnd = (new Date(timeEnda)).getTime()
+          carts.sort(this._compare("id"));//排序
+          //获取时间
+          const seperator = "-";
+          const str = carts[0].time.indexOf('-')
+          const timeStart = carts[0].time.slice(0, str)//截取开始时间
+          const timeEnd = carts[carts.length - 1].time.slice(str + 1)//截取结束时间
+          const Y = `${this.data.date}`.slice(0, 4)//截取年
+          const M = `${this.data.date}`.slice(4, 6)//截取月
+          const D = `${this.data.date}`.slice(6)//截取日
+          let date = `${Y}${seperator}${M}${seperator}${D}`
+          let timeStarta = `${date} ${timeStart}`
+          let timeEnda = `${date} ${timeEnd}`
+          let matchTimeStart = (new Date(timeStarta)).getTime()
+          let matchTimeEnd = (new Date(timeEnda)).getTime()
 
-        //更新订单
-        this.setData({
-          opacity: 1,
-          buy: "提交订单",
-          orders: arr,
-          isNext: true,
-          carts,
-          num: carts.length,
-          timeStart: timeStart,
-          timeEnd: timeEnd,
-          matchTimeStart: matchTimeStart,
-          matchTimeEnd: matchTimeEnd,
-        })
-        console.log("+列表：", arr)
-        console.log("+订单：", carts)
-        // console.log("+timeStart：", timeStarta, matchTimeStart, "timeEnd：", timeEnda, matchTimeEnd)
+          //更新订单
+          this.setData({
+            opacity: 1,
+            buy: "提交订单",
+            orders: arr,
+            isNext: true,
+            carts,
+            num: carts.length,
+            timeStart: timeStart,
+            timeEnd: timeEnd,
+            matchTimeStart: matchTimeStart,
+            matchTimeEnd: matchTimeEnd,
+          })
+          console.log("+列表Accept：", arr)
+          console.log("+订单Accept：", carts)
+          // console.log("+timeStart：", timeStarta, matchTimeStart, "timeEnd：", timeEnda, matchTimeEnd)
       }
 
       // this._orderChange(e)
@@ -387,8 +382,8 @@ Page({
             num: carts.length,
           })
         }
-        console.log("+列表：", arr)
-        console.log("+订单：", carts)
+        console.log("-orderChange列表：", arr)
+        console.log("-orderChange订单：", carts)
       } else {
         //carts ++
           ++num;
@@ -443,8 +438,8 @@ Page({
             matchTimeStart: matchTimeStart,
             matchTimeEnd: matchTimeEnd,
           })
-        console.log("+列表：", arr)
-        console.log("+订单：", carts)
+        console.log("+列表orderChange：", arr)
+        console.log("+订单orderChange：", carts)
       }
     },
     
@@ -463,24 +458,54 @@ Page({
         var orderList = res.data
         var orders = []
         orderList.map(((item, index) => {
-          orders.push(
-            Object.assign(
-              {},
-              item,
-              { 
-                selectedA: false, 
-                selectedB:false, 
-                id: index, 
-                price: this.data.price,
-              }
+          if (typeof item.hostOrderId != 'undefined' && typeof item.guestOrderId != 'undefined') {
+            orders.push(
+              Object.assign(
+                {},
+                item,
+                {
+                  bookedA: true,
+                  bookedB: true,
+                  id: index,
+                  price: this.data.price,
+                  // bookedB: hasOwnProperty('hostOrderId')
+                }
+              )
             )
-          )
+          } else if (typeof item.hostOrderId != 'undefined' && typeof item.guestOrderId == 'undefined'){
+            orders.push(
+              Object.assign(
+                {},
+                item,
+                {
+                  bookedA: true,
+                  bookedB: false,
+                  id: index,
+                  price: this.data.price,
+                  // bookedB: hasOwnProperty('hostOrderId')
+                }
+              )
+            )
+          } else{
+            orders.push(
+              Object.assign(
+                {},
+                item,
+                {
+                  selectedA: false,
+                  selectedB: false,
+                  id: index,
+                  price: this.data.price
+                }
+              )
+            )
+          }
+          
         }))
         this.setData({
           orders,
           fieldId: bid
         })
-        console.log('获取场地列表orders：', orders)
       })
     },
 

@@ -12,7 +12,7 @@
   }
   .order-item,.order-item-full{
     padding:20rpx 10rpx;
-    margin:0 15rpx 15rpx 0;
+    margin:0 0 20rpx 0;
     border:2rpx solid #ccc;
     color:#555;
     width:27%;
@@ -24,19 +24,29 @@
     width:65%;
     background: #f34573;
     color:#fff !important;
-    border:none;
+    border:2rpx solid #f34573;
     font-size: 1rem;
     line-height: 2.2rem;
   }
-  .order-item.booked{
+  .booked{
     background: #f34573;
     color:#fff !important;
-    border:3rpx solid #f34573;
+    border:2rpx solid #f34573;
   }
+
+  .checked{
+    background: rgb(59, 89, 153);
+    color:#fff !important;
+    border:2rpx solid rgb(59, 89, 153);
+  }
+  .checked .money{color:#ffff00;}
+  .checked .bookTip{color:#fff;}
+
   .orders_11{display: flex;align-items:center;}
   .orders_11 .order-label{width:6rem;}
   .orders_11 .order-half{width:27%;}
-  .order-item.booked .small{
+
+  .order-item .small{
     font-size: 0.7rem;
     color:#fff;
   }
@@ -46,18 +56,15 @@
     pointer-events:none;
     background: #eeeeee;
     color:#ffffff;
-    border:none;
+    border:2rpx solid #eeeeee;
     height:2rem;
   }
-  .checked .money{color:#ffff00;}
-  .checked .bookTip{color:#fff;}
-  .checked{
-    background: rgb(59, 89, 153);
-    color:#fff !important;
-    border:1px solid rgb(59, 89, 153);
-    }
+  
   .money{color:#3b5999;}
-  .vs{padding:0 20rpx;}
+  .vs{
+    padding:0 16rpx;
+    width:1rem;
+  }
   .bookTip{
     font-size: 0.7rem;
     color:#3b5999;
