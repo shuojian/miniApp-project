@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "team-cs": "../../widget/list/teamList/index"
-  },
-  "navigationBarTitleText": "我的球队",
-  "enablePullDownRefresh": true
-}
