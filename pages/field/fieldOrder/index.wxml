@@ -12,13 +12,13 @@
         <view class="tab-content section p-15" style="margin-bottom:140rpx">
           <!-- 5人场 -->
             <view wx:if='{{fieldSize == "5人制"}}'>
-              <view style="font-size:0.8rem;color:#777777;margin-bottom:10rpx;"> 
+              <view style="font-size:0.8rem;color:#777777;margin-bottom:30rpx;"> 
                 "5人制"球场暂时只提供连续的时间段选择，若有不连续时间段的订购需求，请分次选购。
               </view>
-              <view class='section p-15 orders'>
+              <view class='section orders'>
                 <block wx:for="{{orders}}" 
                       wx:key="this">
-                  <view  class="order-item {{item.selected?'checked':''}} {{item.booked == 'Y'? 'disable':''}}"
+                  <view  class="order-item tp5 {{item.selected?'checked':''}} {{item.booked == 'Y'? 'disable':''}}"
                         bindtap='orderChange' 
                         data-index='{{index}}' 
                         data-booked='{{item.booked}}'
@@ -45,9 +45,9 @@
                   <!--=== 半场 ===-->
                     <block wx:else>
                       <!--= 左半场 =--> 
-                        <view wx:if="{{item.booked == 'M'}}" class="order-item disable">维护中</view>
+                        <view wx:if="{{item.booked == 'M'}}" class="order-item tp11 disable">维护中</view>
                         <view wx:if="{{item.booked == 'N'}}" 
-                              class="order-item {{item.selectedA?'checked':''}}"
+                              class="order-item tp11 {{item.selectedA?'checked':''}}"
                               bindtap='orderSelect' 
                               data-index='{{index}}' 
                               data-booked='{{item.booked}}'
@@ -56,19 +56,19 @@
                             <view class="money">半场 ￥{{item.price}}</view>
                             <view class="bookTip">可订半场</view>
                         </view>
-                        <view wx:elif="{{item.booked == 'Y' && item.hostOrderId !== 0}}" class="order-item booked">
+                        <view wx:elif="{{item.booked == 'Y' && item.hostOrderId !== 0}}" class="order-item tp11 booked">
                           <view >{{item.hostTeamName}}</view>
                           <view class="small" >{{item.hostTeamColor}}</view>
                         </view>
                       <!-- / 左半场 --> 
 
-                      <view class="vs"> <view wx:if="{{item.booked == 'Y'}}">vs</view> </view>
+                      <view class="vs"><view wx:if="{{item.booked == 'Y'}}">vs</view></view>
 
                       <!-- 右半场 --> 
                         <!-- <view class="order-half"> -->
-                          <view class="order-item disable" wx:if="{{item.booked == 'M'}}">维护中</view>
+                          <view class="order-item tp11 disable" wx:if="{{item.booked == 'M'}}">维护中</view>
                           <view wx:if="{{item.booked == 'N'}}" 
-                                class="order-item {{item.selectedB?'checked':''}}"
+                                class="order-item tp11 {{item.selectedB?'checked':''}}"
                                 bindtap='orderAccept' 
                                 data-index='{{index}}' 
                                 data-booked='{{item.booked}}'
@@ -77,12 +77,12 @@
                               <view class="money">半场 ￥{{item.price}}</view>
                               <view class="bookTip">可订半场</view>
                           </view>
-                          <view wx:elif="{{item.booked == 'Y' && item.bookedB}}" class="order-item {{item.bookedB?'booked':''}}">
+                          <view wx:elif="{{item.booked == 'Y' && item.bookedB}}" class="order-item tp11 {{item.bookedB?'booked':''}}">
                               <view class="fz-normal">{{item.guestTeamName}}</view>
                               <view class="small">{{item.guestTeamColor}}</view>
                           </view>  
                           <view wx:elif="{{item.booked == 'Y' && !item.bookedB}}"
-                                class="order-item {{item.selectedB?'checked':''}}"
+                                class="order-item tp11 {{item.selectedB?'checked':''}}"
                                 bindtap='orderAccept' 
                                 data-index='{{index}}' 
                                 data-booked='{{item.booked}}'

@@ -20,8 +20,8 @@
     <view class="order-info">
       <view class="field-name">{{orderDetail.fieldName}} </view>
       <view ><i class="label">地址：</i>{{orderDetail.gymAddr}}</view>
-      <view ><i class="label">球队：</i>{{orderDetail.teamColor}}</view>
-      <view ><i class="label">队服颜色：</i>{{orderDetail.teamName}}</view>
+      <view ><i class="label">球队：</i>{{orderDetail.teamName}}</view>
+      <view wx:if='{{orderDetail.teamColor !== "undefined"}}'><i class="label" >队服颜色：</i>{{orderDetail.teamColor}}</view>
       <view ><i class="label">预定电话：</i>{{orderDetail.phone}}</view>
     </view>
   </view>

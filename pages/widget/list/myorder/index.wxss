@@ -15,21 +15,32 @@
 .header view{
   flex: 1
 }
-.header .right{
+.header .state{
   text-align: right;
+  color:#ef4b4b;
 }
 .main{
   display: flex;
   align-items: center;
   padding: 30rpx 0;
 }
+.total{
+  padding-bottom: 16rpx;
+  text-align: right;
+}
+.total-num{
+  font-size: 1.2rem;
+  color: #3c3c3c;
+}
 .footer{
   border-top:2rpx solid #efefef;
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
   padding:16rpx 0 0 ;
 }
-.footer>view{
-  margin-right:40rpx;
+.footer>.item{
+  margin-left:40rpx;
 }
 .amount{
   /* color:#ff0000; */
@@ -50,4 +61,18 @@
 .time{
   font-size: 1.6rem;
   color:rgb(59, 89, 153)
+}
+
+.btn{
+  padding:6rpx 16rpx;
+}
+.btn-circle{
+  border-radius: 100rpx;
+}
+.btn-plain{
+  background: transparent !important;
+}
+.btn-plain.danger{
+  color:#ef4b4b;
+  border:2rpx solid;
 }
