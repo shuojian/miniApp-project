@@ -1,5 +1,3 @@
-// pages/my/my.js
-// import { promisic } from '../../../utils/common.js'
 import { ReqModel } from '../../../models/request.js'
 const app = getApp()
 const reqModel = new ReqModel()

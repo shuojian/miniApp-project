@@ -1,6 +1,5 @@
 import { ReqModel } from '../../../models/request.js'
 const reqModel = new ReqModel()
-
 Page({
   data: {
     myOrders:{},
