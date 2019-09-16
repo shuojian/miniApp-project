@@ -5,7 +5,7 @@
     <image wx:else class='square' src="../../../../img/logo_v.jpg" />
   </view>
   <view class="item-bd">
-    <view class="title">{{gym.gymName}}</view>
+    <view class="list_title">{{gym.gymName}}</view>
     <view class="desc ell">
       {{gym.gymAddr}}
     </view>

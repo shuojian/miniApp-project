@@ -1,13 +1,15 @@
+import { promisic } from '../../../utils/common.js'
 import { ReqModel } from '../../../models/request.js'
 import { WxCacheModel } from '../../../models/wxcache.js'
 
 const reqModel = new ReqModel()
 const wxCacheModel = new WxCacheModel()
-
-var app = getApp()
+const app = getApp()
 
 Page({
   data: {
+    authorized: false,
+    userInfo:{},
     team:null,
     members:null,
     tabTitle: ['射手榜', '助攻榜', '黄牌榜'],
@@ -18,7 +20,6 @@ Page({
     creatorUserCode: String,
     destUserCode: String,
     isLink: false,
-    token:null,
   },
 
   /**
@@ -26,8 +27,78 @@ Page({
    */
   onLoad: function (options) {
     wx.showLoading()
+    this.userAuthorized()
     this._getData(options)
   },
+
+  userAuthorized() {
+    promisic(wx.getSetting)()
+      .then(data => {
+        if (data.authSetting['scope.userInfo']) {
+          //调用登录接口
+          app.fxLogin(this._init)
+          return promisic(wx.getUserInfo)()
+        }
+        return false
+      })
+      .then(data => {
+        if (!data) return
+        this.setData({
+          authorized: true,
+          userInfo: data.userInfo
+        })
+        // wx.hideLoading()
+      })
+  },
+
+  onGetUserInfo(event) {
+    const userInfo = event.detail.userInfo
+    if (userInfo) {
+      this.setData({
+        userInfo,
+        authorized: true
+      })
+      app.globalData.userInfo = userInfo
+      //调用登录接口
+      app.fxLogin(this._init)
+    }
+  },
+
+  _init() {
+    if (app.globalData.loginInfo.inReview == 'N') {
+      this.setData({
+        inited: true
+      })
+    }
+    // wx.reLaunch({
+    //   url: 'my'
+    // })
+  },
+
+  onGetUserInfo(event) {
+    const userInfo = event.detail.userInfo
+    if (userInfo) {
+      this.setData({
+        userInfo,
+        authorized: true
+      })
+      app.globalData.userInfo = userInfo
+      //调用登录接口
+      app.fxLogin(this._init)
+    }
+  },
+
+  _init() {
+    if (app.globalData.loginInfo.inReview == 'N') {
+      this.setData({
+        inited: true
+      })
+    }
+    // wx.reLaunch({
+    //   url: 'my'
+    // })
+  },
+
   applyForJoin(){
     wx.navigateTo({
       url: `../applyDesc/index?teamId=${this.data.team.teamId}`,
@@ -127,41 +198,43 @@ Page({
     console.log('team详情：', options)
     const detail = reqModel.getTeamDetail(bid)
     const members = reqModel.getListMember(bid)
-    const varToken = app.globalData.loginInfo.token
-    this.setData({
-      token: varToken
+    // const varToken = app.globalData.loginInfo.token
+    // this.setData({
+    //   token: varToken
+    // })
+    detail.then(res =>{
+      const team = res.data
+      this.setData({ team })
     })
-    Promise.all([detail, members])
-      .then(res => {
-        const team = res[0].data
-        const members = res[1].data
-        const creator = members.find(
-          (x) => {
-            return x.userCode == team.leaderUserCode
-          })
-        const creatorUserCode = creator.userCode
-        if (app.globalData.loginInfo.userCode == creatorUserCode) {
-          this.setData({
-            isCreator: true,
-            isTeam: true,
-            isMember: true,
-            isLink: true,
-            destUserCode: app.globalData.loginInfo.userCode
-          })
-        }
-        this.setData({
-          team: team,
-          members: members,
-          creatorUserCode: creatorUserCode,
-        })
-        //console.log('创建者VS当前用户vs创建者Code:', creator.userCode, app.globalData.loginInfo.userCode, creatorUserCode)
-        console.log('球隊詳情：', team)
-        console.log('球员：', members)
-        wx.hideLoading()
-      })
-
-    // wxCacheModel.get("team", reqModel.getTeamDetail())
-    // wxCacheModel.get("members", reqModel.getListMember())
+    members.then(res => {
+      const members = res.data
+      this.setData({ members })
+    })
+    // Promise.all([detail, members])
+    //   .then(res => {
+    //     const team = res[0].data
+    //     const members = res[1].data
+    //     const creator = members.find(
+    //       (x) => {
+    //         return x.userCode == team.leaderUserCode
+    //       })
+    //     const creatorUserCode = creator.userCode
+    //     if (app.globalData.loginInfo.userCode == creatorUserCode) {
+    //       this.setData({
+    //         isCreator: true,
+    //         isTeam: true,
+    //         isMember: true,
+    //         isLink: true,
+    //         destUserCode: app.globalData.loginInfo.userCode
+    //       })
+    //     }
+    //     this.setData({
+    //       team: team,
+    //       members: members,
+    //       creatorUserCode: creatorUserCode,
+    //     })
+    //     wx.hideLoading()
+    //   })
   },
   _clearCache: function () {
     this.setData({

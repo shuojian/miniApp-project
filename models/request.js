@@ -4,130 +4,167 @@ const app = getApp()
 
 class ReqModel extends HTTP {
 /* 赛事 */
-  getEventList(page = 1, limit = 15) { //分页
+  getEventList(page = 1) { //分页
     return this.request({
-      url: `event/page?limit=${limit}&page=${page}`,
+      url: `event/page`,
+      data: {
+        page: page,
+        limit: app.globalData.pagelimit
+      }
     })
   }
   getEventDetail(bid) {
     return this.request({
-      url: `event/getById?eventId=${bid}`
+      url: `event/getById`,
+      data: { eventId:bid }
     })
   }
   getEventListTeam(bid) {
     return this.request({
-      url: `event/listTeam?eventId=${bid}`
+      url: `event/listTeam`,
+      data: { eventId: bid }
     })
   }
   getEventListTeamGroup(bid) {
     return this.request({
-      url: `event/listTeamByGroup?eventId=${bid}`
+      url: `event/listTeamByGroup`,
+      data: { eventId: bid }
     })
   }
   getEventMatch(bid) {
     return this.request({
-      url: `match/page?eventId=${bid}`
+      url: `match/page`,
+      data: { eventId: bid }
     })
   }
   getEventListMember(bid) {
     return this.request({
-      url: `event/listMember?eventId=${bid}`
+      url: `event/listMember`,
+      data: { eventId: bid }
+    })
+  }
+  
+  /* 球队 */
+  getTameList(page = 1) {  //分页
+    return this.request({
+      url: api.team_url,
+      data:{
+        page:page,
+        limit: app.globalData.pagelimit
+      }
     })
   }
 
-  
-  /* 球队 */
-  getTameList(page = 1, limit = 15) {  //分页
-    return this.request({
-      url: `team/page?limit=${limit}&page=${page}`,
-    })
-  }
   getTeamDetail(bid) {
     return this.request({
-      url: `team/getById?teamId=${bid}`,
+      url: api.teamDetail_url,
+      data: { teamId: bid }
     })
   }
 
   getListMember(bid) {
     return this.request({
-      url: `team/listMember?teamId=${bid}`,
+      url: api.teamMember_url,
+      data: { teamId: bid }
+    })
+  }
+
+  // 创建球队
+  creatTeam(data){
+    return this.request({
+      url: app.globalData.baseURL + api.creatTeam_url,
+      method:"POST",
+      data: data
     })
   }
 
 /* 场地 */
   getListSwiperImgs() {
     return this.request({
-      url: "gym/listSwiperImgs",
+      url: api.gymImgs_url,
     })
   }
-  getGymList(page = 1,limit = 15) {  //分页
+  getFieldList(page = 1) {  //分页
     return this.request({
-      url: `gym/page?limit=${limit}&page=${page}`,
+      url: api.fieldList_url,
+      data: {
+        page: page,
+        limit: app.globalData.pagelimit
+      }
+    })
+  }
+  getGymList(page = 1) {  //分页
+    return this.request({
+      url: api.gymList_url,
+      data: {
+        page: page,
+        limit: app.globalData.pagelimit
+      }
     })
   }
   getGymDetail(bid) {
     return this.request({
-      url: `gym/getById?gymId=${bid}`,
+      url: api.gymDetail_url,
+      data: { gymId:bid }
     })
   }
-
-  getFieldList(page = 1,limit = 15) {  //分页
+  getGymDetail(bid) {
     return this.request({
-      url: `field/page?limit=${limit}&page=${page}`,
+      url: api.gymDetail_url,
+      data: { gymId:bid }
     })
   }
   getGymFieldList(bid) {
     return this.request({
-      url: `field/page?gymId=${bid}`,
-    })
-  }
-  getFieldDetail(bid) {
-    return this.request({
-      url: `field/getById?fieldId=${bid}`,
+      url: api.fieldList_url,
+      data: { gymId:bid }
     })
   }
   getFieldListOrder(bid,day) {
     return this.request({
-      url: `field/listDayOrder?fieldId=${bid}&matchDay=${day}`,
-    })
-  }
-  getListDayOrder(bid) {
-    return this.request({
-      url: `field/listDayOrder?fieldId=${bid}`,
+      url: api.fieldOrder_url,
+      data: { 
+        fieldId: bid, 
+        matchDay: day
+      }
     })
   }
 
 /* 我的 */
   getMyTeam() {
     return this.request({
-      url: api.myTeam_url
+      url: api.myTeam_url,
+      data:{token: app.globalData.loginInfo.token}
     })
   }
   getMyTeamMsgs(bid) {
     return this.request({
-      url: `team/listMemberLog?teamId=${bid}`
+      url: api.myTeamMsgs_url,
+      data: { teamId: bid,token: app.globalData.loginInfo.token}
     })
   }
   getMyTeamDetail(bid) {
     return this.request({
-      url: `team/getById?teamId=${bid}`,
+      url: api.myTeamDetail_url,
+      data: { teamId: bid,token: app.globalData.loginInfo.token}
     })
   }
-  getMyOrder() {
-    return this.request({
-      url: api.getMyOrder_url
-      // url: "sportsFieldOrder/getMyOrder"
-    })
-  }
+  // getMyOrder() {
+  //   return this.request({
+  //     url: api.getMyOrder_url,
+  //     data: {token: app.globalData.loginInfo.token}
+  //   })
+  // }
   queryMyOrder() {
     return this.request({
-      url: api.myOrder_url
-      // url: "sportsFieldOrder/queryMyOrder"
+      url: api.myOrder_url,
+      data: {token: app.globalData.loginInfo.token}
     })
   }
   getMyOrderDetail(bid){
     return this.request({
-      url: `sportsFieldOrder/getMyOrder?orderId=${bid}`,
+      url: api.myOrderDetail_url,
+      data: { orderId: bid,token: app.globalData.loginInfo.token }
     })
   }
 }

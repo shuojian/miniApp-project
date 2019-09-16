@@ -1,5 +1,7 @@
-// pages/me/myteam/newteam/newteam.js
+
 var util = require('../../../utils/util.js')
+import { ReqModel } from '../../../models/request.js'
+const reqModel = new ReqModel()
 
 //获取应用实例
 var app = getApp()
@@ -95,23 +97,17 @@ Page({
       teamName: upData.teamName,
       teamType: upData.teamType,
       teamArea: upData.teamArea,
-      teamBelong: upData.teamBelong,
-      
+      teamBelong: upData.teamBelong, 
     }
-
       if (upData.teamName = ''){
       wx.showToast({
         icon: 'none',
         title: '球队队名未填写',
       }) 
     } else {
-      wx.request({
-        url: app.globalData.baseURL + 'team/create',
-        method: 'POST',
-        data: formData,
-        header: {'content-type': 'application/x-www-form-urlencoded'},
-        success: (res) => {
-          console.log("球队创建成功:", res)
+        const creatTeam = reqModel.creatTeam(formData)
+        creatTeam.then( res => {
+          // console.log("球队创建成功:", res)
           wx.lin.showToast({
             title: '创建球队成功！',
             icon: 'success',
@@ -124,18 +120,40 @@ Page({
               })
             }
           })
-        },
-        fail: (error) => {
-          wx.showToast({
-            title: '创建球队出错',
-            icon: 'none',
-            duration: 2000
-          })
-        },
-        complete: (res) => {
-          app.hideLoading()
-        }
-      })
+        })
+
+
+      // wx.request({
+      //   url: app.globalData.baseURL + 'team/create',
+      //   method: 'POST',
+      //   data: formData,
+      //   header: {'content-type': 'application/x-www-form-urlencoded'},
+      //   success: (res) => {
+      //     console.log("球队创建成功:", res)
+      //     wx.lin.showToast({
+      //       title: '创建球队成功！',
+      //       icon: 'success',
+      //       iconStyle: 'color:#7ec699; size: 60',
+      //       success() {
+      //         setTimeout(() => {
+      //           wx.navigateBack({
+      //             delta: 1
+      //           }), 3000
+      //         })
+      //       }
+      //     })
+      //   },
+      //   fail: (error) => {
+      //     wx.showToast({
+      //       title: '创建球队出错',
+      //       icon: 'none',
+      //       duration: 2000
+      //     })
+      //   },
+      //   complete: (res) => {
+      //     app.hideLoading()
+      //   }
+      // })
     } 
   },
 })  

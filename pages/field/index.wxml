@@ -1,10 +1,10 @@
 <view class="page">
   <swiper 
     class='swiper-box' 
-    indicator-dots="{{indicatorDots}}" 
-    autoplay="{{autoplay}}" 
-    interval="{{interval}}" 
-    duration="{{duration}}" 
+    indicator-dots="true" 
+    autoplay="true" 
+    interval="3000" 
+    duration="300" 
     circular="true">
       <block wx:key="id" wx:for="{{swipers}}">
           <swiper-item><image class="slide-image" src="{{item}}" style="width:100%"></image></swiper-item>

@@ -1,13 +1,16 @@
 <view class="page">
   <view class='page-bd p-20'>
-    <view wx:if="{{!nodata}}" class="section mt-1">
-      <block wx:key="id" wx:for="{{myevents}}">
-        <l-list title="{{item.myevent}}" bind:lintap="toMyevent">
-        </l-list>
-      </block>
+    <!-- <v-login wx:if="{{!authorized}}" bind:getuserinfo="onGetUserInfo" /> -->
+    <view>
+      <view wx:if="{{!nodata}}" class="section mt-1">
+        <block wx:key="id" wx:for="{{myevents}}">
+          <l-list title="{{item.myevent}}" bind:lintap="toMyevent">
+          </l-list>
+        </block>
+      </view>
+      <noData wx:else/>
+      <button class='d-btn-primary'  bindtap="onTap">创建赛事</button>
     </view>
-    <noData wx:else/>
-    <button class='d-btn-primary'  bindtap="onTap">创建赛事</button>
   </view>
 </view>
 <l-dialog/>

@@ -8,49 +8,50 @@ const app = getApp()
 Page({
   data: {
     teams:[],
-    searching: false,
-    more:'',
-    
-    inputShowed: false,
-    inputVal: "",
-
-    page: 1,
-    pageLimit: 15,
-    hasMoreData: false,
+    page: 1,//请求页数
+    pageLimit: 0,//页面数据条数
+    pageCount: 0,//总页数
+    count:0,//数据总数
+    loading: false,
+    loaded: false,
+    // inputShowed: false,
+    // inputVal: "",
   },
 
-  onLoad(o) {
+  onLoad() {
     wxCacheModel.get("teams", reqModel.getTameList())
+    let pageLimit = app.globalData.pageLimit
+    this.setData({ pageLimit })
     this._getTeams()
   },
 
   _getTeams() {
-    let page = this.data.page
-    let pageLimit = this.data.pageLimit
-    const teams = reqModel.getTameList(page, pageLimit)
+    const teams = reqModel.getTameList()
     teams.then(
-      res => {
-        let teamList = this.data.teams
-        if (this.data.page == 1) {
-          teamList = []
-        }
-        const teams = res.data
-        if (teams.length < this.data.pageLimit){
-          this.setData({
-            teams: teamList.concat(teams),
-            hasMoreData:false
-          })
-        }else{
-          this.setData({
-            teams: teamList.concat(teams),
-            hasMoreData: true,
-            page:this.data.page + 1
-          })
-        } 
+      res=>{
+        wx.stopPullDownRefresh()
+        this.setData({
+          teams: res.data,
+          count: res.count,
+          pageCount: Math.ceil(res.count / this.data.pageLimit),
+        })
         wxCacheModel.put("teams", res.data, 1)
-        console.log("球队：", res.data)
       }
     )
+  },
+  _getMoreTeams() {
+    let page = this.data.page
+    console.log('数据加载情况',this.data.teams.length)
+    const teams = reqModel.getTameList(page)
+    teams.then(
+      (res) => {
+        wx.stopPullDownRefresh()
+        const teams = this.data.teams.concat(res.data) //新旧数据合并
+        this.setData({
+          teams
+        })
+        wxCacheModel.put("teams", res.data, 1)
+      })
   },
 
   _clearCache() {
@@ -61,7 +62,6 @@ Page({
 
   onShareAppMessage(res) {
     if (res.from === 'button') {
-      // 来自页面内转发按钮
       console.log(res.target)
     }
     return {
@@ -72,30 +72,27 @@ Page({
 
   //下拉刷新
   onPullDownRefresh() {
-    this.data.page = 1
+    this.setData({
+      page: 1,
+      loaded:false
+    })
     this._clearCache();
     this._getTeams()
-    wx.stopPullDownRefresh()
   },
 
   // 上拉触底
   onReachBottom() {
-    let page = this.data.page + 1; //获取当前页数并+1
-    if(this.data.hasMoreData) {
-      this.getTeams(page)
+    if(this.data.page < this.data.pageCount){
       this.setData({
-        page
+        loading: true,  //把"上拉加载"的变量设为false，显示 
+        page: this.data.page + 1
       })
+      this._getMoreTeams()// 上拉获取更多数据
     }else{
       this.setData({
-        hasMoreData:false
+        loading:false,
+        loaded:true
       })
-      // wx.showToast({
-      //   title: '已经到底了',
-      // })
-      wx.lin.showMessage({
-        content: '数据已全部加载完成~'
-      })
-    } 
+    }  
   }
 })

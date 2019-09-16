@@ -1,10 +1,13 @@
-import { ReqModel } from '../../../models/request.js'
 // import { WxCacheModel } from '../../../models/wxcache.js'
-const reqModel = new ReqModel()
 // const wxCacheModel = new WxCacheModel()
+import { promisic } from '../../../utils/common.js'
+import { ReqModel } from '../../../models/request.js'
+const reqModel = new ReqModel()
+const app = getApp()
 
 Page({
   data: {
+    authorized: false,
     myTeams: {},
     nodata: true,
     isCreat:true,
@@ -16,22 +19,24 @@ Page({
   },
 
   getMyTeams(){
-    wx.showLoading()
-    const myTeam = reqModel.getMyTeam()
-    myTeam.then(
-      res => {
-        console.log('myteam:', res.data)
-        if (res.data.length >= 3) {
+    if (app.globalData.loginInfo !== null){
+      wx.showLoading()
+      const myTeam = reqModel.getMyTeam()
+      myTeam.then(
+        res => {
+          console.log('myteam:', res.data)
+          if (res.data.length >= 3) {
+            this.setData({
+              isCreat: false
+            })
+          }
           this.setData({
-            isCreat: false
+            myTeams: res.data,
+            nodata: false
           })
-        }
-        this.setData({
-          myTeams: res.data,
-          nodata: false
+          wx.hideLoading()
         })
-        wx.hideLoading()
-      })
+    }
   },
   clearCache: function () {
     this.setData({

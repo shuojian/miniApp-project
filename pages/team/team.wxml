@@ -1,14 +1,17 @@
 
-<view class='container'>
+<!-- <view class='container'>
   <block wx:key="id" wx:for="{{teams}}">
     <d-team team="{{item}}"/>
   </block>
-</view>
-<l-message type="{{success}}" content="{{content}}"/>
+  
+  <view class="load_more" hidden="{{!loading}}">
+    <view class="load_loading"></view>
+    <view class="load-tips">正在加载……</view>
+  </view>
+  <view class="loaded" hidden="{{!loaded}}">没有更多数据了……</view>
+</view> -->
 
-
-
-<!-- <loadmore show="{{true}}" type="loading" line="true" show="true">
+<loadmore show="true" type="{{loading?'loading':'end'}}" line="true">
   <view slot="content">
      <view class='container'>
         <block wx:key="id" wx:for="{{teams}}">
@@ -16,8 +19,9 @@
         </block>
       </view>
   </view>
-</loadmore> -->
+</loadmore>
 
+<!-- <l-message type="{{success}}" content="{{content}}"/> -->
 <!-- ../widget/list/team/index -->
 
 <!-- 搜索 -->

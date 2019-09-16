@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "v-login": "../../widget/auth/index",
     "l-textarea": "/components/widget/textarea/index"
   }
 }

@@ -25,11 +25,6 @@
 <!-- d-field:widget/list/fields -->
 <!-- d-info:../C_fieldInfo -->
 
-
-
-
-
-
 <!-- <view  class='section mt-1'>
   <div class="dfx">
     <view  bindtap="booking" data-orderid="{{orderid}}" class="dfx-item">

@@ -1,7 +1,5 @@
 import{ api } from 'config.js'
-
 const app = getApp()
-
 const tips = {
   1005:'ppkey无效',
   3000:'用户不存在',
@@ -11,25 +9,24 @@ const tips = {
 class HTTP{
 
   //request
-  request({ url, data = {}, method = 'GET' }) {
+  request({ url, method = 'GET' , data = {}}) {
     return new Promise((resolve, reject) => {
-      this._request(url, resolve, reject, data, method)
+      this._request(url, resolve, reject, method, data)
     })
   }
 
   //request
-  _request(url, resolve, reject, method = 'GET' ){
+  _request(url, resolve, reject, method, data){
     //url, data, method
     this._show_loading()
     wx.request({
       url:api.base_url + url,
       method:method,
-      data:{
-        token: app.globalData.loginInfo.token
-      },
+      data:data,
+      // token: app.globalData.loginInfo.token
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-         },
+      },
       success: res=> {
         const code = res.statusCode.toString()
           if(code.startsWith('2')){

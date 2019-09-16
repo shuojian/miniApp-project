@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "v-button": "/components/widget/image-button/index",
     "l-list": "/components/widget/list/index",
     "l-grid": "/components/widget/grid/index",
     "l-grid-item": "/components/widget/grid-item/index"

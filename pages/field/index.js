@@ -7,24 +7,11 @@ const app = getApp()
 Page({
   data: {
     gyms:{},
-    more: '',
-
-    mode: "scaleToFill",
-    arr: [],
     swipers:[],
-    indicatorDots: true,
-    autoplay: true,
-    interval: 3000,
-    duration: 300,
     page:1
   },
 
   onLoad: function (options) {
-    var array = this.data.arr
-    for (let i = 1; i < 4; i++) {
-      array.push(`../../img/${i}.jpg`)
-    }
-    this.setData({ arr: array })
     wxCacheModel.get("gyms", reqModel.getGymList())
     wxCacheModel.get("swipers", reqModel.getListSwiperImgs())
     this._getGyms()

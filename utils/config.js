@@ -3,27 +3,39 @@ const api = {
   base_url: 'https://mzsport.top/football/',// test
   // base_url: 'http://47.107.33.58:8080/football/' // test
   // base_url: 'http://127.0.0.1:8080/football/' // dev
-
   login_url: 'acc/wxLogin',
   // start_url: '/pages/index/index',
   start_url: '/page/field/index',
   // event_url: 'event/page',
+
+  // 赛事
   match_url: 'match/page',
-  
+
+  // 场地
+  gymImgs_url: 'gym/listSwiperImgs',
+  gymList_url: 'gym/page',
+  gymDetail_url: 'gym/getById',
   fieldList_url: 'field/page',
+  fieldDetail_url: 'field/getById',
   fieldOrder_url: 'field/listDayOrder',
-  gym_url: 'gym/page',
-  uploap_url:'file/upload',
+  
+  // order_url: 'sportsFieldOrder/create',
+  // resetOrder_url: 'sportsFieldPay/resetOrder',
+  // pay_url: 'sportsFieldPay/payOrder',
 
-  order_url: 'sportsFieldOrder/create',
-  resetOrder_url: 'sportsFieldPay/resetOrder',
-  pay_url: 'sportsFieldPay/payOrder',
-  myOrder_url:'sportsFieldOrder/queryMyOrder',
-  getMyOrder_url: 'sportsFieldOrder/getMyOrder',
-
+  // 球队
   team_url: 'team/page',
-  member_url: 'team/listMember',
+  teamDetail_url: 'team/getById',
+  teamMember_url: 'team/listMember',
+  creatTeam_url: 'team/create',
+
+  // 我的
   myTeam_url: 'team/myTeam',
+  myTeamMsgs_url: 'team/listMemberLog',
+  myOrder_url: 'sportsFieldOrder/queryMyOrder',
+  myOrderDetail_url: 'sportsFieldOrder/getById',
+  // getMyOrder_url: 'sportsFieldOrder/getMyOrder',
+  
   applyForJoinTeam_url:'team/applyForJoin',
   applyAcceptTeam_url:'team/join',
   applyRefuseTeam_url: 'team/reject',
@@ -32,6 +44,10 @@ const api = {
   disableTeam_url: 'team/disable',
   enableTeam_url: 'team/enable',
   changeTeamleader_url: 'team/changeTeamleader',
+
+  uploap_url: 'file/upload',
+
+  pagelimit:7
 }
 
 module.exports = { api }

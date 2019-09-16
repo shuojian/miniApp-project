@@ -1,45 +1,48 @@
 <!-- 个人数据 -->
 <view class="page">
-  <!-- header -->
-  <view class="userinfo py-20">
-    <image  class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>
-  <!-- / header -->
-
-  <view class='page-bd'>
-    <!-- 所在球队 -->
-    <view class="cell-title"> 
-      <text class='text'>所在球队</text> 
+  <!-- <v-login wx:if="{{!authorized}}" bind:getuserinfo="onGetUserInfo" /> -->
+  <view>
+    <!-- header -->
+    <view class="userinfo py-20">
+      <open-data type="userAvatarUrl" class="userinfo-avatar"/>
+      <open-data type="userNickName" class="userinfo-nickname"/>
+      <!-- <image  class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image> -->
     </view>
+    <!-- / header -->
 
-    <view class="section">
-      <view wx:if="{{!noData}}"  class="color-gray p-base">还没有参加任何球队</view>
-      <view wx:else>
-        <block wx:key="id" wx:for="{{myTeams}}">
-          <team-cs team="{{item}}"/>
-        </block>
+    <view class='page-bd'>
+      <!-- 所在球队 -->
+      <view class="cell-title"> 
+        <text class='text'>所在球队</text> 
       </view>
-    </view>
-    <!-- / 所在球队 -->
 
-    <!-- 个人参数 -->
-    <view class="cell-title"> 
-      <text class='text'>个人参数数据统计</text> 
+      <view class="section">
+        <view wx:if="{{!noData}}"  class="color-gray p-base">还没有参加任何球队</view>
+        <view wx:else>
+          <block wx:key="id" wx:for="{{myTeams}}">
+            <team-cs team="{{item}}"/>
+          </block>
+        </view>
+      </view>
+      <!-- / 所在球队 -->
+
+      <!-- 个人参数 -->
+      <view class="cell-title"> 
+        <text class='text'>个人参数数据统计</text> 
+      </view>
+      <view class="section">
+        <l-grid l-class="border-tb" row-num="4" show-border="{{true}}">
+          <l-grid-item wx:for="{{myDataCount}}" 
+                      wx:key="{{index}}" 
+                      key="{{index}}" 
+                      slot="{{index}}">
+            <view class="num pt-15">{{item.num}}</view>
+            <view class="text pb-15">{{item.text}}</view>
+          </l-grid-item>
+        </l-grid>
+      </view>
+      <!-- 个人参数 -->
     </view>
-    <view class="section">
-      <l-grid l-class="border-tb" row-num="4" show-border="{{true}}">
-        <l-grid-item wx:for="{{myDataCount}}" 
-                    wx:key="{{index}}" 
-                    key="{{index}}" 
-                    slot="{{index}}">
-          <view class="num pt-15">{{item.num}}</view>
-          <view class="text pb-15">{{item.text}}</view>
-        </l-grid-item>
-      </l-grid>
-    </view>
-    <!-- 个人参数 -->
   </view>
-  
 </view>
 

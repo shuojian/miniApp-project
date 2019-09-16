@@ -2,22 +2,26 @@
   background: #fff;
   font-size: 0.8rem;
   line-height: 1.8rem;
-  color:#999999;
-}
-.header{
-  border-bottom:1rpx solid #efefef;
-  line-height: 2.4rem;
-  padding:0 30rpx;
+  color:#777777;
 }
 .body{
   padding:30rpx;
   align-items: center;
 }
+.header{
+  border-bottom:1rpx solid #efefef;
+}
 .footer{
   border-top:1rpx solid #efefef;
+}
+.header,.footer{
+  display: flex;
   line-height: 2.4rem;
   padding:0 30rpx;
 }
+.header view,.footer view{flex: 1}
+.header .right,
+.footer .right{text-align: right;}
 
 .main{
   display: flex;
@@ -28,44 +32,29 @@
   flex:auto;
   text-align: center;
 }
-.title{
-  border-bottom: 6rpx solid #efefef;
+.main_day{
+  border-top: 6rpx solid #efefef;
 }
-.time{
+.main_time{
   font-size: 1.6rem;
   color:rgb(59, 89, 153)
 }
-
-.order-info{
-  color:#3c3c3c;
+.sub{
   line-height: 1.4rem;
   margin-top:50rpx;
 }
-
-.header,
-.footer{
-  display: flex;
+.sub_title{
+  color:#3b5999;
+  font-size: 1rem;
+  font-weight: 500;
 }
-
-.header view,
-.footer view{
-  flex: 1
+.book_info{
+  padding-left:30rpx;
+  border-left:6rpx solid #efefef;
+  margin:20rpx 0 0 0;
 }
-.header .right,
-.footer .right{
-  text-align: right;
-}
-
-.footer>view{
-  margin-right:40rpx;
-}
-
 .label{
   display: inline-block;
   width:4.1rem;
-}
-.field-name{
-  font-size: 1rem;
-  font-weight: 500;
 }
 

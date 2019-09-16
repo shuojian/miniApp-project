@@ -1,49 +1,45 @@
+import { promisic } from '../../../utils/common.js'
 import { ReqModel } from '../../../models/request.js'
 const reqModel = new ReqModel()
-
+const app = getApp()
 Page({
   data: {
+    authorized: false,
+    userInfo:null,
     myOrders:{},
     nodata: true,
     date:null,
     pagenum:1,
   },
   onLoad(options) {
-    wx.showLoading()
+    // wx.showLoading()
+    // this.userAuthorized()
     this.getMyOrders()
   },
 
-  _parserDate:(date)=> {
-    var t = Date.parse(date);
-    if (!isNaN(t)) {
-      return new Date(Date.parse(date.replace(/-/g, "/")));
-    } else {
-      return new Date();
+  getMyOrders(){
+    if (app.globalData.loginInfo !== null){
+      const myOrder = reqModel.queryMyOrder()
+      myOrder.then(
+        res => {
+          const v1 = res.data
+          const dataTotal = v1.length
+          const getList = v1.map((obj, index) => {
+            let rObj = obj;
+            rObj.matchDay = this.formatTo(obj.matchDay);
+            rObj.matchHourStart = this.formatTo(obj.matchHourStart, 'time');
+            rObj.matchHourEnd = this.formatTo(obj.matchHourEnd, 'time');
+            return rObj
+          })
+          this.setData({
+            myOrders: getList,
+            nodata:false,
+          })
+          wx.hideLoading()
+          // console.log('我的订单:', res.data)
+        }
+      )
     }
-  },
-
-  getMyOrders:function(){
-    const myOrder = reqModel.queryMyOrder()
-    myOrder.then(
-      res => {
-        const v1 = res.data
-        const dataTotal = v1.length
-        const getList = v1.map((obj, index) => {
-          let rObj = obj;
-          rObj.matchDay = this.formatTo(obj.matchDay);
-          rObj.matchHourStart = this.formatTo(obj.matchHourStart, 'time');
-          rObj.matchHourEnd = this.formatTo(obj.matchHourEnd, 'time');
-          return rObj
-        })
-        this.setData({
-          myOrders: getList,
-          nodata:false,
-        })
-
-        wx.hideLoading()
-        console.log('我的订单:', res.data)
-      }
-    )
   },
 
   toDetail(){
@@ -72,6 +68,16 @@ Page({
       return `${hour}:${sconde}`
     }
   },
+
+  _parserDate:(date)=> {
+    var t = Date.parse(date);
+    if (!isNaN(t)) {
+      return new Date(Date.parse(date.replace(/-/g, "/")));
+    } else {
+      return new Date();
+    }
+  },
+
     //下拉刷新
   onPullDownRefresh: function () {
     this.clearCache();

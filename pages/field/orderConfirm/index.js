@@ -1,3 +1,5 @@
+
+// orderConfirm,
 import { ReqModel } from '../../../models/request.js'
 const util = require('../../../utils/util.js')
 const reqModel = new ReqModel()
@@ -25,8 +27,8 @@ Page({
     inited: false,
     parentUserCode: null,
     isGuest:false,
+    authorized: false,
     userInfo: {},
-    lastRouteId: null,
     authLogin: true,
     realName: "",
     phoneRule: {
@@ -37,85 +39,85 @@ Page({
   },
 
   // 生命周期函数--监听页面加载
-  onLoad: function (query) {
-    wx.showLoading()
-    this._userAuthorized()
-    const num = query.num
-    const fieldSize = query.fieldSize
-    const carts = JSON.parse(query.carts)
-    console.log('页面接收:', query)
-    console.log('carts:', carts)
-    if (carts[0].booked == "Y" && typeof carts[0].hostorderid != 'undefined'){
-      const orderId = carts[0].hostorderid
+    onLoad: function (query) {
+      wx.showLoading()
+      this._userAuthorized()
+      const num = query.num
+      const fieldSize = query.fieldSize
+      const carts = JSON.parse(query.carts)
+      console.log('页面接收:', query)
+      console.log('carts:', carts)
+      if (carts[0].booked == "Y" && typeof carts[0].hostorderid != 'undefined'){
+        const orderId = carts[0].hostorderid
+        this.setData({
+          isGuest:true,
+          orderId
+        })
+      }
       this.setData({
-        isGuest:true,
-        orderId
+        date: query.date,
+        timeStart: query.timeStart,
+        timeEnd: query.timeEnd,
+        matchTimeStart: query.matchTimeStart,
+        matchTimeEnd: query.matchTimeEnd,
+        fieldName: query.fieldName,
+        fieldId: query.fieldId,
+        fieldSize: query.fieldSize,
+        fieldType: query.fieldType,
+        gymName: query.gymName,
+        price: query.price,
+        num
       })
-    }
-    this.setData({
-      date: query.date,
-      timeStart: query.timeStart,
-      timeEnd: query.timeEnd,
-      matchTimeStart: query.matchTimeStart,
-      matchTimeEnd: query.matchTimeEnd,
-      fieldName: query.fieldName,
-      fieldId: query.fieldId,
-      fieldSize: query.fieldSize,
-      fieldType: query.fieldType,
-      gymName: query.gymName,
-      price: query.price,
-      num
-    })
-    if (fieldSize == "5人制") {
-      this.setData({type: 'full'})
-    }else if (fieldSize == "11人制"){
-      if (carts.length == 2 ){
-        if (carts[0].time == carts[1].time){
-          this.setData({type: 'full'})
+      if (fieldSize == "5人制") {
+        this.setData({type: 'full'})
+      }else if (fieldSize == "11人制"){
+        if (carts.length == 2 ){
+          if (carts[0].time == carts[1].time){
+            this.setData({type: 'full'})
+          }else{
+            this.setData({type: 'half'})
+          }  
+        } else if (carts.length == 4 ){
+          if (carts[0].time == carts[1].time && carts[2].time == carts[3].time) {
+            this.setData({type: 'full'})
+          } else {
+            this.setData({type: 'half'})
+          } 
+        } else if (carts.length == 6) {
+          if (carts[0].time == carts[1].time && carts[2].time == carts[3].time && carts[4].time == carts[5].time) {
+            this.setData({type: 'full' })
+          } else {
+            this.setData({type: 'half'})
+          } 
+        } else if (carts.length == 8) {
+          if (carts[0].time == carts[1].time && carts[2].time == carts[3].time && carts[4].time == carts[5].time && carts[6].time == carts[7].time) {
+            this.setData({type: 'full'})
+          } else{
+            this.setData({ type: 'half'})
+          }
+        } else if (carts.length == 10) {
+          if (carts[0].time == carts[1].time && carts[2].time == carts[3].time && carts[4].time == carts[5].time && carts[6].time == carts[7].time && carts[8].time == carts[9].time) {
+            this.setData({ type: 'full' })
+          } else {
+            this.setData({ type: 'half' })
+          }
+        } else if (carts.length == 12) {
+          if (carts[0].time == carts[1].time && carts[2].time == carts[3].time && carts[4].time == carts[5].time && carts[6].time == carts[7].time && carts[8].time == carts[9].time && carts[10].time == carts[11].time) {
+            this.setData({ type: 'full' })
+          } else {
+            this.setData({ type: 'half' })
+          }
+        } else if (carts.length == 14) {
+          if (carts[0].time == carts[1].time && carts[2].time == carts[3].time && carts[4].time == carts[5].time && carts[6].time == carts[7].time && carts[8].time == carts[9].time && carts[10].time == carts[11].time && carts[12].time == carts[13].time) {
+            this.setData({ type: 'full' })
+          } else {
+            this.setData({ type: 'half' })
+          }
         }else{
           this.setData({type: 'half'})
-        }  
-      } else if (carts.length == 4 ){
-        if (carts[0].time == carts[1].time && carts[2].time == carts[3].time) {
-          this.setData({type: 'full'})
-        } else {
-          this.setData({type: 'half'})
-        } 
-      } else if (carts.length == 6) {
-        if (carts[0].time == carts[1].time && carts[2].time == carts[3].time && carts[4].time == carts[5].time) {
-          this.setData({type: 'full' })
-        } else {
-          this.setData({type: 'half'})
-        } 
-      } else if (carts.length == 8) {
-        if (carts[0].time == carts[1].time && carts[2].time == carts[3].time && carts[4].time == carts[5].time && carts[6].time == carts[7].time) {
-          this.setData({type: 'full'})
-        } else{
-          this.setData({ type: 'half'})
         }
-      } else if (carts.length == 10) {
-        if (carts[0].time == carts[1].time && carts[2].time == carts[3].time && carts[4].time == carts[5].time && carts[6].time == carts[7].time && carts[8].time == carts[9].time) {
-          this.setData({ type: 'full' })
-        } else {
-          this.setData({ type: 'half' })
-        }
-      } else if (carts.length == 12) {
-        if (carts[0].time == carts[1].time && carts[2].time == carts[3].time && carts[4].time == carts[5].time && carts[6].time == carts[7].time && carts[8].time == carts[9].time && carts[10].time == carts[11].time) {
-          this.setData({ type: 'full' })
-        } else {
-          this.setData({ type: 'half' })
-        }
-      } else if (carts.length == 14) {
-        if (carts[0].time == carts[1].time && carts[2].time == carts[3].time && carts[4].time == carts[5].time && carts[6].time == carts[7].time && carts[8].time == carts[9].time && carts[10].time == carts[11].time && carts[12].time == carts[13].time) {
-          this.setData({ type: 'full' })
-        } else {
-          this.setData({ type: 'half' })
-        }
-      }else{
-        this.setData({type: 'half'})
-      }
-    } 
-  },
+      } 
+    },
 
   // 表单提交
     formSubmit(e) {
@@ -353,7 +355,10 @@ Page({
     _userAuthorized() {
       promisic(wx.getSetting)()
         .then(data => {
+          wx.hideLoading()
           if (data.authSetting['scope.userInfo']) {
+            //调用登录接口
+            app.fxLogin(this._init)
             return promisic(wx.getUserInfo)()
           }
           return false
@@ -361,11 +366,22 @@ Page({
         .then(data => {
           if (!data) return
           this.setData({
+            authorized: true,
             userInfo: data.userInfo
           })
-          // console.log('userInfo:', data.userInfo)
-          wx.hideLoading()
         })
+    },
+    onGetUserInfo(event) {
+      const userInfo = event.detail.userInfo
+      if (userInfo) {
+        this.setData({
+          userInfo,
+          authorized: true
+        })
+        app.globalData.userInfo = userInfo
+        //调用登录接口
+        app.fxLogin(this._init)
+      }
     },
 
     _compare(property) {

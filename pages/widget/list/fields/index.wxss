@@ -1,4 +1,5 @@
 @import "/components/common/tag.wxss";
+@import "/components/common/list.wxss";
 .container{
   display: flex;
   padding:20rpx 30rpx;
@@ -6,6 +7,7 @@
   align-items:center;
   background: #fff;
 }
+
 .item-hd{
   width:18%;
   padding-right:20rpx;
@@ -27,10 +29,7 @@
   align-items: center;
   justify-content:flex-end;
 }
-.title{
-  font-size: 1.1rem;
-  display: flex;
-}
+
 .content{
   color:#777777;
   font-size: 0.8rem;

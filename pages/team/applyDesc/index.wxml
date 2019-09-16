@@ -1,4 +1,6 @@
-<view class="container">
+
+<v-login wx:if="{{!authorized}}" bind:getuserinfo="onGetUserInfo" />
+<view wx:else class="container">
   <form bindsubmit="formSubmit">
     <view class="label">申请加入球队</view>
     <l-textarea 

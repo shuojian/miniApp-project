@@ -1,9 +1,12 @@
+import { promisic } from '../../../utils/common.js'
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    authorized: false,
     myevent:{},
     nodata: true
   },
@@ -13,7 +16,40 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.userAuthorized()
+  },
 
+  userAuthorized() {
+    promisic(wx.getSetting)()
+      .then(data => {
+        if (data.authSetting['scope.userInfo']) {
+          //调用登录接口
+          app.fxLogin(this._init)
+          return promisic(wx.getUserInfo)()
+        }
+        return false
+      })
+      .then(data => {
+        if (!data) return
+        this.setData({
+          authorized: true,
+          userInfo: data.userInfo
+        })
+        // wx.hideLoading()
+      })
+  },
+
+  onGetUserInfo(event) {
+    const userInfo = event.detail.userInfo
+    if (userInfo) {
+      this.setData({
+        userInfo,
+        authorized: true
+      })
+      app.globalData.userInfo = userInfo
+      //调用登录接口
+      app.fxLogin(this._init)
+    }
   },
   
   // 创建赛事弹框

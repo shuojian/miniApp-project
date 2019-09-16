@@ -19,6 +19,24 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    tel() {
+      const phonenum = this.properties.gym.gymContactPhone
+      wx.makePhoneCall({
+        phoneNumber: phonenum
+      })
+    },
+    copy() {
+      const content = this.properties.gym.gymContactWechat
+      wx.setClipboardData({
+        data: content,
+        success(res) {
+          wx.getClipboardData({
+            success(res) {
+              console.log(res.data)
+            }
+          })
+        }
+      })
+    }
   }
 })

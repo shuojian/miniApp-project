@@ -1,4 +1,5 @@
 import { ReqModel } from '../../../models/request.js'
+import { promisic } from '../../../utils/common.js'
 const app = getApp()
 const reqModel = new ReqModel()
 
@@ -8,8 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
     authorized: false,
+    userInfo: {},
+    inited: false,
     myTeams: null,
     noData: true,
     myDataCount: [
@@ -59,7 +61,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    wx.showLoading()
+    // wx.showLoading()
+    this.getMyTeams()
+  },
+
+  getMyTeams(){
     const myTeam = reqModel.getMyTeam()
     myTeam.then(
       res => {
@@ -67,26 +73,7 @@ Page({
           nodata: false,
           myTeams: res.data,
         })
-        console.log('我的球队:', res.data)
     })
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        authorized: true,
-      })
-      wx.hideLoading()
-    } else {
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            authorized: true,
-          })
-        }
-      })
-      wx.hideLoading()
-    }
   },
 
   toDetail(){

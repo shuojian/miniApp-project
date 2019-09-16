@@ -7,7 +7,7 @@
   -webkit-box-align:center;
   -webkit-align-items:center;
   align-items:center;
-  padding:15px;
+  padding:20rpx 30rpx;
   position:relative;
   border-bottom: 1rpx solid #efefef;
 }
@@ -47,6 +47,18 @@
 .item-bd .title{
   font-weight:400;
   font-size:34rpx;
+  width:auto;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  word-wrap:break-word;
+  word-break:break-all;
+}
+.list_title{
+  font-size: 1em;
+  display: flex;
+  line-height: 1.4em;
+  font-weight:400;
   width:auto;
   overflow:hidden;
   text-overflow:ellipsis;

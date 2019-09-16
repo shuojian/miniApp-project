@@ -2,26 +2,18 @@
 <!-- header -->
   <view class='page-hd bg-f'>
     <view class="userinfo py-20">
-      <button wx:if="{{!authorized}}" 
-              open-type="getUserInfo" 
-              bind:getuserinfo="onGetUserInfo"> 
-        获取头像昵称 
-      </button>
-      <view wx:if="{{authorized}}">
-        <!-- bindtap="accountSet"  -->
-        <image 
-              class="userinfo-avatar" 
-              src="{{userInfo.avatarUrl}}" 
-              mode="cover">
-        </image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <v-button wx:if="{{!authorized}}" open-type="getUserInfo" bind:getuserinfo="onGetUserInfo" >
+        <image slot="img" class="userinfo-avatar" src="/img/my.png" />
+      </v-button>
+      <view wx:else>
+          <image src="{{userInfo.avatarUrl}}" class="userinfo-avatar" mode="cover"/>
+          <text class="userinfo-nickname"> {{userInfo.nickName}}</text>
       </view>
     </view>
   </view>
 <!-- / header -->
 
   <view class="page_bd">
-
     <!-- 我的数据 -->
     <view class="section mt-10">
       <l-list l-class="px-15"  title="我的数据" bind:lintap="toMyData"/>
@@ -38,30 +30,22 @@
     </view>
     <!--/ 我的数据 -->
 
-      <!-- 我的列表 -->
-      
+    <!-- 我的列表 -->
       <view class="section mt-10 px-15">
         <l-list  title="我的球队" bind:lintap="toMyTeam" image="/img/tab/me_tab.png"/>
         <l-list  title="我的赛事" bind:lintap="toMyEvent" image="/img/tab/index_tab.png"/>
         <l-list title="我的订单" bind:lintap="toMyOrder" icon="order"/>
       </view>
+    <!--/ 我的列表 -->
+      <view class="section mt-10 p-15 fz-14">
+        <l-button special="{{true}}" open-type="share">
+          <l-icon name="share" /> <i class="ml-10">分享梦舟</i> 
+        </l-button>
+        <view class="list-divide"></view>
+        <l-button special="{{true}}" open-type="contact">
+          <l-icon name="customer-service" color="#3683d6" /><i class="ml-10">客服</i>
+        </l-button>
+      </view>
 
-      <!-- <view class="section mt-10 px-15">
-        <l-list title="我的客服" image="/img/tab/s.png">
-        <view slot="right-section"><contact-button type="default-light" size="30" session-from="weapp" class="guest-button">
-    </contact-button></view>
-    </l-list>
-      </view> -->
-      
-      <!--/ 我的列表 -->
-        <view class="section mt-10 p-15 fz-14">
-          <l-button special="{{true}}" open-type="share">
-            <l-icon name="share" /> <i class="ml-10">分享梦舟</i> 
-          </l-button>
-          <view class="list-divide"></view>
-          <l-button special="{{true}}" open-type="contact">
-            <l-icon name="customer-service" color="#3683d6" /><i class="ml-10">客服</i>
-          </l-button>
-        </view>
   </view>
 </view>

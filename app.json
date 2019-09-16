@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/index/login/login",
+    
     "pages/field/index",
     "pages/field/fields/index",
     "pages/field/detail/detail",
@@ -21,7 +21,8 @@
     "pages/my/myOrder/myorder",
     "pages/my/myOrderDetail/index",
     "pages/my/msg/msg",
-    "pages/my/service/service" 
+    "pages/my/service/service" ,
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",

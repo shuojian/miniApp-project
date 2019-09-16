@@ -16,9 +16,9 @@
       <view class='item'>
         <i class="iconfont icon-lianxifangshi"></i>
         <view class="title">联系方式</view>
-        <view class='desc'>
-        电话：<i bindtap="tel" class="color-primary" >{{gym.gymContactPhone}}</i>
-        微信：<i class="color-primary">{{gym.gymContactWechat}}</i>
+        <view class='desc contact'>
+          <view>电话：<i bindtap="tel" class="num" >{{gym.gymContactPhone}}</i></view>
+          <view>微信：<i bindtap="copy" class="num">{{gym.gymContactWechat}}</i></view>
         </view>
       </view>
       <view class='item'>

@@ -1,0 +1,29 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align:center;
+  padding-top:100rpx;
+}
+.app_avatar{
+  width:200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+}
+.app_name{
+  font-size: 1.2rem;
+  padding:20rpx 0 100rpx;
+}
+.desc{
+  color:#777;
+  margin-bottom: 30rpx;
+}
+.btn-auth{
+  background: #3b5999 !important;
+  color:#fff;
+  border:none !important;
+}
+
+
+
+

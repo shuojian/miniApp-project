@@ -28,4 +28,4 @@
   overflow:hidden;
   text-overflow:ellipsis;
   margin-left:10rpx;
-  }
+}

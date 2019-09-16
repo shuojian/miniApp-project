@@ -4,7 +4,7 @@ var app = getApp()
 var isLoading = false;
 Page({
   data: {
-    lastRouteId: null,
+    lastRoute: null,
     authLogin: true,
     inited: false,
     parentUserCode: null,
@@ -12,18 +12,21 @@ Page({
   },
 
   onLoad (o) {
+    const lastRoute = o.route
+    this.setData({lastRoute})
+    console.log("接收：", lastRoute)
     if (app.globalData.userInfo) {
-      app.fxLogin(this._init)
+      app.fxLogin(this._init(lastRoute))
     } else {
       wx.getSetting({
         success: (res) => {
           console.log("调用getSetting成功：", res)
-          if (res.authSetting && res.authSetting["scope.userInfo"]) {
+          if (res.authSetting["scope.userInfo"]) {
             this.setData({
               authLogin: false
             })
             //调用登录接口
-            app.fxLogin(this._init)
+            app.fxLogin(this._init(lastRoute))
           }
         }
       })
@@ -31,26 +34,24 @@ Page({
   },
 
   getUserInfo(e) {
-    console.log('getUserInfo用户信息：', e.detail.rawData)
     if (e.detail.errMsg == "getUserInfo:ok") {
       this.setData({
         authLogin: false,
-        userInfo: e.detail.rawData
+        userInfo: e.detail.userInfo
       })
-      app.globalData.userInfo = e.detail.rawData
-      app.fxLogin(this._init)
+      app.globalData.userInfo = e.detail.userInfo
+      app.fxLogin(this._init(this.data.lastRoute))
     }
   },
   
-  _init(lastRouteId) {
-    if (app.globalData.loginInfo && app.globalData.loginInfo.inReview && app.globalData.loginInfo.inReview == 'N') {
+  _init(lastRoute) {
+    if (app.globalData.loginInfo&&app.globalData.loginInfo.inReview == 'N') {
       this.setData({
         inited: true
       })
     } 
     wx.reLaunch({
-      // url: '../index'
-      url: '../../field/index'
+      url: `${lastRoute}`
     })
   }
 })

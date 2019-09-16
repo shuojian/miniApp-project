@@ -1,4 +1,6 @@
-<view class='bookInfo'>
+<v-login wx:if="{{!authorized}}" bind:getuserinfo="onGetUserInfo" />
+<block wx:else>
+  <view class='bookInfo'>
     <view class="title">{{gymName}}</view>
     <view class="info">
       <view class="time">{{timeStart}}</view>
@@ -13,7 +15,7 @@
       <view class="time">{{timeEnd}}</view>
     </view>
     <view class="footer">{{date}}</view>
-</view>
+  </view>
 
   <form wx:if="{{isGuest}}" bindsubmit="formSubmitGuest" bindreset="formReset">       
     <view class='section mt-10'>
@@ -86,6 +88,7 @@
       <view class='btn-text'>确认支付</view>
     </button>
   </form>
+</block>
 
 <l-message/>
 <l-toast />

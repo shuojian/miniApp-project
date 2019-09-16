@@ -1,10 +1,13 @@
-
+<!-- <v-login wx:if="{{!authorized}}" bind:getuserinfo="onGetUserInfo" /> -->
 <view wx:if="{{!nodata}}">
   <block wx:key="id" wx:for="{{myOrders}}">
     <orderList order="{{item}}" bind:lintap="toDetail"/>
   </block>
 </view>
 <nodata wx:else></nodata>
+
+
+
 
 
 

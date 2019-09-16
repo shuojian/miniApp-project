@@ -46,14 +46,19 @@ color:#777;
 }
 
 .list.adicon .item .desc{
-  font-size: 0.8em; color:#5c5c5c; margin-top:8px;
+   color:#5c5c5c; margin-top:8px;
 }
 
 .fieldInfo{
   padding:20rpx;
 }
-.desc i{
+.desc .num{
   color:#ff0000;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 500
+}
+.contact{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

@@ -42,7 +42,7 @@ Page({
       wx.showLoading()
       const bid = query.bid
       const fieldSize = query.fieldSize
-      console.log('页面接收:', query)
+      // console.log('页面接收:', query)
 
       //循环日期
       let arr = []
@@ -449,6 +449,18 @@ Page({
       wx.navigateTo({
         url: `../orderConfirm/index?date=${this.data.date}&num=${this.data.num}&matchTimeStart=${this.data.matchTimeStart}&matchTimeEnd=${this.data.matchTimeEnd}&timeStart=${this.data.timeStart}&timeEnd=${this.data.timeEnd}&gymName=${this.data.gymName}&fieldId=${this.data.fieldId}&fieldName=${this.data.field.name}&fieldSize=${this.data.fieldSize}&fieldType=${this.data.fieldType}&price=${this.data.price}&carts=${carts}`
       })
+
+      // const route = "../field/fieldOrder/index"
+      // if (app.globalData.loginInfo !== null) {
+      //   let carts = JSON.stringify(this.data.carts)
+      //   wx.navigateTo({
+      //     url: `../orderConfirm/index?date=${this.data.date}&num=${this.data.num}&matchTimeStart=${this.data.matchTimeStart}&matchTimeEnd=${this.data.matchTimeEnd}&timeStart=${this.data.timeStart}&timeEnd=${this.data.timeEnd}&gymName=${this.data.gymName}&fieldId=${this.data.fieldId}&fieldName=${this.data.field.name}&fieldSize=${this.data.fieldSize}&fieldType=${this.data.fieldType}&price=${this.data.price}&carts=${carts}`
+      //   })
+      // } else {
+      //   wx.navigateTo({
+      //     url: `../../login/login?route=${route}`,
+      //   })
+      // }  
     },
 
   // 获取场地列表 order 

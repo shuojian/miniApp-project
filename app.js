@@ -1,4 +1,5 @@
 //app.js
+import { promisic } from 'utils/common.js'
 import { api } from 'utils/config.js'
 App({
   globalData: {
@@ -8,7 +9,8 @@ App({
     code: null,
     parentUserCode: null,
     baseURL: api.base_url,
-    startUrl:api.start_url
+    startUrl:api.start_url,
+    pagelimit: api.pagelimit
   },
 
   onLaunch() {
@@ -23,30 +25,15 @@ App({
     }
   },
 
-  showLoading() {
-    wx.showToast({
-      title: 'loading...',
-      icon: 'loading',
-      duration: 15000
-    })
-    wx.showNavigationBarLoading()
-  },
-
-  hideLoading() {
-    wx.hideToast()
-    wx.hideNavigationBarLoading()
-  },
-
   fxLogin(cb) {
     if (this.globalData.loginInfo) {
       typeof cb == "function" && cb()
       return
     }
-
     //调用登录接口
     wx.login({
       success: (res) => {
-        console.log('调用登录接口获得:', res)
+        // console.log('调用登录接口获得:', res)
         if (this.globalData.userInfo && this.globalData.userInfo.rawData && this.globalData.userInfo.encryptedData && this.globalData.userInfo.iv && this.globalData.userInfo.signature) {
           this.fxWxLogin(res.code, cb)
           this.globalData.code = res.code
@@ -57,7 +44,7 @@ App({
             success: (userInfo) => {
               this.globalData.userInfo = userInfo
               this.fxWxLogin(res.code, cb)
-              console.log('调用getUserInfo:', userInfo)
+              // console.log('调用getUserInfo:', userInfo)
             },
             fail: (res) => {
               wx.showModal({
@@ -108,18 +95,16 @@ App({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: (res) => {
-        console.log('code换取token res:', res)
+        // console.log('code换取token res:', res)
         if (res.data.code == 0 && res.data.data && res.data.data.token) {
           this.globalData.loginInfo = res.data.data
           this.globalData.loginInfo.lastLoginDate = new Date().getTime()
           wx.setStorageSync('loginInfo', this.globalData.loginInfo)
           typeof cb == "function" && cb()
         }
-
       },
       fail: (res) => {
         // this.changeSetting(cb)
-        console.log('code换取token失败')
         wx.showModal({
           title: '出错啦',
           content: '登录失败',
@@ -132,134 +117,82 @@ App({
     })
   },
 
-  changeSetting(cb) {
-    wx.showModal({
-      title: '提示',
-      content: '请您授权',
-      showCancel: false,
-      success: (res) => {
-        wx.openSetting({
-          success: (res) => {
-            console.log("授权成功：", res)
-            if (res.authSetting && res.authSetting["scope.userLocation"]) {
-              //this.getLoginInfo(cb)
-            } else {
-              this.changeSetting(cb)
-            }
-          },
-          fail: (res) => {
-            this.changeSetting(cb)
-          }
-        })
-      }
+  showLoading() {
+    wx.showToast({
+      title: 'loading...',
+      icon: 'loading',
+      duration: 15000
     })
+    wx.showNavigationBarLoading()
   },
 
-  getUserInfo: function (otherUserCode, cb) {
-    this.showLoading()
-    wx.request({
-      url: this.globalData.baseURL + 'u/view',
-      data: {
-        token: this.globalData.loginInfo.token,
-        otherUserCode: otherUserCode
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: (res) => {
-        console.log("getUserInfo:", res)
-        if (res.data.code == 0 && res.data.data) {
-          typeof cb == "function" && cb(res.data.data)
-        }
-      },
-      complete: (res) => {
-        this.hideLoading()
-      }
-    })
+  hideLoading() {
+    wx.hideToast()
+    wx.hideNavigationBarLoading()
   },
-
-  uploadFile: function (filePath, file, refId, refType) {
-    wx.showLoading()
-    wx.uploadFile({
-      url: this.globalData.baseURL + 'file/uploadToWxCos',
-      filePath: filePath,
-      name: 'file',
-      method: "POST",
-      formData: {
-        token: this.globalData.loginInfo.token,
-        appId: this.globalData.appId,
-        // duration:
-        file: file,
-        // fileType:,
-        refId: refId || '',
-        refType: refType || '',
-      },
-      success: (res) => {
-        console.log('文件上传信息：', res, res.data)
-      },
-      complete: (res) => {
-        wx.hideLoading()
-      }
-    })
-  },
-  // uploadFile: function (filePath, file, refId, refType,  cb) {
-  //   if (!filePath) {
-  //     typeof cb == "function" && cb()
-  //     return
+  
+  // saveUserTrail: function (longitude, latitude) {
+  //   if (latitude && longitude && this.globalData.loginInfo && this.globalData.loginInfo.token) {
+  //     wx.request({
+  //       url: this.globalData.baseURL + 'u/saveUserTrail',
+  //       data: {
+  //         token: this.globalData.loginInfo.token,
+  //         longitude: longitude,
+  //         latitude: latitude
+  //       },
+  //       header: {
+  //         'content-type': 'application/x-www-form-urlencoded'
+  //       },
+  //       complete: function (res) {
+  //         console.log(res)
+  //       }
+  //     })
   //   }
-  //   wx.uploadFile({
-  //     url: this.globalData.baseURL + 'file/uploadToWxCos',
-  //     filePath: filePath,
-  //     name: 'file',
-  //     method:"POST",
-  //     formData: {
+  // },
+
+  // getUserInfo: function (otherUserCode, cb) {
+  //   this.showLoading()
+  //   wx.request({
+  //     url: this.globalData.baseURL + 'u/view',
+  //     data: {
   //       token: this.globalData.loginInfo.token,
-  //       appId: this.globalData.appId,
-  //       // duration:
-  //       file:file,
-  //       // fileType:,
-  //       refId: refId || '',
-  //       refType: refType || '',
-  //       // sort: sort || 0
+  //       otherUserCode: otherUserCode
   //     },
-  //     success: (res) =>{
-  //       if (res.data) {
-  //         var retData = JSON.parse(res.data)
-  //         if (retData.code != 0) {
-  //           typeof cb == "function" && cb()
-  //           return
-  //         }
-  //         typeof cb == "function" && cb(retData.data.url)
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded'
+  //     },
+  //     success: (res) => {
+  //       console.log("getUserInfo:", res)
+  //       if (res.data.code == 0 && res.data.data) {
+  //         typeof cb == "function" && cb(res.data.data)
   //       }
   //     },
-  //     fail: (res)=> {
-  //       typeof cb == "function" && cb()
+  //     complete: (res) => {
+  //       this.hideLoading()
   //     }
   //   })
   // },
 
-  saveUserTrail: function (longitude, latitude) {
-    if (latitude && longitude && this.globalData.loginInfo && this.globalData.loginInfo.token) {
-      wx.request({
-        url: this.globalData.baseURL + 'u/saveUserTrail',
-        data: {
-          token: this.globalData.loginInfo.token,
-          longitude: longitude,
-          latitude: latitude
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        complete: function (res) {
-          console.log(res)
-        }
-      })
-    }
-  },
-  shareAppMessage(res) {
-    return {
-      title: '梦舟体育',
-      path: this.globalData.startUrl
-    }
-  },
+  // changeSetting(cb) {
+  //   wx.showModal({
+  //     title: '提示',
+  //     content: '请您授权',
+  //     showCancel: false,
+  //     success: (res) => {
+  //       wx.openSetting({
+  //         success: (res) => {
+  //           console.log("授权成功：", res)
+  //           if (res.authSetting && res.authSetting["scope.userLocation"]) {
+  //             //this.getLoginInfo(cb)
+  //           } else {
+  //             this.changeSetting(cb)
+  //           }
+  //         },
+  //         fail: (res) => {
+  //           this.changeSetting(cb)
+  //         }
+  //       })
+  //     }
+  //   })
+  // },
 })

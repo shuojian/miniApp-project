@@ -11,12 +11,21 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-    wx.showLoading()
-    this.userAuthorized()
+  onLoad(o) {
+    // wx.showLoading()
+    if (app.globalData.userInfo) {
+      this.setData({
+        authorized: true,
+        userInfo: app.globalData.userInfo
+      })
+      app.fxLogin(this._init)
+    } else {
+      this.userAuthorized()
+    }
   },
 
   userAuthorized() {
+    console.log(1)
     promisic(wx.getSetting)()
       .then(data => {
         if (data.authSetting['scope.userInfo']) {
@@ -30,7 +39,7 @@ Page({
           authorized: true,
           userInfo: data.userInfo
         })
-        wx.hideLoading()
+        console.log('getuseinfo', data.userInfo)
       })
   },
 
@@ -41,37 +50,79 @@ Page({
         userInfo,
         authorized: true
       })
+      app.globalData.userInfo = userInfo
+      //调用登录接口
+      app.fxLogin(this._init)
     }
   },
 
-  accountSet() {
-    wx.navigateTo({
-      url: '../accountSet/index'
-    })
+  _init() {
+    if (app.globalData.loginInfo.inReview == 'N') {
+      this.setData({
+        inited: true
+      })
+    }
+    // wx.reLaunch({
+    //   url: 'my'
+    // })
   },
 
+  // accountSet() {
+  //   wx.navigateTo({
+  //     url: '../accountSet/index'
+  //   })
+  // },
+
   toMyData(){
-    wx.navigateTo({
-      url: 'myData/mydata',
-    })
+    const route = "../my/my"
+    if (app.globalData.loginInfo !== null) {
+      wx.navigateTo({
+        url: 'myData/mydata',
+      })
+    } else {
+      wx.navigateTo({
+        url: `../login/login?route=${route}`,
+      })
+    }
   },
 
   toMyEvent() {
-    wx.navigateTo({
-      url: 'myEvent/myevent',
-    })
+    const route = "../my/my"
+    if (app.globalData.loginInfo !== null) {
+      wx.navigateTo({
+        url: 'myEvent/myevent',
+      })
+    } else {
+      wx.navigateTo({
+        url: `../login/login?route=${route}`,
+      })
+    }
   },
 
   toMyOrder() {
-    wx.navigateTo({
-      url: 'myOrder/myorder',
-    })
+    const route = "../my/my"
+    if(app.globalData.loginInfo !== null){
+      wx.navigateTo({
+        url: 'myOrder/myorder',
+      })
+    }else{
+      wx.navigateTo({
+        url: `../login/login?route=${route}`,
+      })
+    }
   },
 
   toMyTeam() {
-    wx.navigateTo({
-      url: 'myTeam/myteam',
-    })
+    const route = "../my/my"
+    if (app.globalData.loginInfo !== null) {
+      wx.navigateTo({
+        url: 'myTeam/myteam',
+      })
+    } else {
+      wx.navigateTo({
+        url: `../login/login?route=${route}`,
+      })
+    }
   },
 
   toService(){
@@ -100,12 +151,6 @@ Page({
       title: '梦舟体育',
       path: app.globalData.startUrl
     }
-  },
-  /**
-  * 页面相关事件处理函数--监听用户下拉动作
-  */
-  onPullDownRefresh() {
-
   },
 
 })
