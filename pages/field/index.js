@@ -12,8 +12,8 @@ Page({
   },
 
   onLoad: function (options) {
-    wxCacheModel.get("gyms", reqModel.getGymList())
-    wxCacheModel.get("swipers", reqModel.getListSwiperImgs())
+    // wxCacheModel.get("gyms", reqModel.getGymList())
+    // wxCacheModel.get("swipers", reqModel.getListSwiperImgs())
     this._getGyms()
   },
 
