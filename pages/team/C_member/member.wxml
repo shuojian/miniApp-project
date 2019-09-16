@@ -16,7 +16,7 @@
       </view>
 
       <view wx:if="{{member.userCode == creatorUserCode}}" class="item-bd_sb" >
-        <view class="kickoutTeam" wx:if="{{!isCreator}}" bindtap="kickoutTeam">踢出球队</view>
+        <view class="kickoutTeam" wx:if="{{!isCreator && isMember}}" bindtap="kickoutTeam">踢出球队</view>
       </view>
 
       <view class='item-ft'>
