@@ -21,6 +21,7 @@ Page({
   onLoad() {
     wxCacheModel.get("teams", reqModel.getTameList())
     let pageLimit = app.globalData.pageLimit
+    console.log("数据类型", typeof (pageLimit))
     this.setData({ pageLimit })
     this._getTeams()
   },
@@ -41,7 +42,6 @@ Page({
   },
   _getMoreTeams() {
     let page = this.data.page
-    console.log('数据加载情况',this.data.teams.length)
     const teams = reqModel.getTameList(page)
     teams.then(
       (res) => {

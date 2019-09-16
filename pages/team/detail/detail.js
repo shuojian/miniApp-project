@@ -10,15 +10,16 @@ Page({
   data: {
     authorized: false,
     userInfo:{},
+    isShow: false,
+    isCreator: false,
+    isTeam: false,
+    isMember: false,
+    creatorUserCode: null,      //球队创建者 UserCode
+    destUserCode: null,         //当前用户 UserCode
+
     team:null,
     members:null,
     tabTitle: ['射手榜', '助攻榜', '黄牌榜'],
-    isShow:false,
-    isCreator:false,
-    isTeam:false,
-    isMember:false,
-    creatorUserCode: String,
-    destUserCode: String,
     isLink: false,
   },
 
@@ -30,75 +31,7 @@ Page({
     this.userAuthorized()
     this._getData(options)
   },
-
-  userAuthorized() {
-    promisic(wx.getSetting)()
-      .then(data => {
-        if (data.authSetting['scope.userInfo']) {
-          //调用登录接口
-          app.fxLogin(this._init)
-          return promisic(wx.getUserInfo)()
-        }
-        return false
-      })
-      .then(data => {
-        if (!data) return
-        this.setData({
-          authorized: true,
-          userInfo: data.userInfo
-        })
-        // wx.hideLoading()
-      })
-  },
-
-  onGetUserInfo(event) {
-    const userInfo = event.detail.userInfo
-    if (userInfo) {
-      this.setData({
-        userInfo,
-        authorized: true
-      })
-      app.globalData.userInfo = userInfo
-      //调用登录接口
-      app.fxLogin(this._init)
-    }
-  },
-
-  _init() {
-    if (app.globalData.loginInfo.inReview == 'N') {
-      this.setData({
-        inited: true
-      })
-    }
-    // wx.reLaunch({
-    //   url: 'my'
-    // })
-  },
-
-  onGetUserInfo(event) {
-    const userInfo = event.detail.userInfo
-    if (userInfo) {
-      this.setData({
-        userInfo,
-        authorized: true
-      })
-      app.globalData.userInfo = userInfo
-      //调用登录接口
-      app.fxLogin(this._init)
-    }
-  },
-
-  _init() {
-    if (app.globalData.loginInfo.inReview == 'N') {
-      this.setData({
-        inited: true
-      })
-    }
-    // wx.reLaunch({
-    //   url: 'my'
-    // })
-  },
-
+  /*申请加入*/
   applyForJoin(){
     wx.navigateTo({
       url: `../applyDesc/index?teamId=${this.data.team.teamId}`,
@@ -193,48 +126,40 @@ Page({
     })
   },
   /*获得页面数据*/
-  _getData(options) {
-    const bid = options.bid
-    console.log('team详情：', options)
+  _getData(o) {
+    const bid = o.bid
     const detail = reqModel.getTeamDetail(bid)
     const members = reqModel.getListMember(bid)
-    // const varToken = app.globalData.loginInfo.token
-    // this.setData({
-    //   token: varToken
+    Promise.all([detail, members])
+      .then(res => {
+        const team = res[0].data //球队详情
+        const members = res[1].data //球队队员
+        const creator = members.find((x) => { return x.userCode == team.leaderUserCode }) //球队创建者
+        const creatorUserCode = creator.userCode //球队创建者userCode
+        const destUserCode = app.globalData.loginInfo.userCode //当前用户userCode
+        if (destUserCode == creatorUserCode) {
+          this.setData({
+            isCreator: true,
+            isTeam: true,
+            isMember: true,
+            isLink: true,
+            destUserCode,
+          })
+        }
+        this.setData({
+          team,
+          members,
+          creatorUserCode,
+        })
+        wx.hideLoading()
+      })
+    // detail.then(res => {
+    //   this.setData({ team: res.data })
     // })
-    detail.then(res =>{
-      const team = res.data
-      this.setData({ team })
-    })
-    members.then(res => {
-      const members = res.data
-      this.setData({ members })
-    })
-    // Promise.all([detail, members])
-    //   .then(res => {
-    //     const team = res[0].data
-    //     const members = res[1].data
-    //     const creator = members.find(
-    //       (x) => {
-    //         return x.userCode == team.leaderUserCode
-    //       })
-    //     const creatorUserCode = creator.userCode
-    //     if (app.globalData.loginInfo.userCode == creatorUserCode) {
-    //       this.setData({
-    //         isCreator: true,
-    //         isTeam: true,
-    //         isMember: true,
-    //         isLink: true,
-    //         destUserCode: app.globalData.loginInfo.userCode
-    //       })
-    //     }
-    //     this.setData({
-    //       team: team,
-    //       members: members,
-    //       creatorUserCode: creatorUserCode,
-    //     })
-    //     wx.hideLoading()
-    //   })
+
+    // members.then(res => {
+    //   this.setData({ members:res.data })
+    // })
   },
   _clearCache: function () {
     this.setData({
@@ -258,5 +183,49 @@ Page({
       title: '梦舟体育',
       path: '/pages/index/index'
     }
-  }
+  },
+  // 授权登录
+   userAuthorized() {
+    promisic(wx.getSetting)()
+      .then(data => {
+        if (data.authSetting['scope.userInfo']) {
+          //调用登录接口
+          app.fxLogin(this._init)
+          return promisic(wx.getUserInfo)()
+        }
+        return false
+      })
+      .then(data => {
+        if (!data) return
+        this.setData({
+          authorized: true,
+          userInfo: data.userInfo
+        })
+        // wx.hideLoading()
+      })
+    },
+
+    onGetUserInfo(event) {
+    const userInfo = event.detail.userInfo
+      if (userInfo) {
+        this.setData({
+          userInfo,
+          authorized: true
+        })
+        app.globalData.userInfo = userInfo
+        //调用登录接口
+        app.fxLogin(this._init)
+      }
+    },
+
+    _init() {
+      if (app.globalData.loginInfo.inReview == 'N') {
+        this.setData({
+          inited: true
+        })
+      }
+      // wx.reLaunch({
+      //   url: 'my'
+      // })
+    },
 })

@@ -18,7 +18,6 @@ const api = {
   fieldList_url: 'field/page',
   fieldDetail_url: 'field/getById',
   fieldOrder_url: 'field/listDayOrder',
-  
   // order_url: 'sportsFieldOrder/create',
   // resetOrder_url: 'sportsFieldPay/resetOrder',
   // pay_url: 'sportsFieldPay/payOrder',
@@ -29,15 +28,8 @@ const api = {
   teamMember_url: 'team/listMember',
   creatTeam_url: 'team/create',
 
-  // 我的
-  myTeam_url: 'team/myTeam',
-  myTeamMsgs_url: 'team/listMemberLog',
-  myOrder_url: 'sportsFieldOrder/queryMyOrder',
-  myOrderDetail_url: 'sportsFieldOrder/getById',
-  // getMyOrder_url: 'sportsFieldOrder/getMyOrder',
-  
-  applyForJoinTeam_url:'team/applyForJoin',
-  applyAcceptTeam_url:'team/join',
+  applyForJoinTeam_url: 'team/applyForJoin',
+  applyAcceptTeam_url: 'team/join',
   applyRefuseTeam_url: 'team/reject',
   kickoutTeam_url: 'team/kickou',
   leaveTeam_url: 'team/leave',
@@ -45,9 +37,15 @@ const api = {
   enableTeam_url: 'team/enable',
   changeTeamleader_url: 'team/changeTeamleader',
 
+  // 我的
+  myTeam_url: 'team/myTeam',
+  myTeamMsgs_url: 'team/listMemberLog',
+  myOrder_url: 'sportsFieldOrder/queryMyOrder',
+  myOrderDetail_url: 'sportsFieldOrder/getById',
+  // getMyOrder_url: 'sportsFieldOrder/getMyOrder',
+  
   uploap_url: 'file/upload',
-
-  pagelimit:7
+  pagelimit:12
 }
 
 module.exports = { api }
