@@ -9,7 +9,7 @@ class ReqModel extends HTTP {
       url: `event/page`,
       data: {
         page: page,
-        limit: app.globalData.pagelimit
+        limit: app.globalData.pageLimit
       }
     })
   }
@@ -50,7 +50,7 @@ class ReqModel extends HTTP {
       url: api.team_url,
       data:{
         page:page,
-        limit: app.globalData.pagelimit
+        limit: app.globalData.pageLimit
       }
     })
   }
@@ -89,7 +89,7 @@ class ReqModel extends HTTP {
       url: api.fieldList_url,
       data: {
         page: page,
-        limit: app.globalData.pagelimit
+        limit: app.globalData.pageLimit
       }
     })
   }
@@ -98,7 +98,7 @@ class ReqModel extends HTTP {
       url: api.gymList_url,
       data: {
         page: page,
-        limit: app.globalData.pagelimit
+        limit: app.globalData.pageLimit
       }
     })
   }

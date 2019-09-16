@@ -10,7 +10,7 @@ App({
     parentUserCode: null,
     baseURL: api.base_url,
     startUrl:api.start_url,
-    pageLimit: api.pagelimit
+    pageLimit: api.pageLimit
   },
 
   onLaunch() {

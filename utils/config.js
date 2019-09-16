@@ -45,7 +45,7 @@ const api = {
   // getMyOrder_url: 'sportsFieldOrder/getMyOrder',
   
   uploap_url: 'file/upload',
-  pagelimit:12
+  pageLimit:12
 }
 
 module.exports = { api }
