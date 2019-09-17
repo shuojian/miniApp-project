@@ -7,7 +7,7 @@
 
   <!-- 创建赛事button  -->
   <view class='page-hd p20'>
-    <button class="d-btn-cc-pri pos-fix ab-r ab-b2" bindtap='onclick'>创建赛事</button>
+    <button class="d-btn-cc pos-fix pos-rb" bindtap='onclick'>创建赛事</button>
   </view>
 </view>
 

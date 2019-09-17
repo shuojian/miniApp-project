@@ -12,13 +12,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(o) {
-    // wx.showLoading()
+  },
+  onShow(o) {
     if (app.globalData.userInfo) {
       this.setData({
         authorized: true,
-        userInfo: app.globalData.userInfo
+        userInfo: app.globalData.userInfo.userInfo
       })
-      app.fxLogin(this._init)
     } else {
       this.userAuthorized()
     }
@@ -36,7 +36,7 @@ Page({
         if (!data) return
         this.setData({
           authorized: true,
-          userInfo: data.userInfo
+          userInfo: data.userInfo   //页面用户信息
         })
       })
   },
@@ -48,7 +48,6 @@ Page({
         userInfo,
         authorized: true
       })
-      app.globalData.userInfo = userInfo
       //调用登录接口
       app.fxLogin(this._init)
     }
@@ -60,9 +59,6 @@ Page({
         inited: true
       })
     }
-    // wx.reLaunch({
-    //   url: 'my'
-    // })
   },
 
   // accountSet() {
@@ -128,6 +124,7 @@ Page({
       url: 'service/service',
     })
   },
+
 
   // toLogin(){
   //   wx.navigateTo({

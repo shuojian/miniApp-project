@@ -45,8 +45,8 @@ Page({
       const num = query.num
       const fieldSize = query.fieldSize
       const carts = JSON.parse(query.carts)
-      console.log('页面接收:', query)
-      console.log('carts:', carts)
+      // console.log('页面接收:', query)
+      // console.log('carts:', carts)
       if (carts[0].booked == "Y" && typeof carts[0].hostorderid != 'undefined'){
         const orderId = carts[0].hostorderid
         this.setData({
@@ -154,7 +154,7 @@ Page({
       // console.log("表单提交数据:", paymentPo)
       this._formSub('/sportsFieldOrder/engage',paymentPo,e)
     },
-  //表单提交
+  // 下单
     _formSub(url,paymentPo,e){
       const teamName = e.detail.value.teamName
       const teamColor = e.detail.value.teamColor
@@ -185,10 +185,8 @@ Page({
           method: 'POST',
           data: paymentPo,
           success: (res) => {
-            console.log("表单提交success:", res)
             const resD = res.data.data
             const reg = RegExp(/预订时间段异常/);
-            console.log("表单提交success:", resD)
             if (reg.test(resD)) {
               wx.lin.showDialog({
                 type: "confirm",
@@ -197,13 +195,9 @@ Page({
                 confirmText: '重新选择',
                 success: (res) => {
                   if (res.confirm) {
-                    if (res.confirm) {
-                      wx.navigateBack({
-                        delta: 1
-                      })
-                    }
+                    wx.navigateBack({delta: 1})
                   } else if (res.cancel) {
-                    console.log('用户点击取消')
+                    // console.log('用户点击取消')
                   }
                 }
               })
@@ -246,33 +240,26 @@ Page({
         header: {
           'content-type': 'application/x-www-form-urlencoded'
         },
-        success: (res) => {
-          console.log('pay.request成功', res)
+        success: (res) => { //提交服务器返回
+          // console.log('pay.request成功', res)
           if (res.data.code != 0) {
             wx.showModal({
               title: '支付失败',
               content: `${res.data.code} / 失败信息:${res.data.data} `,
               showCancel: false
             })
-            // 【请稍后重试或者联系客服。】
             return
-          }
-
-          var payId = res.data.data.payId
-          if (!payId) {
+          }else if (!res.data.data.payId) {
             wx.showModal({
-              title: '支付成功',
-              content: '场地预订成功',
+              title: '提交服务器成功',
+              content: '提交服务器场地预订成功',
               showCancel: false,
               success: (res) => {
-                wx.navigateBack({
-                  delta:1
-                })
+                wx.navigateBack({delta:1})
               }
             })
             return
           }
-
           wx.requestPayment({
             'appId': res.data.data.orderExtInfo.appId,
             'timeStamp': res.data.data.orderExtInfo.timeStamp,
@@ -281,11 +268,15 @@ Page({
             'signType': res.data.data.orderExtInfo.signType,
             'paySign': res.data.data.orderExtInfo.paySign,
             'success': (res) => {
-              console.log('pay.requestPayment成功', res)
-              wx.showModal({
-                title: '支付成功',
-                content: '场地预订成功！',
-                showCancel: false
+              wx.lin.showToast({
+                title: '场地预订成功！~',
+                icon: 'success',
+                duration: 2000,
+                success: (res) => {
+                   setTimeout(function () {
+                     wx.navigateBack({ delta: 1 })
+                   },2000)
+                }
               })
             },
             'fail': (res) => {
@@ -308,13 +299,11 @@ Page({
                       showCancel: false
                     })
                     return
-                  }
-
-                  if (res && res.errMsg == 'requestPayment:fail cancel') {
-                    // wx.showToast({
-                    //   title: '支付已取消',
-                    //   icon: 'none'
-                    // })
+                  }else if (res && res.errMsg == 'requestPayment:fail cancel') {
+                    wx.showToast({
+                      title: '支付已取消',
+                      icon: 'none'
+                    })
                   } else {
                     wx.showModal({
                       title: '支付失败',
@@ -339,26 +328,13 @@ Page({
         }
       })
     },
-  // 初始化
-    _init(lastRouteId) {
-      if (app.globalData.loginInfo && app.globalData.loginInfo.inReview && app.globalData.loginInfo.inReview == 'N') {
-        this.setData({
-          inited: true
-        })
-      } else {
-        this.setData({
-          inited: true
-        })
-      }
-    },
+
   // 获取用户信息
     _userAuthorized() {
       promisic(wx.getSetting)()
         .then(data => {
           wx.hideLoading()
           if (data.authSetting['scope.userInfo']) {
-            //调用登录接口
-            app.fxLogin(this._init)
             return promisic(wx.getUserInfo)()
           }
           return false
@@ -367,7 +343,7 @@ Page({
           if (!data) return
           this.setData({
             authorized: true,
-            userInfo: data.userInfo
+            userInfo: data.userInfo  //页面用户信息
           })
         })
     },
@@ -378,7 +354,7 @@ Page({
           userInfo,
           authorized: true
         })
-        app.globalData.userInfo = userInfo
+        // app.globalData.userInfo = userInfo
         //调用登录接口
         app.fxLogin(this._init)
       }

@@ -122,10 +122,12 @@ Page({
             const str = carts[0].time.indexOf('-')
             const timeStart = carts[0].time.slice(0, str)//截取时间
             const timeEnd = carts[carts.length - 1].time.slice(str + 1)
-            let timeStarta = `${this.data.date} ${timeStart}`
-            let timeEnda = `${this.data.date} ${timeEnd}`
-            let matchTimeStart = (new Date(timeStarta)).getTime()
-            let matchTimeEnd = (new Date(timeEnda)).getTime()
+            let date = `${Y}${seperator}${M}${seperator}${D}`
+            let timeStarta = `${date} ${timeStart}:00` //格式：2019-09-18 10:00
+            let timeEnda = `${date} ${timeEnd}:00` //加:00 苹果格式有坑：2019-09-18 10:00:00
+            let matchTimeStart = this._tTimes(timeStarta)
+            let matchTimeEnd = this._tTimes(timeEnda)
+
             this.setData({
               orders: arr,
               carts,
@@ -135,7 +137,7 @@ Page({
               matchTimeStart,
               matchTimeEnd
             })
-            console.log("-订单orderChange：", carts)
+            // console.log("-订单orderChange：", carts)
           }
           else {
             this.setData({
@@ -182,10 +184,10 @@ Page({
             const M = `${this.data.date}`.slice(4, 6)//截取月
             const D = `${this.data.date}`.slice(6)//截取日
             let date = `${Y}${seperator}${M}${seperator}${D}`
-            let timeStarta = `${date} ${timeStart}`
-            let timeEnda = `${date} ${timeEnd}`
-            let matchTimeStart = (new Date(timeStarta)).getTime()
-            let matchTimeEnd = (new Date(timeEnda)).getTime()
+            let timeStarta = `${date} ${timeStart}:00` //格式：2019-09-18 10:00
+            let timeEnda = `${date} ${timeEnd}:00` //加:00 苹果格式有坑：2019-09-18 10:00:00
+            let matchTimeStart = this._tTimes(timeStarta)
+            let matchTimeEnd = this._tTimes(timeEnda)
 
           //更新数据
             this.setData({
@@ -200,12 +202,7 @@ Page({
               matchTimeStart: matchTimeStart,
               matchTimeEnd: matchTimeEnd,
             })
-        console.log("+列表orderChange：", arr)
-        console.log("+订单orderChange：", carts)
-        // console.log("+timeStart：", timeStarta, matchTimeStart, "timeEnd：", timeEnda, matchTimeEnd)
       }
-
-      // this._orderChange(e)
     },
     orderAccept(e) {
       console.log('当前选择：', e.currentTarget)
@@ -240,10 +237,11 @@ Page({
             const str = carts[0].time.indexOf('-')
             const timeStart = carts[0].time.slice(0, str)//截取时间
             const timeEnd = carts[carts.length - 1].time.slice(str + 1)
-            let timeStarta = `${this.data.date} ${timeStart}`
-            let timeEnda = `${this.data.date} ${timeEnd}`
-            let matchTimeStart = (new Date(timeStarta)).getTime()
-            let matchTimeEnd = (new Date(timeEnda)).getTime()
+            let date = `${Y}${seperator}${M}${seperator}${D}`
+            let timeStarta = `${date} ${timeStart}:00` //格式：2019-09-18 10:00
+            let timeEnda = `${date} ${timeEnd}:00` //加:00 苹果格式有坑：2019-09-18 10:00:00
+            let matchTimeStart = this._tTimes(timeStarta)
+            let matchTimeEnd = this._tTimes(timeEnda)
 
             //更新订单
             this.setData({
@@ -255,9 +253,6 @@ Page({
               matchTimeStart,
               matchTimeEnd
             })
-            console.log("-订单orderAccept：", carts)
-            console.log("-列表orderAccept：", arr)
-            // console.log("-timeStart：", timeStart, matchTimeStart,"timeEnd：", timeEnd, matchTimeEnd)
           }
           else {
             //更新订单
@@ -303,10 +298,10 @@ Page({
           const M = `${this.data.date}`.slice(4, 6)//截取月
           const D = `${this.data.date}`.slice(6)//截取日
           let date = `${Y}${seperator}${M}${seperator}${D}`
-          let timeStarta = `${date} ${timeStart}`
-          let timeEnda = `${date} ${timeEnd}`
-          let matchTimeStart = (new Date(timeStarta)).getTime()
-          let matchTimeEnd = (new Date(timeEnda)).getTime()
+          let timeStarta = `${date} ${timeStart}:00` //格式：2019-09-18 10:00
+          let timeEnda = `${date} ${timeEnd}:00` //加:00 苹果格式有坑：2019-09-18 10:00:00
+          let matchTimeStart = this._tTimes(timeStarta)
+          let matchTimeEnd = this._tTimes(timeEnda)
 
           //更新订单
           this.setData({
@@ -321,12 +316,7 @@ Page({
             matchTimeStart: matchTimeStart,
             matchTimeEnd: matchTimeEnd,
           })
-          console.log("+列表Accept：", arr)
-          console.log("+订单Accept：", carts)
-          // console.log("+timeStart：", timeStarta, matchTimeStart, "timeEnd：", timeEnda, matchTimeEnd)
       }
-
-      // this._orderChange(e)
     },
     orderChange(e) {
       console.log('当前选择：', e.currentTarget)
@@ -360,10 +350,10 @@ Page({
               const str = carts[0].time.indexOf('-')
               const timeStart = carts[0].time.slice(0, str)//截取时间
               const timeEnd = carts[carts.length - 1].time.slice(str + 1)
-              let timeStarta = `${this.data.date} ${timeStart}`
-              let timeEnda = `${this.data.date} ${timeEnd}`
-              let matchTimeStart = (new Date(timeStarta)).getTime()
-              let matchTimeEnd = (new Date(timeEnda)).getTime()
+              let timeStarta = `${date} ${timeStart}:00` //格式：2019-09-18 10:00
+              let timeEnda = `${date} ${timeEnd}:00` //加:00 苹果格式有坑：2019-09-18 10:00:00
+              let matchTimeStart = this._tTimes(timeStarta)
+              let matchTimeEnd = this._tTimes(timeEnda)
             //更新数据
               this.setData({
                 orders: arr,
@@ -374,7 +364,6 @@ Page({
                 matchTimeStart,
                 matchTimeEnd
               })
-          // console.log("-订单：", carts)
         }else {
           this.setData({
             orders: arr,
@@ -382,8 +371,7 @@ Page({
             num: carts.length,
           })
         }
-        console.log("-orderChange列表：", arr)
-        console.log("-orderChange订单：", carts)
+
       } else {
         //carts ++
           ++num;
@@ -420,10 +408,13 @@ Page({
           const M = `${this.data.date}`.slice(4, 6)//截取月
           const D = `${this.data.date}`.slice(6)//截取日
           let date = `${Y}${seperator}${M}${seperator}${D}`
-          let timeStarta = `${date} ${timeStart}`
-          let timeEnda = `${date} ${timeEnd}`
-          let matchTimeStart = (new Date(timeStarta)).getTime()
-          let matchTimeEnd = (new Date(timeEnda)).getTime()
+          let timeStarta = `${date} ${timeStart}:00` //格式：2019-09-18 10:00
+          let timeEnda = `${date} ${timeEnd}:00` //加:00 苹果格式有坑：2019-09-18 10:00:00
+          let matchTimeStart = this._tTimes(timeStarta)
+          let matchTimeEnd = this._tTimes(timeEnda)
+
+          // let matchTimeStart = (new Date(timeStarta)).getTime()//此方法不兼容苹果手机
+          // let matchTimeEnd = (new Date(timeEnda)).getTime()
 
         //更新数据
           this.setData({
@@ -433,13 +424,12 @@ Page({
             isNext: true,
             carts,
             num: carts.length,
-            timeStart: timeStart,
-            timeEnd: timeEnd,
-            matchTimeStart: matchTimeStart,
-            matchTimeEnd: matchTimeEnd,
+            timeStart,
+            timeEnd,
+            matchTimeStart,
+            matchTimeEnd,
           })
-        console.log("+列表orderChange：", arr)
-        console.log("+订单orderChange：", carts)
+        // console.log("时间转换：", matchTimeStart, matchTimeEnd)
       }
     },
     
@@ -449,18 +439,6 @@ Page({
       wx.navigateTo({
         url: `../orderConfirm/index?date=${this.data.date}&num=${this.data.num}&matchTimeStart=${this.data.matchTimeStart}&matchTimeEnd=${this.data.matchTimeEnd}&timeStart=${this.data.timeStart}&timeEnd=${this.data.timeEnd}&gymName=${this.data.gymName}&fieldId=${this.data.fieldId}&fieldName=${this.data.field.name}&fieldSize=${this.data.fieldSize}&fieldType=${this.data.fieldType}&price=${this.data.price}&carts=${carts}`
       })
-
-      // const route = "../field/fieldOrder/index"
-      // if (app.globalData.loginInfo !== null) {
-      //   let carts = JSON.stringify(this.data.carts)
-      //   wx.navigateTo({
-      //     url: `../orderConfirm/index?date=${this.data.date}&num=${this.data.num}&matchTimeStart=${this.data.matchTimeStart}&matchTimeEnd=${this.data.matchTimeEnd}&timeStart=${this.data.timeStart}&timeEnd=${this.data.timeEnd}&gymName=${this.data.gymName}&fieldId=${this.data.fieldId}&fieldName=${this.data.field.name}&fieldSize=${this.data.fieldSize}&fieldType=${this.data.fieldType}&price=${this.data.price}&carts=${carts}`
-      //   })
-      // } else {
-      //   wx.navigateTo({
-      //     url: `../../login/login?route=${route}`,
-      //   })
-      // }  
     },
 
   // 获取场地列表 order 
@@ -579,6 +557,13 @@ Page({
         var value2 = obj2[property];
         return value1 - value2;     
       }
+    },
+    // 兼容苹果的时间戳转换
+    _tTimes(time) {
+      let fm = time.split(/[- :]/); 
+      let fmS = new Date(fm[0], fm[1] - 1, fm[2], fm[3], fm[4], fm[5]);
+      let tTime = Date.parse(fmS)
+      return tTime
     },
   // showToast
     showToast(title = '选择不连续的时间段，须分多次提交订单', icon = 'error', color = '#ff0000', size = 40) {

@@ -14,13 +14,11 @@ Page({
   onLoad (o) {
     const lastRoute = o.route
     this.setData({lastRoute})
-    console.log("接收：", lastRoute)
     if (app.globalData.userInfo) {
       app.fxLogin(this._init(lastRoute))
     } else {
       wx.getSetting({
         success: (res) => {
-          console.log("调用getSetting成功：", res)
           if (res.authSetting["scope.userInfo"]) {
             this.setData({
               authLogin: false
@@ -39,7 +37,7 @@ Page({
         authLogin: false,
         userInfo: e.detail.userInfo
       })
-      app.globalData.userInfo = e.detail.userInfo
+      // app.globalData.userInfo = e.detail.userInfo
       app.fxLogin(this._init(this.data.lastRoute))
     }
   },

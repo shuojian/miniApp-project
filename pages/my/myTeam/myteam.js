@@ -24,7 +24,7 @@ Page({
       const myTeam = reqModel.getMyTeam()
       myTeam.then(
         res => {
-          console.log('myteam:', res.data)
+          // console.log('myteam:', res.data)
           if (res.data.length >= 3) {
             this.setData({
               isCreat: false

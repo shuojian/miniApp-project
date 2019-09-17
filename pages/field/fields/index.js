@@ -22,7 +22,6 @@ Page({
       key:options.key 
     })
     wxCacheModel.get("fields", reqModel.getFieldList())
-    // this._getGyms()
     this._getFields()
   },
 

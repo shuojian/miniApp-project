@@ -55,7 +55,7 @@
   word-break:break-all;
 }
 .list_title{
-  font-size: 1em;
+  font-size: 1.2em;
   display: flex;
   line-height: 1.4em;
   font-weight:400;

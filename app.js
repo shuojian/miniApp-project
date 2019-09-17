@@ -33,7 +33,6 @@ App({
     //调用登录接口
     wx.login({
       success: (res) => {
-        // console.log('调用登录接口获得:', res)
         if (this.globalData.userInfo && this.globalData.userInfo.rawData && this.globalData.userInfo.encryptedData && this.globalData.userInfo.iv && this.globalData.userInfo.signature) {
           this.fxWxLogin(res.code, cb)
           this.globalData.code = res.code
@@ -44,7 +43,6 @@ App({
             success: (userInfo) => {
               this.globalData.userInfo = userInfo
               this.fxWxLogin(res.code, cb)
-              // console.log('调用getUserInfo:', userInfo)
             },
             fail: (res) => {
               wx.showModal({
@@ -129,70 +127,5 @@ App({
   hideLoading() {
     wx.hideToast()
     wx.hideNavigationBarLoading()
-  },
-  
-  // saveUserTrail: function (longitude, latitude) {
-  //   if (latitude && longitude && this.globalData.loginInfo && this.globalData.loginInfo.token) {
-  //     wx.request({
-  //       url: this.globalData.baseURL + 'u/saveUserTrail',
-  //       data: {
-  //         token: this.globalData.loginInfo.token,
-  //         longitude: longitude,
-  //         latitude: latitude
-  //       },
-  //       header: {
-  //         'content-type': 'application/x-www-form-urlencoded'
-  //       },
-  //       complete: function (res) {
-  //         console.log(res)
-  //       }
-  //     })
-  //   }
-  // },
-
-  // getUserInfo: function (otherUserCode, cb) {
-  //   this.showLoading()
-  //   wx.request({
-  //     url: this.globalData.baseURL + 'u/view',
-  //     data: {
-  //       token: this.globalData.loginInfo.token,
-  //       otherUserCode: otherUserCode
-  //     },
-  //     header: {
-  //       'content-type': 'application/x-www-form-urlencoded'
-  //     },
-  //     success: (res) => {
-  //       console.log("getUserInfo:", res)
-  //       if (res.data.code == 0 && res.data.data) {
-  //         typeof cb == "function" && cb(res.data.data)
-  //       }
-  //     },
-  //     complete: (res) => {
-  //       this.hideLoading()
-  //     }
-  //   })
-  // },
-
-  // changeSetting(cb) {
-  //   wx.showModal({
-  //     title: '提示',
-  //     content: '请您授权',
-  //     showCancel: false,
-  //     success: (res) => {
-  //       wx.openSetting({
-  //         success: (res) => {
-  //           console.log("授权成功：", res)
-  //           if (res.authSetting && res.authSetting["scope.userLocation"]) {
-  //             //this.getLoginInfo(cb)
-  //           } else {
-  //             this.changeSetting(cb)
-  //           }
-  //         },
-  //         fail: (res) => {
-  //           this.changeSetting(cb)
-  //         }
-  //       })
-  //     }
-  //   })
-  // },
+  }
 })

@@ -136,16 +136,19 @@ Page({
         const members = res[1].data //球队队员
         const creator = members.find((x) => { return x.userCode == team.leaderUserCode }) //球队创建者
         const creatorUserCode = creator.userCode //球队创建者userCode
-        const destUserCode = app.globalData.loginInfo.userCode //当前用户userCode
-        if (destUserCode == creatorUserCode) {
-          this.setData({
-            isCreator: true,
-            isTeam: true,
-            isMember: true,
-            isLink: true,
-            destUserCode,
-          })
+        if (app.globalData.loginInfo !== null){
+          const destUserCode = app.globalData.loginInfo.userCode //当前用户userCode
+          if (destUserCode == creatorUserCode) {
+            this.setData({
+              isCreator: true,
+              isTeam: true,
+              isMember: true,
+              isLink: true,
+              destUserCode,
+            })
+          }
         }
+      
         this.setData({
           team,
           members,
