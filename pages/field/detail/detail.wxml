@@ -7,15 +7,14 @@
 
 <view class="page_bd">
   <!-- 场地列表 -->
-  <view class="title-block">{{gym.gymName}} 场地列表</view> 
-  <view class="container">
-    <view wx:if="{{fields.length == 0}}" class='padding'>今日暂无场地</view>
-    <view wx:else>
-      <block wx:key="id" wx:for="{{fields}}">
-        <d-field field="{{item}}" gymName="{{gym.gymName}}"/>
-      </block>
-    </view>
+  <view class="section-title_left">{{gym.gymName}} 场地列表</view> 
+  <view wx:if="{{fields.length == 0}}" class='padding'>今日暂无场地</view>
+  <view wx:else>
+    <block wx:key="id" wx:for="{{fields}}">
+      <d-field field="{{item}}" gymName="{{gym.gymName}}"/>
+    </block>
   </view>
+  
   <!-- / 场地列表 -->
   <!-- 简介 -->
   <d-info isGym="{{true}}" gym="{{gym}}"/>

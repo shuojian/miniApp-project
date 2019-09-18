@@ -12,7 +12,7 @@
 
     <view class='page-bd'>
       <!-- 所在球队 -->
-      <view class="cell-title"> 
+      <view class="section-title_left"> 
         <text class='text'>所在球队</text> 
       </view>
 
@@ -27,7 +27,7 @@
       <!-- / 所在球队 -->
 
       <!-- 个人参数 -->
-      <view class="cell-title"> 
+      <view class="section-title_left"> 
         <text class='text'>个人参数数据统计</text> 
       </view>
       <view class="section">

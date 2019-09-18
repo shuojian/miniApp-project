@@ -70,7 +70,7 @@
         auto-height="{{true}}" 
         value="{{teamDesc}}"/>
   </view>
-  <view class='p-20'><button class='d-btn-primary' form-type='submit'>确定修改</button></view>
+  <view class='p-20'><button class='d-btn-primary d-btn' form-type='submit'>确定修改</button></view>
 </form>
 
 <view bindtap='disableTeam' class="btn-delete" >  册除球队 </view>

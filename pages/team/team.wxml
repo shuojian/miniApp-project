@@ -1,5 +1,5 @@
 
-<!-- <view class='container'>
+<!-- <view class=''>
   <block wx:key="id" wx:for="{{teams}}">
     <d-team team="{{item}}"/>
   </block>
@@ -13,11 +13,9 @@
 
 <loadmore show="true" type="{{loading?'loading':'end'}}" line="true">
   <view slot="content">
-     <view class='container'>
-        <block wx:key="id" wx:for="{{teams}}">
-          <d-team team="{{item}}"/>
-        </block>
-      </view>
+    <block wx:key="id" wx:for="{{teams}}">
+      <d-team team="{{item}}"/>
+    </block>
   </view>
 </loadmore>
 

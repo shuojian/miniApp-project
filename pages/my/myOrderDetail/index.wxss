@@ -1,4 +1,4 @@
-.container{
+.section{
   background: #fff;
   font-size: 0.8rem;
   line-height: 1.8rem;

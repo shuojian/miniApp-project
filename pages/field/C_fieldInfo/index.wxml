@@ -2,7 +2,7 @@
   <image src="{{field.logoUrl}}"></image>
 </view> -->
 <view wx:if="{{isGym == true}}">
-  <view class="title-block">{{gym.gymName}}简介</view>
+  <view class="section-title_left">{{gym.gymName}}简介</view>
   <view class="container">
     <view class="fieldInfo">
       <view class="addr"><i class="iconfont icon-dizhi"></i> {{gym.gymAddr}}</view>

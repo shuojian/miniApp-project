@@ -466,22 +466,18 @@ page {
   margin-right: 0.7rem; }
 
 /*btn*/
-.d-btn {
+.d-btn, .btn-bottom,
+.d-btn-bottom {
   display: flex;
   align-items: center;
+  justify-content: center;
   font-weight: 500;
   border: 2rpx solid transparent;
-  padding: 1rem 0.5rem;
+  padding: 0.5em 1em;
   font-size: 1.2em;
-  line-height: 1.4rem;
-  border-radius: 8rpx; }
-
-.d-btn-primary {
-  padding: 1rem 0.5rem;
-  font-size: 1.2em;
-  line-height: 1.4rem;
+  line-height: 1.7em;
   border-radius: 8rpx;
-  color: color-yiq(#3b5999);
+  color: #fff;
   background: #3b5999 linear-gradient(180deg, #5872a8, #3b5999) repeat-x;
   border-color: #3b5999; }
 
@@ -491,18 +487,11 @@ page {
   bottom: 30rpx;
   left: 30rpx;
   right: 30rpx;
-  z-index: 99;
-  color: color-yiq(#3b5999);
-  background: #3b5999 linear-gradient(180deg, #5872a8, #3b5999) repeat-x;
-  border-color: #3b5999;
-  padding: 1rem 0.5rem;
-  font-size: 1.2em;
-  line-height: 1.4rem;
-  border-radius: 0 !important; }
+  z-index: 99; }
 
 .d-btn-cc {
   z-index: 99;
-  color: color-yiq(#3b5999);
+  color: #fff;
   background: #3b5999 linear-gradient(180deg, #5872a8, #3b5999) repeat-x;
   border-color: #3b5999;
   padding: 30rpx 2rpx;
@@ -523,12 +512,12 @@ page {
 
 .list-btn {
   display: inline-block;
-  color: color-yiq(#3b5999);
+  color: #fff;
   background: #3b5999 linear-gradient(180deg, #5872a8, #3b5999) repeat-x;
   border-color: #3b5999;
   padding: 18rpx 14rpx;
   font-size: 1.2em;
-  line-height: 1.4rem;
+  line-height: 1.7em;
   border-radius: 60rpx; }
 
 /*components*/
@@ -571,7 +560,7 @@ page {
   -webkit-align-items: center;
   align-items: center;
   position: relative;
-  width: 100%;
+  /* width: 100%; */
   min-height: 88rpx;
   color: #3c3c3c;
   font-size: 1em;
@@ -648,10 +637,11 @@ page {
 
 .section-title_left {
   color: #3b5999;
-  margin-bottom: 12px;
-  border-left: 2px solid;
-  line-height: 0.7rem;
-  padding-left: 15rpx; }
+  font-weight: 600;
+  margin: 30rpx;
+  border-left: 6rpx solid;
+  line-height: 0.8rem;
+  padding-left: 20rpx; }
 
 /*tags*/
 .tag {
@@ -671,19 +661,19 @@ page {
   border-radius: 50rpx; }
 
 .tag-primary {
-  color: color-yiq(#3b5999);
+  color: #fff;
   background-color: #3b5999; }
 
 .tag-secondary {
-  color: color-yiq(#ff6363);
+  color: #fff;
   background-color: #ff6363; }
 
 .tag-warning {
-  color: color-yiq(#ffc107);
+  color: #212529;
   background-color: #ffc107; }
 
 .tag-gray {
-  color: color-yiq(#6c757d);
+  color: #fff;
   background-color: #6c757d; }
 
 .tag-plain-primary {
@@ -710,4 +700,4 @@ page {
   background-image: none;
   border-color: #6c757d; }
 
-/*# sourceMappingURL=football.min.wxss.map */
+/*# sourceMappingURL=football.wxss.map */

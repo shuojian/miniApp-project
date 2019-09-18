@@ -109,11 +109,9 @@
     }
 
   .btn-total{
-    text-align: center;
-    width:40%;
+    width:50%;
+    margin-left:-50%;
     color:#ffff00;
-    font-size: 1.5rem;
-    line-height: 3rem;
   }
 
   .btn-disable{

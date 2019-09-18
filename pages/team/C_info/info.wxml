@@ -3,7 +3,7 @@
 
 <view class='page-bd'>
   <!-- 球队统计 -->
-  <view class="cell-title"> <text class='text'>{{team.teamName}}球队统计</text> </view>
+  <view class="section-title_left"> <text class='text'>{{team.teamName}}球队统计</text> </view>
   <view class='section'>
       <l-grid row-num="4" show-border="{{true}}">
         <l-grid-item key="one" slot="one">
@@ -34,7 +34,7 @@
     <!-- 个人参数 -->
   </view>
   
-  <view class="cell-title"><text class='text'>近期比赛</text></view>
+  <view class="section-title_left"><text class='text'>近期比赛</text></view>
   <view wx:if="{{isEnvent}}" class="text-gray p-base bg-f">{{team.teamName}}</view>
   <view wx:else class="text-gray p-base bg-f">近期无赛事</view>
     

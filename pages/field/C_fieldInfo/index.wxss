@@ -10,22 +10,22 @@
   max-height: 300rpx;
 } */
 
-.title{
+/* .title{
   font-weight: 500; 
   color:#3b5999; 
   margin:6rpx 0 10rpx 0; 
   line-height: 1.2rem;
-  }
-  .title-block{
-  font-weight: 600; 
+  } */
+.section-title_left{
   color:#3b5999; 
-  margin:20rpx; 
-  padding-left:20rpx; 
-  border-left:6rpx solid;
-  line-height: 1rem;
-  }
+  font-weight: 600;
+  margin:30rpx; 
+  border-left:6rpx solid; 
+  line-height: 0.8rem;  
+  padding-left:20rpx;
+}
 .addr{
-font-size: 0.8rem;
+font-size: 0.9em;
 color:#777;
 }
 

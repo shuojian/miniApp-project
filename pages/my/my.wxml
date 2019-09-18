@@ -37,7 +37,7 @@
         <l-list title="我的订单" bind:lintap="toMyOrder" icon="order"/>
       </view>
     <!--/ 我的列表 -->
-      <view class="section mt-10 p-15 fz-14">
+      <view class="section mt-10 p-15">
         <l-button special="{{true}}" open-type="share">
           <l-icon name="share" /> <i class="ml-10">分享梦舟</i> 
         </l-button>

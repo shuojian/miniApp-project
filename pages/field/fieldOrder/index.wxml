@@ -1,4 +1,4 @@
-<view class='container'>
+
   <l-tabs bind:linchange="sDate" 
           equal-width="true" 
           scrollable="true" 
@@ -121,7 +121,7 @@
       <view class='btn-text'>{{buy}}</view>
     </button>
   <!-- / 提交按钮 -->
-</view>
+
 
 <l-message/>
 <l-toast />

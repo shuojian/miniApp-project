@@ -11,7 +11,7 @@
         placeholder="请输入申请说明 / 或者告诉队长你是谁 "
         auto-height="{{true}}" 
         value="{{teamDesc}}"/>
-    <view style="margin-top:50rpx;"><button class='d-btn-primary' form-type='submit'>提交</button></view>    
+    <view style="margin-top:50rpx;"><button class='d-btn-primary d-btn' form-type='submit'>提交</button></view>    
   </form>
 </view>
 

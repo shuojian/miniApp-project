@@ -16,7 +16,7 @@
       </view>
     </view> -->
     
-    <l-input l-class="mrl--15" label="球队名称" name="teamName"  placeholder="输入名称" />
+    <l-input l-class="mx--15" label="球队名称" name="teamName"  placeholder="输入名称" />
 
     <view class='item'>
       <view class='item-left'>所在地区</view>
@@ -63,7 +63,7 @@
       <view class='item-left'>入队验证码</view>
       <view class='item-right'>3359</view>
     </view> -->
-    <view class='mtb-10'>球队简介</view>
+    <view class='my-10'>球队简介</view>
     <l-textarea 
         name="teamDesc" 
         indicator="{{true}}" 
@@ -71,7 +71,7 @@
         auto-height="{{true}}" 
         placeholder=" 球队简介~"  />
   </view>
-  <view class='p-20'><button class='d-btn-primary' form-type='submit'>创建球队</button></view>
+  <view class='p-20'><button class='d-btn-primary d-btn' form-type='submit'>创建球队</button></view>
 </form>
 
 <l-toast />

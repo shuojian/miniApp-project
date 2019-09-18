@@ -22,7 +22,7 @@
     </l-radio-group>
 
   </view>
-  <view class='p-20'><button class='d-btn-primary' form-type='submit'>确定修改</button></view>
+  <view class='p-20'><button class='d-btn-primary d-btn' form-type='submit'>确定修改</button></view>
 </form>
 
   <view bindtap='leaveTeam' class="btn-delete" > 退出球队 </view>

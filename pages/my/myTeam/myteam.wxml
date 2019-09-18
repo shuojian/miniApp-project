@@ -15,7 +15,7 @@
     </view>
 
     <view class='p-20' wx:if="{{isCreat}}">
-      <button bindtap='creatTeam' class='d-btn-primary'>创建球队</button>
+      <button bindtap='creatTeam' class='d-btn-primary d-btn'>创建球队</button>
     </view>
   </view>
 </view>

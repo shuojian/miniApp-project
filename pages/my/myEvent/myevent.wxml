@@ -9,7 +9,7 @@
         </block>
       </view>
       <noData wx:else/>
-      <button class='d-btn-primary'  bindtap="onTap">创建赛事</button>
+      <button class='d-btn-primary d-btn'  bindtap="onTap">创建赛事</button>
     </view>
   </view>
 </view>
