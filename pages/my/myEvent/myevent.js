@@ -57,7 +57,7 @@ Page({
     wx.lin.showDialog({
       type: "alert",
       title: "进驻赛事",
-      content: "请联系QQ123456789"
+      content: "请联系：13888761796 或 QQ 409524497"
     })
   },
   onShareAppMessage: function (res) {

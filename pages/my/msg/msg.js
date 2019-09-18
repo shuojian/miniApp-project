@@ -17,13 +17,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (o) {
-    console.log('传递数据:', o)
+    // console.log('传递数据:', o, app.globalData.loginInfo)
     const bid = o.bid
-    const team = o.team
+    // const team = o.team
     this.setData({
-      teamId: bid
+      teamId: bid,
+      destUserCode: app.globalData.loginInfo.userCode
     })
     this._getMyTeamMsgs(bid)
+
   },
 
   _getMyTeamMsgs(bid) {
@@ -31,10 +33,9 @@ Page({
     const myTeamMsgs = reqModel.getMyTeamMsgs(bid)
     myTeamMsgs.then(
       res => {
-        console.log('myTeamMsgs:', res.data)
+        // console.log('myTeamMsgs:', res)
         this.setData({
           myTeamMsgs: res.data,
-          // destUserCode: res.data.destUserCode
         })
         wx.hideLoading()
       })
