@@ -5,7 +5,7 @@ var isLoading = false;
 Page({
   data: {
     lastRoute: null,
-    authLogin: true,
+    authLogin: true, //需要登录
     inited: false,
     parentUserCode: null,
     userInfo: {},
@@ -14,6 +14,7 @@ Page({
   onLoad (o) {
     const lastRoute = o.route
     this.setData({lastRoute})
+    
     if (app.globalData.userInfo) {
       app.fxLogin(this._init(lastRoute))
     } else {
@@ -34,10 +35,10 @@ Page({
   getUserInfo(e) {
     if (e.detail.errMsg == "getUserInfo:ok") {
       this.setData({
-        authLogin: false,
+        authLogin: false, //是否登录
         userInfo: e.detail.userInfo
       })
-      // app.globalData.userInfo = e.detail.userInfo
+      app.globalData.userInfo = e.detail.userInfo
       app.fxLogin(this._init(this.data.lastRoute))
     }
   },

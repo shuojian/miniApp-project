@@ -1,3 +1,4 @@
 @import 'common/iconfont/iconfont.wxss';
 /* @import 'common/football.wxss'; */
 @import 'common/football.min.wxss';
+/* test git */

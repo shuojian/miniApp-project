@@ -9,7 +9,12 @@ const api = {
   // event_url: 'event/page',
 
   // 赛事
-  match_url: 'match/page',
+  event_url: 'event/page',
+  eventDetail_url: 'event/getById',
+  eventListTeam_url: 'event/listTeam',
+  eventListTeamByGroup_url: 'event/listTeamByGroup',
+  eventMatch_url: 'match/page',
+  eventListMember_url: 'event/listMember',
 
   // 场地
   gymImgs_url: 'gym/listSwiperImgs',
@@ -27,6 +32,7 @@ const api = {
   teamDetail_url: 'team/getById',
   teamMember_url: 'team/listMember',
   creatTeam_url: 'team/create',
+  updateTeam_url: 'team/update',
 
   applyForJoinTeam_url: 'team/applyForJoin',
   applyAcceptTeam_url: 'team/join',
@@ -43,8 +49,15 @@ const api = {
   myOrder_url: 'sportsFieldOrder/queryMyOrder',
   myOrderDetail_url: 'sportsFieldOrder/getById',
   // getMyOrder_url: 'sportsFieldOrder/getMyOrder',
+
+  //post
+  createOrder_url: 'sportsFieldOrder/create',
+  engageOrder_url: 'sportsFieldOrder/engage',
+  payOrder_url: 'sportsFieldPay/payOrder',
+  resetOrder_url: 'sportsFieldPay/resetOrder',
   
   uploap_url: 'file/upload',
+  uploapToWxCos_url: 'file/uploadToWxCos',
   pageLimit:12
 }
 

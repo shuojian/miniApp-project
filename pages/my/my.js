@@ -49,12 +49,12 @@ Page({
         authorized: true
       })
       //调用登录接口
-      app.fxLogin(this._init)
+      app.fxLogin(this._init())
     }
   },
 
   _init() {
-    if (app.globalData.loginInfo.inReview == 'N') {
+    if (app.globalData.loginInfo && app.globalData.loginInfo.inReview == 'N') {
       this.setData({
         inited: true
       })

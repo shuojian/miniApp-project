@@ -7,11 +7,12 @@ const app = getApp()
 
 Page({
   data: {
-    teams:[],
-    page: 1,//请求页数
-    pageLimit: 0,//页面数据条数
-    pageCount: 0,//总页数
-    count:0,//数据总数
+    teams:null,
+
+    page: 1,        //请求页数
+    pageLimit: 0,   //页面数据条数,全局配置
+    pageCount: 0,   //总页数
+    count:0,        //数据总数
     loading: false,
     loaded: false,
     // inputShowed: false,
@@ -19,45 +20,30 @@ Page({
   },
 
   onLoad() {
-    wxCacheModel.get("teams", reqModel.getTameList())
     let pageLimit = app.globalData.pageLimit
-    console.log("数据类型", typeof (pageLimit))
     this.setData({ pageLimit })
-    this._getTeams()
+
+    this.getTeams()
   },
 
-  _getTeams() {
-    const teams = reqModel.getTameList()
-    teams.then(
-      res=>{
-        wx.stopPullDownRefresh()
-        this.setData({
-          teams: res.data,
-          count: res.count,
-          pageCount: Math.ceil(res.count / this.data.pageLimit),
-        })
-        wxCacheModel.put("teams", res.data, 1)
-      }
-    )
-  },
-  _getMoreTeams() {
-    let page = this.data.page
-    const teams = reqModel.getTameList(page)
-    teams.then(
-      (res) => {
-        wx.stopPullDownRefresh()
-        const teams = this.data.teams.concat(res.data) //新旧数据合并
-        this.setData({
-          teams
-        })
-        wxCacheModel.put("teams", res.data, 1)
-      })
-  },
-
-  _clearCache() {
+  async getTeams() {
+    const teams = await reqModel.getTameList()
+    wx.stopPullDownRefresh()
     this.setData({
-      teams: []
-    });
+      teams: teams.data,
+      count: teams.count,
+      pageCount: Math.ceil(teams.count / this.data.pageLimit),
+    })
+  },
+
+  async getMoreTeams() {
+    let page = this.data.page
+    let newTeams = await reqModel.getTameList(page)
+    wx.stopPullDownRefresh()
+    let teams = this.data.teams.concat(newTeams.data) //新旧数据合并
+    this.setData({
+      teams
+    })
   },
 
   onShareAppMessage(res) {
@@ -94,5 +80,11 @@ Page({
         loaded:true
       })
     }  
-  }
+  },
+
+  _clearCache() {
+    this.setData({
+      teams: null
+    });
+  },
 })

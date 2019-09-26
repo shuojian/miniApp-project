@@ -1,7 +1,7 @@
 
 <view class="container">
   <image class="app_avatar" src="/img/logo.png" />
-  <view class="app_name">梦州体育</view>
-  <view class="desc">授权后，梦州才能为你提供此项服务</view>
+  <view class="app_name">梦舟体育</view>
+  <view class="desc">授权后，梦舟才能为你提供此项服务</view>
   <button class='btn-auth' open-type='{{openType}}' bind:getuserinfo="onGetUserInfo">马上授权</button>
 </view>

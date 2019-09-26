@@ -11,38 +11,18 @@ Page({
     page:1
   },
 
-  onLoad: function (options) {
-    // wxCacheModel.get("gyms", reqModel.getGymList())
-    // wxCacheModel.get("swipers", reqModel.getListSwiperImgs())
-    this._getGyms()
+  onLoad(options) {
+    this.getPageData()
   },
 
-  _getGyms: function () {
-    const gyms = reqModel.getGymList()
-    const swipers = reqModel.getListSwiperImgs()
-    gyms.then(
-      res => {
-        wx.stopPullDownRefresh()
-        this.setData({
-          gyms: res.data,
-        })
-        // console.log('场馆列表：', res.data)
-        wxCacheModel.put("gyms", res.data, 1)
-    })
-    swipers.then(
-      res => {
-        this.setData({
-          swipers: res.data
-        })
-      }
-    )
-  },
-
-  _clearCache: function () {
+  //获取页面数据
+  async getPageData () {
+    const [gyms, swipers] = await Promise.all([reqModel.getGymList(), reqModel.getListSwiperImgs()]);
+    wx.stopPullDownRefresh()
     this.setData({
-      gyms: {},
-      swipers:[]
-    });
+      gyms: gyms.data,
+      swipers: swipers.data
+    })
   },
 
   toFields(){
@@ -55,6 +35,7 @@ Page({
       url: `fields/index?key=two`
     })
   },
+  
 
   //分享
   onShareAppMessage(res) {
@@ -67,6 +48,7 @@ Page({
       path: app.globalData.startUrl
     }
   },
+
   //下拉刷新
   onPullDownRefresh() {
     this._clearCache()
@@ -81,5 +63,12 @@ Page({
     })
     this.getGyms();//重新调用请求获取下一页数据
     wx.stopReachBottom()
+  },
+
+  _clearCache: function () {
+    this.setData({
+      gyms: {},
+      swipers: []
+    });
   }
 })

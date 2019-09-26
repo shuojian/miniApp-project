@@ -17,7 +17,6 @@
 }
 .header .state{
   text-align: right;
-  color:#ef4b4b;
 }
 .main{
   display: flex;
@@ -75,4 +74,14 @@
 .btn-plain.danger{
   color:#ef4b4b;
   border:2rpx solid;
+}
+
+.text-success{
+  color:#28a745;
+}
+.text-danger{
+  color:#ef4b4b;
+}
+.text-gray{
+  color:#6c757d;
 }

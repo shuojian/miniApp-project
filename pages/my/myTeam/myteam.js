@@ -18,24 +18,34 @@ Page({
     this.getMyTeams()
   },
 
-  getMyTeams(){
-    if (app.globalData.loginInfo !== null){
-      wx.showLoading()
-      const myTeam = reqModel.getMyTeam()
-      myTeam.then(
-        res => {
-          // console.log('myteam:', res.data)
-          if (res.data.length >= 3) {
-            this.setData({
-              isCreat: false
-            })
-          }
-          this.setData({
-            myTeams: res.data,
-            nodata: false
-          })
-          wx.hideLoading()
+  async getMyTeams(){
+    if (app.globalData.loginInfo){
+      const token = { token: app.globalData.loginInfo.token }
+      const resData = await reqModel.getMyTeam(token)
+      console.log('myTeams -> ', resData)
+      if (resData.data.length >= 3) {
+        this.setData({
+          isCreat: false
         })
+      }
+      this.setData({
+        myTeams: resData.data,
+        nodata: false
+      })
+
+      // myTeam.then(
+      //   res => {
+      //     if (res.data.length >= 3) {
+      //       this.setData({
+      //         isCreat: false
+      //       })
+      //     }
+      //     this.setData({
+      //       myTeams: res.data,
+      //       nodata: false
+      //     })
+      //     wx.hideLoading()
+      //   })
     }
   },
   clearCache: function () {

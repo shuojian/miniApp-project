@@ -1,6 +1,9 @@
 //app.js
-import { promisic } from 'utils/common.js'
 import { api } from 'utils/config.js'
+import { ReqModel } from 'models/request.js'
+import { promisic } from 'utils/common.js'
+const util = require('utils/util.js')
+const reqModel = new ReqModel()
 App({
   globalData: {
     appId: 'wx5e388f9d4a1954c1',
@@ -9,7 +12,7 @@ App({
     code: null,
     parentUserCode: null,
     baseURL: api.base_url,
-    startUrl:api.start_url,
+    startUrl: api.start_url,
     pageLimit: api.pageLimit
   },
 
@@ -25,62 +28,34 @@ App({
     }
   },
 
-  fxLogin(cb) {
+  async fxLogin(cb) {
     if (this.globalData.loginInfo) {
       typeof cb == "function" && cb()
       return
     }
     //调用登录接口
-    wx.login({
-      success: (res) => {
-        if (this.globalData.userInfo && this.globalData.userInfo.rawData && this.globalData.userInfo.encryptedData && this.globalData.userInfo.iv && this.globalData.userInfo.signature) {
+    try{
+      const res = await promisic(wx.login)()
+      console.log('wx.login ->', res)
+      if (this.globalData.userInfo && this.globalData.userInfo.rawData && this.globalData.userInfo.encryptedData && this.globalData.userInfo.iv && this.globalData.userInfo.signature) {
           this.fxWxLogin(res.code, cb)
           this.globalData.code = res.code
-        } else {
-          wx.showLoading()
-          wx.getUserInfo({
-            withCredentials: true,
-            success: (userInfo) => {
-              this.globalData.userInfo = userInfo
-              this.fxWxLogin(res.code, cb)
-            },
-            fail: (res) => {
-              wx.showModal({
-                title: '出错啦',
-                content: '获取用户信息失败',
-                showCancel: false
-              })
-              // typeof cb == "function" && cb()
-            },
-            complete: (res) => {
-              wx.hideLoading()
-            }
-          })
-        }
-      },
-      fail: (res) => {
-        wx.showModal({
-          title: '出错啦',
-          content: 'wx.login:失败',
-          showCancel: false
-        })
+      } 
+      else {
+          const userInfo = await promisic(wx.getUserInfo)()
+          console.log('userInfo ->', userInfo)
+          this.globalData.userInfo = userInfo
+          
+          this.fxWxLogin(res.code, cb)
       }
-    })
+    }
+    catch(err){
+      util.showToast_error('wx.login:失败')
+    }
   },
 
-  fxReLogin: function (cb) {
-    wx.removeStorageSync('loginInfo')
-    this.globalData.loginInfo = null
-    this.fxLogin(cb)
-  },
-
-  fxWxLogin: function (code, cb) {
-    this.showLoading()
-    wx.request({
-      // url: this.globalData.baseURL + 'acc/wxLoginTest',
-      url: this.globalData.baseURL + 'acc/wxLogin',
-      method: 'POST',
-      data: {
+  async fxWxLogin(code, cb) {
+    const data = {
         appId: this.globalData.appId,
         code: code,
         userInfo: this.globalData.userInfo.rawData,
@@ -88,31 +63,29 @@ App({
         iv: this.globalData.userInfo.iv,
         signature: this.globalData.userInfo.signature,
         parentUserCode: this.globalData.parentUserCode
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: (res) => {
-        // console.log('code换取token res:', res)
-        if (res.data.code == 0 && res.data.data && res.data.data.token) {
-          this.globalData.loginInfo = res.data.data
-          this.globalData.loginInfo.lastLoginDate = new Date().getTime()
-          wx.setStorageSync('loginInfo', this.globalData.loginInfo)
-          typeof cb == "function" && cb()
-        }
-      },
-      fail: (res) => {
-        // this.changeSetting(cb)
-        wx.showModal({
-          title: '出错啦',
-          content: '登录失败',
-          showCancel: false
-        })
-      },
-      complete: (res) => {
-        this.hideLoading()
+    }
+
+    try{
+      const res = await reqModel.login(data)
+      console.log('登录后台 ->', res)
+      if (res.code == 0 && res.data && res.data.token) {
+        this.globalData.loginInfo = res.data
+        this.globalData.loginInfo.lastLoginDate = new Date().getTime()
+        wx.setStorageSync('loginInfo', this.globalData.loginInfo) //缓存登录信息
+        typeof cb == "function" && cb()
+      }else{
+        util.showModal(res.code, res.msg, false)
       }
-    })
+    }catch(err){
+      util.showToast_error('登录失败')
+      console.log('err -> ', err)
+    }
+  },
+
+  fxReLogin: function (cb) {
+    wx.removeStorageSync('loginInfo')
+    this.globalData.loginInfo = null
+    this.fxLogin(cb)
   },
 
   showLoading() {

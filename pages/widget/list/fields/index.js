@@ -20,16 +20,10 @@ Component({
    */
   methods: {
     toBook(event) {
-      const bid = this.properties.field.fieldId
-      const name = this.properties.field.fieldName
-      const desc = this.properties.field.fieldDesc
-      const contact = this.properties.field.fieldContactPhone
-      const amount = this.properties.field.amount
       const gymName = this.properties.gymName
-      const fieldType = this.properties.field.fieldType
-      const fieldSize = this.properties.field.fieldSize
+      let data = JSON.stringify(this.properties.field) //传object
       wx.navigateTo({
-        url: `/pages/field/fieldOrder/index?bid=${bid}&fieldSize=${fieldSize}&name=${name}&desc=${desc}&contact=${contact}&amount=${amount}&gymName=${gymName}&fieldType=${fieldType}`
+        url: `/pages/field/fieldOrder/index?data=${data}&gymName=${gymName}`
       })
     },
     toInfo(event) {

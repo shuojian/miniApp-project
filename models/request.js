@@ -1,45 +1,45 @@
 import { HTTP } from '../utils/http.js'
 import { api } from '../utils/config.js'
-const app = getApp()
+// const app = getApp()
 
 class ReqModel extends HTTP {
 /* 赛事 */
   getEventList(page = 1) { //分页
     return this.request({
-      url: `event/page`,
+      url: api.event_url,
       data: {
         page: page,
-        limit: app.globalData.pageLimit
+        limit: api.pageLimit
       }
     })
   }
   getEventDetail(bid) {
     return this.request({
-      url: `event/getById`,
+      url: api.eventDetail_url,
       data: { eventId:bid }
     })
   }
   getEventListTeam(bid) {
     return this.request({
-      url: `event/listTeam`,
+      url: api.eventListTeam_url,
       data: { eventId: bid }
     })
   }
   getEventListTeamGroup(bid) {
     return this.request({
-      url: `event/listTeamByGroup`,
+      url: api.eventListTeamByGroup_url,
       data: { eventId: bid }
     })
   }
   getEventMatch(bid) {
     return this.request({
-      url: `match/page`,
+      url: api.eventMatch_url,
       data: { eventId: bid }
     })
   }
   getEventListMember(bid) {
     return this.request({
-      url: `event/listMember`,
+      url: api.eventListMember_url,
       data: { eventId: bid }
     })
   }
@@ -50,7 +50,7 @@ class ReqModel extends HTTP {
       url: api.team_url,
       data:{
         page:page,
-        limit: app.globalData.pageLimit
+        limit: api.pageLimit
       }
     })
   }
@@ -72,7 +72,23 @@ class ReqModel extends HTTP {
   // 创建球队
   creatTeam(data){
     return this.request({
-      url: app.globalData.baseURL + api.creatTeam_url,
+      url: api.creatTeam_url,
+      method:"POST",
+      data: data
+    })
+  }
+  // 删除球队
+  disableTeam(data){
+    return this.request({
+      url: api.disableTeam_url,
+      method:"POST",
+      data: data
+    })
+  }
+  // 更改球队
+  updateTeam(data){
+    return this.request({
+      url: api.updateTeam_url,
       method:"POST",
       data: data
     })
@@ -89,7 +105,7 @@ class ReqModel extends HTTP {
       url: api.fieldList_url,
       data: {
         page: page,
-        limit: app.globalData.pageLimit
+        limit: api.pageLimit
       }
     })
   }
@@ -98,7 +114,7 @@ class ReqModel extends HTTP {
       url: api.gymList_url,
       data: {
         page: page,
-        limit: app.globalData.pageLimit
+        limit: api.pageLimit
       }
     })
   }
@@ -131,40 +147,93 @@ class ReqModel extends HTTP {
   }
 
 /* 我的 */
-  getMyTeam() {
+  getMyTeam(data) {
     return this.request({
       url: api.myTeam_url,
-      data:{token: app.globalData.loginInfo.token}
+      data: data
+      // {token: app.globalData.loginInfo.token}
     })
   }
-  getMyTeamMsgs(bid) {
+  getMyTeamMsgs(bid, token) {
     return this.request({
       url: api.myTeamMsgs_url,
-      data: { teamId: bid,token: app.globalData.loginInfo.token}
+      data: { 
+        teamId: bid, 
+        token: token
+      }
     })
   }
-  getMyTeamDetail(bid) {
-    return this.request({
-      url: api.myTeamDetail_url,
-      data: { teamId: bid,token: app.globalData.loginInfo.token}
-    })
-  }
+  // getMyTeamDetail(bid, token) {
+  //   return this.request({
+  //     url: api.myTeamDetail_url,
+  //     data: { 
+  //       teamId: bid, 
+  //       token: token 
+  //     }
+  //   })
+  // }
   // getMyOrder() {
   //   return this.request({
   //     url: api.getMyOrder_url,
   //     data: {token: app.globalData.loginInfo.token}
   //   })
   // }
-  queryMyOrder() {
+  queryMyOrder(token) {
     return this.request({
       url: api.myOrder_url,
-      data: {token: app.globalData.loginInfo.token}
+      data: {token: token}
     })
   }
-  getMyOrderDetail(bid){
+  getMyOrderDetail(bid, token){
     return this.request({
       url: api.myOrderDetail_url,
-      data: { orderId: bid,token: app.globalData.loginInfo.token }
+      data: { orderId: bid, token:token}
+    })
+  }
+
+  // 下单
+  createOrder(dataSubmit) {
+    return this.request({
+      url: api.createOrder_url,
+      method: 'POST',
+      data: dataSubmit
+    })
+  }
+  engageOrder(dataSubmit) {
+    return this.request({
+      url: api.engageOrder_url,
+      method: 'POST',
+      data: dataSubmit
+    })
+  }
+  payOrder(token, orderId) {
+    return this.request({
+      url: api.payOrder_url,
+      method: 'POST',
+      data: {
+        token: token,
+        orderId: orderId,
+        useCoin: 'N',
+        useGiftAmount: 'N',
+        payChannel: 'WeChat'
+      }
+    })
+  }
+  resetOrder(token, payId) {
+    return this.request({
+      url: api.resetOrder_url,
+      method: 'POST',
+      data: {
+        token: token,
+        payId: payId
+      }
+    })
+  }
+  login(data) {
+    return this.request({
+      url: api.login_url,
+      method: "POST",
+      data: data
     })
   }
 }

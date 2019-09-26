@@ -17,7 +17,8 @@ Page({
   onLoad: function (options) {
     wx.showLoading()
     const bid = options.bid
-    const detail = reqModel.getMyOrderDetail(bid)
+    const token = app.globalData.loginInfo.token 
+    const detail = reqModel.getMyOrderDetail(bid, token)
 
     detail.then(res => {
       const v1 = res.data

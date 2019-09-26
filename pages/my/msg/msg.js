@@ -30,7 +30,8 @@ Page({
 
   _getMyTeamMsgs(bid) {
     wx.showLoading()
-    const myTeamMsgs = reqModel.getMyTeamMsgs(bid)
+    const token = app.globalData.loginInfo.token
+    const myTeamMsgs = reqModel.getMyTeamMsgs(bid, token)
     myTeamMsgs.then(
       res => {
         // console.log('myTeamMsgs:', res)

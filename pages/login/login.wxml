@@ -13,8 +13,8 @@
 
 <view wx:if="{{authLogin}}" class="row_view auth p-20">
   <l-avatar size="160" src="/img/logo.png" />
-  <view class="ms">授权后，梦州才能为你提供此项服务</view>
-  <button class='mt-50 d-btn-primary d-btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo">请您授权登录</button>
+  <view class="ms">授权后，梦舟才能为你提供此项服务</view>
+  <button class='mt-50 d-btn-primary d-btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo">请你授权登录</button>
 </view>
 
 <!-- d-btn-primary -->

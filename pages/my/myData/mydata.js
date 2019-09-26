@@ -65,14 +65,12 @@ Page({
     this.getMyTeams()
   },
 
-  getMyTeams(){
-    const myTeam = reqModel.getMyTeam()
-    myTeam.then(
-      res => {
-        this.setData({
-          nodata: false,
-          myTeams: res.data,
-        })
+  async getMyTeams(){
+    const token = { token: app.globalData.loginInfo.token }
+    const resData = await reqModel.getMyTeam(token)
+    this.setData({
+      nodata: false,
+      myTeams: resData.data,
     })
   },
 

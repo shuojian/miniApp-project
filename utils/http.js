@@ -1,8 +1,9 @@
 import{ api } from 'config.js'
 const app = getApp()
 const tips = {
-  1005:'ppkey无效',
-  3000:'用户不存在',
+  204:'暂无数据',
+  401:'没有授权',
+  403:'登录错误',
   1:'抱歉，出现一个错误'
 }
 
@@ -30,11 +31,11 @@ class HTTP{
       success: res=> {
         const code = res.statusCode.toString()
           if(code.startsWith('2')){
-            resolve(res.data)
+            resolve(res.data) 
           }
           else{
             reject()
-            const error_code = res.data.error_code
+            const error_code = res.data.code
             this._show_error(error_code)
           }
       },

@@ -1,20 +1,23 @@
 <v-login wx:if="{{!authorized}}" bind:getuserinfo="onGetUserInfo" />
 <block wx:else>
   <view class='bookInfo'>
-    <view class="title">{{gymName}}</view>
+    <view class="title">{{receiveData.gymName}}</view>
     <view class="info">
-      <view class="time">{{timeStart}}</view>
+      <view class="time">{{receiveData.start}}</view>
       <view class="book-detail">
-        <view class="field-info">{{fieldSize}}{{fieldType}}<i wx:if="{{fieldSize == '5人制'}}"> x {{num}}</i></view> 
-        <view>
-          <i wx:if="{{fieldSize == '11人制' && type == 'half'}}">半场 x {{num}}</i>
-          <i wx:elif="{{fieldSize == '11人制' && type == 'full'}}">全场 x {{num/2}}</i>
+        <view class="field-info">
+          {{receiveData.field.fieldSize}}{{receiveData.field.fieldType}}
+          <i wx:if="{{receiveData.fieldSize == '5人制'}}"> x {{receiveData.num}}</i>
         </view> 
-        <view class="feild-name">{{fieldName}}</view> 
+        <view>
+          <i wx:if="{{receiveData.field.fieldSize == '11人制' && type == 'half'}}">半场 x {{receiveData.num}}</i>
+          <i wx:elif="{{receiveData.field.fieldSize == '11人制' && type == 'full'}}">全场 x {{receiveData.num/2}}</i>
+        </view> 
+        <view class="feild-name">{{receiveData.field.name}}</view> 
       </view>
-      <view class="time">{{timeEnd}}</view>
+      <view class="time">{{receiveData.end}}</view>
     </view>
-    <view class="footer">{{date}}</view>
+    <view class="footer">{{receiveData.date}}</view>
   </view>
 
   <form wx:if="{{isGuest}}" bindsubmit="formSubmitGuest" bindreset="formReset">       
@@ -46,7 +49,7 @@
       </view>
     </view>
 
-    <view class='bill'>合计：<i class="mark">￥</i> <i class="num-money">{{price*num}}</i> </view>
+    <view class='bill'>合计：<i class="mark">￥</i> <i class="num-money">{{receiveData.price*receiveData.num}}</i> </view>
     <button class="btn-bottom" formType="submit">
       <view class='btn-text'>确认支付</view>
     </button>
@@ -67,7 +70,7 @@
               type="string" 
               label="球队名" 
               placeholder="球队名" />
-      <l-input wx:if="{{fieldSize == '11人制'}}" 
+      <l-input wx:if="{{receiveData.field.fieldSize == '11人制'}}" 
               name="teamColor" 
               required="{{true}}"
               type="string" 
@@ -77,12 +80,12 @@
 
     <view class='section' style="margin-bottom:20rpx;">
       <view class='p-15'>
-        <view class='section-title_left'>备注</view>
+        <view class='section-title_left px-0'>备注</view>
         <l-textarea name="note" indicator="{{true}}" maxlength="140" auto-height="{{true}}" placeholder=" 备注" />
       </view>
     </view>
 
-    <view class='bill'>合计：<i class="mark">￥</i> <i class="num-money">{{price*num}}</i> </view>
+    <view class='bill'>合计：<i class="mark">￥</i> <i class="num-money">{{receiveData.price*receiveData.num}}</i> </view>
   
     <button class="btn-bottom" formType="submit">
       <view class='btn-text'>确认支付</view>

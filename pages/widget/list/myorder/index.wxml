@@ -1,10 +1,10 @@
-<view class='container' bindtap='onTap' wx:if="{{order.state !== 'closed'}}">
-
+<view class='container' bindtap='onTap' wx:if="{{order.payAmount}}">
+ <!-- wx:if="{{order.state !== 'closed'}} && {{order.payAmount}}" -->
   <view class="header">
     <view>订单号：{{order.orderId}}</view>
-    <view wx:if="{{order.state == 'dispatched'}}" class="state">交易成功</view>
-    <view wx:elif="{{order.state == 'created'}}" class="state">未付款</view>
-    <view wx:else class="state">交易关闭</view>
+    <view wx:if="{{order.payAmount}}" class="state text-success">交易成功</view>
+    <view wx:elif="{{order.state == 'created'}}" class="state text-danger">未付款</view>
+    <view wx:else class="state text-gray">交易关闭</view>
   </view>
 
   <view class="main">
@@ -24,9 +24,10 @@
   <view class="footer">
     <view class='item'>队名：{{order.teamName}}</view>
     <view class='item' wx:if='{{order.teamColor !== "undefined"}}'>队服颜色：{{order.teamColor}}</view>
-    <view class='item' wx:if="{{order.state == 'created'}}">
-      <!-- <view class="btn btn-plain btn-circle danger">去付款</view> -->
-    </view>
+    <view class='item' wx:if="{{order.state == 'closed'}}">已结束</view>
+    <!-- <view class='item' wx:if="{{order.state == 'created'}}">
+      <view class="btn btn-plain btn-circle danger">去付款</view>
+    </view> -->
   </view>
 
 </view>

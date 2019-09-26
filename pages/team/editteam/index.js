@@ -1,5 +1,10 @@
-// pages/me/myteam/newteam/newteam.js
+
+// editteam
+// import { UploadFile } from '../../../models/uploadFile.js'
+import { ReqModel } from '../../../models/request.js'
 var util = require('../../../utils/util.js')
+const reqModel = new ReqModel()
+// const uploadFile = new UploadFile()
 
 //获取应用实例
 var app = getApp()
@@ -33,9 +38,7 @@ Page({
     const teamId = bid
     const attachs = options.attachs
     const teamName = options.teamName
-    // const teamArea = options.teamArea
     const teamType = options.teamType
-    // const teamBelong = options.teamBelong
     const teamDesc = options.teamDesc
     console.log('球队信息：', options)
     this.setData({
@@ -65,41 +68,19 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: (res) => {
-        console.log('图片提交：', res)
+        // console.log('图片提交：', res)
+        // const attachs = uploadFile.UploadFile({ 
+        //   url: 'file/uploadToWxCos', 
+        //   filePath: res.tempFilePaths[0], 
+        //   file: 'teamAvata', 
+        //   refId: this.data.teamId, 
+        //   refType: 'team'
+        // })
         this._uploadFile(res.tempFilePaths[0], 'teamAvata', this.data.teamId, 'team')
         this.setData({
           attachs: res.tempFilePaths[0]
           // attachs: res.data.url
         })
-      }
-    })
-  },
-
-  _uploadFile: function (filePath, file, refId, refType) {
-    wx.showLoading()
-    wx.uploadFile({
-      url: app.globalData.baseURL + 'file/uploadToWxCos',
-      filePath: filePath,
-      name: 'file',
-      method: "POST",
-      formData: {
-        token: app.globalData.loginInfo.token,
-        appId: app.globalData.appId,
-        // duration:
-        file: file,
-        // fileType:,
-        refId: refId || '',
-        refType: refType || '',
-      },
-      success: (res) => {
-        console.log('文件上传信息：', res)
-        // const pic = res.data
-        // this.setData({
-        //   attachsSrc: pic
-        // })
-      },
-      complete: (res) => {
-        wx.hideLoading()
       }
     })
   },
@@ -124,11 +105,9 @@ Page({
   },
 
   /*修改球队*/
-  formSubmit(e) {
+  async formSubmit(e) {
     app.showLoading()
-    console.log('submit：', e.detail.value)
     var upData = e.detail.value
-
     var formData = {
       token: app.globalData.loginInfo.token,
       teamId: this.data.teamId,
@@ -139,95 +118,55 @@ Page({
       teamBelong: upData.teamBelong,
       teamDesc: upData.teamDesc,
     }
-   
-      wx.request({
-        url: app.globalData.baseURL + 'team/update',
-        method: 'POST',
-        data: formData,
-        header: { 'content-type': 'application/x-www-form-urlencoded' },
-        success: (res) => {
-          console.log("球队修改成功:", res)
-          wx.lin.showToast({
-            title: '球队修改成功！',
-            icon: 'success',
-            iconStyle: 'color:#7ec699; size: 60',
-            success() {
-              setTimeout(() => {
-                wx.navigateBack({
-                  delta: 1
-                }), 3000
-              })
-            }
-          })
-        },
-        fail: (error) => {
-          wx.showToast({
-            title: '球队修改出错',
-            icon: 'none',
-            duration: 2000
-          })
-        },
-        complete: (res) => {
-          app.hideLoading()
-        }
-      })
-    },
+
+    const res = await reqModel.updateTeam(formData)
+    util.showToast_success('球队修改成功！')
+    util.backTo(2000, 1)
+  },
   
   /*删除球队*/
-  disableTeam(e) {
-    console.log('删除球队：', e)
-    wx.showModal({
-      title: '确定删除当前球队？',
-      content: '',
-      type: "confirm",
+  async disableTeam(e) {
+    const postData = {
+      token: app.globalData.loginInfo.token,
+      teamId: this.data.teamId,
+    }
+    const res = await util.showModal('确定删除当前球队？')
+    const dis = await reqModel.disableTeam(postData)
+    if (dis.code == "-1") {
+      util.showToast_error('删除球队出现错误，稍后再试')
+      util.backTo(2000, 1)
+    } else {
+      util.showToast_success('球队删除成功！')
+      util.backTo(2000, 3)
+    } 
+  },
+
+  _uploadFile: function (filePath, file, refId, refType) {
+    // UploadFile
+    wx.showLoading()
+    wx.uploadFile({
+      url: app.globalData.baseURL + 'file/uploadToWxCos',
+      filePath: filePath,
+      name: 'file',
+      method: "POST",
+      formData: {
+        token: app.globalData.loginInfo.token,
+        appId: app.globalData.appId,
+        // duration:
+        file: file,
+        // fileType:,
+        refId: refId || '',
+        refType: refType || '',
+      },
       success: (res) => {
-        if (res.confirm) {
-          wx.showLoading()
-          wx.request({
-            url: app.globalData.baseURL + 'team/disable',
-            method: 'POST',
-            data: {
-              token: app.globalData.loginInfo.token,
-              teamId: this.data.teamId,
-            },
-            header: { 'content-type': 'application/x-www-form-urlencoded' },
-            success: (res) => {
-              console.log("请求成功:", res)
-              if (res.data.code == "-1") {
-                wx.lin.showToast({
-                  title: '删除球队出现错误，稍后再试',
-                  icon: 'error',
-                  iconStyle: 'color:#ff0000; size: 60',
-                  success: () => {
-                    setTimeout(() => {
-                      wx.navigateBack({
-                        delta: 1
-                      }), 3000
-                    })
-                  }
-                })
-              } else {
-                wx.lin.showToast({
-                  title: '球队删除成功！',
-                  icon: 'success',
-                  iconStyle: 'color:#7ec699; size: 60',
-                  success: () => {
-                    setTimeout(() => {
-                      wx.navigateBack({
-                        delta: 2
-                      }), 3000
-                    })
-                  }
-                })
-              }
-            },
-            complete: (res) => {
-              wx.hideLoading()
-            }
-          })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
+        console.log('文件上传信息：', res)
+        // const pic = res.data
+        // this.setData({
+        //   attachsSrc: pic
+        // })
+      },
+      complete: (res) => {
+        wx.hideLoading()
       }
     })
   },

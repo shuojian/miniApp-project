@@ -8,7 +8,7 @@ const app = getApp()
 
 Page({
   data: {
-    authorized: false,
+    // authorized: false,
     userInfo:{},
     isShow: false,
     isCreator: false,
@@ -27,8 +27,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading()
-    this.userAuthorized()
+    if (app.globalData.userInfo){
+      this.setData({
+        userInfo: app.globalData.userInfo
+      })
+    }
     this._getData(options)
   },
   /*申请加入*/
@@ -156,15 +159,9 @@ Page({
         })
         wx.hideLoading()
       })
-    // detail.then(res => {
-    //   this.setData({ team: res.data })
-    // })
-
-    // members.then(res => {
-    //   this.setData({ members:res.data })
-    // })
   },
-  _clearCache: function () {
+
+  _clearCache() {
     this.setData({
       team: {},
       members: {}
@@ -177,6 +174,7 @@ Page({
     this._getData(options)
     wx.stopPullDownRefresh()
   },
+  
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
@@ -186,49 +184,5 @@ Page({
       title: '梦舟体育',
       path: '/pages/index/index'
     }
-  },
-  // 授权登录
-   userAuthorized() {
-    promisic(wx.getSetting)()
-      .then(data => {
-        if (data.authSetting['scope.userInfo']) {
-          //调用登录接口
-          app.fxLogin(this._init)
-          return promisic(wx.getUserInfo)()
-        }
-        return false
-      })
-      .then(data => {
-        if (!data) return
-        this.setData({
-          authorized: true,
-          userInfo: data.userInfo
-        })
-        // wx.hideLoading()
-      })
-    },
-
-    onGetUserInfo(event) {
-    const userInfo = event.detail.userInfo
-      if (userInfo) {
-        this.setData({
-          userInfo,
-          authorized: true
-        })
-        app.globalData.userInfo = userInfo
-        //调用登录接口
-        app.fxLogin(this._init)
-      }
-    },
-
-    _init() {
-      if (app.globalData.loginInfo.inReview == 'N') {
-        this.setData({
-          inited: true
-        })
-      }
-      // wx.reLaunch({
-      //   url: 'my'
-      // })
-    },
+  }
 })

@@ -4,11 +4,8 @@ const reqModel = new ReqModel()
 const app = getApp()
 Page({
   data: {
-    authorized: false,
-    userInfo:null,
-    myOrders:{},
+    myOrders:null,
     nodata: true,
-    date:null,
     pagenum:1,
   },
   onLoad(options) {
@@ -18,8 +15,9 @@ Page({
   },
 
   getMyOrders(){
-    if (app.globalData.loginInfo !== null){
-      const myOrder = reqModel.queryMyOrder()
+    if (app.globalData.loginInfo){
+      const token = app.globalData.loginInfo.token
+      const myOrder = reqModel.queryMyOrder(token)
       myOrder.then(
         res => {
           const v1 = res.data
@@ -69,14 +67,14 @@ Page({
     }
   },
 
-  _parserDate:(date)=> {
-    var t = Date.parse(date);
-    if (!isNaN(t)) {
-      return new Date(Date.parse(date.replace(/-/g, "/")));
-    } else {
-      return new Date();
-    }
-  },
+  // _parserDate:(date)=> {
+  //   var t = Date.parse(date);
+  //   if (!isNaN(t)) {
+  //     return new Date(Date.parse(date.replace(/-/g, "/")));
+  //   } else {
+  //     return new Date();
+  //   }
+  // },
 
     //下拉刷新
   onPullDownRefresh: function () {

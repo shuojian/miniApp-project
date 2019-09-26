@@ -115,7 +115,7 @@
   <!-- / 选择信息 -->
 
   <!-- 提交按钮 -->
-    <button class="btn-bottom {{isNext == false ? 'btn-disable':''}}" bindtap="orderConfirm" style='opacity: {{opacity}}'>
+    <button class="btn-bottom {{isNext == false ? 'btn-disable':''}}" bindtap="orderConfirm" style="opacity: {{isNext == false ? '0.2':'1'}}">
       <view class='btn-total'>
         <i class="mark">￥</i> {{num*price}} </view>
       <view class='btn-text'>{{buy}}</view>
@@ -126,16 +126,4 @@
 <l-message/>
 <l-toast />
 
-<!-- <view class="section p-15 orderInfo">
-    <view>{{field.fieldType}}：{{gymName}} · {{field.name}} · ￥{{field.amount}}/小时</view>
-    <view>{{field.contact}}</view>
-  </view> -->
-   <!-- 选择日期 -->  
-  <!-- <view class="picker_group"> 
-    选择日期： 
-    <picker mode="date" value="{{date}}" bindchange="bindDateChange">  
-      <view class="picker">{{date}}</view>  
-    </picker>      
-  </view> -->
-  <!-- / 选择日期 --> 
 
