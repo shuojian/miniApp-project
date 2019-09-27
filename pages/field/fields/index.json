@@ -1,8 +1,8 @@
 {
   "usingComponents": {
+    "nodata": "../../widget/nodata/index",
     "l-tabpanel": "/components/widget/tabpanel/index",
     "l-tabs": "/components/widget/tabs/index",
-    "d-gym":"../widget/list/gym/index",
     "d-field": "../../widget/list/fields"
   },
   "navigationBarTitleText": "场馆列表",

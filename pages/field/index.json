@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "nodata": "../widget/nodata/index",
     "d-gym":"../widget/list/gym/index"
   },
   "navigationBarTitleText": "附近球场",

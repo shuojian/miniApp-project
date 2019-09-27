@@ -10,8 +10,8 @@
   </view>
   <view class="loaded" hidden="{{!loaded}}">没有更多数据了……</view>
 </view> -->
-
-<loadmore show="true" type="{{loading?'loading':'end'}}" line="true">
+<nodata wx:if='{{noData}}'/>
+<loadmore wx:else show="true" type="{{loading?'loading':'end'}}" line="true">
   <view slot="content">
     <block wx:key="id" wx:for="{{teams}}">
       <d-team team="{{item}}"/>

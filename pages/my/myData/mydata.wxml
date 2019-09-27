@@ -17,12 +17,12 @@
       </view>
 
       <view class="section">
-        <view wx:if="{{!noData}}"  class="color-gray p-base">还没有参加任何球队</view>
-        <view wx:else>
+        <view wx:if="{{!noData}}" >
           <block wx:key="id" wx:for="{{myTeams}}">
             <team-cs team="{{item}}"/>
           </block>
         </view>
+        <view wx:else class="text-gray p-base">还没有参加任何球队</view>
       </view>
       <!-- / 所在球队 -->
 

@@ -21,10 +21,12 @@
       <view class="opt-text"> 11人制足球</view>
     </div>
   </view>
-
-  <block wx:key="id" wx:for="{{gyms}}">
-    <d-gym gym="{{item}}"/>
-  </block>
+  <nodata wx:if="{{noData}}"/>
+  <view wx:else>
+    <block wx:key="id" wx:for="{{gyms}}">
+      <d-gym gym="{{item}}"/>
+    </block>
+  </view>
 </view>
 
-<l-loading type="flash"full-screen="{{true}}"></l-loading>
+<!-- <l-loading type="flash" full-screen="{{true}}"></l-loading> -->

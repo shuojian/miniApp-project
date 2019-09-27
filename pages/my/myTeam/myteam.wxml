@@ -1,17 +1,13 @@
 <view class="page">
   <!-- <v-login wx:if="{{!authorized}}" bind:getuserinfo="onGetUserInfo"/> -->
   <view>
-    <view wx:if="{{!nodata}}" class="section mt-1">
+    <nodata wx:if="{{nodata}}"/>
+    <view wx:else class="section mt-1">
       <block wx:key="id" wx:for="{{myTeams}}">
         <team-cs team="{{item}}" 
                 hasNewMembe="{{hasNewMember}}"  
                 bind:disableTap="{{disableTeam}}"/>
       </block>
-    </view>
-    
-    <view wx:else class='nodata'>
-        <image src="/img/logo_v.png"></image>
-        暂无相关数据
     </view>
 
     <view class='p-20' wx:if="{{isCreat}}">

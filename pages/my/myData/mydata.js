@@ -61,23 +61,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    // wx.showLoading()
     this.getMyTeams()
   },
 
   async getMyTeams(){
     const token = { token: app.globalData.loginInfo.token }
     const resData = await reqModel.getMyTeam(token)
-    this.setData({
-      nodata: false,
-      myTeams: resData.data,
-    })
-  },
-
-  toDetail(){
-    wx.navigateTo({
-      url: '',
-    })
+    console.log('我的球队 ->', resData)
+    if (resData.data){
+      this.setData({
+        noData: false,
+        myTeams: resData.data,
+      })
+    }
   },
 
   /**

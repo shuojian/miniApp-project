@@ -6,6 +6,7 @@ const wxCacheModel = new WxCacheModel()
 const app = getApp()
 Page({
   data: {
+    noData: true,
     gyms:{},
     swipers:[],
     page:1
@@ -18,11 +19,14 @@ Page({
   //获取页面数据
   async getPageData () {
     const [gyms, swipers] = await Promise.all([reqModel.getGymList(), reqModel.getListSwiperImgs()]);
-    wx.stopPullDownRefresh()
-    this.setData({
-      gyms: gyms.data,
-      swipers: swipers.data
-    })
+    this.setData({ swipers: swipers.data})
+    console.log('gyms -> ', gyms)
+    if(gyms.data.length > 0){
+      this.setData({
+        noDate: false,
+        gyms: gyms.data,
+      })
+    }
   },
 
   toFields(){

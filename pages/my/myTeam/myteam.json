@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "nodata": "../../widget/nodata/index",
     "v-login": "../../widget/auth/index",
     "team-cs": "../../widget/list/teamList/index"
   },

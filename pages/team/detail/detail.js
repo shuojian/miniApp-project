@@ -1,10 +1,8 @@
-import { promisic } from '../../../utils/common.js'
 import { ReqModel } from '../../../models/request.js'
-import { WxCacheModel } from '../../../models/wxcache.js'
+// import { WxCacheModel } from '../../../models/wxcache.js'
 const util = require('../../../utils/util.js')
-
 const reqModel = new ReqModel()
-const wxCacheModel = new WxCacheModel()
+// const wxCacheModel = new WxCacheModel()
 const app = getApp()
 
 Page({

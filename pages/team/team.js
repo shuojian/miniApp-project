@@ -7,6 +7,7 @@ const app = getApp()
 
 Page({
   data: {
+    noData: true,
     teams:null,
 
     page: 1,        //请求页数
@@ -28,18 +29,20 @@ Page({
 
   async getTeams() {
     const teams = await reqModel.getTameList()
-    wx.stopPullDownRefresh()
-    this.setData({
-      teams: teams.data,
-      count: teams.count,
-      pageCount: Math.ceil(teams.count / this.data.pageLimit),
-    })
+    console.log('teams ->', teams)
+    if (teams.data.length > 0){
+      this.setData({
+        noData:false,
+        teams: teams.data,
+        count: teams.count,
+        pageCount: Math.ceil(teams.count / this.data.pageLimit),
+      })
+    }
   },
 
   async getMoreTeams() {
     let page = this.data.page
     let newTeams = await reqModel.getTameList(page)
-    wx.stopPullDownRefresh()
     let teams = this.data.teams.concat(newTeams.data) //新旧数据合并
     this.setData({
       teams

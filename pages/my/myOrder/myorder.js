@@ -20,21 +20,22 @@ Page({
       const myOrder = reqModel.queryMyOrder(token)
       myOrder.then(
         res => {
-          const v1 = res.data
-          const dataTotal = v1.length
-          const getList = v1.map((obj, index) => {
-            let rObj = obj;
-            rObj.matchDay = this.formatTo(obj.matchDay);
-            rObj.matchHourStart = this.formatTo(obj.matchHourStart, 'time');
-            rObj.matchHourEnd = this.formatTo(obj.matchHourEnd, 'time');
-            return rObj
-          })
-          this.setData({
-            myOrders: getList,
-            nodata:false,
-          })
-          wx.hideLoading()
+          if(res.data.length > 0){
+            const v1 = res.data
+            const dataTotal = v1.length
+            const getList = v1.map((obj, index) => {
+              let rObj = obj;
+              rObj.matchDay = this.formatTo(obj.matchDay);
+              rObj.matchHourStart = this.formatTo(obj.matchHourStart, 'time');
+              rObj.matchHourEnd = this.formatTo(obj.matchHourEnd, 'time');
+              return rObj
+            })
+            this.setData({
+              myOrders: getList,
+              nodata: false,
+            })
           // console.log('我的订单:', res.data)
+          }
         }
       )
     }

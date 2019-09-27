@@ -6,7 +6,7 @@ const wxCacheModel = new WxCacheModel()
 
 Page({
   data: {
-    // gyms:{},
+    noData: true,
     fields: [],
     fields5:[],
     fields11: [],
@@ -30,35 +30,27 @@ Page({
       fields: []
     });
   },
-  _getGyms: function () {
-    const gyms = reqModel.getGymList()
-    gyms.then(
-      res => {
-        this.setData({
-          gyms: res.data,
-        })
-        console.log('场馆列表：', res.data)
-        wxCacheModel.put("gyms", res.data, 1)
-    })
 
-  },
   _getFields: function () {
     const fields = reqModel.getFieldList()
     fields.then(
       res => {
-        let fields = res.data
-        let fields5 = fields.filter((p)=>{
-          return p.fieldSize == '5人制'
-        })
-        let fields11 = fields.filter((p) => {
-          return p.fieldSize == '11人制'
-        })
-        this.setData({
-          fields,
-          fields5,
-          fields11,
-        })
-        console.log('fields：', res.data)
+        if (fields.data > 0) {
+          let fields = res.data
+          let fields5 = fields.filter((p) => {
+            return p.fieldSize == '5人制'
+          })
+          let fields11 = fields.filter((p) => {
+            return p.fieldSize == '11人制'
+          })
+          this.setData({
+            noData: false,
+            fields,
+            fields5,
+            fields11,
+          })
+         }
+        console.log('fields：', res)
         wxCacheModel.put("fields", res.data, 1)
       })
 
