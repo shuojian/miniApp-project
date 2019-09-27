@@ -2,7 +2,7 @@
  <!-- wx:if="{{order.state !== 'closed'}} && {{order.payAmount}}" -->
   <view class="header">
     <view>订单号：{{order.orderId}}</view>
-    <view wx:if="{{order.payAmount}}" class="state text-success">交易成功</view>
+    <view wx:if="{{order.state == 'finished'}}" class="state text-success">交易成功</view>
     <view wx:elif="{{order.state == 'created'}}" class="state text-danger">未付款</view>
     <view wx:else class="state text-gray">交易关闭</view>
   </view>
