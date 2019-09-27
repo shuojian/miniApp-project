@@ -1,7 +1,7 @@
 import { ReqModel } from '../../../models/request.js'
 
 const reqModel = new ReqModel()
-
+const app = getApp()
 Page({
 
   /**
@@ -15,7 +15,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading()
     const bid = options.bid
     const token = app.globalData.loginInfo.token 
     const detail = reqModel.getMyOrderDetail(bid, token)
@@ -30,7 +29,6 @@ Page({
       this.setData({
         orderDetail: v1,
       })
-      console.log('我的订单详情：', v1)
     })
   },
 
