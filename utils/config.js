@@ -1,6 +1,6 @@
 const api = {
-  // base_url: "https://www.mzsport.top/football/",
-  base_url: 'https://mzsport.top/football/',// test
+  base_url: "https://www.mzsport.top/football/",
+  // base_url: 'https://mzsport.top/football/',// test
   // base_url: 'http://47.107.33.58:8080/football/' // test
   // base_url: 'http://127.0.0.1:8080/football/' // dev
   login_url: 'acc/wxLogin',
