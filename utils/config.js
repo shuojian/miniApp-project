@@ -37,7 +37,7 @@ const api = {
   applyForJoinTeam_url: 'team/applyForJoin',
   applyAcceptTeam_url: 'team/join',
   applyRefuseTeam_url: 'team/reject',
-  kickoutTeam_url: 'team/kickou',
+  kickoutTeam_url: 'team/kickout',
   leaveTeam_url: 'team/leave',
   disableTeam_url: 'team/disable',
   enableTeam_url: 'team/enable',

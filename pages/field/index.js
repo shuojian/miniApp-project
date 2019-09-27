@@ -52,7 +52,7 @@ Page({
   //下拉刷新
   onPullDownRefresh() {
     this._clearCache()
-    this._getGyms()
+    this.getPageData()
     wx.stopPullDownRefresh()
   },
   // 上拉触底
@@ -61,7 +61,7 @@ Page({
     this.setData({
       page, //更新当前页数
     })
-    this.getGyms();//重新调用请求获取下一页数据
+    this.getPageData();//重新调用请求获取下一页数据
     wx.stopReachBottom()
   },
 

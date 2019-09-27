@@ -94,6 +94,33 @@ class ReqModel extends HTTP {
     })
   }
 
+  // 踢出球队
+  kickoutTeam(data){
+    return this.request({
+      url: api.kickoutTeam_url,
+      method:"POST",
+      data: data
+    })
+  }
+
+  // 恢复球队
+  enableTeam(data){
+    return this.request({
+      url: api.enableTeam_url,
+      method:"POST",
+      data: data
+    })
+  }
+
+  // 修改队长
+  changeTeamleader(data){
+    return this.request({
+      url: api.changeTeamleader_url,
+      method:"POST",
+      data: data
+    })
+  }
+
 /* 场地 */
   getListSwiperImgs() {
     return this.request({

@@ -7,8 +7,6 @@ Page({
     lastRoute: null,
     authLogin: true, //需要登录
     inited: false,
-    parentUserCode: null,
-    userInfo: {},
   },
 
   onLoad (o) {
@@ -36,9 +34,9 @@ Page({
     if (e.detail.errMsg == "getUserInfo:ok") {
       this.setData({
         authLogin: false, //是否登录
-        userInfo: e.detail.userInfo
+        userInfo: e.detail
       })
-      app.globalData.userInfo = e.detail.userInfo
+      app.globalData.userInfo = e.detail
       app.fxLogin(this._init(this.data.lastRoute))
     }
   },

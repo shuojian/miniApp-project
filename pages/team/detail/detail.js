@@ -1,6 +1,7 @@
 import { promisic } from '../../../utils/common.js'
 import { ReqModel } from '../../../models/request.js'
 import { WxCacheModel } from '../../../models/wxcache.js'
+const util = require('../../../utils/util.js')
 
 const reqModel = new ReqModel()
 const wxCacheModel = new WxCacheModel()
@@ -8,7 +9,6 @@ const app = getApp()
 
 Page({
   data: {
-    // authorized: false,
     userInfo:{},
     isShow: false,
     isCreator: false,
@@ -41,92 +41,53 @@ Page({
     })
   },
   /*踢出球队*/
-  kickoutTeam(e) { 
-    wx.showModal({
-      title: '确定将其踢出球队？',
-      content: '',
-      type: "confirm",
-      success: (res) => {
-        if (res.confirm) {
-          wx.showLoading()
-          wx.request({
-            url: app.globalData.baseURL + '/team/kickout',
-            method: 'POST',
-            data: {
-              token: app.globalData.loginInfo.token,
-              teamId: this.data.team.teamId,
-              destUserCode: this.data.destUserCode,
-            },
-            header: { 'content-type': 'application/x-www-form-urlencoded' },
-            success: (res) => {
-              console.log("踢出球队请求成功:", res)
-              if (res.data.code == "-1") {
-                wx.lin.showToast({
-                  title: '踢出球队出现错误，稍后再试',
-                  icon: 'error',
-                  iconStyle: 'color:#ff0000; size: 60'
-                })
-              } else {
-                wx.lin.showToast({
-                  title: '踢出球队成功！',
-                  icon: 'success',
-                  iconStyle: 'color:#7ec699; size: 60',
-                  success: () => {
-                    console.log("请求成功:", res)
-                  }
-                })
-              }
-            },
-            complete: (res) => {
-              wx.hideLoading()
-            }
-          })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
+  async kickoutTeam(e) { 
+    const postData = {
+      token: app.globalData.loginInfo.token,
+      teamId: this.data.team.teamId,
+      destUserCode: this.data.destUserCode,
+    }
+    try{
+      await util.showModal('确定将其踢出球队？','',true)
+      const reskickoutTeam = await reqModel.kickoutTeam(postData)
+      if (reskickoutTeam.data.code == "-1") {
+        util.showToast_error('踢出球队出现错误，稍后再试',)
+      } else {
+        util.showToast_success('踢出球队成功！',)
       }
-    })
+    }catch(err){
+      util.showToast_error('err')
+      console.log('踢出球队err ->', err)
+    }  
   },
   /*恢复球队*/
-  enableTeam(e) {
-    wx.request({
-      url: app.globalData.baseURL + '/team/enable',
-      method: 'POST',
-      data: {
-        token: app.globalData.loginInfo.token,
-        teamId: this.data.team.teamId,
-      },
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
-      success: (res) => {
-        console.log("申请加入球队:", res)
-        wx.lin.showToast({
-          title: '申请已发送,等待确认~',
-          icon: 'success',
-          iconStyle: 'color:#7ec699; size: 60',
-        })
-      }
-    })
+  async enableTeam(e) {
+    const postData = {
+      token: app.globalData.loginInfo.token,
+      teamId: this.data.team.teamId,
+    }
+    try{
+      await reqModel.enableTeam(postData)
+      util.showToast_success('申请已发送,等待确认~')
+    }catch(err){
+      util.showToast_error('err')
+      console.log('恢复球队err ->', err)
+    }
   },
   /*修改队长*/
-  changeTeamleader(e){
-    wx.request({
-      url: app.globalData.baseURL + '/team/changeTeamleader',
-      method: 'POST',
-      data: {
-        token: app.globalData.loginInfo.token,
-        teamId: this.data.team.teamId,
-        destUserCode: this.data.destUserCode
-      },
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
-      success: (res) => {
-        console.log("申请加入球队:", res)
-        wx.lin.showToast({
-          title: '申请已发送,等待确认~',
-          icon: 'success',
-          iconStyle: 'color:#7ec699; size: 60',
-        })
-      }
-    })
+  async changeTeamleader(e){
+    const postData = {
+      token: app.globalData.loginInfo.token,
+      teamId: this.data.team.teamId,
+      destUserCode: this.data.destUserCode
+    }
+    try{
+      await reqModel.changeTeamleader(postData)
+      util.showToast_success('申请已发送,等待确认~')
+    }catch(err){
+      util.showToast_error('err')
+      console.log('修改队长err ->', err)
+    } 
   },
   /*获得页面数据*/
   _getData(o) {

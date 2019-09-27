@@ -63,7 +63,7 @@ Page({
       loaded:false
     })
     this._clearCache();
-    this._getTeams()
+    this.getTeams()
   },
 
   // 上拉触底
@@ -73,7 +73,7 @@ Page({
         loading: true,  //把"上拉加载"的变量设为false，显示 
         page: this.data.page + 1
       })
-      this._getMoreTeams()// 上拉获取更多数据
+      this.getMoreTeams()// 上拉获取更多数据
     }else{
       this.setData({
         loading:false,
