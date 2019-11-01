@@ -4,10 +4,13 @@
     <image wx:else class='avatar' src="../../../../img/logo_v.jpg" />
   </view>
   <view class="item-bd" catchtap='toInfo'>
-    <view class="list_title">{{field.fieldName}} <view class="price"><i>￥</i>{{field.amount}}<i>/h</i></view></view>
+    <view class="list_title">
+      <view class="ell">{{field.fieldName}}</view> 
+      <view class="price">{{field.amount}}</view>
+    </view>
     <view class="content">
-      <view class="tag gray square-h">{{field.fieldType}}</view>
-      <view class="tag gray square-h">{{field.fieldSize}}</view>
+      <view class="tag gray square-s">{{field.fieldType}}</view>
+      <view class="tag fill square-s">{{field.fieldSize}}</view>
       <view class="Phone">{{field.fieldContactPhone}}</view>
     </view>
   </view>

@@ -5,19 +5,15 @@
     <view class='item' >
       <view class='item-left' >球队队徽</view>
       <view class='item-right'>
-        <view wx:if="{{!attachs}}" style="width:35px; height:35px">
-          <image class='wh-f'  bindtap='choseImg' id='1' name='attachs' src='/img/logo.png'></image>
+        <view style="width:35px; height:35px">
+          <image class='wh-f'  bindtap='choseImg' id='1' name='attachs' src='{{logoUrl}}'></image>
         </view>
-        <view wx:else style="width:35px; height:35px">
-          <image class='wh-f'  bindtap='choseImg' id='1' name='attachs' src='{{attachs}}'></image>
-        </view>
-        <!-- <image class="wh-f" src='{{imgsrc}}'/> -->
         <view class='iconfont icon-icon_right'></view>
       </view>
     </view>
     <l-input l-class="mx--15" label="球队名称" name="teamName" value="{{teamName}}"/>
 
-    <view class='item'>
+    <!-- <view class='item'>
       <view class='item-left'>所在地区</view>
       <view class='item-right'>
         <picker name="teamArea"
@@ -31,22 +27,23 @@
         </picker>
         <view class='iconfont icon-icon_right'></view>
       </view>
-    </view>
+    </view> -->
 
     <view class='item'>
       <view class='item-left'>擅长赛制</view>
       <view class='item-right'>
         <picker name="teamType"
                 bindchange="pickerChange" 
-                value="{{array[index]}}" 
-                range="{{array}}">
-          <view class="picker">{{array[index]}}</view>
+                value="{{teamTypes[index]}}" 
+                range="{{teamTypes}}">
+          <!-- <view class="picker">{{teamType}}</view> -->
+          <view class="picker">{{teamTypes[index]}}</view>
         </picker>
         <view class='iconfont icon-icon_right'></view>
       </view>
     </view>
 
-    <view class='item'>
+    <!-- <view class='item'>
       <view class='item-left'>所属行业</view>
       <view class='item-right'>
         <picker name="teamBelong"
@@ -57,7 +54,7 @@
         </picker>
         <view class='iconfont icon-icon_right'></view>
       </view>
-    </view>
+    </view> -->
     <!-- <view class='item'>
       <view class='item-left'>入队验证码</view>
       <view class='item-right'>3359</view>

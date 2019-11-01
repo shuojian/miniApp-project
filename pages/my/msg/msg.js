@@ -1,6 +1,7 @@
 import { ReqModel } from '../../../models/request.js'
 
 const reqModel = new ReqModel()
+const util = require('../../../utils/util.js')
 const app = getApp()
 Page({
 
@@ -17,7 +18,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (o) {
-    // console.log('传递数据:', o, app.globalData.loginInfo)
+    // console.log('传递数据:', o)
     const bid = o.bid
     // const team = o.team
     this.setData({
@@ -29,84 +30,44 @@ Page({
   },
 
   _getMyTeamMsgs(bid) {
-    wx.showLoading()
     const token = app.globalData.loginInfo.token
     const myTeamMsgs = reqModel.getMyTeamMsgs(bid, token)
     myTeamMsgs.then(
       res => {
-        // console.log('myTeamMsgs:', res)
+        console.log('myTeamMsgs:', res)
         this.setData({
           myTeamMsgs: res.data,
         })
-        wx.hideLoading()
       })
   },
 
   /*批准加入*/
-  accept(e) {
-    wx.showLoading(),
-    wx.request({
-      url: app.globalData.baseURL + '/team/join',
-      method: 'POST',
-      data: {
-        token: app.globalData.loginInfo.token,
-        teamId: this.data.teamId,
-        destUserCode: this.data.destUserCode
-      },
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
-      success: (res) => {
-        console.log("批准:", res)
-        if (res.data.code == "-1") {
-          wx.lin.showToast({
-            title: '你已拒绝或已接受',
-            icon: 'error',
-            iconStyle: 'color:#FF0000; size: 60',
-          })
-        } else {
-          wx.lin.showToast({
-            title: '已批准对方加入球队',
-            icon: 'success',
-            iconStyle: 'color:#7ec699; size: 60',
-          })
-        }
-      },
-      complete: (res) => {
-        wx.hideLoading()
-      }
-    })
+  async accept(e) {
+    const postData = {
+      token: app.globalData.loginInfo.token,
+      teamId: this.data.teamId,
+      destUserCode: this.data.destUserCode
+    }
+    const res = await reqModel.applyAcceptTeam(postData)
+    if (res.data.code == "-1") {
+      util.showToast_error('你已拒绝或已接受')
+    } else {
+      util.showToast_success('已批准对方加入球队')
+    }
   },
   /*拒绝加入*/
-  reject(e) {
-    wx.showLoading(),
-    wx.request({
-      url: app.globalData.baseURL + '/team/reject',
-      method: 'POST',
-      data: {
-        token: app.globalData.loginInfo.token,
-        teamId: this.data.teamId,
-        destUserCode: this.data.destUserCode,
-      },
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
-      success: (res) => {
-        console.log("拒绝:", res)
-        if (res.data.code == "-1") {
-          wx.lin.showToast({
-            title: '你已拒绝或已接受',
-            icon: 'error',
-            iconStyle: 'color:#FF0000; size: 60',
-          })
-        } else {
-          wx.lin.showToast({
-            title: '已批准对方加入球队',
-            icon: 'success',
-            iconStyle: 'color:#7ec699; size: 60',
-          })
-        }
-      },
-      complete: (res) => {
-        wx.hideLoading()
-      }
-    })
+  async reject(e) {
+    const postData = {
+      token: app.globalData.loginInfo.token,
+      teamId: this.data.teamId,
+      destUserCode: this.data.destUserCode,
+    }
+    const res = await reqModel.applyRefuseTeam(postData)
+    if (res.data.code == "-1") {
+      util.showToast_error('你已拒绝或已接受')
+    } else {
+      util.showToast_success('已批准对方加入球队')
+    }
   },
 
   /**

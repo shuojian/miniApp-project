@@ -1,5 +1,6 @@
 @import "/components/common/list.wxss";
 @import "/components/common/tag.wxss";
+@import "/components/common/base.wxss";
 
 .ell{
   word-break:keep-all;

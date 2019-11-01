@@ -1,0 +1,38 @@
+.flex{display: flex; align-items: center}
+.circle{border-radius: 50%;}
+.square-s{border-radius: 4rpx;}
+.square{border-radius: 8rpx;}
+.b{font-weight: 500}
+
+.mx-10{margin-left: 20rpx; margin-right:20rpx;}
+.mx-5{margin-left: 10rpx; margin-right:10rpx;}
+.my-5{margin-top: 10rpx; margin-bottom:10rpx;}
+.my-10{margin-top: 20rpx; margin-bottom:20rpx;}
+
+.iconfont{
+  font-family:iconfont;
+  font-size:40rpx;
+  color:#8c98ae;
+  font-style:normal;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.ell{
+  width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  /* word-wrap:break-word; */
+  /* word-break:break-all; */
+}
+
+.ell-2{
+  width:100%;
+  height:2.2rem;
+  overflow:hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2;
+}
+

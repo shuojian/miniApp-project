@@ -1,5 +1,6 @@
 @import "/components/common/tag.wxss";
 @import "/components/common/list.wxss";
+@import "/components/common/base.wxss";
 .container{
   display: flex;
   padding:20rpx 30rpx;
@@ -9,7 +10,7 @@
 }
 
 .item-hd{
-  width:18%;
+  width:15%;
   padding-right:20rpx;
 }
 .item-hd .avatar{
@@ -17,14 +18,10 @@
   height:120rpx;
   border-radius: 10rpx;
 }
-.item-bd{
-  /* width:40%; */
-  width:60%;
-  padding-right:20rpx;
-}
+
 .item-ft{
   /* width:42%; */
-  width:22%;
+  width:23%;
   display: flex;
   align-items: center;
   justify-content:flex-end;
@@ -38,8 +35,11 @@
 
 .price{
  color:#B58900;
- font-size: 1.1rem;
- margin-left:6rpx;
+ font-size: 1rem;
+ /* margin-left:6rpx; */
+ position: absolute;
+ top:56rpx;
+ right:20%;
 }
 .price i{
   font-size: 0.6rem;

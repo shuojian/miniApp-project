@@ -7,8 +7,8 @@
 
   <view class="item-bd">
     <view class="list_title">{{team.teamName}}</view>
-    <view class="desc">
-      <view class="it first"><i class="d-tag">{{team.teamType}}</i></view>
+    <view class="desc flex">
+      <view class="it first"><i class="tag fill circle">{{team.teamType}}</i></view>
       <view class="it"> 共{{team.memberCount}}人</view>
       <!-- <view class="desci"> {{team.teamDesc}}</view> -->
     </view>

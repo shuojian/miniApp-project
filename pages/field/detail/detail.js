@@ -4,37 +4,51 @@ import { WxCacheModel } from '../../../models/wxcache.js'
 const reqModel = new ReqModel()
 const wxCacheModel = new WxCacheModel()
 
+const QQMapWX = require('../../../utils/qqmap-wx-jssdk.min.js');
 Page({
   data: {
     gym:{},
+    tude:{},
     phone:null,
     orderid:null,
     fields:[],
     // field: {}
   },
   onLoad(options) {
-    wx.showLoading()
     const bid = options.bid
     const detail = reqModel.getGymDetail(bid)
     const fields = reqModel.getGymFieldList(bid)
+    // 调用接口
+    const qqmapsdk = new QQMapWX({
+      key:'PWZBZ-EFD3F-CM5J6-NKEIL-NTTFO-MXF7S'
+    })
     // const field = reqModel.getFieldDetail(bid)
     detail.then(res=>{
-      console.log('详情：',res.data)
+      // console.log('详情：',res.data)
       this.setData({
         gym: res.data,
         phone: res.data.gymContactPhone,
         orderid: bid,
       })
-      wx.hideLoading()
+      qqmapsdk.search({
+        keyword: res.data.gymAddr,
+        success: (res)=> {
+            console.log('success->',res.data)
+            this.setData({
+              tude:res.data[0]
+            })
+        },
+        fail: function (res) {
+            console.log('err->',res);
+        },
+      })
     })
     fields.then(res => {
-      console.log('场地：', res.data)
+      // console.log('场地：', res.data)
       this.setData({
         fields: res.data,
       })
-      wx.hideLoading()
     })
-    
   },
 
   toGymInfo(e){
@@ -96,12 +110,12 @@ Page({
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      console.log(res.target)
+      // console.log(res.target)
     }
     return {
       title: '梦舟体育',
-      path: '/pages/index/index'
+      path: app.globalData.startUrl
     }
-  }
+  },
 
 })

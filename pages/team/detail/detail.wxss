@@ -1,4 +1,6 @@
 @import"/components/common/list.wxss";
+@import"/components/common/tag.wxss";
+@import"/components/common/base.wxss";
 .title{
   color: #3b5999 !important;
   font-weight: 500;
@@ -12,7 +14,7 @@
   margin:0 8rpx 8rpx 0;
   border-radius:20rpx;
 }
-.tags{line-height: 0.8rem; margin-bottom: 12rpx;}
+/* .tags{line-height: 0.8rem; margin-bottom: 12rpx;} */
 .btn-delete{text-align: center; padding:80rpx 40rpx; color:#999999;}
 .applyDesc{
   width:490rpx !important;

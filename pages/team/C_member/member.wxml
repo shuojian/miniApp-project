@@ -2,17 +2,18 @@
  <!-- 球队队员 -->
   <view class="container" >
       <view class='mr-10'><span class="member-num" wx:if="{{member.stmShirtNum !== 0}}"> {{member.stmShirtNum}} </span></view>
-      <view class="item-hd smx">
-          <image class="circle" src="/img/logo_v.jpg" />
+      <view class="item-hd sm">
+          <image wx:if="{{member.imgUrl}}" src="{{member.imgUrl}}" class="circle" mode="cover"/>
+          <image wx:else class="circle" src="/img/logo_v.jpg" />
       </view>
-      <view class="item-bd">
-        <view class="title">{{member.realName}}</view>
-        <view class="desc">{{member.stmPosition}}</view>
-      </view>
-      <view wx:if="{{member.userCode == creatorUserCode}}" class="item-bd_sb" >
-        <d-edit linkText="创建者"
-                isMember ="{{member}}"
-                member="{{member}}"/>
+      <view class="item-bd flex">
+        <view class="text">
+          <view class="title">{{member.realName}}</view>
+          <view class="desc">{{member.stmPosition}}</view>
+        </view>
+        <view wx:if="{{member.userCode == creatorUserCode}}" class="mx-10">
+          <view class="tag fill red circle b">创建者</view> 
+        </view>
       </view>
 
       <view wx:if="{{member.userCode == creatorUserCode}}" class="item-bd_sb" >

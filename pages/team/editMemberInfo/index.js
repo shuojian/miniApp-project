@@ -13,29 +13,19 @@ Page({
     stmType: null,
     teamId:null,
     realName:null,
-
-    // attachsSrc: '/img/logo.png',
-    // attachsSrc: null,
   },
 
   // 生命周期函数--监听页面加载
   onLoad(options) {
-    const realName = options.realName
-    const destUserCode = options.bid
-    const stmPosition = options.stmPosition
-
-    const stmShirtNum = options.stmShirtNum
-    const stmType = options.stmType
-    const teamId = options.teamId
-    console.log('球员信息：', options, options.teamId, destUserCode,)
-
+    const memberInfo = JSON.parse(options.memberInfo)
+    console.log('球员信息->：', memberInfo)
     this.setData({
-      destUserCode: destUserCode,
-      stmPosition: stmPosition,
-      stmShirtNum: stmShirtNum,
-      stmType: stmType,
-      teamId: teamId, 
-      realName:realName
+      destUserCode: memberInfo.stmId,
+      stmPosition: memberInfo.stmPosition,
+      stmShirtNum: memberInfo.stmShirtNum,
+      stmType: memberInfo.stmType,
+      teamId: memberInfo.teamId, 
+      realName:memberInfo.realName
     })
   },
 
@@ -51,24 +41,8 @@ Page({
       stmType: e.detail.value
     })
   },
-  choseImg(e) {
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: (res) => {
-        console.log('图片提交：', res)
-        this.setData({
-          attachsSrc: res.tempFilePaths[0]
-        })
-        app.uploadFile(this.data.attachsSrc, 'teamAvata', this.data.teamId, 'team')
-        // this.setData({
-        //   attachsSrc:
-        // })
-      }
-    })
-  },
 
+  /*修改信息*/
   formSubmit(e) {
     app.showLoading()
     console.log('submit：', e.detail.value)
@@ -90,25 +64,11 @@ Page({
         header: {'content-type': 'application/x-www-form-urlencoded'},
         success: (res) => {
           console.log("修改成功:", res)
-          wx.lin.showToast({
-            title: '修改成功！',
-            icon: 'success',
-            iconStyle: 'color:#7ec699; size: 60',
-            success() {
-              setTimeout(() => {
-                wx.navigateBack({
-                  delta:1
-                }), 3000
-              })
-            }
-          })  
+          util.showToast_success('修改成功！')
+          util.backTo(1500, 1)
         },
         fail: (error) => {
-          wx.showToast({
-            title: '传输出现错误，稍后再试',
-            icon: 'none',
-            duration: 2000
-          })
+          util.showToast_error('传输出现错误，稍后再试')
         },
         complete: (res) => {
           app.hideLoading()
@@ -125,7 +85,7 @@ Page({
         if (res.confirm) {
           wx.showLoading()
           wx.request({
-            url: app.globalData.baseURL + '/team/leave',
+            url: app.globalData.baseURL + 'team/leave',
             method: 'POST',
             data: {
               token: app.globalData.loginInfo.token,
@@ -133,12 +93,7 @@ Page({
             },
             header: { 'content-type': 'application/x-www-form-urlencoded' },
             success: (res) => {
-              console.log("退出球队:", res)
-              wx.lin.showToast({
-                title: '退出球队成功！~',
-                icon: 'success',
-                iconStyle: 'color:#7ec699; size: 60',
-              })
+              util.showToast_success('退出球队成功')
             },
             complete:() =>{
               wx.hideLoading()
@@ -148,4 +103,15 @@ Page({
       }
     })
   }, 
+
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      // console.log(res.target)
+    }
+    return {
+      title: '梦舟体育',
+      path: app.globalData.startUrl
+    }
+  },
 })

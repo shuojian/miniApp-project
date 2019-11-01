@@ -10,17 +10,17 @@ const tips = {
 
  class UploadFile{
    //request
-   uploadFile({ url, filePath, file, refId, refType}) {
+   uploadFile(path, file, refId, refType) {
      return new Promise((resolve, reject) => {
-       this._uploadFile(url, filePath, resolve, reject, file, refId, refType)
+       this._uploadFile(path, resolve, reject, file, refId, refType)
      })
    }
 
-   _uploadFile(url, filePath, resolve, reject,  file, refId, refType) {
+   _uploadFile(path, resolve, reject,  file, refId, refType) {
     this._show_loading()
     wx.uploadFile({
-      url: api.base_url + url,
-      filePath: filePath,
+      url: api.base_url + 'file/uploadToWxCos',
+      filePath: path,
       name: 'file',
       method: "POST",
       formData: {

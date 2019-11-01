@@ -6,7 +6,7 @@
     </view>
     <view class='item-bd'>
       <view class='title'>{{team.teamName}}</view>
-      <view class='tags'><i>{{team.teamType}}</i></view>
+      <view class='tag fill circle'>{{team.teamType}}</view>
       <view class='desc'> {{team.teamDesc}}</view> 
     </view>
     <view class="item-ft">

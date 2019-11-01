@@ -13,7 +13,12 @@ Page({
     more: '',
     key:"one",
 
-    pagenum:1
+    page: 1,        //请求页数
+    pageLimit: 0,   //页面数据条数,全局配置
+    pageCount: 0,   //总页数
+    count:0,        //数据总数
+    loading: false,
+    loaded: false,
   },
 
   onLoad: function (options) {
@@ -31,29 +36,44 @@ Page({
     });
   },
 
-  _getFields: function () {
-    const fields = reqModel.getFieldList()
-    fields.then(
-      res => {
-        if (fields.data > 0) {
-          let fields = res.data
-          let fields5 = fields.filter((p) => {
-            return p.fieldSize == '5人制'
-          })
-          let fields11 = fields.filter((p) => {
-            return p.fieldSize == '11人制'
-          })
-          this.setData({
-            noData: false,
-            fields,
-            fields5,
-            fields11,
-          })
-         }
-        console.log('fields：', res)
-        wxCacheModel.put("fields", res.data, 1)
+  async _getFields() {
+    const res = await reqModel.getFieldList()
+    console.log('fields -> ',res.data)
+    if (res.data.length > 0) {
+      let fields = res.data 
+      let fields5 = fields.filter((p) => {
+        return p.fieldSize == '5人制'
       })
+      let fields11 = fields.filter((p) => {
+        return p.fieldSize == '11人制'
+      })
+      this.setData({
+        noData: false,
+        fields,
+        fields5,
+        fields11,
+        count: res.count,
+        pageCount: Math.ceil(res.count / this.data.pageLimit),
+      })
+      }
+    // wxCacheModel.put("fields", res.data, 1)
+  },
 
+  async getMoreFields() {
+    let page = this.data.page
+    let newFields = await reqModel.getFieldList(page)
+    let fields = this.data.fields.concat(newFields.data) //新旧数据合并
+    let fields5 = fields.filter((p) => {
+      return p.fieldSize == '5人制'
+    })
+    let fields11 = fields.filter((p) => {
+      return p.fieldSize == '11人制'
+    })
+    this.setData({
+      fields,
+      fields5,
+      fields11,
+    })
   },
 
   //分享
@@ -75,10 +95,17 @@ Page({
   },
   // 上拉触底
   onReachBottom() {
-    let pagenum = this.data.pagenum + 1; //获取当前页数并+1
-    this.setData({
-      pagenum: pagenum, //更新当前页数
-    })
-    this.getGyms();//重新调用请求获取下一页数据
+    if(this.data.page < this.data.pageCount){
+      this.setData({
+        loading: true,  //把"上拉加载"的变量设为false，显示 
+        page: this.data.page + 1
+      })
+      this.getMoreFields()// 上拉获取更多数据
+    }else{
+      this.setData({
+        loading:false,
+        loaded:true
+      })
+    } 
   }
 })

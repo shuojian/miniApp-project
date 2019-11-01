@@ -6,19 +6,30 @@ Component({
   properties: {
     gym:Object,
     field: Object,
-    isGym:Boolean
+    isGym:Boolean,
+    tude:Object,
   },
 
   /**
    * 组件的初始数据
    */
   data: {
+
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+    getLocation(){
+      wx.openLocation({//使用微信内置地图查看位置。
+        latitude: this.properties.tude.location.lat,
+        longitude: this.properties.tude.location.lng,
+        name: this.properties.gym.gymName,
+        desc: this.properties.tude.address
+      })
+    },
+    
     tel() {
       const phonenum = this.properties.gym.gymContactPhone
       wx.makePhoneCall({

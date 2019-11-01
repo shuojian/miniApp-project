@@ -2,17 +2,17 @@
 .member{
  padding:5rpx 18rpx;
  border:2rpx solid;
- color:cornflowerblue;
+ color:#3b5999;
  border-radius: 50rpx;
  font-size: 0.8em;
 }
 .team{
   padding:10rpx 16rpx;
-  background: cornflowerblue;
+  background: #3b5999;
   border-radius: 50rpx;
   color: #ffffff;
 }
 .linkArrow{
   font-size: 0.9em !important;
-  color:#aaaaaa !importannt;
+  color:#aaaaaa !important;
 }

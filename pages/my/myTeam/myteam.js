@@ -24,7 +24,7 @@ Page({
       const resData = await reqModel.getMyTeam(token)
       console.log('getMyTeams -> ', resData)
       if (resData.data){
-        if (resData.data.length >= 2) {
+        if (resData.data.length >= 1) {
           this.setData({
             isCreat: false
           })
@@ -61,6 +61,17 @@ Page({
       pagenum: pagenum, //更新当前页数
     })
     this.getMyTeams();//重新调用请求获取下一页数据
-  }
+  },
+
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      // console.log(res.target)
+    }
+    return {
+      title: '梦舟体育',
+      path: app.globalData.startUrl
+    }
+  },
 
 })

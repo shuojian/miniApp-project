@@ -9,10 +9,17 @@ Page({
     noData: true,
     gyms:{},
     swipers:[],
-    page:1
+    page: 1,        //请求页数
+    pageLimit: 0,   //页面数据条数,全局配置
+    pageCount: 0,   //总页数
+    count:0,        //数据总数
+    loading: false,
+    loaded: false,
   },
 
   onLoad(options) {
+    let pageLimit = app.globalData.pageLimit
+    this.setData({ pageLimit })
     this.getPageData()
   },
 
@@ -23,10 +30,21 @@ Page({
     console.log('gyms -> ', gyms)
     if(gyms.data.length > 0){
       this.setData({
-        noDate: false,
+        noData: false,
         gyms: gyms.data,
+        count: gyms.count,
+        pageCount: Math.ceil(gyms.count / this.data.pageLimit),
       })
     }
+  },
+
+  async getMoreGyms() {
+    let page = this.data.page
+    let newGyms = await reqModel.getGymList(page)
+    let gyms = this.data.gyms.concat(newGyms.data) //新旧数据合并
+    this.setData({
+      gyms
+    })
   },
 
   toFields(){
@@ -61,12 +79,18 @@ Page({
   },
   // 上拉触底
   onReachBottom() {
-    let page = this.data.page + 1; //获取当前页数并+1
-    this.setData({
-      page, //更新当前页数
-    })
-    this.getPageData();//重新调用请求获取下一页数据
-    wx.stopReachBottom()
+    if(this.data.page < this.data.pageCount){
+      this.setData({
+        loading: true,  //把"上拉加载"的变量设为false，显示 
+        page: this.data.page + 1
+      })
+      this.getMoreGyms()// 上拉获取更多数据
+    }else{
+      this.setData({
+        loading:false,
+        loaded:true
+      })
+    } 
   },
 
   _clearCache: function () {

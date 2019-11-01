@@ -233,7 +233,7 @@ Page({
       }
       return {
         title: '梦舟体育',
-        path: '/pages/index/index'
+        path: app.globalData.startUrl
       }
     }
 })

@@ -1,10 +1,8 @@
 
 // editteam
-// import { UploadFile } from '../../../models/uploadFile.js'
 import { ReqModel } from '../../../models/request.js'
 var util = require('../../../utils/util.js')
 const reqModel = new ReqModel()
-// const uploadFile = new UploadFile()
 
 //获取应用实例
 var app = getApp()
@@ -18,14 +16,15 @@ Page({
 
     teamId: null,
     teamType: null,
-    attachs: null,
+    logoUrl:null,
+    // attachs: null,
     teamDesc:null,
     teamName:null,
     attachsSrc: null,
 
     region: ['云南省', '昆明市', '五华区'],
     customItem: '全部',
-    array: ['3人制', '5人制', '7人制', '8人制', '11人制'],
+    teamTypes: ['5人制', '11人制'],
     index: 0,
 
     hyArray: ['政府', '企业', '校园', '球迷'],
@@ -34,30 +33,29 @@ Page({
 
   // 生命周期函数--监听页面加载
   onLoad(options) {
-    const bid = options.bid
-    const teamId = bid
-    const attachs = options.attachs
-    const teamName = options.teamName
-    const teamType = options.teamType
-    const teamDesc = options.teamDesc
-    console.log('球队信息：', options)
+    const teamInfo = JSON.parse(options.teamInfo) 
+    console.log('球队信息：', teamInfo)
     this.setData({
-      teamId,
-      attachs,
-      teamName,
+      teamId: teamInfo.teamId,
+      teamName: teamInfo.teamName,
       // teamArea,
-      teamType,
+      teamType: teamInfo.teamType,
       // teamBelong,
-      teamDesc,
+      teamDesc: teamInfo.teamDesc,
     })
+    if (teamInfo.teamType == '11人制'){
+      this.setData({index: 1})
+    }else{
+      this.setData({index: 0})
+    }
 
-    if (attachs == "undefined"){
+    if (!teamInfo.logoUrl){
       this.setData({
-        attachs: '/img/logo.png'
+        logoUrl: '/img/logo.png'
       })
     }else{
       this.setData({
-        attachs: attachs,
+        logoUrl: teamInfo.logoUrl,
       })
     }
   },
@@ -68,37 +66,24 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: (res) => {
-        // console.log('图片提交：', res)
-        // const attachs = uploadFile.UploadFile({ 
-        //   url: 'file/uploadToWxCos', 
-        //   filePath: res.tempFilePaths[0], 
-        //   file: 'teamAvata', 
-        //   refId: this.data.teamId, 
-        //   refType: 'team'
-        // })
-        this._uploadFile(res.tempFilePaths[0], 'teamAvata', this.data.teamId, 'team')
-        this.setData({
-          attachs: res.tempFilePaths[0]
-          // attachs: res.data.url
-        })
+        // console.log('图片提交：', res.tempFilePaths[0])
+        this.uploadFile(res.tempFilePaths[0],'teamAvata', this.data.teamId, 'team')
+        this.setData({logoUrl: res.tempFilePaths[0]})
       }
     })
   },
 
   regionChange(e) {
-    console.log('所在地区：', e.detail.value)
     this.setData({
       region: e.detail.value
     })
   },
   pickerChange(e) {
-    console.log('擅长赛制：', e.detail.value)
     this.setData({
       index: e.detail.value
     })
   },
   hyChange(e) {
-    console.log('所属行业：', e.detail.value)
     this.setData({
       hyIndex: e.detail.value
     })
@@ -111,17 +96,22 @@ Page({
     var formData = {
       token: app.globalData.loginInfo.token,
       teamId: this.data.teamId,
-      attachs: this.data.attachsSrc,
+      attachs: this.data.logoUrl,
+      // logoUrl: this.data.logoUrl,
       teamName: upData.teamName,
-      teamArea: upData.teamArea,
+      // teamArea: upData.teamArea,
       teamType: upData.teamType,
-      teamBelong: upData.teamBelong,
       teamDesc: upData.teamDesc,
     }
-
+    console.log('上传数据->',upData, formData)
     const res = await reqModel.updateTeam(formData)
-    util.showToast_success('球队修改成功！')
-    util.backTo(2000, 1)
+    console.log('上传数据反馈->',res)
+    if (res.code == "200"){
+      util.showToast_success('球队修改成功！')
+      util.backTo(1500, 1)
+    }else{
+      util.showToast_error(res.msg)
+    }
   },
   
   /*删除球队*/
@@ -141,7 +131,20 @@ Page({
     } 
   },
 
-  _uploadFile: function (filePath, file, refId, refType) {
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      // console.log(res.target)
+    }
+    return {
+      title: '梦舟体育',
+      path: app.globalData.startUrl
+    }
+  },
+
+
+  uploadFile(filePath, file, refId, refType) {
+    console.log('token->',app.globalData.loginInfo.token)
     // UploadFile
     wx.showLoading()
     wx.uploadFile({
@@ -152,18 +155,17 @@ Page({
       formData: {
         token: app.globalData.loginInfo.token,
         appId: app.globalData.appId,
-        // duration:
         file: file,
-        // fileType:,
+        fileType:'jpeg',
         refId: refId || '',
         refType: refType || '',
       },
       success: (res) => {
-        console.log('文件上传信息：', res)
-        // const pic = res.data
-        // this.setData({
-        //   attachsSrc: pic
-        // })
+        const data = JSON.parse(res.data)
+        if(data.code == "403"){
+          util.showToast_error(data.msg)
+        }
+        console.log('文件上传信息：', res, res.data)
       },
       complete: (res) => {
         wx.hideLoading()

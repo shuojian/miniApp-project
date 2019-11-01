@@ -85,10 +85,28 @@ class ReqModel extends HTTP {
       data: data
     })
   }
-  // 更改球队
+  // 更改球队 updateTeam_url: 'team/update',
   updateTeam(data){
     return this.request({
       url: api.updateTeam_url,
+      method:"POST",
+      data: data
+    })
+  }
+
+  // 批准加入
+  applyAcceptTeam(data){
+    return this.request({
+      url: api.applyAcceptTeam_url,
+      method:"POST",
+      data: data
+    })
+  }
+
+  // 拒绝加入
+  applyRefuseTeam(data){
+    return this.request({
+      url: api.applyRefuseTeam_url,
       method:"POST",
       data: data
     })

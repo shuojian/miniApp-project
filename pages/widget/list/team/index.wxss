@@ -1,18 +1,7 @@
 @import "/components/common/list.wxss";
 @import "/components/common/tag.wxss";
+@import "/components/common/base.wxss";
 
-.d-tag{
-  padding:3rpx 12rpx 2rpx 6rpx;
-  background: #bbbbbb;
-  color:#ffffff;
-  /* margin:0 8rpx; */
-  border-radius: 20px ;
-  font-size: 0.9em;
-}
-.desc{
-  display: flex;
-  margin-top: 8rpx;
-}
 .desc .it{
   width:18%;
   text-align: center;

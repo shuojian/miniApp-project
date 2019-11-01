@@ -19,10 +19,10 @@
           <view class="py-10"><i class="num">{{team.lose}}</i>负</view>
         </l-grid-item> 
         <l-grid-item key="5" slot="5">
-          <view class="py-10"><i class="num">{{team.matchCount}}</i>未录入</view>
+          <view class="py-10"><i class="num">{{team.matchCount}}</i>积分</view>
         </l-grid-item>
         <l-grid-item key="6" slot="6">
-          <view class="py-10"><i class="num">{{team.smtGoal}}</i>选球</view>
+          <view class="py-10"><i class="num">{{team.smtGoal}}</i>进球</view>
         </l-grid-item>
         <l-grid-item key="7" slot="7">
           <view class="py-10"><i class="num">{{team.smtGoalAgainst}}</i>失球</view>
