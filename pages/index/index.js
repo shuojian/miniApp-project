@@ -8,6 +8,7 @@ const app = getApp()
 Page({
   data: {
     events:{},
+    noData: true,
     more: '',
     pagenumL:1
   },
@@ -19,6 +20,8 @@ Page({
     wxCacheModel.get("events", reqModel.getEventList())
     this._getEvents()
   },
+
+
 
   //下拉刷新
   onPullDownRefresh: function () {
@@ -88,12 +91,17 @@ Page({
           rObj.signupEndTimea = time.toTime2(obj.stTimes).slice(0, 13);
           return rObj
         })
-        this.setData({
-          events: events,
-        })
-        wxCacheModel.put("events", res.data, 1)
+
+        if (events.length > 0){
+          this.setData({
+            noData: false,
+            events: events,
+          })
+        }
+        // wxCacheModel.put("events", res.data, 1)
         console.log('赛事列表:', events)
       },
     )
   }
+
 })

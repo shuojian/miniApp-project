@@ -8,6 +8,7 @@
     </view>
     <view class="item-footer apply" wx:if="{{team.hasNewMember == 'Y'}}" catchtap='toMsg'>
         有新消息
-        <view class="newMsg"></view>
+        
     </view>
+    <view class="newMsg"></view>
 </view>

@@ -86,6 +86,7 @@
     </view>
 
     <view class='bill'>合计：<i class="mark">￥</i> <i class="num-money">{{receiveData.price*receiveData.num}}</i> </view>
+    <view bindtap="toNotice" class='tips'>预订须知</view>
   
     <button class="btn-bottom" formType="submit">
       <view class='btn-text'>确认支付</view>

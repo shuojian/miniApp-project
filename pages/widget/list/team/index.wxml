@@ -10,6 +10,7 @@
     <view class="desc flex">
       <view class="it first"><i class="tag fill circle">{{team.teamType}}</i></view>
       <view class="it"> 共{{team.memberCount}}人</view>
+      <view class="it first" wx:if="{{team.district}}">{{team.city}} • {{team.district}}</view>
       <!-- <view class="desci"> {{team.teamDesc}}</view> -->
     </view>
   </view>

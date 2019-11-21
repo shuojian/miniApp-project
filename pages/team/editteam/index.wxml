@@ -13,7 +13,7 @@
     </view>
     <l-input l-class="mx--15" label="球队名称" name="teamName" value="{{teamName}}"/>
 
-    <!-- <view class='item'>
+    <view class='item'>
       <view class='item-left'>所在地区</view>
       <view class='item-right'>
         <picker name="teamArea"
@@ -22,12 +22,13 @@
               value="{{region}}" 
               custom-item="{{customItem}}">
             <view class="picker">
+              <!-- {{teamInfo.city}},{{teamInfo.district}} -->
               {{region[1]}}，{{region[2]}}
             </view>
         </picker>
         <view class='iconfont icon-icon_right'></view>
       </view>
-    </view> -->
+    </view>
 
     <view class='item'>
       <view class='item-left'>擅长赛制</view>
@@ -42,19 +43,6 @@
         <view class='iconfont icon-icon_right'></view>
       </view>
     </view>
-
-    <!-- <view class='item'>
-      <view class='item-left'>所属行业</view>
-      <view class='item-right'>
-        <picker name="teamBelong"
-                bindchange="hyChange" 
-                value="{{hyArray[hyIndex]}}" 
-                range="{{hyArray}}">
-          <view class="picker">{{hyArray[hyIndex]}}</view>
-        </picker>
-        <view class='iconfont icon-icon_right'></view>
-      </view>
-    </view> -->
     <!-- <view class='item'>
       <view class='item-left'>入队验证码</view>
       <view class='item-right'>3359</view>

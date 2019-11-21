@@ -27,7 +27,7 @@
               value="{{region}}" 
               custom-item="{{customItem}}">
             <view class="picker">
-              {{region[1]}}，{{region[2]}}
+              {{region[0]}}，{{region[1]}}，{{region[2]}}
             </view>
         </picker>
         <view class='iconfont icon-icon_right'></view>
@@ -47,7 +47,7 @@
       </view>
     </view>
 
-    <view class='item'>
+    <!-- <view class='item'>
       <view class='item-left'>所属行业</view>
       <view class='item-right'>
         <picker name="teamBelong"
@@ -58,7 +58,7 @@
         </picker>
         <view class='iconfont icon-icon_right'></view>
       </view>
-    </view>
+    </view> -->
     <!-- <view class='item'>
       <view class='item-left'>入队验证码</view>
       <view class='item-right'>3359</view>

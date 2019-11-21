@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "nodata": "../widget/nodata/index",
     "d-event": "../widget/list/event/index",
     "l-dialog": "/components/widget/dialog/index"
   },

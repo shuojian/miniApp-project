@@ -89,7 +89,7 @@ class ReqModel extends HTTP {
   updateTeam(data){
     return this.request({
       url: api.updateTeam_url,
-      method:"POST",
+      method: "POST",
       data: data
     })
   }

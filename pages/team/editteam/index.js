@@ -14,6 +14,7 @@ Page({
     authLogin: true,
     //parentUserCode: null,
 
+    teamInfo:null,
     teamId: null,
     teamType: null,
     logoUrl:null,
@@ -27,8 +28,8 @@ Page({
     teamTypes: ['5人制', '11人制'],
     index: 0,
 
-    hyArray: ['政府', '企业', '校园', '球迷'],
-    hyIndex: 0
+    // hyArray: ['政府', '企业', '校园', '球迷'],
+    // hyIndex: 0
   },
 
   // 生命周期函数--监听页面加载
@@ -36,11 +37,10 @@ Page({
     const teamInfo = JSON.parse(options.teamInfo) 
     console.log('球队信息：', teamInfo)
     this.setData({
+      teamInfo,
       teamId: teamInfo.teamId,
       teamName: teamInfo.teamName,
-      // teamArea,
       teamType: teamInfo.teamType,
-      // teamBelong,
       teamDesc: teamInfo.teamDesc,
     })
     if (teamInfo.teamType == '11人制'){
@@ -83,11 +83,6 @@ Page({
       index: e.detail.value
     })
   },
-  hyChange(e) {
-    this.setData({
-      hyIndex: e.detail.value
-    })
-  },
 
   /*修改球队*/
   async formSubmit(e) {
@@ -95,18 +90,19 @@ Page({
     var upData = e.detail.value
     var formData = {
       token: app.globalData.loginInfo.token,
-      teamId: this.data.teamId,
+      teamId: this.data.teamId,//*
+      teamType: upData.teamType,//*球队 类型
       attachs: this.data.logoUrl,
-      // logoUrl: this.data.logoUrl,
-      teamName: upData.teamName,
-      // teamArea: upData.teamArea,
-      teamType: upData.teamType,
-      teamDesc: upData.teamDesc,
+      teamName: upData.teamName,//球队名称
+      teamDesc: upData.teamDesc,//球队说明
+      province: upData.teamArea[0],//球队所在省
+      city: upData.teamArea[1],//球队所在州和省级市
+      district: upData.teamArea[2],//球队所在地级市、区和县
     }
     console.log('上传数据->',upData, formData)
     const res = await reqModel.updateTeam(formData)
     console.log('上传数据反馈->',res)
-    if (res.code == "200"){
+    if (res.code == "0"){
       util.showToast_success('球队修改成功！')
       util.backTo(1500, 1)
     }else{
@@ -141,7 +137,6 @@ Page({
       path: app.globalData.startUrl
     }
   },
-
 
   uploadFile(filePath, file, refId, refType) {
     console.log('token->',app.globalData.loginInfo.token)

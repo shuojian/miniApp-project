@@ -48,6 +48,12 @@
   color:#888888;
   font-weight: 400;
 }
+
+.tips{
+  padding:30rpx;
+  text-align: right;
+  color:rgb(59, 89, 153);
+}
 /* .field-info i{
   display: inline-block;
   margin-left:4rpx;

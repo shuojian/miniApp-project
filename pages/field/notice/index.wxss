@@ -1,0 +1,23 @@
+/* pages/field/notice/index.wxss */
+.container{
+  padding:30rpx;
+  background:#ffffff;
+}
+.title_article{
+  font-size: 1.4em;
+  text-align: center;
+  color: #3b5999;
+  font-weight: 600;
+}
+.title{
+  margin-top:30rpx;
+  font-size: 1.1em;
+  color: #3b5999;
+  font-weight: 600;
+}
+.p{
+  color:#777777;
+  line-height: 1.5rem;
+  margin-bottom: 0.6rem;
+  text-indent: 0;
+}

@@ -96,7 +96,10 @@ Page({
   _clearCache: function () {
     this.setData({
       gyms: {},
-      swipers: []
+      swipers: [],
+      page: 1,
+      loading: false,
+      loaded: false,
     });
   }
 })

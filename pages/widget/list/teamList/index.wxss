@@ -2,15 +2,19 @@
 .newMsg{
   width:20rpx;
   height:20rpx;
+  border-radius: 30rpx;
   background: #ff0000;
-  border-radius: 20rpx;
-  margin:0 auto;
+  /* margin:0 auto; */
+ position: absolute;
+  right:15rpx;
+  top:15rpx;
 }
 .item-main{
-  flex:6 !important;
+  flex:8 !important;
 }
 .item-footer{
-  flex:3 !important;
+  flex:1 !important;
+  font-size: 0.7rem;
 }
 .apply{
   color:#999999;

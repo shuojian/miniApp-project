@@ -195,6 +195,7 @@ const showModal = (title, content = "", showCancel = true, confirmText = "确定
           resolve()
         } else if (res.cancel) {
           reject()
+          console.log('用户点击取消')
         }
       } 
     })

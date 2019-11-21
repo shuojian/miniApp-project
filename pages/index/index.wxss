@@ -2,6 +2,16 @@
 .complete{color:#efefef; background: #bcbcbc; border:none;}
 .processing{color:#fff; background:#3b5999; border:none;}
 .preparation{color:#fff; background:#B58900; border:none;}
+.d-btn-cc {
+  width:100rpx; height:100rpx; 
+  background:#3b5999;color:#ffffff; 
+  border-radius: 100rpx;
+  font-size: 0.7rem;
+  padding:20rpx 15rpx;
+  line-height: 1.2em;
+  }
+.pos-fix {position: fixed}
+.pos-rb{right:30rpx;bottom:30rpx;}
 
 
 

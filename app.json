@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/field/index",
     "pages/field/fields/index",
     "pages/field/detail/detail",
@@ -8,6 +7,7 @@
     "pages/field/orderConfirm/index",
     "pages/index/index",
     "pages/index/detail/detail",
+    "pages/index/detail/result/vsdetail/vsdetail",
     "pages/team/team",
     "pages/team/detail/detail",
     "pages/team/applyDesc/index",
@@ -21,8 +21,9 @@
     "pages/my/myOrder/myorder",
     "pages/my/myOrderDetail/index",
     "pages/my/msg/msg",
-    "pages/my/service/service" ,
-    "pages/login/login"
+    "pages/my/service/service",
+    "pages/login/login",
+    "pages/field/notice/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -42,6 +43,12 @@
         "text": "订球场"
       },
       {
+        "selectedIconPath": "img/tab/index_tab.png",
+        "iconPath": "img/tab/index_tab1.png",
+        "pagePath": "pages/index/index",
+        "text": "赛事"
+      },
+      {
         "selectedIconPath": "img/tab/team_tab.png",
         "iconPath": "img/tab/team_tab1.png",
         "pagePath": "pages/team/team",
@@ -55,9 +62,9 @@
       }
     ]
   },
-  "permission":{
-    "scope.userLocation":{
-      "desc":"请点击确定"
+  "permission": {
+    "scope.userLocation": {
+      "desc": "请点击确定"
     }
   },
   "usingComponents": {

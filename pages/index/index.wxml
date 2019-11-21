@@ -1,16 +1,14 @@
 <!--page:index.wxml "d-event": "/components/event/index"-->
-
-<view class="container">
+<nodata wx:if='{{noData}}'/>
+<view wx:else  class="container">
   <block wx:key="id" wx:for="{{events}}">
     <d-event event="{{item}}"></d-event>
   </block>
-
-  <!-- 创建赛事button  -->
+</view>
+<!-- 创建赛事button  -->
   <view class='page-hd p20'>
     <button class="d-btn-cc pos-fix pos-rb" bindtap='onclick'>创建赛事</button>
   </view>
-</view>
-
 <l-dialog/>
 
 <!-- components

@@ -268,6 +268,12 @@ Page({
   * 登录代码完结 -->
   */
 
+  toNotice(){
+    wx.navigateTo({
+      url: '../notice/index'
+    })
+  },
+
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
