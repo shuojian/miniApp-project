@@ -4,12 +4,12 @@
       申请加入球队
     </view>
     <view class="msg-bd">
-      {{item.applyDesc}}
-      <view class="time">{{item.insertTime}}</view>
+      {{item.realName}}申请加入你的球队
+      <view class="time">申请了发送时间：{{item.applyTime}}</view>
     </view>
     <view class="msg-ft">
-      <view class="btn-rj" bindtap="reject">拒绝</view>
-      <view class="btn-ac" bindtap="accept">接受</view>
+      <view class="btn-rj" data-applyInfo="{{item}}" bindtap="reject">拒绝</view>
+      <view class="btn-ac" data-applyInfo="{{item}}" bindtap="accept">接受</view>
     </view>
   </view>
 </block>

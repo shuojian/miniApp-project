@@ -18,38 +18,53 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (o) {
-    // console.log('传递数据:', o)
-    const bid = o.bid
-    // const team = o.team
+    const team = JSON.parse(o.team) //接收到的传值数据
+    console.log('传递数据-->', team)
+    const bid = team.teamId
     this.setData({
       teamId: bid,
-      destUserCode: app.globalData.loginInfo.userCode
+      destUserCode: team.leaderUserCode
     })
     this._getMyTeamMsgs(bid)
-
   },
 
   _getMyTeamMsgs(bid) {
-    const token = app.globalData.loginInfo.token
-    const myTeamMsgs = reqModel.getMyTeamMsgs(bid, token)
-    myTeamMsgs.then(
-      res => {
-        console.log('myTeamMsgs:', res)
-        this.setData({
-          myTeamMsgs: res.data,
-        })
-      })
+    if (app.globalData.loginInfo) {
+      const token = app.globalData.loginInfo.token
+      const myTeamMsgs = reqModel.getMyTeamMsgs(bid, token)
+      myTeamMsgs.then(
+        res => {
+          console.log('myTeamMsgs-->', res)
+          if(res.data){
+            if (res.data.length > 0) {
+              const v1 = res.data
+              const msgs = v1.map((obj) => {
+                let rObj = obj;
+                rObj.applyTime = util.toTime(obj.insertTime)
+                return rObj
+              })
+              this.setData({
+                myTeamMsgs: msgs,
+              })
+            }
+          }
+        }
+      )
+    }
   },
 
   /*批准加入*/
   async accept(e) {
+    console.log('批准-->', e.currentTarget.dataset)
+    const applyInfo = e.currentTarget.dataset.applyinfo
     const postData = {
       token: app.globalData.loginInfo.token,
-      teamId: this.data.teamId,
-      destUserCode: this.data.destUserCode
+      teamId: applyInfo.teamId, //*球队ID
+      destUserCode: applyInfo.userCode//*申请人ID
     }
     const res = await reqModel.applyAcceptTeam(postData)
-    if (res.data.code == "-1") {
+    // console.log('接受res->', res)
+    if (res.code == "-1") {
       util.showToast_error('你已拒绝或已接受')
     } else {
       util.showToast_success('已批准对方加入球队')
@@ -57,13 +72,15 @@ Page({
   },
   /*拒绝加入*/
   async reject(e) {
+    console.log('拒绝-->', e.currentTarget.dataset)
+    const applyInfo = e.currentTarget.dataset.applyinfo
     const postData = {
       token: app.globalData.loginInfo.token,
-      teamId: this.data.teamId,
-      destUserCode: this.data.destUserCode,
+      teamId: applyInfo.teamId, //*球队ID
+      destUserCode: applyInfo.userCode//*申请人ID
     }
     const res = await reqModel.applyRefuseTeam(postData)
-    if (res.data.code == "-1") {
+    if (res.code == "-1") {
       util.showToast_error('你已拒绝或已接受')
     } else {
       util.showToast_success('已批准对方加入球队')
@@ -74,7 +91,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      myTeamMsgs: {}
+    })
+    this._getMyTeamMsgs(this.data.teamId)
   },
 
   /**

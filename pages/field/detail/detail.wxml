@@ -17,7 +17,8 @@
   
   <!-- / 场地列表 -->
   <!-- 简介 -->
-  <d-info isGym="{{true}}" gym="{{gym}}" tude="{{tude}}"/>
+  <!-- <d-info isGym="{{true}}" gym="{{gym}}" tude="{{tude}}"/> -->
+  <d-info isGym="{{true}}" gym="{{gym}}"/>
 </view>
 
 <!-- components -->

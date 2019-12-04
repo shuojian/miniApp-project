@@ -5,7 +5,8 @@
   <view class="section-title_left">{{gym.gymName}}简介</view>
   <view class="container">
     <view class="fieldInfo">
-      <view class="addr" bindtap="getLocation">
+     <view class="addr" bindtap="getLocation">
+      <!-- <view class="addr" bindtap="toMap"> -->
         <i class="iconfont icon-dizhi"></i>
         {{gym.gymAddr}}
       </view>

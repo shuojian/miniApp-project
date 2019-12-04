@@ -2,6 +2,6 @@
 /* :host {
   color: #3c3c3c;
 } */
-
+@import "/components/common/base.wxss";
 @import "/components/common/list.wxss";
 @import "/components/common/tag.wxss";

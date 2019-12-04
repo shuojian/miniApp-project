@@ -24,7 +24,7 @@ Page({
       const resData = await reqModel.getMyTeam(token)
       console.log('getMyTeams -> ', resData)
       if (resData.data){
-        if (resData.data.length >= 1) {
+        if (resData.data.length >= 3) {
           this.setData({
             isCreat: false
           })
@@ -69,8 +69,9 @@ Page({
       // console.log(res.target)
     }
     return {
-      title: '梦舟体育',
-      path: app.globalData.startUrl
+      title: app.globalData.shareTitle,
+      path: app.globalData.startUrl,
+      imageUrl: app.globalData.shareImgUrl
     }
   },
 

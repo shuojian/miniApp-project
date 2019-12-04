@@ -20,7 +20,7 @@ Page({
     const memberInfo = JSON.parse(options.memberInfo)
     console.log('球员信息->：', memberInfo)
     this.setData({
-      destUserCode: memberInfo.stmId,
+      destUserCode: memberInfo.userCode, //队员ID
       stmPosition: memberInfo.stmPosition,
       stmShirtNum: memberInfo.stmShirtNum,
       stmType: memberInfo.stmType,
@@ -45,16 +45,16 @@ Page({
   /*修改信息*/
   formSubmit(e) {
     app.showLoading()
-    console.log('submit：', e.detail.value)
+    console.log('submit：', e.detail.value, this.data.destUserCode, this.data.teamId)
     var upDate = e.detail.value
     var formData = {
       token: app.globalData.loginInfo.token,
-      destUserCode: this.data.destUserCode,
-      teamId: this.data.teamId,
+      destUserCode: this.data.destUserCode,//*必填 队员ID
+      teamId: this.data.teamId,//*必填 球队ID
       realName: upDate.realName,
-      stmShirtNum: upDate.stmShirtNum,
-      stmPosition: this.data.stmPosition,
-      stmType: this.data.stmType,
+      stmShirtNum: upDate.stmShirtNum, //球衣编号
+      stmPosition: this.data.stmPosition, //队员场上位置
+      stmType: this.data.stmType,  //队员身份
     }
 
     wx.request({
@@ -63,9 +63,13 @@ Page({
         data: formData,
         header: {'content-type': 'application/x-www-form-urlencoded'},
         success: (res) => {
-          console.log("修改成功:", res)
-          util.showToast_success('修改成功！')
-          util.backTo(1500, 1)
+          console.log("修改-->", res.data)
+          if(res.data.code == "0"){
+            util.showToast_success('修改成功！')
+            util.backTo(1500, 1) 
+          }else{
+            util.showModal('修改出错',res.data.data)
+          }
         },
         fail: (error) => {
           util.showToast_error('传输出现错误，稍后再试')

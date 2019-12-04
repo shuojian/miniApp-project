@@ -12,13 +12,6 @@ Component({
   },
 
   /**
-   * 组件的初始数据
-   */
-  data: {
-
-  },
-
-  /**
    * 组件的方法列表
    */
   methods: {
@@ -29,11 +22,11 @@ Component({
       })
     },
     toMsg(event){
-      const team = this.properties.team
       const bid = this.properties.team.teamId
-      const leaderUserCode = this.properties.team.leaderUserCode
+      // const leaderUserCode = this.properties.team.leaderUserCode
+      let team = JSON.stringify(this.properties.team) //传object
       wx.navigateTo({
-        url: `/pages/my/msg/msg?bid=${bid}&team=${team}&leaderUserCode=${leaderUserCode}`
+        url: `/pages/my/msg/msg?bid=${bid}&team=${team}`
       })
     }
   }

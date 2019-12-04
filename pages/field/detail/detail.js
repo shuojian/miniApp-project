@@ -1,10 +1,11 @@
 import { ReqModel } from '../../../models/request.js'
 import { WxCacheModel } from '../../../models/wxcache.js'
+const QQMapWX = require('../../../utils/qqmap-wx-jssdk.min.js');
+const util = require('../../../utils/util.js')
 
 const reqModel = new ReqModel()
 const wxCacheModel = new WxCacheModel()
 
-const QQMapWX = require('../../../utils/qqmap-wx-jssdk.min.js');
 Page({
   data: {
     gym:{},
@@ -18,33 +19,19 @@ Page({
     const bid = options.bid
     const detail = reqModel.getGymDetail(bid)
     const fields = reqModel.getGymFieldList(bid)
-    // 调用接口
-    const qqmapsdk = new QQMapWX({
-      key:'PWZBZ-EFD3F-CM5J6-NKEIL-NTTFO-MXF7S'
-    })
-    // const field = reqModel.getFieldDetail(bid)
+
+    //球场详情
     detail.then(res=>{
       // console.log('详情：',res.data)
       this.setData({
         gym: res.data,
         phone: res.data.gymContactPhone,
         orderid: bid,
-      })
-      qqmapsdk.search({
-        keyword: res.data.gymAddr,
-        success: (res)=> {
-            console.log('success->',res.data)
-            this.setData({
-              tude:res.data[0]
-            })
-        },
-        fail: function (res) {
-            console.log('err->',res);
-        },
-      })
+      }) 
     })
+
+    //场地列表
     fields.then(res => {
-      // console.log('场地：', res.data)
       this.setData({
         fields: res.data,
       })
@@ -113,8 +100,9 @@ Page({
       // console.log(res.target)
     }
     return {
-      title: '梦舟体育',
-      path: app.globalData.startUrl
+      title: app.globalData.shareTitle,
+      path: app.globalData.startUrl,
+      imageUrl: app.globalData.shareImgUrl
     }
   },
 

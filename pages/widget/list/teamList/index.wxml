@@ -1,4 +1,5 @@
-<view class='container'>
+<view class="pos-rela">
+  <view class='container'>
     <view class="item-avatar">
       <image wx:if="{{team.logoUrl}}" src="{{team.logoUrl}}" class="avatar-img"></image>
       <image wx:else src="/img/logo_v.jpg" alt="" class="avatar-img"/>
@@ -8,7 +9,7 @@
     </view>
     <view class="item-footer apply" wx:if="{{team.hasNewMember == 'Y'}}" catchtap='toMsg'>
         有新消息
-        
     </view>
     <view class="newMsg"></view>
+  </view>
 </view>

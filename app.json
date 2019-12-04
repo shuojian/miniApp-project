@@ -64,7 +64,7 @@
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "请点击确定"
+      "desc": "点击确定，可获取球场地理位置，为你导航"
     }
   },
   "usingComponents": {

@@ -1,4 +1,7 @@
 @import '../teams/index.wxss';
+.pos-rela{
+  position: relative;
+}
 .newMsg{
   width:20rpx;
   height:20rpx;

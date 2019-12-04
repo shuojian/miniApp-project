@@ -88,8 +88,9 @@ Page({
       // console.log(res.target)
     }
     return {
-      title: '梦舟体育',
-      path: app.globalData.startUrl
+      title: app.globalData.shareTitle,
+      path: app.globalData.startUrl,
+      imageUrl: app.globalData.shareImgUrl
     }
   },
 

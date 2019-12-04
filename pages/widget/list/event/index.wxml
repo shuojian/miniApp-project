@@ -19,9 +19,9 @@
       </view>
 
       <view class='tags'>
-        <view class='tag gray square-h'>{{event.eventDesc}}</view>
-        <view class='tag gray square-h'>{{event.eventType}}</view>
-        <view class='tag gray square-h'>{{event.eventPrice}}</view>
+        <view wx:if='{{event.eventDesc}}'class='tag gray square-s'>{{event.eventDesc}}</view>
+        <view wx:if='{{event.eventType}}'class='tag gray square-s'>{{event.eventType}}</view>
+        <view wx:if='{{event.eventPrice}}' class='tag gray square-s'>{{event.eventPrice}}</view>
       </view>
     </view>
 

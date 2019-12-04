@@ -13,6 +13,8 @@ App({
     parentUserCode: null,
     baseURL: api.base_url,
     startUrl: api.start_url,
+    shareTitle: '你的朋友邀请你加入球队',
+    shareImgUrl: api.share_img_url,
     pageLimit: api.pageLimit
   },
 
