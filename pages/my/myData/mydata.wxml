@@ -1,7 +1,71 @@
 <!-- 个人数据 -->
 <view class="page">
+  <view wx:if="{{isMember}}" class="member">
+    <!-- header -->
+    <view class="userinfo py-20">
+      <image  class="userinfo-avatar" src="{{memberInfo.avatarUrl}}" mode="cover"></image>
+      <view  class="userinfo-nickname" >{{memberInfo.realName}}</view>
+    </view>
+    <!-- / header -->
+
+    <view class='page-bd'>
+      <!-- 所在球队 -->
+      <view class="section-title_left"> 
+        <text class='text'>所在球队</text> 
+      </view>
+
+      <view class="section">
+        <view wx:if="{{!noData}}" >
+          <block wx:key="id" wx:for="{{myTeams}}">
+            <team-cs team="{{item}}"/>
+          </block>
+        </view>
+        <view wx:else class="text-gray p-base">还没有参加任何球队</view>
+      </view>
+      <!-- / 所在球队 -->
+
+      <!-- 个人参数 -->
+      <view class="section-title_left"> 
+        <text class='text'>个人参数数据统计</text> 
+      </view>
+      <view class="section">
+        <l-grid l-class="border-tb" row-num="4" show-border="{{true}}">
+          <l-grid-item key="0" slot="0">
+            <view class="num pt-15">{{memberInfo.matchCount}}</view>
+            <view class="text pb-15">参赛</view>
+          </l-grid-item>
+          <l-grid-item key="1" slot="1">
+            <view class="num pt-15">{{memberInfo.smmGoal}}</view>
+            <view class="text pb-15">进球</view>
+          </l-grid-item>
+          <l-grid-item key="2" slot="2">
+            <view class="num pt-15">{{memberInfo.smmFoul}}</view>
+            <view class="text pb-15">犯规</view>
+          </l-grid-item>
+          <l-grid-item key="3" slot="3">
+            <view class="num pt-15">{{memberInfo.smmShoot}}</view>
+            <view class="text pb-15">射门</view>
+          </l-grid-item>
+          <l-grid-item key="4" slot="4">
+            <view class="num pt-15">{{memberInfo.smmAssistsGoal}}</view>
+            <view class="text pb-15">助攻</view>
+          </l-grid-item>
+          <l-grid-item key="5" slot="5">
+            <view class="num pt-15">{{memberInfo.smmYellowCard}}</view>
+            <view class="text pb-15">黄牌</view>
+          </l-grid-item>
+          <l-grid-item>
+            <view class="num pt-15" key="6" slot="6">{{memberInfo.smmRedCard}}</view>
+            <view class="text pb-15">红牌</view>
+          </l-grid-item>
+        </l-grid>
+      </view>
+      <!-- 个人参数 -->
+    </view>
+  </view>
+
   <!-- <v-login wx:if="{{!authorized}}" bind:getuserinfo="onGetUserInfo" /> -->
-  <view>
+  <view wx:else class="my"> 
     <!-- header -->
     <view class="userinfo py-20">
       <open-data type="userAvatarUrl" class="userinfo-avatar"/>

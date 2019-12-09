@@ -43,6 +43,7 @@ const api = {
   disableTeam_url: 'team/disable',
   enableTeam_url: 'team/enable',
   changeTeamleader_url: 'team/changeTeamleader',
+  updateTeamMember_url: 'team/updateSportsTeamMember',
 
   // 我的
   myTeam_url: 'team/myTeam',

@@ -61,6 +61,10 @@ Page({
     }
   },
 
+  // _getMyData(){
+
+  // },
+
   // accountSet() {
   //   wx.navigateTo({
   //     url: '../accountSet/index'

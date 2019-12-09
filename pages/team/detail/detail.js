@@ -19,25 +19,30 @@ Page({
     members:null,
     tabTitle: ['射手榜', '助攻榜', '黄牌榜'],
     isLink: false,
+
+    bid:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('userInfo ->', app.globalData)
+    this.setData({
+      bid: options.bid
+    })
     if (app.globalData.loginInfo){
       this.setData({
         userInfo: app.globalData.loginInfo,
-        destUserCode: app.globalData.loginInfo.userCode
+        destUserCode: app.globalData.loginInfo.userCode //当前用户code
       })
     }
-    this._getData(options)
+  },
+  onShow: function(){
+    this._getData(this.data.bid) //修改后可自动刷新
   },
 
   /*获得页面数据*/
-  _getData(o) {
-    const bid = o.bid
+  _getData(bid) {
     const detail = reqModel.getTeamDetail(bid)
     const members = reqModel.getListMember(bid)
     Promise.all([detail, members])
@@ -73,27 +78,6 @@ Page({
     wx.navigateTo({
       url: `../applyDesc/index?teamId=${this.data.team.teamId}`,
     })
-  },
-
-  /*踢出球队*/
-  async kickoutTeam(e) { 
-    const postData = {
-      token: app.globalData.loginInfo.token,
-      teamId: this.data.team.teamId,
-      destUserCode: this.data.destUserCode,
-    }
-    try{
-      await util.showModal('确定将其踢出球队？','',true)
-      const reskickoutTeam = await reqModel.kickoutTeam(postData)
-      if (reskickoutTeam.data.code == "-1") {
-        util.showToast_error('踢出球队出现错误，稍后再试',)
-      } else {
-        util.showToast_success('踢出球队成功！',)
-      }
-    }catch(err){
-      util.showToast_error('err')
-      console.log('踢出球队err ->', err)
-    }  
   },
 
   /*恢复球队*/

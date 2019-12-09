@@ -32,18 +32,9 @@ Page({
           promisic(wx.authorize)({ scope: 'scope.userLocation' })
             .then((res) => {
               console.log('wx.authorize->', res)
-              // return promisic(wx.getLocation)()
             })
-            // .then((res) => {
-            //   console.log('wx.getLocation2->', res)
-            //   // this.getAddress(res.latitude, res.longitude)
-            // })
         }
       })
-      // .then((res) => {
-      //   console.log('wx.getLocation1->', res)
-      // })
-
     let pageLimit = app.globalData.pageLimit
     this.setData({ pageLimit })
     this.getTeams()

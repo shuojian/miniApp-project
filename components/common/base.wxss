@@ -4,6 +4,11 @@
 .square{border-radius: 8rpx;}
 .b{font-weight: 500}
 
+.ml-10{margin-left: 20rpx;}
+.mr-10{margin-right:20rpx;}
+.ml-5{margin-left: 10rpx;}
+.mr-5{margin-right:10rpx;}
+
 .mx-10{margin-left: 20rpx; margin-right:20rpx;}
 .mx-5{margin-left: 10rpx; margin-right:10rpx;}
 .my-5{margin-top: 10rpx; margin-bottom:10rpx;}

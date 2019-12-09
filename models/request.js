@@ -55,14 +55,14 @@ class ReqModel extends HTTP {
     })
   }
 
-  getTeamDetail(bid) {
+  getTeamDetail(bid) { //球队详情
     return this.request({
       url: api.teamDetail_url,
       data: { teamId: bid }
     })
   }
 
-  getListMember(bid) {
+  getListMember(bid) {  //球队球员
     return this.request({
       url: api.teamMember_url,
       data: { teamId: bid }
@@ -112,11 +112,29 @@ class ReqModel extends HTTP {
     })
   }
 
+  // 修改队员
+  updateTeamMember(data) {
+    return this.request({
+      url: api.updateTeamMember_url,
+      method: "POST",
+      data: data
+    })
+  }
+
   // 踢出球队
   kickoutTeam(data){
     return this.request({
       url: api.kickoutTeam_url,
       method:"POST",
+      data: data
+    })
+  }
+
+  // 退出球队
+  leaveTeam(data) {
+    return this.request({
+      url: api.leaveTeam_url,
+      method: "POST",
       data: data
     })
   }

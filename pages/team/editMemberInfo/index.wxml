@@ -25,5 +25,6 @@
   <view class='p-20'><button class='d-btn-primary d-btn' form-type='submit'>确定修改</button></view>
 </form>
 
-  <view bindtap='leaveTeam' class="btn-delete" > 退出球队 </view>
+  <view wx:if="{{isCurrent && !isCreator}}" bindtap='leaveTeam' class="btn-delete" > 退出球队 </view>
+   <view wx:if="{{!isCurrent}}" bindtap='kickoutTeam' class="btn-delete" > 踢出球队 </view>
 <l-toast />

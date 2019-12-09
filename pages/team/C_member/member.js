@@ -12,16 +12,25 @@ Component({
   data: {
     notag:false
   },
+
   methods: {
     toEditInfo(){
       wx.navigateTo({
         url: '/pages/team/detail/editMemberInfo/editMemberInfo'
       })
     },
-    /*踢出球队*/
-  kickoutTeam(e) {
-    this.triggerEvent('dtap', {e}, {})
+
+    toMemberInfo(){
+      const memberInfo = JSON.stringify(this.properties.member)
+      wx.navigateTo({
+        url: `/pages/my/myData/mydata?memberInfo=${memberInfo}`
+      })
     },
-  },  
+  }
+    /*踢出球队*/
+  // kickoutTeam(e) {
+  //   this.triggerEvent('dtap', {e}, {})
+  //   },
+  // },  
 
 })

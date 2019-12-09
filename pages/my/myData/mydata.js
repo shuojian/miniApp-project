@@ -54,14 +54,26 @@ Page({
         id: 7,
         text: "红牌",
         num: 0
-      }]
+      }],
+
+      isMember:false,
+      memberInfo:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
-    this.getMyTeams()
+  onLoad(options) {
+    if(options.memberInfo){
+      const memberInfo = JSON.parse(options.memberInfo)
+      console.log('接收->',memberInfo)
+      this.setData({
+        isMember:true,
+        memberInfo
+      })
+    }else{
+      this.getMyTeams()
+    } 
   },
 
   async getMyTeams(){
