@@ -1,12 +1,14 @@
+<!--== 头 图片 ==-->
 <view class='page-hd'>
     <view class="xsimg">
       <image wx:if="{{gym.logoUrl}}" class='thumb' src="{{gym.logoUrl}}"/>
       <image wx:else class='thumb' src="../../../img/cd2.jpg"/>
     </view>
 </view>
+<!--== / 头 图片 ==-->
 
 <view class="page_bd">
-  <!-- 场地列表 -->
+  <!--== 场地列表 ==-->
   <view class="section-title_left">{{gym.gymName}} 场地列表</view> 
   <view wx:if="{{fields.length == 0}}" class='padding'>今日暂无场地</view>
   <view wx:else>
@@ -14,16 +16,21 @@
       <d-field field="{{item}}" gymName="{{gym.gymName}}"/>
     </block>
   </view>
-  
-  <!-- / 场地列表 -->
-  <!-- 简介 -->
-  <!-- <d-info isGym="{{true}}" gym="{{gym}}" tude="{{tude}}"/> -->
+  <!--== / 场地列表 ==-->
+
+  <!--== 简介 ==-->
   <d-info isGym="{{true}}" gym="{{gym}}"/>
+  <!--== / 简介 ==-->
 </view>
+
+
+
+
 
 <!-- components -->
 <!-- d-field:widget/list/fields -->
 <!-- d-info:../C_fieldInfo -->
+
 
 <!-- <view  class='section mt-1'>
   <div class="dfx">

@@ -28,17 +28,53 @@ Page({
     console.log('userInfo ->', app.globalData)
     if (app.globalData.loginInfo){
       this.setData({
-        userInfo: app.globalData.loginInfo
+        userInfo: app.globalData.loginInfo,
+        destUserCode: app.globalData.loginInfo.userCode
       })
     }
     this._getData(options)
   },
+
+  /*获得页面数据*/
+  _getData(o) {
+    const bid = o.bid
+    const detail = reqModel.getTeamDetail(bid)
+    const members = reqModel.getListMember(bid)
+    Promise.all([detail, members])
+      .then(res => {
+        const team = res[0].data //球队详情
+        const members = res[1].data //球队队员
+        const creator = members.find((x) => { return x.userCode == team.leaderUserCode }) //球队创建者
+        const creatorUserCode = creator.userCode //球队创建者userCode
+        if (app.globalData.loginInfo !== null) {
+          this.setData({
+            isLink: true,
+            isTeam: true,
+            isMember: true,
+          })
+          if (this.data.destUserCode == creatorUserCode) {
+            this.setData({
+              isCreator: true,
+            })
+          }
+        }
+
+        this.setData({
+          team,
+          members,
+          creatorUserCode,
+        })
+        wx.hideLoading()
+      })
+  },
+  
   /*申请加入*/
   applyForJoin(){
     wx.navigateTo({
       url: `../applyDesc/index?teamId=${this.data.team.teamId}`,
     })
   },
+
   /*踢出球队*/
   async kickoutTeam(e) { 
     const postData = {
@@ -59,6 +95,7 @@ Page({
       console.log('踢出球队err ->', err)
     }  
   },
+
   /*恢复球队*/
   async enableTeam(e) {
     const postData = {
@@ -73,6 +110,7 @@ Page({
       console.log('恢复球队err ->', err)
     }
   },
+
   /*修改队长*/
   async changeTeamleader(e){
     const postData = {
@@ -87,38 +125,6 @@ Page({
       util.showToast_error('err')
       console.log('修改队长err ->', err)
     } 
-  },
-  /*获得页面数据*/
-  _getData(o) {
-    const bid = o.bid
-    const detail = reqModel.getTeamDetail(bid)
-    const members = reqModel.getListMember(bid)
-    Promise.all([detail, members])
-      .then(res => {
-        const team = res[0].data //球队详情
-        const members = res[1].data //球队队员
-        const creator = members.find((x) => { return x.userCode == team.leaderUserCode }) //球队创建者
-        const creatorUserCode = creator.userCode //球队创建者userCode
-        if (app.globalData.loginInfo !== null){
-          const destUserCode = app.globalData.loginInfo.userCode //当前用户userCode
-          if (destUserCode == creatorUserCode) {
-            this.setData({
-              isCreator: true,
-              isTeam: true,
-              isMember: true,
-              isLink: true,
-              destUserCode,
-            })
-          }
-        }
-      
-        this.setData({
-          team,
-          members,
-          creatorUserCode,
-        })
-        wx.hideLoading()
-      })
   },
 
   _clearCache() {

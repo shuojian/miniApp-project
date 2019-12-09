@@ -15,6 +15,7 @@ Page({
     fields:[],
     // field: {}
   },
+
   onLoad(options) {
     const bid = options.bid
     const detail = reqModel.getGymDetail(bid)
@@ -38,62 +39,13 @@ Page({
     })
   },
 
-  toGymInfo(e){
-    wx.navigateTo({
-      url: `../gymInfo/index?gymId=${this.data.gym.gymId}&name=${this.data.gym.gymName}&addr=${this.data.gym.gymAddr}&desc=${this.data.gym.gymDesc}&phone=${this.data.gym.gymContactPhone}&wechat=${this.data.gym.gymContactWechat}&service=${this.data.gym.gymService}&notice=${this.data.gym.gymOrderNotice}&service=${this.data.gym.gymService}&businessHours=${this.data.gym.gymBusinessHours}`,
-    })
-  },
-  toFieidInfo(e) {
-    wx.navigateTo({
-      url: `../gymInfo/index?gymId=${this.data.gym.gymId}&name=${this.data.gym.gymName}&addr=${this.data.gym.gymAddr}&desc=${this.data.gym.gymDesc}&phone=${this.data.gym.gymContactPhone}&wechat=${this.data.gym.gymContactWechat}&service=${this.data.gym.gymService}&notice=${this.data.gym.gymOrderNotice}&service=${this.data.gym.gymService}&businessHours=${this.data.gym.gymBusinessHours}`,
-    })
-  },
-
-  booking(e){
-    let orderid = e.target.dataset.orderid
-    wx.navigateTo({
-      url: `../sportsorder/sportsorder?orderId=${orderid}&gym=${this.data.gym}`,
-    })
-  },
-
-  toBooking(e){
-    let orderid = e.target.dataset.orderid
-    let amount = this.data.fields.amount
-  },
-
-  tel(){
-    const phonenum = this.data.gym.gymContactPhone
-    wx.makePhoneCall({
-      phoneNumber: phonenum
-    })
-  },
-
-  callFootball(){
-    const phonenum = this.data.gym.gymContactPhone
-    console.log('phoneNumber:' + phonenum)
-    wx.showActionSheet({
-      itemList: [phonenum,'拨打','复制'],
-      success:(res) =>{
-        if(res.tapIndex==1){
-          wx.makePhoneCall({
-            phoneNumber: phonenum,
-          })
-        } 
-        if (res.tapIndex == 2){
-          wx.setClipboardData({
-            data: phonenum,
-            success(res) {
-              wx.getClipboardData({
-                success(res) {
-                  console.log(res.data) 
-                }
-              })
-            }
-          })
-        }
-      }
-    })
-  },
+  // toGymInfo(e){
+  //   const gym = JSON.stringify(this.data.gym) 
+  //   wx.navigateTo({
+  //     url: `../gymInfo/index?gymId=${this.data.gym.gymId}&gym=${gym}`
+  //   })
+  // },
+ 
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮

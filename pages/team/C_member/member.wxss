@@ -20,3 +20,9 @@
     color:#999999;
   }
 
+  .item-ft{
+    width:100rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+  }
+

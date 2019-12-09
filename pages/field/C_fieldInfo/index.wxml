@@ -8,7 +8,7 @@
      <view class="addr" bindtap="getLocation">
       <!-- <view class="addr" bindtap="toMap"> -->
         <i class="iconfont icon-dizhi"></i>
-        {{gym.gymAddr}}
+        {{gym.gymAddr}} <i class="juli">{{juli}} KM</i>
       </view>
     </view>
     <view class='list adicon bg-f'>
@@ -21,8 +21,8 @@
         <i class="iconfont icon-lianxifangshi"></i>
         <view class="title">联系方式</view>
         <view class='desc contact'>
-          <view>电话：<i bindtap="tel" class="num" >{{gym.gymContactPhone}}</i></view>
-          <view>微信：<i bindtap="copy" class="num">{{gym.gymContactWechat}}</i></view>
+          <view wx:if="{{gym.gymContactPhone}}">电话：<i bindtap="tel" class="num" >{{gym.gymContactPhone}}</i></view>
+          <view wx:if="{{gym.gymContactWechat}}">微信：<i bindtap="copy" class="num">{{gym.gymContactWechat}}</i></view>
         </view>
       </view>
       <view class='item'>
@@ -42,6 +42,7 @@
     </view>
   </view>
 </view>
+
 <view wx:else>
     <view class="title-block">{{field.fieldName}}简介</view>
     <view class="container">

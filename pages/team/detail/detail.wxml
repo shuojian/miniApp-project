@@ -32,10 +32,12 @@
                 member="{{item}}" 
                 isCreator="{{isCreator}}" 
                 isMember="{{isMember}}" 
-                creatorUserCode="{{creatorUserCode}}" 
+                destUserCode="{{destUserCode}}" 
+                creatorUserCode ="{{creatorUserCode}}" 
                 isLink="{{isLink}}"/>
       </block>
     </view>
+    <!-- creatorUserCode="{{creatorUserCode}}"  -->
   </l-tabpanel>
 
   <l-tabpanel tab="球队统计" key="three" slot="three">

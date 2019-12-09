@@ -1,30 +1,43 @@
 
  <!-- 球队队员 -->
   <view class="container" >
+      <!--== 球员号 ==-->
       <view class='mr-10'><span class="member-num" wx:if="{{member.stmShirtNum !== 0}}"> {{member.stmShirtNum}} </span></view>
+      <!--== / 球员号 ==-->
+
+      <!--== 头像 ==-->
       <view class="item-hd sm">
           <image wx:if="{{member.imgUrl}}" src="{{member.imgUrl}}" class="circle" mode="cover"/>
           <image wx:else class="circle" src="/img/logo_v.jpg" />
       </view>
+      <!--== /头像 ==-->
+
+      <!--== /昵称、位置 ==-->
       <view class="item-bd flex">
         <view class="text">
           <view class="title">{{member.realName}}</view>
           <view class="desc">{{member.stmPosition}}</view>
         </view>
+        <view wx:if="{{member.stmType}}" class="tag primary circle b mx-10">{{member.stmType}}</view>
         <view wx:if="{{member.userCode == creatorUserCode}}" class="mx-10">
           <view class="tag fill red circle b">创建者</view> 
         </view>
       </view>
 
-      <view wx:if="{{member.userCode == creatorUserCode}}" class="item-bd_sb" >
-        <view class="kickoutTeam" wx:if="{{!isCreator && isMember}}" bindtap="kickoutTeam">踢出球队</view>
+      <view wx:if="{{destUserCode == creatorUserCode}}" class="item-bd_sb" >
+        <view class="kickoutTeam" wx:if="{{member.userCode != destUserCode}}" bindtap="kickoutTeam">踢出球队</view>
       </view>
+      <!--== /昵称、位置 ==-->
 
       <view class='item-ft'>
         <view class='tags' wx:if="{{notag}}">
           <span class="tag primary circle">{{member.stmState}}</span>
         </view>
-        <d-edit wx:if="{{member.userCode == creatorUserCode && isLink}}"
+        <!-- <d-edit wx:if="{{member.userCode == creatorUserCode && isLink}}"
+                isMember ="{{member}}"
+                member="{{member}}"
+                isLink="{{isLink}}"/> -->
+        <d-edit wx:if="{{member.userCode == destUserCode && isLink}}"
                 isMember ="{{member}}"
                 member="{{member}}"
                 isLink="{{isLink}}"/>

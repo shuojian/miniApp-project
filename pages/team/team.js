@@ -23,41 +23,30 @@ Page({
   },
 
   onLoad() {
-    wx.getSetting({
-      success:(res)=> {
+    promisic(wx.getSetting)()
+      .then((res) => {
         console.log('getSetting->', res)
         if (res.authSetting['scope.userLocation']) {
-          wx.getLocation({
-            success:(res)=> {
-              console.log('位置是否授权->',res)
-              this.getAddress(res.latitude, res.longitude)
-            }
-          })
+          return promisic(wx.getLocation)()
         } else {
-          wx.authorize({
-            scope: 'scope.userLocation',
-            success: (res) => {
-              wx.getLocation({
-                success: (res) => {
-                  console.log('位置是否授权->', res)
-                  this.getAddress(res.latitude, res.longitude)
-                }
-              })
-            },
-          })
+          promisic(wx.authorize)({ scope: 'scope.userLocation' })
+            .then((res) => {
+              console.log('wx.authorize->', res)
+              // return promisic(wx.getLocation)()
+            })
+            // .then((res) => {
+            //   console.log('wx.getLocation2->', res)
+            //   // this.getAddress(res.latitude, res.longitude)
+            // })
         }
-      },
-      fail(err){
-        console.log('失败list->', err)
-      }
-    })
+      })
+      // .then((res) => {
+      //   console.log('wx.getLocation1->', res)
+      // })
 
     let pageLimit = app.globalData.pageLimit
     this.setData({ pageLimit })
-
     this.getTeams()
-    // this.userAuthorized()
-    
   },
   //获取球队
   async getTeams() {
@@ -91,32 +80,18 @@ Page({
   },
 
   //获取授权信息
-  userAuthorized() {
-    promisic(wx.getSetting)()
-      .then(data => {
-        if (data.authSetting['scope.userLocation']) {
-          return promisic(wx.getLocation)()
-        }
-        return promisic(wx.openSetting)()
-      })
-      .then(data => {
-        console.log(data )
-        this.getAddress(res.latitude, res.longitude)
-      })
-  },
+  // getAddress(latitude, longitude) {
+  //   let qqmapsdk = new QQMapWX({
+  //     key: 'PWZBZ-EFD3F-CM5J6-NKEIL-NTTFO-MXF7S'
+  //   })
 
-  getAddress(latitude, longitude) {
-    let qqmapsdk = new QQMapWX({
-      key: 'PWZBZ-EFD3F-CM5J6-NKEIL-NTTFO-MXF7S'
-    })
-
-    qqmapsdk.reverseGeocoder({
-      location: { latitude, longitude },
-      success(res) {
-        console.log('success', res)
-      }
-    })
-  },
+  //   qqmapsdk.reverseGeocoder({
+  //     location: { latitude, longitude },
+  //     success(res) {
+  //       console.log('reverseGeocoder->', res)
+  //     }
+  //   })
+  // },
 
   //位置授权
   // onAuthLocation() {

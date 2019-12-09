@@ -4,6 +4,7 @@ Component({
     member: Object,
     isCreator:Boolean,
     isMember:Boolean,
+    destUserCode: String,
     creatorUserCode:String,
     isLink: Boolean,
   },
